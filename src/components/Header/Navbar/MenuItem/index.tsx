@@ -17,7 +17,7 @@ const MenuItem: React.FC<Props> = ({
     onMouseOver,
     onMouseOut,
 }: Props) => {
-    let cn = `tab-list-item ${className}`;
+    const cn = `tab-list-item ${className}`;
     return (
         <>
             {route.external ? (

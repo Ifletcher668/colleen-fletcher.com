@@ -3,9 +3,20 @@
 .site-header {
     background: color(med-blue);
     display: grid;
-    grid-template-columns: 3fr 10fr 3fr;
-    gap: 1em;
+    grid-template-columns:
+        [full-start] minmax(size(mg-med), size(mg-large))
+        [main-start] minmax(0, 60em) [main-end]
+        minmax(size(mg-med), size(mg-large)) [full-end];
+
+    &:not(.at-top) {
+        position: sticky;
+        top: 0;
+    }
+    &.home-page.at-top {
+        visibility: hidden;
+    }
     .nav-tabs {
+        grid-column: main;
         .tab-list {
             height: 100%;
             display: flex;

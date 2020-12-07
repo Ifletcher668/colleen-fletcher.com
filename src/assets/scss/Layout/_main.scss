@@ -2,5 +2,11 @@
 
 .site-main {
     display: grid;
-    margin: 0 size(mg-large);
+    grid-template-columns:
+        [full-start] minmax(size(mg-med), size(mg-large))
+        [main-start] minmax(0, 60em) [main-end]
+        minmax(size(mg-med), size(mg-large)) [full-end];
+    & > * {
+        grid-column: main;
+    }
 }

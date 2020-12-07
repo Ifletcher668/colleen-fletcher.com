@@ -2,11 +2,11 @@ import React, {useState} from 'react';
 import config from '../../../../config/website';
 import MenuItem from './MenuItem';
 
-const Navbar: React.FC = () => {
+const Navbar: React.FC<DefaultProps> = (props: DefaultProps) => {
     const routes = Object.values(config.routes);
     const [activeTab, setActiveTab] = useState('');
     return (
-        <nav className="nav-tabs">
+        <nav className={props.className}>
             <ul className="tab-list">
                 {routes.map((route, idx) => {
                     let className = '';
