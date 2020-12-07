@@ -1,0 +1,43 @@
+@use '../Config/' as *;
+
+.site-header {
+    background: color(med-blue);
+    display: grid;
+    grid-template-columns: 3fr 10fr 3fr;
+    gap: 1em;
+    .nav-tabs {
+        .tab-list {
+            height: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            .tab-list-item {
+                &::first-letter {
+                    color: purple;
+                }
+                .hover-padding {
+                    position: absolute;
+                    padding: 100px;
+                }
+                .navbar-panel {
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    visibility: hidden;
+                }
+                &.active {
+                    .navbar-panel {
+                        visibility: visible;
+                        top: 100px;
+                        background: color(background);
+                        width: 100%;
+                        z-index: 1000;
+                        display: flex;
+                        flex-flow: column nowrap;
+                        padding: size(pad-med);
+                    }
+                }
+            }
+        }
+    }
+}

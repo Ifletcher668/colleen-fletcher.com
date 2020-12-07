@@ -1,0 +1,6 @@
+@use '../Config/' as *;
+
+.site-main {
+    display: grid;
+    margin: 0 size(mg-large);
+}

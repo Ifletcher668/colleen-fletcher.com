@@ -1,0 +1,39 @@
+// font-path begins at root sass folder
+@use '../../../../node_modules/accoutrement/sass/tools' as * with(
+    $font-path: '../fonts/'
+);
+
+$primary: (
+    'name': 'cormorant',
+    'normal': (
+        'ttf': 'Cormorant/Cormorant-Regular.ttf',
+    ),
+    'bold': (
+        'ttf': 'Cormorant/Cormorant-Bold.ttf',
+    ),
+    'italic': (
+        'ttf': 'Cormorant/Cormorant-Italic.ttf',
+    ),
+    'stack': (
+        'arial',
+        'helvetica',
+        'serif',
+    ),
+    'source': 'https://fonts.googleapis.com/css2?family=Cormorant',
+);
+@include add-font('cormorant', $primary);
+
+$accent: (
+    'name': 'MA Sexy',
+    'normal': (
+        'ttf': 'MASexy/MASexy.ttf',
+    ),
+    'bold': (
+        'ttf': 'MASexy/MASexy.ttf',
+    ),
+    'stack': (
+        'serif',
+    ),
+);
+
+@include add-font('MA Sexy', $accent);

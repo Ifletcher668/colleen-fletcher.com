@@ -1,0 +1,33 @@
+@use '../Config/' as *;
+
+// MSIE: Required for IEMobile.
+@-ms-viewport {
+    width: device-width;
+}
+
+body {
+    background: var(--background);
+    @include clearfix();
+    min-height: 100vh;
+}
+
+@include global-box-sizing();
+
+// Ensures page width is always >=320px.
+@include below('xsmall') {
+    html,
+    body {
+        min-width: 320px;
+    }
+}
+
+// gatsby-added divs workaround
+#___gatsby,
+#gatsby-focus-wrapper {
+    min-height: inherit;
+}
+
+#gatsby-focus-wrapper {
+    display: grid;
+    grid-template-rows: 100px auto auto;
+}
