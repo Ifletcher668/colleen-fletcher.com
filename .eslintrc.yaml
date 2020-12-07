@@ -4,12 +4,9 @@ plugins:
     - '@typescript-eslint'
 
 extends:
-    - kentcdodds
-    - kentcdodds/react
-    - kentcdodds/jsx-a11y
-    - kentcdodds/jest
     - plugin:@typescript-eslint/eslint-recommended
     - plugin:@typescript-eslint/recommended
+    - plugin:@typescript-eslint/recommended-require-type-checking
 
 rules:
     import/no-unresolved: off
