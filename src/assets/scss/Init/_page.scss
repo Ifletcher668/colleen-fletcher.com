@@ -9,6 +9,7 @@ body {
     background: var(--background);
     @include clearfix();
     min-height: 100vh;
+    scroll-behavior: smooth;
 }
 
 @include global-box-sizing();

@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Link} from 'gatsby';
+import ALink from 'gatsby-plugin-transition-link/AniLink';
 import SubMenu from '../SubMenu';
 import Panel from '../Panel';
 
@@ -23,16 +24,32 @@ const MenuItem: React.FC<Props> = ({
             {route.external ? (
                 <a href={route.path}>{route.name}</a>
             ) : (
-                <Link to={route.path} className={cn} onMouseOver={onMouseOver}>
+                <ALink
+                    // swipe
+                    // top="entry"
+                    paintDrip
+                    // entryOffset={80}
+                    hex="#7dd1f7"
+                    duration={1}
+                    to={route.path}
+                    // exit={{
+                    //     trigger: ({node, e, exit, entry}) =>
+                    //         console.log(node, e, exit, entry),
+                    // }}
+                    className={cn}
+                    onMouseOver={onMouseOver}
+                >
                     {route.name}
                     {route.submenu && (
                         <Panel onMouseOut={onMouseOut}>
                             {route.submenu.map(item => {
-                                return <Link to={item.path}>{item.name}</Link>;
+                                return (
+                                    <ALink to={item.path}>{item.name}</ALink>
+                                );
                             })}
                         </Panel>
                     )}
-                </Link>
+                </ALink>
             )}
 
             {/*

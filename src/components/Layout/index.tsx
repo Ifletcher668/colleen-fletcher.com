@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {TransitionPortal} from 'gatsby-plugin-transition-link';
 import Footer from '../Footer';
 import Header from '../Header';
 import Main from '../Main';
@@ -21,7 +22,7 @@ const Layout: React.FC<Props> = ({children, location}: Props) => {
     useEffect(() => {
         document.addEventListener('scroll', handleScroll);
         return document.addEventListener('scroll', handleScroll);
-    }, []);
+    }, [documentIsAtTop]);
 
     const headerClassNames = ['site-header'];
 
@@ -35,13 +36,24 @@ const Layout: React.FC<Props> = ({children, location}: Props) => {
         headerClassNames.push('at-top');
     }
 
+    const addHeader = () => {
+        if (documentIsAtTop && location.pathname === '/') {
+            return '';
+        } else if (documentIsAtTop) {
+            return <Header classes={headerClassNames} />;
+        } else {
+            // if scrolling
+            return (
+                <TransitionPortal>
+                    <Header classes={headerClassNames} />
+                </TransitionPortal>
+            );
+        }
+    };
+
     return (
         <>
-            {documentIsAtTop && location.pathname === '/' ? (
-                ''
-            ) : (
-                <Header classes={headerClassNames} />
-            )}
+            {addHeader()}
             <Main>{children}</Main>
             <Footer />
         </>

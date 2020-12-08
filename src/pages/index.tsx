@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import Header from '../components/Header';
 import Layout from '../components/Layout';
 
 export default (props: PageProps) => {
