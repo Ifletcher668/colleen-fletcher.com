@@ -1,84 +1,58 @@
 import React from 'react';
 import {Link} from 'gatsby';
 import ALink from 'gatsby-plugin-transition-link/AniLink';
-import SubMenu from '../SubMenu';
 import Panel from '../Panel';
 
 interface Props {
-    route: Route;
-    activeTab: string;
+    data: Page;
     className: string;
     onMouseOver: () => void;
     onMouseOut: () => void;
 }
 
 const MenuItem: React.FC<Props> = ({
-    route,
+    data,
     className,
     onMouseOver,
     onMouseOut,
 }: Props) => {
+    const pageName = data.name;
+    const pageRoute = data.route;
+    const subMenus: SubMenu[] = data.route.data as SubMenu[];
+
     const cn = `tab-list-item ${className}`;
+    const LINK_PROPS = {
+        paintDrip: true,
+        hex: '#7dd1f7',
+        duration: 1,
+    };
     return (
         <>
-            {route.external ? (
-                <a href={route.path}>{route.name}</a>
+            {pageRoute.isExternalLink ? (
+                <a className="tab-list-item" href={pageRoute.url}>
+                    {pageName}
+                </a>
             ) : (
                 <ALink
-                    // swipe
-                    // top="entry"
-                    paintDrip
-                    // entryOffset={80}
-                    hex="#7dd1f7"
-                    duration={1}
-                    to={route.path}
+                    to={pageRoute.url}
+                    className={cn}
+                    onMouseOver={onMouseOver}
+                    {...LINK_PROPS}
                     // exit={{
                     //     trigger: ({node, e, exit, entry}) =>
                     //         console.log(node, e, exit, entry),
                     // }}
-                    className={cn}
-                    onMouseOver={onMouseOver}
                 >
-                    {route.name}
-                    {route.submenu && (
-                        <Panel onMouseOut={onMouseOut}>
-                            {route.submenu.map(item => {
-                                return (
-                                    <ALink to={item.path}>{item.name}</ALink>
-                                );
-                            })}
-                        </Panel>
+                    {pageName}
+                    {subMenus && (
+                        <Panel
+                            data={subMenus}
+                            onMouseOut={onMouseOut}
+                            {...LINK_PROPS}
+                        />
                     )}
                 </ALink>
             )}
-
-            {/*
-                {route.external ? (
-                    <a
-                        href={route.path}
-                        onMouseOver={
-                            route.submenu ? handleShowSubmenu : () => {}
-                        }
-                        // onMouseLeave={handleShowSubmenu}
-                    >
-                        {route.name}
-                    </a>
-                ) : (
-                    <Link to={route.path}>{route.name}</Link>
-                )}
-                {route.submenu && (
-                    <div
-                        onMouseOver={
-                            route.submenu ? () => setShow(true) : () => {}
-                        }
-                        className={`sub-menu ${show ? ' show' : ''}`}
-                        onMouseLeave={() => setShow(false)}
-                    >
-                        {route.submenu.map(item => {
-                            return <span>{item.name}</span>;
-                        })}
-                    </div>
-                )} */}
         </>
     );
 };

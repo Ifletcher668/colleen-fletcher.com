@@ -44,9 +44,9 @@ const Layout: React.FC<Props> = ({children, location}: Props) => {
         } else {
             // if scrolling
             return (
-                <TransitionPortal>
-                    <Header classes={headerClassNames} />
-                </TransitionPortal>
+                // <TransitionPortal>
+                <Header classes={headerClassNames} />
+                // </TransitionPortal>
             );
         }
     };

@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import Header from '../components/Header';
 import Layout from '../components/Layout';
-
 export default (props: PageProps) => {
     return (
-        <Layout location={props.location}>
+        <>
+            {/* <Header /> */}
+            {/* <Layout location={props.location}> */}
             <h1>Home Page</h1>
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -45,6 +46,7 @@ export default (props: PageProps) => {
                 adipisci, tempore nemo excepturi incidunt nesciunt veniam
                 perferendis suscipit odit in modi consequuntur?
             </p>
-        </Layout>
+            {/* </Layout> */}
+        </>
     );
 };

@@ -1,15 +1,15 @@
 @use '../Config/' as *;
 
 .site-footer {
-    // position: fixed;
-    // bottom: 0;
-    // width: 100vw;
-    // display: flex;
-    // align-items: center;
-    // justify-content: center;
-    // text-align: center;
-
+    display: grid;
+    grid-template-columns:
+        [full-start] minmax(size(mg-large), (size(mg-large) * 2))
+        [footer-start] minmax(0, 60em) [footer-end]
+        minmax(size(mg-large), (size(mg-large) * 2)) [full-end];
+    place-items: center;
+    text-align: center;
     .content {
+        grid-column: footer;
         .footer-nav {
             .footer-navbar {
                 display: flex;

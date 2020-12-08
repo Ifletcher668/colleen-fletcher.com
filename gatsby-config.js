@@ -18,15 +18,15 @@ module.exports = {
         `gatsby-plugin-sitemap`,
         `gatsby-plugin-typescript`,
         `gatsby-plugin-sass`,
-        `gatsby-plugin-transition-link`,
-        // {
-        //     resolve: `gatsby-plugin-transition-link`,
-        //     options: {
-        //         layout: require.resolve(
-        //             `${__dirname}/src/components/Header/index.tsx`,
-        //         ),
-        //     },
-        // },
+        // `gatsby-plugin-transition-link`,
+        {
+            resolve: `gatsby-plugin-transition-link`,
+            options: {
+                layout: require.resolve(
+                    `${__dirname}/src/components/Layout/index.tsx`,
+                ),
+            },
+        },
         //
         // {
         //     resolve: `gatsby-plugin-manifest`,

@@ -10,19 +10,20 @@ const Header: React.FC<DefaultProps> = (props: DefaultProps) => {
         <header
             role="header"
             className={
-                props.classes ? props.classes.join(' ') : props.className
+                `site-header`
+                // props.classes ? props.classes.join(' ') : props.className
             }
         >
             <Image
                 className="frangipani"
                 fluid={frangipaniImg.childImageSharp.fluid}
-                style={{width: '100px', height: '100px'}}
+                style={{maxWidth: '100px', maxHeight: '100px'}}
             />
             <Navbar className="nav-tabs" />
             <Image
                 className="frangipani"
                 fluid={frangipaniImg.childImageSharp.fluid}
-                style={{width: '100px', height: '100px'}}
+                style={{maxWidth: '100px', maxHeight: '100px'}}
             />
         </header>
     );
