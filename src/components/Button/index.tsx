@@ -2,7 +2,7 @@ import React from 'react';
 
 interface Props {
     children: React.ReactNode;
-    variant: 'primary' | 'secondary';
+    variant: 'primary' | 'secondary' | 'tertiary';
     type?: 'submit' | 'reset' | 'button';
     onClick?: () => void;
 }

@@ -1,7 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import Button from '../components/Button';
-import Header from '../components/Header';
-import Layout from '../components/Layout';
 export default (props: PageProps) => {
     return (
         <>
@@ -18,6 +16,9 @@ export default (props: PageProps) => {
                 </Button>
                 <Button type={'button'} variant={'secondary'}>
                     Secondary Button
+                </Button>
+                <Button type={'button'} variant={'tertiary'}>
+                    Tertiary Button
                 </Button>
             </p>
             <p>

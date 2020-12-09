@@ -22,7 +22,7 @@ const Navbar: React.FC<DefaultProps> = (props: DefaultProps) => {
 
     const LINK_TRANSITION_PROPS = {
         paintDrip: true,
-        hex: '#7dd1f7',
+        hex: '#CBEDFC',
         duration: 0.7,
         // direction: 'right',
         // bg: '#7dd1f7',

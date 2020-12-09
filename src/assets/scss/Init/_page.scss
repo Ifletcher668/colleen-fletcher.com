@@ -62,4 +62,12 @@ body {
             ),
             color(primary-blue);
     }
+    &.tertiary {
+        background: radial-gradient(
+                68.84% 68.84% at 50% 50%,
+                color(earth) 0%,
+                rgba(255, 255, 255, 0) 70.83%
+            ),
+            color(earth);
+    }
 }
