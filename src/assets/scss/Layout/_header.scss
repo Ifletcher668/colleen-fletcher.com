@@ -4,9 +4,9 @@
     background: color(med-blue);
     display: grid;
     grid-template-columns:
-        [full-start] minmax(size(mg-med), size(mg-large))
-        [main-start] minmax(0, 60em) [main-end]
-        minmax(size(mg-med), size(mg-large)) [full-end];
+        [margin-start] minmax(size(mg-medium), size(mg-large))
+        [main-start] minmax(0, size(fullWidth)) [main-end]
+        minmax(size(mg-medium), size(mg-large)) [margin-end];
 
     &:not(.at-top) {
         position: sticky;
@@ -16,57 +16,86 @@
     &.home-page.at-top {
         visibility: hidden;
     }
-    .nav-tabs {
+    .navbar {
         grid-column: main;
-        .tab-list {
+        .nav-list {
             height: 100px;
             display: flex;
             justify-content: space-around;
             align-items: center;
-            .tab-list-item {
+            .nav-list-item {
                 &::first-letter {
                     @include font-family('MA Sexy');
                 }
-                .navbar-panel {
+                .panel-navbar {
                     position: absolute;
                     left: 0;
-                    top: 0;
+                    top: 80px;
                     visibility: hidden;
+                    .submenu,
+                    .content {
+                        visibility: hidden;
+                        opacity: 0;
+                    }
                 }
                 &.active {
-                    .navbar-panel {
-                        visibility: visible;
+                    .panel-navbar {
+                        animation: show time(medium) ease-out;
+                        animation-fill-mode: forwards;
                         background: color(light-blue);
                         top: 100px;
                         z-index: 1000;
                         width: 100vw;
-                        padding: size(pad-med) 0;
-                        padding: size(pad-med) 0;
                         display: grid;
                         grid-auto-flow: column;
                         grid-template-columns:
-                            [full-start] minmax(size(mg-med), size(mg-large))
-                            [submenu] minmax(
-                                size(mg-large) * 1.5,
-                                size(mg-large) * 2.5
+                            [margin-start] minmax(
+                                size(mg-medium),
+                                size(mg-large)
                             )
-                            [space] minmax(size(mg-med), size(mg-large))
-                            [copy-start] minmax(0, 60em)
-                            minmax(size(mg-med), size(mg-large)) [full-end];
+                            [submenu] minmax(size(col-medium), size(col-large))
+                            [space-between] minmax(
+                                size(mg-medium),
+                                size(mg-large)
+                            )
+                            [content] minmax(0, size(fullWidth))
+                            minmax(size(mg-medium), size(mg-large))
+                            [margin-end];
+
+                        ul {
+                            display: flex;
+                            flex-flow: column nowrap;
+                            align-items: flex-start;
+                            padding-right: size(pad-small);
+                        }
+                        .submenu,
+                        .content {
+                            animation: show time(slow) time(medium) ease-out;
+                            animation-fill-mode: forwards;
+                            padding: size(pad-medium) 0;
+                        }
 
                         .submenu {
                             grid-column: submenu;
-                            display: flex;
-                            flex-flow: column nowrap;
-                            padding-right: size(pad-small);
                             border-right: 1px solid black;
                         }
-                        .copy {
-                            grid-column: copy-start;
+                        .content {
+                            grid-column: content;
                         }
                     }
                 }
             }
         }
+    }
+}
+
+@keyframes show {
+    from {
+        opacity: 0;
+        visibility: hidden;
+    }
+    to {
+        opacity: 1;
+        visibility: visible;
     }
 }

@@ -11,10 +11,16 @@
     .content {
         grid-column: footer;
         .footer-nav {
+            margin: 0 0 size(mg-small) 0;
             .footer-navbar {
                 display: flex;
                 align-items: center;
                 justify-content: space-around;
+            }
+        }
+        .info {
+            > * {
+                margin: 0 0 size(mg-xsmall) 0;
             }
         }
     }

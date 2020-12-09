@@ -1,5 +1,5 @@
 const config: Config = {
-    pages: {
+    pageLinks: {
         home: {
             name: 'Home',
             route: {
@@ -36,16 +36,64 @@ const config: Config = {
                     {
                         name: 'Tuesday Tips',
                         path: '/tuesday-tips',
-                        data: {
-                            sentence: 'testing submenu length is too long?',
-                        },
+                        data: [
+                            {
+                                name: 'TT Best Read 1',
+                                path: '/reiki-1',
+                                data: null,
+                            },
+                            {
+                                name: 'TT Best Read 2',
+                                path: '/reiki-2',
+                                data: null,
+                            },
+                            {
+                                name: 'TT Best Read 3',
+                                path: '/reiki-2',
+                                data: null,
+                            },
+                            {
+                                name: 'TT Best Read 4',
+                                path: '/reiki-2',
+                                data: null,
+                            },
+                            {
+                                name: 'TT Best Read 5',
+                                path: '/reiki-2',
+                                data: null,
+                            },
+                        ],
                     },
                     {
                         name: 'You, Me, and the Trees',
                         path: '/you-me-and-the-trees',
-                        data: {
-                            sentence: 'testing submenu length is too long?',
-                        },
+                        data: [
+                            {
+                                name: 'YM&tT Best Read 1',
+                                path: '/reiki-1',
+                                data: null,
+                            },
+                            {
+                                name: 'YM&tT Best Read 2',
+                                path: '/reiki-2',
+                                data: null,
+                            },
+                            {
+                                name: 'YM&tT Best Read 3',
+                                path: '/reiki-2',
+                                data: null,
+                            },
+                            {
+                                name: 'YM&tT Best Read 4',
+                                path: '/reiki-2',
+                                data: null,
+                            },
+                            {
+                                name: 'YM&tT Best Read 5',
+                                path: '/reiki-2',
+                                data: null,
+                            },
+                        ],
                     },
                 ],
             },
@@ -64,17 +112,57 @@ const config: Config = {
                 data: [
                     {
                         name: 'Reiki',
-                        path: '/tuesday-tips',
-                        data: {
-                            sentence: 'testing submenu length is too long?',
-                        },
+                        path: '/reiki',
+                        data: [
+                            {
+                                name: 'Reiki 1',
+                                path: '/reiki-1',
+                                data: null,
+                            },
+                            {
+                                name: 'Reiki 2',
+                                path: '/reiki-2',
+                                data: null,
+                            },
+                        ],
                     },
                     {
                         name: 'Classes and Workshops',
                         path: '/you-me-and-the-trees',
-                        data: {
-                            sentence: 'testing submenu length is too long?',
-                        },
+                        data: [
+                            {
+                                name: 'Learn to Take Care of Your Skin',
+                                path: '/skin',
+                                data: null,
+                            },
+                            {
+                                name: 'A New You',
+                                path: '/skin',
+                                data: null,
+                            },
+                            {
+                                name: 'The Great Outdoors',
+                                path: '/skin',
+                                data: null,
+                            },
+                            {
+                                name:
+                                    'Testing The Length of these to See When it needs to be cut off',
+                                path: '/skin',
+                                data: null,
+                            },
+                            {
+                                name:
+                                    'Do I need to Limit How Many of These She Can Have at One Time?',
+                                path: '/skin',
+                                data: null,
+                            },
+                            {
+                                name: 'Eh, One More Just to See',
+                                path: '/skin',
+                                data: null,
+                            },
+                        ],
                     },
                 ],
             },
@@ -103,6 +191,7 @@ const config: Config = {
         instagram: 'instagram',
         facebook: 'facebook',
         discord: 'discord',
+        pinterest: 'pinterest',
     },
 };
 

@@ -19,7 +19,7 @@ const Header: React.FC<DefaultProps> = (props: DefaultProps) => {
                 fluid={frangipaniImg.childImageSharp.fluid}
                 style={{maxWidth: '100px', maxHeight: '100px'}}
             />
-            <Navbar className="nav-tabs" />
+            <Navbar className="navbar" />
             <Image
                 className="frangipani"
                 fluid={frangipaniImg.childImageSharp.fluid}

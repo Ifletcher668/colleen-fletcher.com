@@ -3,9 +3,9 @@
 .site-main {
     display: grid;
     grid-template-columns:
-        [full-start] minmax(size(mg-med), size(mg-large))
-        [main-start] minmax(0, 60em) [main-end]
-        minmax(size(mg-med), size(mg-large)) [full-end];
+        [full-start] minmax(size(mg-medium), size(mg-large))
+        [main-start] minmax(0, size(fullWidth)) [main-end]
+        minmax(size(mg-medium), size(mg-large)) [full-end];
     & > * {
         grid-column: main;
     }

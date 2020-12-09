@@ -1,57 +1,44 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Link} from 'gatsby';
 import ALink from 'gatsby-plugin-transition-link/AniLink';
-import Panel from '../Panel';
 
-interface Props {
-    data: Page;
-    className: string;
-    onMouseOver: () => void;
-    onMouseOut: () => void;
+import Panel from '../Panel';
+import {NavbarContext} from '../index';
+
+interface Props extends DefaultProps {
+    data: PageLink;
 }
 
-const MenuItem: React.FC<Props> = ({
-    data,
-    className,
-    onMouseOver,
-    onMouseOut,
-}: Props) => {
-    const pageName = data.name;
+const MenuItem: React.FC<Props> = ({data, className}: Props) => {
+    const linkName = data.name;
     const pageRoute = data.route;
     const subMenus: SubMenu[] = data.route.data as SubMenu[];
+    const {setActivePanelName, LINK_TRANSITION_PROPS} = useContext(
+        NavbarContext,
+    );
 
-    const cn = `tab-list-item ${className}`;
-    const LINK_PROPS = {
-        paintDrip: true,
-        hex: '#7dd1f7',
-        duration: 1,
-    };
+    const cn = `nav-list-item ${className ? className : ''}`;
+
     return (
         <>
             {pageRoute.isExternalLink ? (
-                <a className="tab-list-item" href={pageRoute.url}>
-                    {pageName}
-                </a>
+                <li className={cn}>
+                    <a href={pageRoute.url}>{linkName}</a>
+                </li>
             ) : (
-                <ALink
-                    to={pageRoute.url}
+                <li
                     className={cn}
-                    onMouseOver={onMouseOver}
-                    {...LINK_PROPS}
-                    // exit={{
-                    //     trigger: ({node, e, exit, entry}) =>
-                    //         console.log(node, e, exit, entry),
-                    // }}
+                    onMouseOver={() => setActivePanelName(linkName)}
+                    onClick={() => {
+                        setActivePanelName('');
+                    }}
                 >
-                    {pageName}
-                    {subMenus && (
-                        <Panel
-                            data={subMenus}
-                            onMouseOut={onMouseOut}
-                            {...LINK_PROPS}
-                        />
-                    )}
-                </ALink>
+                    <ALink to={pageRoute.url} {...LINK_TRANSITION_PROPS}>
+                        {linkName}
+                    </ALink>
+
+                    {subMenus && <Panel data={subMenus} />}
+                </li>
             )}
         </>
     );
