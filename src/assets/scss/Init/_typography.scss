@@ -80,6 +80,8 @@ h1 {
     @include font-family('MA Sexy');
     font-size: size(h1);
     color: color(earth);
+    // corrects font going out of bounds
+    margin: size(mg-xsmall) 0 size(mg-small) 0;
 }
 h2 {
     font-size: size(h2);

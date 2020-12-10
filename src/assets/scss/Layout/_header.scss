@@ -13,9 +13,25 @@
         top: 0;
         z-index: 1000000000;
     }
-    &.home-page.at-top {
+    &.home-page {
         visibility: hidden;
+        animation: headerEntrance time(slow) time(medium) ease-in-out;
+        animation-fill-mode: forwards;
     }
+
+    @keyframes headerEntrance {
+        from {
+            transform: scale(0.5);
+            opacity: 0;
+            visibility: hidden;
+        }
+        to {
+            transform: scale(1);
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
     .navbar {
         grid-column: main;
         .nav-list {
