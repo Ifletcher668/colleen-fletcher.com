@@ -13,11 +13,19 @@ module.exports = {
     },
     plugins: [
         `gatsby-transformer-sharp`,
+
         `gatsby-plugin-sharp`,
         `gatsby-plugin-react-helmet`,
         `gatsby-plugin-sitemap`,
         `gatsby-plugin-typescript`,
         `gatsby-plugin-sass`,
+        `gatsby-plugin-postcss`,
+        // {
+        //     resolve: `gatsby-plugin-postcss`,
+        //     options: {
+        //         postCssPlugins: [require('autoprefixer')()],
+        //     },
+        // },
         // `gatsby-plugin-transition-link`,
         {
             resolve: `gatsby-plugin-transition-link`,
@@ -27,7 +35,6 @@ module.exports = {
                 ),
             },
         },
-        //
         // {
         //     resolve: `gatsby-plugin-manifest`,
         //     options: {
