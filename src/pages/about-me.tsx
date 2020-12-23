@@ -5,7 +5,6 @@ export default (props: PageProps) => {
     return (
         <TransitionState>
             {({mount, transitionStatus}) => {
-                console.log(transitionStatus);
                 return (
                     <>
                         <h1>About Page</h1>
