@@ -1,43 +1,71 @@
 import React, {useContext} from 'react';
-import {Link} from 'gatsby';
-import ALink from 'gatsby-plugin-transition-link/AniLink';
-
-import Panel from '../Panel';
 import {NavbarContext} from '../index';
+import ALink from 'gatsby-plugin-transition-link/AniLink';
+import Panel from '../Panel';
 
+// props matches type StrapiMenuItem
 interface Props extends DefaultProps {
-    data: PageLink;
+    title: string;
+    is_link_external: boolean;
+    slug: string;
+    offerings: StrapiOfferings[];
+    blogs: StrapiBlog[];
 }
 
-const MenuItem: React.FC<Props> = ({data, className}: Props) => {
-    const linkName = data.name;
-    const pageRoute = data.route;
-    const subMenus: SubMenu[] = data.route.data as SubMenu[];
-    const {setActivePanelName, LINK_TRANSITION_PROPS} = useContext(
-        NavbarContext,
-    );
+// data, className: Props
+const MenuItem: React.FC<Props> = ({
+    title,
+    is_link_external,
+    slug,
+    offerings,
+    blogs,
+    className,
+}: Props) => {
+    const {
+        isActivePanel,
+        setIsActivePanel,
+        activePanelName,
+        setActivePanelName,
+        TRANSITION_PROPS,
+    } = useContext(NavbarContext);
 
     const cn = `nav-list-item ${className ? className : ''}`;
-
     return (
         <>
-            {pageRoute.isExternalLink ? (
+            {is_link_external ? (
                 <li className={cn}>
-                    <a href={pageRoute.url}>{linkName}</a>
+                    <a href={`${slug}`}>{title}</a>
                 </li>
             ) : (
                 <li
                     className={cn}
-                    onMouseOver={() => setActivePanelName(linkName)}
+                    onMouseOver={() => {
+                        setActivePanelName(title), setIsActivePanel(true);
+                    }}
+                    // clear on navigation
                     onClick={() => {
-                        setActivePanelName('');
+                        setActivePanelName(''), setIsActivePanel(false);
                     }}
                 >
-                    <ALink to={pageRoute.url} {...LINK_TRANSITION_PROPS}>
-                        {linkName}
+                    <ALink
+                        to={`/${
+                            slug.toLocaleLowerCase() === 'home' ? '' : slug
+                        }`}
+                        {...TRANSITION_PROPS}
+                    >
+                        {title}
                     </ALink>
 
-                    {subMenus && <Panel data={subMenus} />}
+                    {isActivePanel &&
+                        activePanelName === title &&
+                        blogs.length > 0 && (
+                            <Panel blogs={blogs} baseUrl={slug} />
+                        )}
+                    {isActivePanel &&
+                        activePanelName === title &&
+                        offerings.length > 0 && (
+                            <Panel offerings={offerings} baseUrl={slug} />
+                        )}
                 </li>
             )}
         </>

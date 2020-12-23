@@ -6,8 +6,6 @@ import Navbar from './Navbar';
 const Header: React.FC<DefaultProps> = (props: DefaultProps) => {
     const {frangipaniImg} = useImage();
 
-    console.log(props);
-
     return (
         <header
             role="header"

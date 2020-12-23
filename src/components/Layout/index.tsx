@@ -11,13 +11,10 @@ interface Props extends DefaultProps {
 const Layout: React.FC<Props> = ({children, location}: Props) => {
     const [documentIsAtTop, setDocumentIsAtTop] = useState<boolean>(true);
 
-    const handleScroll = () => {
-        if (window.scrollY === 0) {
-            setDocumentIsAtTop(true);
-        } else {
-            setDocumentIsAtTop(false);
-        }
-    };
+    const handleScroll = () =>
+        window.scrollY < 200
+            ? setDocumentIsAtTop(true)
+            : setDocumentIsAtTop(false);
 
     useEffect(() => {
         document.addEventListener('scroll', handleScroll);
@@ -25,35 +22,21 @@ const Layout: React.FC<Props> = ({children, location}: Props) => {
     }, [documentIsAtTop]);
 
     const headerClassNames = ['site-header'];
-
-    if (location.pathname === '/') {
-        headerClassNames.push('home-page');
-    } else {
-        const pn = location.pathname.slice(1);
-        headerClassNames.push(pn);
-    }
     if (documentIsAtTop) {
         headerClassNames.push('at-top');
     }
 
-    const addHeader = () => {
-        if (documentIsAtTop && location.pathname === '/') {
-            return '';
-        } else if (documentIsAtTop) {
-            return <Header classes={headerClassNames} />;
-        } else {
-            // if scrolling
-            return (
-                // <TransitionPortal>
-                <Header classes={headerClassNames} />
-                // </TransitionPortal>
-            );
-        }
-    };
+    const handleHeaderBehavior = () =>
+        // hides header at top of homepage
+        documentIsAtTop && location.pathname === '/' ? (
+            ''
+        ) : (
+            <Header classes={headerClassNames} />
+        );
 
     return (
         <>
-            {addHeader()}
+            {handleHeaderBehavior()}
             <Main>{children}</Main>
             <Footer />
         </>

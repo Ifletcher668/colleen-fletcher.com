@@ -18,3 +18,8 @@ rules:
     babel/quotes: off
     consistent-return: off
     no-console: 1
+
+overrides:
+    - files:
+          - 'src/**/*.ts'
+          - 'src/**/*.tsx'

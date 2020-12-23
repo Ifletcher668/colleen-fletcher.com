@@ -1,59 +1,70 @@
 import React, {createContext, useState} from 'react';
-import config from '../../../../config/website';
+import {useStrapiData} from '../../../utils/graphql/queries/useStrapi';
 import MenuItem from './MenuItem';
 
 // Context
-interface LinkProps {
+type TransitionProps = {
     paintDrip: boolean;
     hex: string;
     duration: number;
-}
+};
+
 type NavCtx = {
+    isActivePanel: boolean;
+    setIsActivePanel: React.Dispatch<React.SetStateAction<boolean>>;
     activePanelName: string;
     setActivePanelName: React.Dispatch<React.SetStateAction<string>>;
-    LINK_TRANSITION_PROPS: LinkProps;
+    TRANSITION_PROPS: TransitionProps;
 };
 
 export const NavbarContext = createContext<NavCtx | {[key: string]: any}>({});
 
-const Navbar: React.FC<DefaultProps> = (props: DefaultProps) => {
-    const pageLinks = Object.values(config.pageLinks);
-    const [activePanelName, setActivePanelName] = useState('');
+const Navbar: React.FC<DefaultProps> = ({className}: DefaultProps) => {
+    const [isActivePanel, setIsActivePanel] = useState<boolean>(false);
+    const [activePanelName, setActivePanelName] = useState<string>('');
 
-    const LINK_TRANSITION_PROPS = {
+    const {
+        strapi: {menuItems},
+    } = useStrapiData();
+
+    const TRANSITION_PROPS: TransitionProps = {
         paintDrip: true,
         hex: '#CBEDFC',
         duration: 0.7,
-        // direction: 'right',
-        // bg: '#7dd1f7',
     };
 
     const ctx = {
+        isActivePanel,
+        setIsActivePanel,
         activePanelName,
         setActivePanelName,
-        LINK_TRANSITION_PROPS,
+        TRANSITION_PROPS,
     };
 
     return (
-        <nav className={props.className}>
+        <nav className={className}>
             <NavbarContext.Provider value={ctx}>
                 <ul className="nav-list">
-                    {pageLinks.map((link, idx) => {
-                        // if submenu
-                        if (link.route.data) {
+                    {menuItems.map((menuItem, idx) => {
+                        if (
+                            menuItem.blogs.length > 0 ||
+                            menuItem.offerings.length > 0
+                        ) {
+                            // show active panel
                             let className = '';
-                            if (link.name === activePanelName) {
+                            if (menuItem.title === activePanelName) {
                                 className += 'active';
                             }
                             return (
                                 <MenuItem
                                     key={idx}
                                     className={className}
-                                    data={link}
+                                    {...menuItem}
                                 />
                             );
                         } else {
-                            return <MenuItem key={idx} data={link} />;
+                            // no data needing panel
+                            return <MenuItem key={idx} {...menuItem} />;
                         }
                     })}
                 </ul>

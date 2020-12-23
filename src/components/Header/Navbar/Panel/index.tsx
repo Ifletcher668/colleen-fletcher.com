@@ -5,56 +5,78 @@ import {useImage} from '../../../../utils/graphql/queries/useImage';
 import {NavbarContext} from '../index';
 
 interface Props {
-    data: SubMenu[];
+    blogs?: StrapiBlog[];
+    offerings?: StrapiOfferings[];
+    baseUrl: string;
 }
 
-const Panel: React.FC<Props> = ({data}: Props) => {
+const Panel: React.FC<Props> = ({blogs, offerings, baseUrl}: Props) => {
     const {frangipaniImg} = useImage();
     const [subMenuItems, setSubMenuItems] = useState<JSX.Element[]>([]);
     const [activeSubMenuItemName, setActiveSubMenuItemName] = useState('');
-
-    const {setActivePanelName, LINK_TRANSITION_PROPS} = useContext(
+    const {setIsActivePanel, setActivePanelName, TRANSITION_PROPS} = useContext(
         NavbarContext,
     );
+
+    console.log(subMenuItems);
 
     return (
         <nav
             className="panel-navbar"
             onMouseLeave={() => {
-                setActivePanelName(''), setSubMenuItems([]);
+                setActivePanelName(''),
+                    setSubMenuItems([]),
+                    setIsActivePanel(false);
             }}
         >
             <ul className="submenu">
-                {data.map(({path, name, data}) => {
-                    const subMenu: JSX.Element[] = [];
-                    let className = '';
-                    if (data) {
-                        if (name === activeSubMenuItemName) {
-                            className += 'active';
+                {offerings &&
+                    offerings.map(({title, slug, services}) => {
+                        const subMenu: JSX.Element[] = [];
+                        let className = '';
+                        if (services) {
+                            if (title === activeSubMenuItemName) {
+                                className += 'active';
+                            }
+                            services.map(({title, slug}, idx) => {
+                                subMenu.push(
+                                    <ALink key={idx} to={`/${baseUrl}/${slug}`}>
+                                        {title}
+                                    </ALink>,
+                                );
+                            });
                         }
-                        data.map(menuItem => {
-                            subMenu.push(
-                                <ALink key={menuItem.name} to={menuItem.path}>
-                                    {menuItem.name}
-                                </ALink>,
-                            );
-                        });
-                    }
-                    return (
-                        <li key={name} className={className}>
-                            <ALink
-                                to={path}
-                                onMouseOver={() => {
-                                    setSubMenuItems(subMenu),
-                                        setActiveSubMenuItemName(name);
-                                }}
-                                {...LINK_TRANSITION_PROPS}
-                            >
-                                {name}
-                            </ALink>
-                        </li>
-                    );
-                })}
+                        return (
+                            <li key={title} className={className}>
+                                <ALink
+                                    to={`/${baseUrl}/${slug}`}
+                                    onMouseOver={() => {
+                                        setSubMenuItems(subMenu),
+                                            setActiveSubMenuItemName(title);
+                                    }}
+                                    {...TRANSITION_PROPS}
+                                >
+                                    {title}
+                                </ALink>
+                            </li>
+                        );
+                    })}
+                {blogs &&
+                    blogs.map(({title, slug}) => {
+                        return (
+                            <li key={title}>
+                                <ALink
+                                    to={slug}
+                                    onMouseOver={() => {
+                                        setActiveSubMenuItemName(title);
+                                    }}
+                                    {...TRANSITION_PROPS}
+                                >
+                                    {title}
+                                </ALink>
+                            </li>
+                        );
+                    })}
             </ul>
             <section className="content">
                 {subMenuItems.length < 1 && (
@@ -64,8 +86,8 @@ const Panel: React.FC<Props> = ({data}: Props) => {
                     />
                 )}
                 <ul>
-                    {subMenuItems.map(item => {
-                        return <li>{item}</li>;
+                    {subMenuItems.map((item, idx) => {
+                        return <li key={idx}>{item}</li>;
                     })}
                 </ul>
             </section>

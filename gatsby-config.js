@@ -10,6 +10,7 @@ module.exports = {
         siteUrl: config.siteURl,
         title: config.siteTitle,
         description: config.siteDescription,
+        author: config.author,
     },
     plugins: [
         `gatsby-transformer-sharp`,
@@ -50,19 +51,20 @@ module.exports = {
                 path: `${__dirname}/src/assets/images`,
             },
         },
-        // TODO: uncomment when building Strapi
-        // {
-        //     resolve: 'gatsby-source-graphql',
-        //     options: {
-        //         typeName: 'STRAPI',
-        //         fieldName: 'strapi',
-        //         url: `${
-        //             process.env.NODE_ENV === 'development'
-        //                 ? 'http://localhost:1337/graphql'
-        //                 : 'https://isiahfletcheradmin.herokuapp.com/graphql'
-        //         }`,
-        //         refetchInterval: process.env.NODE_ENV === 'development' && 50, // refetches Strapi data every 10 minutes
-        //     },
-        // },
+        {
+            resolve: 'gatsby-source-graphql',
+            options: {
+                typeName: 'STRAPI',
+                fieldName: 'strapi',
+                // TODO
+                // url: `${
+                //     process.env.NODE_ENV === 'development'
+                //         ? 'http://localhost:1337/graphql'
+                //         : 'https://isiahfletcheradmin.herokuapp.com/graphql'
+                // }`,
+                url: `http://localhost:1337/graphql`,
+                // refetchInterval: process.env.NODE_ENV === 'development' && 50, // refetches Strapi data every 5 minutes
+            },
+        },
     ],
 };

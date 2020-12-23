@@ -8,3 +8,4 @@ gatsby-config.js
 gatsby-browser.js
 gatsby-node.js
 postcss.config.js
+formatDate.js
