@@ -30,21 +30,31 @@ const MenuItem: React.FC<Props> = ({
     } = useContext(NavbarContext);
 
     const cn = `nav-list-item ${className ? className : ''}`;
+
+    const handleOpenOrClosePanel = (title: string, isActive: boolean) => {
+        setActivePanelName(title);
+        setIsActivePanel(isActive);
+    };
     return (
         <>
             {is_link_external ? (
-                <li className={cn}>
-                    <a href={`${slug}`}>{title}</a>
+                <li
+                    className={cn}
+                    onMouseOver={() => {
+                        handleOpenOrClosePanel('', false);
+                    }}
+                >
+                    <a href={slug}>{title}</a>
                 </li>
             ) : (
                 <li
                     className={cn}
                     onMouseOver={() => {
-                        setActivePanelName(title), setIsActivePanel(true);
+                        handleOpenOrClosePanel(title, true);
                     }}
                     // clear on navigation
                     onClick={() => {
-                        setActivePanelName(''), setIsActivePanel(false);
+                        handleOpenOrClosePanel('', false);
                     }}
                 >
                     <ALink

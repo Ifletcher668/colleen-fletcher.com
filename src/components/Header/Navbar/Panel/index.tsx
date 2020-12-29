@@ -18,16 +18,20 @@ const Panel: React.FC<Props> = ({blogs, offerings, baseUrl}: Props) => {
         NavbarContext,
     );
 
-    console.log(subMenuItems);
+    const handleOpenOrClosePanel = (
+        title: string,
+        isActive: boolean,
+        items: JSX.Element[],
+    ) => {
+        setActivePanelName(title),
+            setIsActivePanel(isActive),
+            setSubMenuItems(items);
+    };
 
     return (
         <nav
             className="panel-navbar"
-            onMouseLeave={() => {
-                setActivePanelName(''),
-                    setSubMenuItems([]),
-                    setIsActivePanel(false);
-            }}
+            onMouseLeave={() => handleOpenOrClosePanel('', false, [])}
         >
             <ul className="submenu">
                 {offerings &&
@@ -66,7 +70,7 @@ const Panel: React.FC<Props> = ({blogs, offerings, baseUrl}: Props) => {
                         return (
                             <li key={title}>
                                 <ALink
-                                    to={slug}
+                                    to={`/${baseUrl}/${slug}`}
                                     onMouseOver={() => {
                                         setActiveSubMenuItemName(title);
                                     }}

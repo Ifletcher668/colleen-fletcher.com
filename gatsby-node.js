@@ -20,8 +20,12 @@ exports.createPages = async ({actions, graphql, reporter}) => {
                         title
                     }
                     category {
-                        title
+                        name
                     }
+                }
+                pages {
+                    id
+                    slug
                 }
             }
         }
@@ -41,6 +45,18 @@ exports.createPages = async ({actions, graphql, reporter}) => {
         createPage({
             path: pageSlug,
             component: path.resolve(`./src/templates/blog-post.tsx`),
+            context: {
+                id,
+            },
+        });
+    });
+
+    const pages = data.strapi.pages;
+    pages.forEach(({id, slug}) => {
+        const pageSlug = slug.toLowerCase() === 'home' ? '/' : slug;
+        createPage({
+            path: pageSlug,
+            component: path.resolve(`./src/templates/page.tsx`),
             context: {
                 id,
             },

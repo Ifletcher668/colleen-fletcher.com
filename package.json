@@ -7,7 +7,7 @@
     "build": "gatsby build",
     "develop": "gatsby develop -p 3000",
     "lint": "eslint . --ext .tsx --ext .ts --ext .js",
-    "start": "npm run develop",
+    "start": "rm -rf .cache && yarn develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "cleanDependencies": "rm -rf .cache node_modules yarn.lock && yarn",

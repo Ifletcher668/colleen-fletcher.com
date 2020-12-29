@@ -92,6 +92,11 @@ $sizes: (
     'pad-large': '#_base->5th',
     'pad-medium': '#_base->3rd',
     'pad-small': '#_base->root',
+    'pad-xsmall': (
+        '%value': '#_base->root',
+        'times': 0.5,
+        'convert-units': 'em',
+    ),
     // text
     // xlarge screen-size
     'text': '#_base->3rd',

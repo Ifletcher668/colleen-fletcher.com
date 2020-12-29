@@ -52,6 +52,13 @@
                     }
                 }
                 &.active {
+                    // clear default hover style for anchor tag
+                    a {
+                        border-bottom: 0;
+                    }
+                    transition: time('fast') ease-out;
+                    border-bottom: color(lilac) solid 3px;
+                    color: color(dark-blue);
                     .panel-navbar {
                         animation: show time(medium) ease-out;
                         animation-fill-mode: forwards;
@@ -74,21 +81,22 @@
                             [content] minmax(0, size(fullWidth))
                             minmax(size(mg-medium), size(mg-large))
                             [margin-end];
-
-                        ul {
-                            display: flex;
-                            flex-flow: column nowrap;
-                            align-items: flex-start;
-                            padding-right: size(pad-small);
-                        }
                         .submenu,
                         .content {
                             animation: show time(slow) time(medium) ease-out;
                             animation-fill-mode: forwards;
                             padding: size(pad-medium) 0;
                         }
-
                         .submenu {
+                            li.active {
+                                transition: time('medium') ease-out;
+                                padding-left: size(pad-xsmall);
+                                border-left: 3px solid color(lilac);
+                            }
+                            display: flex;
+                            flex-flow: column nowrap;
+                            align-items: flex-start;
+                            padding-right: size(pad-small);
                             grid-column: submenu;
                             border-right: 1px solid black;
                         }
