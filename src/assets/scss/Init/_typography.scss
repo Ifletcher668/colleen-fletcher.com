@@ -103,6 +103,62 @@ span {
     font-weight: size(weight-heading);
 }
 
+hr {
+    .standard {
+        border: 0;
+        border-bottom: solid 1px color(earth);
+        margin: 0 0 size(mg-large) 0;
+    }
+    .fancy {
+        // frangipanis!
+    }
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    border: none;
+    overflow: hidden;
+    outline: none;
+    box-shadow: none;
+    padding: 0 size(pad-small);
+    border-radius: size(radius);
+    letter-spacing: size(letter-spacing-fancy);
+    margin: size(mg-xsmall);
+    color: color(background);
+    &:hover {
+        transition: time(medium) ease-in-out;
+        transform: scale(1.01);
+    }
+    &.primary {
+        background: radial-gradient(
+                68.84% 68.84% at 50% 50%,
+                color(lilac) 0%,
+                rgba(255, 255, 255, 0) 70.83%
+            ),
+            color(lilac);
+        //
+    }
+
+    &.secondary {
+        background: radial-gradient(
+                68.84% 68.84% at 50% 50%,
+                color(primary-blue) 0%,
+                rgba(255, 255, 255, 0) 70.83%
+            ),
+            color(primary-blue);
+    }
+    &.tertiary {
+        background: radial-gradient(
+                68.84% 68.84% at 50% 50%,
+                color(earth) 0%,
+                rgba(255, 255, 255, 0) 70.83%
+            ),
+            color(earth);
+        color: color(primary-blue);
+    }
+}
+
 // sub {
 //     font-size: 0.8em;
 //     position: relative;
@@ -144,11 +200,4 @@ span {
 //         padding: 1em 1.5em;
 //         overflow-x: auto;
 //     }
-// }
-
-// hr {
-//     border: 0;
-//     border-bottom: solid 2px _palette(border);
-//     margin: (_size(margin, lg) * 1.25) 0;
-
 // }

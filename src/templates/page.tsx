@@ -13,7 +13,6 @@ export default (props: Props) => {
             strapi: {page},
         },
     } = props;
-    console.log(page);
 
     return (
         <>

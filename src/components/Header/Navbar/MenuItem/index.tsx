@@ -5,20 +5,18 @@ import Panel from '../Panel';
 
 // props matches type StrapiMenuItem
 interface Props extends DefaultProps {
-    title: string;
+    text: string;
     is_link_external: boolean;
     slug: string;
-    offerings: StrapiOfferings[];
-    blogs: StrapiBlog[];
+    page: StrapiPage;
 }
 
 // data, className: Props
 const MenuItem: React.FC<Props> = ({
-    title,
+    text,
     is_link_external,
     slug,
-    offerings,
-    blogs,
+    page,
     className,
 }: Props) => {
     const {
@@ -44,13 +42,13 @@ const MenuItem: React.FC<Props> = ({
                         handleOpenOrClosePanel('', false);
                     }}
                 >
-                    <a href={slug}>{title}</a>
+                    <a href={slug}>{text}</a>
                 </li>
             ) : (
                 <li
                     className={cn}
                     onMouseOver={() => {
-                        handleOpenOrClosePanel(title, true);
+                        handleOpenOrClosePanel(text, true);
                     }}
                     // clear on navigation
                     onClick={() => {
@@ -63,18 +61,20 @@ const MenuItem: React.FC<Props> = ({
                         }`}
                         {...TRANSITION_PROPS}
                     >
-                        {title}
+                        {text}
                     </ALink>
 
                     {isActivePanel &&
-                        activePanelName === title &&
-                        blogs.length > 0 && (
-                            <Panel blogs={blogs} baseUrl={slug} />
+                        page &&
+                        page.blogs.length > 0 &&
+                        activePanelName === text && (
+                            <Panel blogs={page.blogs} baseUrl={slug} />
                         )}
                     {isActivePanel &&
-                        activePanelName === title &&
-                        offerings.length > 0 && (
-                            <Panel offerings={offerings} baseUrl={slug} />
+                        page &&
+                        page.offerings.length > 0 &&
+                        activePanelName === text && (
+                            <Panel offerings={page.offerings} baseUrl={slug} />
                         )}
                 </li>
             )}

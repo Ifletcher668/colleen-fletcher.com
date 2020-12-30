@@ -6,7 +6,7 @@ import {NavbarContext} from '../index';
 
 interface Props {
     blogs?: StrapiBlog[];
-    offerings?: StrapiOfferings[];
+    offerings?: StrapiOffering[];
     baseUrl: string;
 }
 

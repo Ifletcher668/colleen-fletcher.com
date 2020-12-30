@@ -2,11 +2,11 @@ import React from 'react';
 import MarkdownField from 'react-markdown';
 
 export interface Props {
-    data: StrapiBodyContent;
+    data: string;
 }
 
-const TextField: React.FC<Props> = ({data: {body}}: Props) => {
-    return <MarkdownField source={body} />;
+const TextField: React.FC<Props> = ({data}: Props) => {
+    return <MarkdownField source={data} allowDangerousHtml />;
 };
 
 export default TextField;

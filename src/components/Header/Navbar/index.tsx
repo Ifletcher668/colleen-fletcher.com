@@ -1,5 +1,5 @@
 import React, {createContext, useState} from 'react';
-import {useStrapiData} from '../../../utils/graphql/queries/useStrapi';
+import {useStrapiData} from '../../../utils/graphql/queries/useStrapiData';
 import MenuItem from './MenuItem';
 
 // Context
@@ -46,22 +46,24 @@ const Navbar: React.FC<DefaultProps> = ({className}: DefaultProps) => {
             <NavbarContext.Provider value={ctx}>
                 <ul className="nav-list">
                     {menuItems.map((menuItem, idx) => {
-                        if (
-                            menuItem.blogs.length > 0 ||
-                            menuItem.offerings.length > 0
-                        ) {
-                            // show active panel
-                            let className = '';
-                            if (menuItem.title === activePanelName) {
-                                className += 'active';
+                        if (menuItem.page) {
+                            if (
+                                menuItem.page.blogs.length > 0 ||
+                                menuItem.page.offerings.length > 0
+                            ) {
+                                // show active panel
+                                let className = '';
+                                if (menuItem.text === activePanelName) {
+                                    className += 'active';
+                                }
+                                return (
+                                    <MenuItem
+                                        key={idx}
+                                        className={className}
+                                        {...menuItem}
+                                    />
+                                );
                             }
-                            return (
-                                <MenuItem
-                                    key={idx}
-                                    className={className}
-                                    {...menuItem}
-                                />
-                            );
                         } else {
                             // no data needing panel
                             return <MenuItem key={idx} {...menuItem} />;

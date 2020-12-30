@@ -1,24 +1,11 @@
 import React from 'react';
-import MarkdownField from 'react-markdown';
-import Heading from '../../Heading';
 
 export interface Props {
-    data: StrapiBodyContent;
+    data: 'standard' | 'fancy'; // strapi 'style' column
 }
 
-const TextWithImageField: React.FC<Props> = ({
-    data: {header, rich_text, image_right_side},
-}: Props) => {
-    return (
-        <section className={image_right_side ? 'img-right' : 'img-left'}>
-            {header && <Heading level={3}>{header}</Heading>}
-            <MarkdownField
-                className="markdown"
-                children={rich_text}
-                allowDangerousHtml
-            />
-        </section>
-    );
+const DividerField: React.FC<Props> = ({data}: Props) => {
+    return <hr className={data} />;
 };
 
-export default TextWithImageField;
+export default DividerField;
