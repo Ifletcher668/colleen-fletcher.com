@@ -63,7 +63,8 @@ module.exports = {
                 //         : 'https://isiahfletcheradmin.herokuapp.com/graphql'
                 // }`,
                 url: `http://localhost:1337/graphql`,
-                refetchInterval: process.env.NODE_ENV === 'development' && 50, // refetches Strapi data every 5 minutes
+                refetchInterval:
+                    process.env.NODE_ENV === 'development' ? 25 : false, // refetches Strapi data every 25 seconds
             },
         },
     ],
