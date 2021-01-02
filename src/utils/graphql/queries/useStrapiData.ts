@@ -4,20 +4,29 @@ export const useStrapiData: () => Strapi = () =>
     useStaticQuery(graphql`
         query GET_STRAPI_CONTENT {
             strapi {
-                menuItems(sort: "order") {
-                    id
-                    text
-                    slug
-                    is_external_link
-                    order
+                homepage: menuItem(id: "1") {
+                    ...StrapiMenuItem
+                }
+                allOtherMenuItems: menuItems(
+                    sort: "text"
+                    where: {id_ne: "1"}
+                ) {
+                    ...StrapiMenuItem
                     page {
-                        blogs(sort: "title") {
+                        title
+                        slug
+                        blogs {
+                            name
                             slug
-                            title
+                            fullUrlPath
+                            blog_posts {
+                                ...AllStrapiBlogPostDataForFullUrlPath
+                            }
                         }
-                        offerings(sort: "title") {
+                        offerings {
                             title
                             slug
+                            fullUrlPath
                             services {
                                 title
                                 slug

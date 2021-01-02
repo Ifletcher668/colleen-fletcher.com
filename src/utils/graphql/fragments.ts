@@ -1,5 +1,31 @@
 import {graphql} from 'gatsby';
 
+// Strapi Content Types
+export const StrapiMenuItem = graphql`
+    fragment StrapiMenuItem on STRAPI_MenuItem {
+        text
+        slug
+        is_external_link
+    }
+`;
+
+export const StrapiBlogPost = graphql`
+    fragment AllStrapiBlogPostDataForFullUrlPath on STRAPI_BlogPost {
+        title
+        slug
+        published
+        blog {
+            name
+            slug
+        }
+        category {
+            name
+            slug
+        }
+        fullUrlPath
+    }
+`;
+
 export const FluidImage = graphql`
     fragment FluidImage on File {
         childImageSharp {

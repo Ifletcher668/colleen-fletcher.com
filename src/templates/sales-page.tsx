@@ -1,84 +1,34 @@
 import React from 'react';
 import {graphql} from 'gatsby';
-import Heading from '../components/Heading';
 import StrapiDynamicZone from '../components/StrapiDynamicZone';
-import BannerBackground from 'gatsby-background-image';
-import {Grid} from '../components/Container';
-import Card from '../components/Card';
-import MarkdownField from 'react-markdown';
-import SEO from '../components/SEO';
 
-type PageContext = {
-    id: string;
-    blogsPageId: StrapiBlogPost[];
-};
 interface Props {
     data: Strapi;
-    pageContext: PageContext;
 }
 
 export default (props: Props) => {
     const {
         data: {
-            strapi: {page, blogs, blogPosts},
+            strapi: {service},
         },
     } = props;
 
     return (
         <>
-            <SEO />
-            <BannerBackground
-                fluid={
-                    page.banner_background_image.imageFile.childImageSharp.fluid
-                }
-                className="banner-background"
-            >
-                <StrapiDynamicZone components={page.banner} />
-            </BannerBackground>
-            <StrapiDynamicZone components={page.body} />
-            {props.pageContext.blogsPageId && (
-                <>
-                    <Grid
-                        rows={`[rest] 1fr [test] 2fr`}
-                        containerType="section"
-                    >
-                        <Heading level={2}>Blogs</Heading>
-                        {blogs.map((blog, idx) => {
-                            return (
-                                <Card
-                                    key={idx}
-                                    heading={
-                                        <Heading level={4}>{blog.name}</Heading>
-                                    }
-                                    footer={[]}
-                                >
-                                    <MarkdownField
-                                        source={blog.meta_description}
-                                        allowDangerousHtml
-                                        className="paragraph"
-                                    />
-                                </Card>
-                            );
-                        })}
-                    </Grid>
-                    {blogPosts.map((blogPost, idx) => {
-                        return <Card key={idx}>{blogPost.title}</Card>;
-                    })}
-                </>
-            )}
+            <StrapiDynamicZone components={service.banner} />
+            <StrapiDynamicZone components={service.sales_page} />
         </>
     );
 };
 
 export const query = graphql`
-    query GET_PAGE($id: ID!) {
+    query GET_SALES_PAGE($id: ID!) {
         strapi {
-            page(id: $id) {
+            service(id: $id) {
                 title
                 banner_background_image {
                     ...StrapiUploadFile
                 }
-                meta_description
                 banner {
                     __typename
                     ... on STRAPI_ComponentMediaSingleImage {
@@ -133,7 +83,7 @@ export const query = graphql`
                         ...StrapiComponentSectionImageCenterTextEitherSide
                     }
                 }
-                body {
+                sales_page {
                     __typename
                     ... on STRAPI_ComponentMediaSingleImage {
                         ...StrapiComponentMediaSingleImage
@@ -187,15 +137,6 @@ export const query = graphql`
                         ...StrapiComponentSectionImageCenterTextEitherSide
                     }
                 }
-            }
-            blogPosts {
-                title
-            }
-            blogs {
-                name
-                slug
-                fullUrlPath
-                meta_description
             }
         }
     }
