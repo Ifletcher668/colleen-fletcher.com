@@ -2,44 +2,45 @@ import React from 'react';
 
 interface Props extends DefaultProps {
     level: 1 | 2 | 3 | 4 | 5 | 6;
-    tilt: 'up' | 'even' | 'down';
+    tilt?: 'up' | 'even' | 'down';
 }
 
-const Heading: React.FC<Props> = ({level, children, tilt}: Props) => {
+const Heading: React.FC<Props> = ({level, children, style, tilt}: Props) => {
+    const cn = `${tilt === 'even' || tilt === undefined ? '' : `tilt-${tilt}`}`;
     switch (level) {
         case 1:
             return (
-                <h1 className={`${tilt === 'even' ? '' : `tilt-${tilt}`}`}>
+                <h1 style={style} className={cn}>
                     {children}
                 </h1>
             );
         case 2:
             return (
-                <h2 className={`${tilt === 'even' ? '' : `tilt-${tilt}`}`}>
+                <h2 style={style} className={cn}>
                     {children}
                 </h2>
             );
         case 3:
             return (
-                <h3 className={`${tilt === 'even' ? '' : `tilt-${tilt}`}`}>
+                <h3 style={style} className={cn}>
                     {children}
                 </h3>
             );
         case 4:
             return (
-                <h4 className={`${tilt === 'even' ? '' : `tilt-${tilt}`}`}>
+                <h4 style={style} className={cn}>
                     {children}
                 </h4>
             );
         case 5:
             return (
-                <h5 className={`${tilt === 'even' ? '' : `tilt-${tilt}`}`}>
+                <h5 style={style} className={cn}>
                     {children}
                 </h5>
             );
         default:
             return (
-                <h6 className={`${tilt === 'even' ? '' : `tilt-${tilt}`}`}>
+                <h6 style={style} className={cn}>
                     {children}
                 </h6>
             );

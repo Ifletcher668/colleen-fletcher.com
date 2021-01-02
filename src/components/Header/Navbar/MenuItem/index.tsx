@@ -6,15 +6,15 @@ import Panel from '../Panel';
 // props matches type StrapiMenuItem
 interface Props extends DefaultProps {
     text: string;
-    is_link_external: boolean;
+    is_external_link: boolean;
     slug: string;
-    page: StrapiPage;
+    page?: StrapiPage;
 }
 
 // data, className: Props
 const MenuItem: React.FC<Props> = ({
     text,
-    is_link_external,
+    is_external_link,
     slug,
     page,
     className,
@@ -33,9 +33,10 @@ const MenuItem: React.FC<Props> = ({
         setActivePanelName(title);
         setIsActivePanel(isActive);
     };
+
     return (
         <>
-            {is_link_external ? (
+            {is_external_link ? (
                 <li
                     className={cn}
                     onMouseOver={() => {
@@ -63,18 +64,17 @@ const MenuItem: React.FC<Props> = ({
                     >
                         {text}
                     </ALink>
-
                     {isActivePanel &&
                         page &&
                         page.blogs.length > 0 &&
                         activePanelName === text && (
-                            <Panel blogs={page.blogs} baseUrl={slug} />
+                            <Panel blogs={page.blogs} />
                         )}
                     {isActivePanel &&
                         page &&
                         page.offerings.length > 0 &&
                         activePanelName === text && (
-                            <Panel offerings={page.offerings} baseUrl={slug} />
+                            <Panel offerings={page.offerings} />
                         )}
                 </li>
             )}

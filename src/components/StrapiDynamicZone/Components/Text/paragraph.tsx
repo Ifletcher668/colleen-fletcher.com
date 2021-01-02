@@ -6,7 +6,9 @@ export interface Props {
 }
 
 const TextField: React.FC<Props> = ({data}: Props) => {
-    return <MarkdownField source={data} allowDangerousHtml />;
+    return (
+        <MarkdownField source={data} allowDangerousHtml className="paragraph" />
+    );
 };
 
 export default TextField;

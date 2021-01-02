@@ -7,10 +7,9 @@ import {NavbarContext} from '../index';
 interface Props {
     blogs?: StrapiBlog[];
     offerings?: StrapiOffering[];
-    baseUrl: string;
 }
 
-const Panel: React.FC<Props> = ({blogs, offerings, baseUrl}: Props) => {
+const Panel: React.FC<Props> = ({blogs, offerings}: Props) => {
     const {frangipaniImg} = useImage();
     const [subMenuItems, setSubMenuItems] = useState<JSX.Element[]>([]);
     const [activeSubMenuItemName, setActiveSubMenuItemName] = useState('');
@@ -35,48 +34,81 @@ const Panel: React.FC<Props> = ({blogs, offerings, baseUrl}: Props) => {
         >
             <ul className="submenu">
                 {offerings &&
-                    offerings.map(({title, slug, services}) => {
-                        const subMenu: JSX.Element[] = [];
+                    offerings.map(offering => {
+                        const {services} = offering;
                         let className = '';
-                        if (services) {
-                            if (title === activeSubMenuItemName) {
-                                className += 'active';
-                            }
-                            services.map(({title, slug}, idx) => {
-                                subMenu.push(
-                                    <ALink key={idx} to={`/${baseUrl}/${slug}`}>
-                                        {title}
-                                    </ALink>,
-                                );
-                            });
+                        if (
+                            services &&
+                            offering.title === activeSubMenuItemName
+                        ) {
+                            className += 'active';
                         }
                         return (
-                            <li key={title} className={className}>
+                            <li key={offering.title} className={className}>
                                 <ALink
-                                    to={`/${baseUrl}/${slug}`}
+                                    to={offering.fullUrlPath}
                                     onMouseOver={() => {
-                                        setSubMenuItems(subMenu),
-                                            setActiveSubMenuItemName(title);
+                                        if (services) {
+                                            setSubMenuItems(() =>
+                                                services.map((service, idx) => {
+                                                    return (
+                                                        <ALink
+                                                            key={idx}
+                                                            to={`${offering.fullUrlPath}${service.slug}`}
+                                                        >
+                                                            {service.title}
+                                                        </ALink>
+                                                    );
+                                                }),
+                                            );
+                                            setActiveSubMenuItemName(
+                                                offering.title,
+                                            );
+                                        }
                                     }}
                                     {...TRANSITION_PROPS}
                                 >
-                                    {title}
+                                    {offering.title}
                                 </ALink>
                             </li>
                         );
                     })}
                 {blogs &&
-                    blogs.map(({title, slug}) => {
+                    blogs.map((blog, idx) => {
+                        const {blog_posts} = blog;
+                        let className = '';
+                        if (blog_posts && blog.name === activeSubMenuItemName) {
+                            className += 'active';
+                        }
                         return (
-                            <li key={title}>
+                            <li key={idx} className={className}>
                                 <ALink
-                                    to={`/${baseUrl}/${slug}`}
+                                    to={blog.fullUrlPath}
                                     onMouseOver={() => {
-                                        setActiveSubMenuItemName(title);
+                                        if (blog_posts) {
+                                            setSubMenuItems(() =>
+                                                blog_posts.map(
+                                                    (
+                                                        {title, fullUrlPath},
+                                                        idx,
+                                                    ) => {
+                                                        return (
+                                                            <ALink
+                                                                key={idx}
+                                                                to={fullUrlPath}
+                                                            >
+                                                                {title}
+                                                            </ALink>
+                                                        );
+                                                    },
+                                                ),
+                                            );
+                                            setActiveSubMenuItemName(blog.name);
+                                        }
                                     }}
                                     {...TRANSITION_PROPS}
                                 >
-                                    {title}
+                                    {blog.name}
                                 </ALink>
                             </li>
                         );

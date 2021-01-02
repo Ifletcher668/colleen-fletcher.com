@@ -24,7 +24,7 @@ const Navbar: React.FC<DefaultProps> = ({className}: DefaultProps) => {
     const [activePanelName, setActivePanelName] = useState<string>('');
 
     const {
-        strapi: {menuItems},
+        strapi: {homepage, allOtherMenuItems},
     } = useStrapiData();
 
     const TRANSITION_PROPS: TransitionProps = {
@@ -45,27 +45,27 @@ const Navbar: React.FC<DefaultProps> = ({className}: DefaultProps) => {
         <nav className={className}>
             <NavbarContext.Provider value={ctx}>
                 <ul className="nav-list">
-                    {menuItems.map((menuItem, idx) => {
-                        if (menuItem.page) {
-                            if (
-                                menuItem.page.blogs.length > 0 ||
-                                menuItem.page.offerings.length > 0
-                            ) {
-                                // show active panel
-                                let className = '';
-                                if (menuItem.text === activePanelName) {
-                                    className += 'active';
-                                }
-                                return (
-                                    <MenuItem
-                                        key={idx}
-                                        className={className}
-                                        {...menuItem}
-                                    />
-                                );
+                    <MenuItem {...homepage} />
+                    {allOtherMenuItems.map((menuItem, idx) => {
+                        if (
+                            menuItem.page &&
+                            (menuItem.page.blogs.length > 0 ||
+                                menuItem.page.offerings.length > 0)
+                        ) {
+                            // show active panel
+                            let className = '';
+                            if (menuItem.text === activePanelName) {
+                                className += 'active';
                             }
+                            return (
+                                <MenuItem
+                                    key={idx}
+                                    className={className}
+                                    {...menuItem}
+                                />
+                            );
                         } else {
-                            // no data needing panel
+                            // no data to show
                             return <MenuItem key={idx} {...menuItem} />;
                         }
                     })}

@@ -36,6 +36,10 @@ const SEO = (props: Props) => {
             titleTemplate={`%s | ${site.siteMetadata.title}`}
             meta={[
                 {
+                    name: 'lang',
+                    content: 'en',
+                },
+                {
                     name: 'viewport',
                     content:
                         '<meta name="viewport" content="width=device-width, initial-scale=1">',
