@@ -57,6 +57,12 @@ p {
     &::first-letter {
         @include font-family('MA Sexy');
     }
+
+    hyphens: auto;
+    hyphenate-limit-chars: 6 3 3;
+    hyphenate-limit-lines: 2;
+    hyphenate-limit-last: always;
+    hyphenate-limit-zone: 8%;
 }
 
 h1,
@@ -66,7 +72,7 @@ h4,
 h5,
 h6 {
     color: color(aterrima);
-    font-weight: 600;
+    font-weight: size(weight-heading);
     letter-spacing: size(letter-spacing-important);
     margin: 0 0 size(mg-small) 0;
     a {
@@ -77,13 +83,18 @@ h6 {
 }
 
 h1 {
-    @include font-family('MA Sexy');
+    &::first-letter {
+        @include font-family('MA Sexy');
+    }
     font-size: size(h1);
     color: color(earth);
     // corrects font going out of bounds
     margin: size(mg-xsmall) 0 size(mg-small) 0;
 }
 h2 {
+    &::first-letter {
+        @include font-family('MA Sexy');
+    }
     font-size: size(h2);
 }
 h3 {
@@ -99,6 +110,11 @@ h6 {
     font-size: size(h6);
 }
 
+.paragraph {
+    span {
+        font-weight: size(weight-light);
+    }
+}
 span {
     font-weight: size(weight-heading);
 }
