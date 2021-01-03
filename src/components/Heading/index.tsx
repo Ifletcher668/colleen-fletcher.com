@@ -3,10 +3,19 @@ import React from 'react';
 interface Props extends DefaultProps {
     level: 1 | 2 | 3 | 4 | 5 | 6;
     tilt?: 'up' | 'even' | 'down';
+    center?: boolean;
 }
 
-const Heading: React.FC<Props> = ({level, children, style, tilt}: Props) => {
-    const cn = `${tilt === 'even' || tilt === undefined ? '' : `tilt-${tilt}`}`;
+const Heading: React.FC<Props> = ({
+    level,
+    children,
+    style,
+    tilt,
+    center,
+}: Props) => {
+    const cn = `${
+        tilt === 'even' || tilt === undefined ? '' : `tilt-${tilt}`
+    } ${center ? 'center' : ''}`;
     switch (level) {
         case 1:
             return (

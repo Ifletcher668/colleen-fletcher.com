@@ -4,13 +4,17 @@ import Heading from '../components/Heading';
 import StrapiDynamicZone from '../components/StrapiDynamicZone';
 import BannerBackground from 'gatsby-background-image';
 import {Grid} from '../components/Container';
-import Card from '../components/Card';
+import {Card, CardHeader, CardBody, CardFooter} from '../components/Card';
 import MarkdownField from 'react-markdown';
 import SEO from '../components/SEO';
-
+import ALink from 'gatsby-plugin-transition-link/AniLink';
+import {useContext} from 'react';
+import {LayoutContext} from '../components/Layout';
+import {useStrapiData} from '../utils/graphql/queries/useStrapiData';
 type PageContext = {
     id: string;
     blogsPageId: StrapiBlogPost[];
+    offeringsPageId: StrapiOffering[];
 };
 interface Props {
     data: Strapi;
@@ -20,10 +24,130 @@ interface Props {
 export default (props: Props) => {
     const {
         data: {
-            strapi: {page, blogs, blogPosts},
+            strapi: {page},
         },
     } = props;
 
+    const {
+        strapi: {blogs, blogPosts, offerings},
+    } = useStrapiData();
+
+    const {TRANSITION_PROPS} = useContext(LayoutContext);
+
+    const GRID_LAYOUT: Grid = {
+        columns: [`repeat(auto-fit, minmax(10em, 1fr))`],
+        gap: `1em`,
+    };
+    const showBlogsPageData = () => {
+        return (
+            <>
+                <Grid containerType="section">
+                    <Heading level={2}>Blogs</Heading>
+                    <Grid {...GRID_LAYOUT}>
+                        {blogs.map((blog, idx) => {
+                            return (
+                                <Card key={idx}>
+                                    <CardHeader>
+                                        <Heading level={3}>
+                                            <ALink
+                                                to={blog.fullUrlPath}
+                                                {...TRANSITION_PROPS}
+                                            >
+                                                {blog.name}
+                                            </ALink>
+                                        </Heading>
+                                    </CardHeader>
+                                    <CardBody>
+                                        <MarkdownField
+                                            source={blog.meta_description}
+                                            allowDangerousHtml
+                                            className="paragraph"
+                                        />
+                                    </CardBody>
+                                </Card>
+                            );
+                        })}
+                    </Grid>
+                </Grid>
+                <Heading level={4}>Blog Posts</Heading>
+                <Grid {...GRID_LAYOUT}>
+                    {blogPosts.map((blogPost, idx) => {
+                        return (
+                            <Card key={idx}>
+                                <CardHeader>
+                                    <Heading level={5}>
+                                        <ALink
+                                            to={blogPost.fullUrlPath}
+                                            {...TRANSITION_PROPS}
+                                        >
+                                            {blogPost.title}
+                                        </ALink>
+                                    </Heading>
+                                </CardHeader>
+                                <CardBody>
+                                    <MarkdownField
+                                        source={blogPost.preview}
+                                        allowDangerousHtml
+                                        className="paragraph"
+                                    />
+                                </CardBody>
+                                {blogPost.tags && blogPost.tags.length > 0 && (
+                                    <CardFooter>
+                                        <Heading level={6}>Tags</Heading>
+                                        {blogPost.tags.map((tag, idx) => {
+                                            return (
+                                                <Grid
+                                                    key={idx}
+                                                    {...GRID_LAYOUT}
+                                                >
+                                                    {tag.name}
+                                                </Grid>
+                                            );
+                                        })}
+                                    </CardFooter>
+                                )}
+                            </Card>
+                        );
+                    })}
+                </Grid>
+            </>
+        );
+    };
+
+    const showOfferingsPageData = () => {
+        return (
+            <>
+                <Grid containerType="section">
+                    <Heading level={2}>Offerings</Heading>
+                    <Grid {...GRID_LAYOUT}>
+                        {offerings.map((offering, idx) => {
+                            return (
+                                <Card key={idx}>
+                                    <CardHeader>
+                                        <Heading level={4}>
+                                            <ALink
+                                                to={offering.fullUrlPath}
+                                                {...TRANSITION_PROPS}
+                                            >
+                                                {offering.title}
+                                            </ALink>
+                                        </Heading>
+                                    </CardHeader>
+                                    <CardBody>
+                                        <MarkdownField
+                                            source={offering.meta_description}
+                                            allowDangerousHtml
+                                            className="paragraph"
+                                        />
+                                    </CardBody>
+                                </Card>
+                            );
+                        })}
+                    </Grid>
+                </Grid>
+            </>
+        );
+    };
     return (
         <>
             <SEO />
@@ -36,36 +160,8 @@ export default (props: Props) => {
                 <StrapiDynamicZone components={page.banner} />
             </BannerBackground>
             <StrapiDynamicZone components={page.body} />
-            {props.pageContext.blogsPageId && (
-                <>
-                    <Grid
-                        rows={`[rest] 1fr [test] 2fr`}
-                        containerType="section"
-                    >
-                        <Heading level={2}>Blogs</Heading>
-                        {blogs.map((blog, idx) => {
-                            return (
-                                <Card
-                                    key={idx}
-                                    heading={
-                                        <Heading level={4}>{blog.name}</Heading>
-                                    }
-                                    footer={[]}
-                                >
-                                    <MarkdownField
-                                        source={blog.meta_description}
-                                        allowDangerousHtml
-                                        className="paragraph"
-                                    />
-                                </Card>
-                            );
-                        })}
-                    </Grid>
-                    {blogPosts.map((blogPost, idx) => {
-                        return <Card key={idx}>{blogPost.title}</Card>;
-                    })}
-                </>
-            )}
+            {props.pageContext.blogsPageId && showBlogsPageData()}
+            {props.pageContext.offeringsPageId && showOfferingsPageData()}
         </>
     );
 };
@@ -187,15 +283,6 @@ export const query = graphql`
                         ...StrapiComponentSectionImageCenterTextEitherSide
                     }
                 }
-            }
-            blogPosts {
-                title
-            }
-            blogs {
-                name
-                slug
-                fullUrlPath
-                meta_description
             }
         }
     }

@@ -9,11 +9,22 @@ export const StrapiMenuItem = graphql`
     }
 `;
 
+export const StrapiBlog = graphql`
+    fragment StrapiBlog on STRAPI_Blog {
+        name
+        slug
+        fullUrlPath
+        meta_description
+    }
+`;
+
+// Grabs everything except body components
 export const StrapiBlogPost = graphql`
-    fragment AllStrapiBlogPostDataForFullUrlPath on STRAPI_BlogPost {
+    fragment StrapiBlogPost on STRAPI_BlogPost {
         title
         slug
         published
+        preview
         blog {
             name
             slug
@@ -22,7 +33,39 @@ export const StrapiBlogPost = graphql`
             name
             slug
         }
+        tags {
+            name
+        }
         fullUrlPath
+    }
+`;
+
+export const StrapiOffering = graphql`
+    fragment StrapiOffering on STRAPI_Offering {
+        id
+        title
+        slug
+        meta_description
+        fullUrlPath
+        services {
+            ...StrapiService
+        }
+    }
+`;
+export const StrapiService = graphql`
+    fragment StrapiService on STRAPI_Service {
+        id
+        title
+        slug
+        fullUrlPath
+        preview
+        banner_background_image {
+            ...StrapiUploadFile
+        }
+        offerings {
+            id
+            slug
+        }
     }
 `;
 

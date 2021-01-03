@@ -1,5 +1,5 @@
 const {createRemoteFileNode} = require('gatsby-source-filesystem');
-const {formatDateOnSlug} = require('./src/utils/formatDate');
+const {formatDateOnSlug} = require('./src/utils/format-date');
 
 const path = require('path');
 require('dotenv').config({
@@ -15,14 +15,21 @@ exports.createPages = async ({actions, graphql, reporter}) => {
                 generalSetting {
                     blogs_page {
                         id
-                        title
                         slug
                     }
                     home_page {
                         id
-                        title
                         slug
                     }
+                    offerings_page {
+                        id
+                        slug
+                    }
+                }
+                blogs {
+                    id
+                    slug
+                    name
                 }
                 blogPosts {
                     id
@@ -71,10 +78,24 @@ exports.createPages = async ({actions, graphql, reporter}) => {
             if (id === pageSettings.blogs_page.id) {
                 context.blogsPageId = pageSettings.blogs_page.id;
             }
+            if (id === pageSettings.offerings_page.id) {
+                context.offeringsPageId = pageSettings.offerings_page.id;
+            }
             createPage({
                 path: pagePath,
                 component: path.resolve(`${__dirname}/src/templates/page.tsx`),
                 context,
+            });
+        });
+
+        // Create Blog Pages
+        data.strapi.blogs.forEach(blog => {
+            createPage({
+                path: `${pageSettings.blogs_page.slug}/${blog.slug}`,
+                component: path.resolve(`${__dirname}/src/templates/blog.tsx`),
+                context: {
+                    id: blog.id,
+                },
             });
         });
 
@@ -102,7 +123,7 @@ exports.createPages = async ({actions, graphql, reporter}) => {
 
         // Create Offerings
         data.strapi.offerings.forEach(({id, slug}) => {
-            const pageSlug = `/work-with-me/${slug}/`;
+            const pageSlug = `/${pageSettings.offerings_page.slug}/${slug}/`;
             createPage({
                 path: pageSlug,
                 component: path.resolve(
@@ -119,7 +140,7 @@ exports.createPages = async ({actions, graphql, reporter}) => {
         data.strapi.services.forEach(service => {
             const {offerings} = service;
             return offerings.forEach(offering => {
-                const pageSlug = `/work-with-me/${offering.slug}/${service.slug}`;
+                const pageSlug = `/${pageSettings.offerings_page.slug}/${offering.slug}/${service.slug}`;
                 createPage({
                     path: pageSlug,
                     component: path.resolve(
@@ -134,6 +155,7 @@ exports.createPages = async ({actions, graphql, reporter}) => {
     });
 };
 
+// TODO: Find out how to grab strapi page settings to clean up resolver urlPaths
 exports.createResolvers = async ({
     actions,
     cache,
@@ -193,6 +215,17 @@ exports.createResolvers = async ({
                 type: `String`,
                 resolve(source) {
                     return `/work-with-me/${source.slug}/`;
+                },
+            },
+        },
+        STRAPI_Service: {
+            fullUrlPath: {
+                // hardcoded to accept work-with-me as the 'offerings' page
+                type: `String`,
+                resolve(source) {
+                    return `/work-with-me/${source.offerings.filter(o => {
+                        o.id === source.id;
+                    })}${source.slug}/`;
                 },
             },
         },

@@ -1,6 +1,7 @@
 import {graphql, useStaticQuery} from 'gatsby';
 
 export const useStrapiData: () => Strapi = () =>
+    // TODO: homepage still hardcoded in query
     useStaticQuery(graphql`
         query GET_STRAPI_CONTENT {
             strapi {
@@ -16,23 +17,24 @@ export const useStrapiData: () => Strapi = () =>
                         title
                         slug
                         blogs {
-                            name
-                            slug
-                            fullUrlPath
+                            ...StrapiBlog
                             blog_posts {
-                                ...AllStrapiBlogPostDataForFullUrlPath
+                                ...StrapiBlogPost
                             }
                         }
                         offerings {
-                            title
-                            slug
-                            fullUrlPath
-                            services {
-                                title
-                                slug
-                            }
+                            ...StrapiOffering
                         }
                     }
+                }
+                blogs {
+                    ...StrapiBlog
+                }
+                blogPosts {
+                    ...StrapiBlogPost
+                }
+                offerings {
+                    ...StrapiOffering
                 }
             }
         }

@@ -1,5 +1,6 @@
 import React, {createContext, useState} from 'react';
 import {useStrapiData} from '../../../utils/graphql/queries/useStrapiData';
+import {LayoutContext} from '../../Layout';
 import MenuItem from './MenuItem';
 
 // Context
@@ -27,12 +28,7 @@ const Navbar: React.FC<DefaultProps> = ({className}: DefaultProps) => {
         strapi: {homepage, allOtherMenuItems},
     } = useStrapiData();
 
-    const TRANSITION_PROPS: TransitionProps = {
-        paintDrip: true,
-        hex: '#CBEDFC',
-        duration: 0.7,
-    };
-
+    const {TRANSITION_PROPS} = React.useContext(LayoutContext);
     const ctx = {
         isActivePanel,
         setIsActivePanel,
