@@ -38,7 +38,15 @@ const Navbar: React.FC<DefaultProps> = ({className}: DefaultProps) => {
     };
 
     return (
-        <nav className={className}>
+        <nav
+            className={
+                className
+                    ? Array.isArray(className)
+                        ? className.join(' ')
+                        : className
+                    : ''
+            }
+        >
             <NavbarContext.Provider value={ctx}>
                 <ul className="nav-list">
                     <MenuItem {...homepage} />
@@ -49,14 +57,14 @@ const Navbar: React.FC<DefaultProps> = ({className}: DefaultProps) => {
                                 menuItem.page.offerings.length > 0)
                         ) {
                             // show active panel
-                            let className = '';
+                            let cn = '';
                             if (menuItem.text === activePanelName) {
-                                className += 'active';
+                                cn += 'active';
                             }
                             return (
                                 <MenuItem
                                     key={idx}
-                                    className={className}
+                                    className={cn}
                                     {...menuItem}
                                 />
                             );

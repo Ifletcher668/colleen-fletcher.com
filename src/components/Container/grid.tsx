@@ -24,6 +24,9 @@ interface Props extends DefaultProps {
 const useBreakpoints = (values: string[]) => {
     const {getBreakpoints, getWidth} = new BreakpointHandler();
     const breakpoints = getBreakpoints();
+    if (!Array.isArray(values)) {
+        throw new Error(`value passed was not of type Array.`);
+    }
     if (values.length > breakpoints.length) {
         throw new Error(
             `Array "[${values}]" is too long! Reduce array length by ${
@@ -42,7 +45,6 @@ const useBreakpoints = (values: string[]) => {
         window.addEventListener('resize', handleResize);
         return window.addEventListener('resize', handleResize);
     }, []);
-
     if (width) {
         if (
             values.length === 1 ||
@@ -68,7 +70,7 @@ const useBreakpoints = (values: string[]) => {
 };
 
 const Grid: React.FC<Props> = ({
-    classNames,
+    className,
     children,
     containerType,
     gap = 0,
@@ -84,25 +86,29 @@ const Grid: React.FC<Props> = ({
         gridAutoColumns: autoCols,
     };
 
-    const classes = classNames ? classNames.join('') : '';
+    const cn = className
+        ? Array.isArray(className)
+            ? className.join(' ')
+            : className
+        : '';
 
     switch (containerType) {
         case 'article':
             return (
-                <article className={classes} style={styles}>
+                <article className={cn} style={styles}>
                     {children}
                 </article>
             );
         case 'section':
             return (
-                <section className={classes} style={styles}>
+                <section className={cn} style={styles}>
                     {children}
                 </section>
             );
 
         default:
             return (
-                <div className={classes} style={styles}>
+                <div className={cn} style={styles}>
                     {children}
                 </div>
             );

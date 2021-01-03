@@ -27,7 +27,13 @@ const MenuItem: React.FC<Props> = ({
         TRANSITION_PROPS,
     } = useContext(NavbarContext);
 
-    const cn = `nav-list-item ${className ? className : ''}`;
+    const cn = `nav-list-item ${
+        className
+            ? Array.isArray(className)
+                ? className.join(' ')
+                : className
+            : ''
+    }`;
 
     const handleOpenOrClosePanel = (title: string, isActive: boolean) => {
         setActivePanelName(title);
@@ -68,13 +74,19 @@ const MenuItem: React.FC<Props> = ({
                         page &&
                         page.blogs.length > 0 &&
                         activePanelName === text && (
-                            <Panel blogs={page.blogs} />
+                            <Panel
+                                className="panel-navbar"
+                                blogs={page.blogs}
+                            />
                         )}
                     {isActivePanel &&
                         page &&
                         page.offerings.length > 0 &&
                         activePanelName === text && (
-                            <Panel offerings={page.offerings} />
+                            <Panel
+                                className="panel-navbar"
+                                offerings={page.offerings}
+                            />
                         )}
                 </li>
             )}

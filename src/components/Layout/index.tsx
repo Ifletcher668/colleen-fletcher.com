@@ -3,10 +3,6 @@ import Footer from '../Footer';
 import Header from '../Header';
 import Main from '../Main';
 
-interface Props extends DefaultProps {
-    location: Location;
-}
-
 type TransitionProps = {
     paintDrip: boolean;
     hex: string;
@@ -21,7 +17,7 @@ export const LayoutContext = createContext<LayoutCtx | {[key: string]: any}>(
     {},
 );
 
-const Layout: React.FC<Props> = ({children, location}: Props) => {
+const Layout: React.FC<PageProps> = ({children, location}: PageProps) => {
     const [documentIsAtTop, setDocumentIsAtTop] = useState<boolean>(true);
 
     const handleScroll = () =>
@@ -54,7 +50,7 @@ const Layout: React.FC<Props> = ({children, location}: Props) => {
         documentIsAtTop && location.pathname === '/' ? (
             ''
         ) : (
-            <Header classes={headerClassNames} />
+            <Header className={headerClassNames} />
         );
 
     return (

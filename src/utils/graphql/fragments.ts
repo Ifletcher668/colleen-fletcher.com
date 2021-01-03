@@ -46,6 +46,9 @@ export const StrapiOffering = graphql`
         title
         slug
         meta_description
+        image {
+            ...StrapiComponentMediaSingleImage
+        }
         fullUrlPath
         services {
             ...StrapiService
@@ -59,6 +62,9 @@ export const StrapiService = graphql`
         slug
         fullUrlPath
         preview
+        preview_image {
+            ...StrapiComponentMediaSingleImage
+        }
         banner_background_image {
             ...StrapiUploadFile
         }

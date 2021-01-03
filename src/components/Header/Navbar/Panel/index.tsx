@@ -4,12 +4,12 @@ import ALink from 'gatsby-plugin-transition-link/AniLink';
 import {useImage} from '../../../../utils/graphql/queries/useImage';
 import {NavbarContext} from '../index';
 
-interface Props {
+interface Props extends DefaultProps {
     blogs?: StrapiBlog[];
     offerings?: StrapiOffering[];
 }
 
-const Panel: React.FC<Props> = ({blogs, offerings}: Props) => {
+const Panel: React.FC<Props> = ({blogs, offerings, className}: Props) => {
     const {frangipaniImg} = useImage();
     const [subMenuItems, setSubMenuItems] = useState<JSX.Element[]>([]);
     const [activeSubMenuItemName, setActiveSubMenuItemName] = useState('');
@@ -29,22 +29,28 @@ const Panel: React.FC<Props> = ({blogs, offerings}: Props) => {
 
     return (
         <nav
-            className="panel-navbar"
+            className={
+                className
+                    ? Array.isArray(className)
+                        ? className.join(' ')
+                        : className
+                    : ''
+            }
             onMouseLeave={() => handleOpenOrClosePanel('', false, [])}
         >
             <ul className="submenu">
                 {offerings &&
                     offerings.map(offering => {
                         const {services} = offering;
-                        let className = '';
+                        let cn = '';
                         if (
                             services &&
                             offering.title === activeSubMenuItemName
                         ) {
-                            className += 'active';
+                            cn += 'active';
                         }
                         return (
-                            <li key={offering.title} className={className}>
+                            <li key={offering.title} className={cn}>
                                 <ALink
                                     to={offering.fullUrlPath}
                                     onMouseOver={() => {
@@ -55,6 +61,7 @@ const Panel: React.FC<Props> = ({blogs, offerings}: Props) => {
                                                         <ALink
                                                             key={idx}
                                                             to={`${offering.fullUrlPath}${service.slug}`}
+                                                            {...TRANSITION_PROPS}
                                                         >
                                                             {service.title}
                                                         </ALink>
@@ -96,6 +103,7 @@ const Panel: React.FC<Props> = ({blogs, offerings}: Props) => {
                                                             <ALink
                                                                 key={idx}
                                                                 to={fullUrlPath}
+                                                                {...TRANSITION_PROPS}
                                                             >
                                                                 {title}
                                                             </ALink>
