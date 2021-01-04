@@ -60,6 +60,14 @@ exports.createPages = async ({actions, graphql, reporter}) => {
                         slug
                     }
                 }
+                tags {
+                    id
+                    slug
+                }
+                categories {
+                    id
+                    slug
+                }
             }
         }
     `).then(({error, data}) => {
@@ -150,6 +158,27 @@ exports.createPages = async ({actions, graphql, reporter}) => {
                         id: service.id,
                     },
                 });
+            });
+        });
+
+        data.strapi.tags.forEach(({id, slug}) => {
+            createPage({
+                path: `tags/${slug}`,
+                component: path.resolve(`${__dirname}/src/templates/tag.tsx`),
+                context: {
+                    id,
+                },
+            });
+        });
+        data.strapi.categories.forEach(({id, slug}) => {
+            createPage({
+                path: `categories/${slug}`,
+                component: path.resolve(
+                    `${__dirname}/src/templates/category.tsx`,
+                ),
+                context: {
+                    id,
+                },
             });
         });
     });

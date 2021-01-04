@@ -10,11 +10,9 @@ const ButtonField: React.FC<Props> = ({
     data: {buttonText, variant, action},
 }: Props) => {
     return (
-        <Alink to={action}>
-            <Button variant={variant} type="button">
-                {buttonText}
-            </Button>
-        </Alink>
+        <Button center variant={variant} type="button">
+            <Alink to={action}>{buttonText}</Alink>
+        </Button>
     );
 };
 

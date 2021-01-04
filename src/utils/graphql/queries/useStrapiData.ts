@@ -33,8 +33,17 @@ export const useStrapiData: () => Strapi = () =>
                 blogPosts {
                     ...StrapiBlogPost
                 }
+                recentBlogPosts: blogPosts(sort: "published", limit: 5) {
+                    ...StrapiBlogPost
+                }
                 offerings {
                     ...StrapiOffering
+                }
+                tags {
+                    ...StrapiTag
+                }
+                categories {
+                    ...StrapiCategory
                 }
             }
         }

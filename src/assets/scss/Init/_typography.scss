@@ -40,6 +40,13 @@ a {
         color: color(dark-blue);
     }
 }
+button {
+    a {
+        &:hover {
+            border-bottom: 0;
+        }
+    }
+}
 
 strong,
 b {
@@ -153,8 +160,11 @@ hr {
                 rgba(255, 255, 255, 0) 70.83%
             ),
             color(lilac);
-        //
+        a {
+            color: color(background);
+        }
     }
+    //
 
     &.secondary {
         background: radial-gradient(
@@ -163,6 +173,9 @@ hr {
                 rgba(255, 255, 255, 0) 70.83%
             ),
             color(primary-blue);
+        a {
+            color: color(background);
+        }
     }
     &.tertiary {
         background: radial-gradient(
@@ -172,11 +185,17 @@ hr {
             ),
             color(earth);
         color: color(primary-blue);
+        a {
+            color: color(primary-blue);
+        }
     }
 }
 
 .center {
     text-align: center;
+    &:not(p) {
+        margin: 0 auto;
+    }
 }
 
 .circle {

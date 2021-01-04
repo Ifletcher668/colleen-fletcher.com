@@ -17,7 +17,7 @@ interface Props extends DefaultProps {
      * the breakpoints get smaller.
      */
     rows?: [string, string?, string?, string?, string?]; // grid-template-rows
-    containerType?: 'article' | 'section' | 'main-content' | 'zigzag';
+    containerType?: 'article' | 'section' | 'main-content' | 'aside';
     autoCols?: string;
 }
 
@@ -71,6 +71,7 @@ const useBreakpoints = (values: string[]) => {
 
 const Grid: React.FC<Props> = ({
     className,
+    style,
     children,
     containerType,
     gap = 0,
@@ -96,6 +97,7 @@ const Grid: React.FC<Props> = ({
         gridTemplateColumns: useBreakpoints(columns as string[]),
         gridTemplateRows: useBreakpoints(rows as string[]),
         gridAutoColumns: autoCols,
+        ...style,
     };
 
     switch (containerType) {
@@ -110,6 +112,12 @@ const Grid: React.FC<Props> = ({
                 <section className={cn} style={styles}>
                     {children}
                 </section>
+            );
+        case 'aside':
+            return (
+                <aside className={cn} style={styles}>
+                    {children}
+                </aside>
             );
 
         default:

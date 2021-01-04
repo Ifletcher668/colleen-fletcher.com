@@ -3,7 +3,7 @@ import {graphql} from 'gatsby';
 import Heading from '../components/Heading';
 import StrapiDynamicZone from '../components/StrapiDynamicZone';
 import CoverImage from 'gatsby-image';
-
+import {Flexbox, Grid} from '../components/Container';
 interface Props {
     data: Strapi;
 }
@@ -18,8 +18,8 @@ export default (props: Props) => {
     } = props;
 
     return (
-        <>
-            <section className="blog-post-header">
+        <Grid containerType="main-content">
+            <Grid containerType="section">
                 <Heading tilt="even" level={1}>
                     {title}
                 </Heading>
@@ -33,9 +33,9 @@ export default (props: Props) => {
                         <figcaption>{cover_image.caption}</figcaption>
                     </>
                 )}
-            </section>
-            <StrapiDynamicZone components={body} />
-        </>
+                <StrapiDynamicZone components={body} />
+            </Grid>
+        </Grid>
     );
 };
 

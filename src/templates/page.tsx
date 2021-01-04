@@ -31,7 +31,7 @@ export default (props: Props) => {
     } = props;
 
     const {
-        strapi: {blogs, blogPosts, offerings},
+        strapi: {blogs, recentBlogPosts, offerings},
     } = useStrapiData();
 
     const {TRANSITION_PROPS} = useContext(LayoutContext);
@@ -77,62 +77,64 @@ export default (props: Props) => {
                         })}
                     </Grid>
                 </Grid>
-                <Heading center level={4}>
-                    Blog Posts
-                </Heading>
-                <Grid
-                    columns={[`repeat(auto-fit, minmax(10em, 1fr))`]}
-                    gap={`1em`}
-                >
-                    {blogPosts.map((blogPost, idx) => {
-                        return (
-                            <Card key={idx}>
-                                <CardHeader>
-                                    <Heading center level={5}>
-                                        <ALink
-                                            to={blogPost.fullUrlPath}
-                                            {...TRANSITION_PROPS}
-                                        >
-                                            {blogPost.title}
-                                        </ALink>
-                                    </Heading>
-                                </CardHeader>
-                                <CardBody>
-                                    <MarkdownField
-                                        source={blogPost.preview}
-                                        allowDangerousHtml
-                                        className="paragraph"
-                                    />
-                                </CardBody>
-                                {blogPost.tags && blogPost.tags.length > 0 && (
-                                    <CardFooter>
-                                        <Heading level={5}>Tags</Heading>
-                                        <Grid
-                                            key={idx}
-                                            gap={`0 1em`}
-                                            columns={[
-                                                `repeat(3, 1fr)`,
-                                                `repeat(3, 1fr)`,
-                                                `repeat(3, 1fr)`,
-                                                `repeat(2, 1fr)`,
-                                            ]}
-                                        >
-                                            {blogPost.tags.map((tag, idx) => {
-                                                return (
-                                                    <Heading
-                                                        key={idx}
-                                                        level={6}
-                                                    >
-                                                        {tag.name}
-                                                    </Heading>
-                                                );
-                                            })}
-                                        </Grid>
-                                    </CardFooter>
-                                )}
-                            </Card>
-                        );
-                    })}
+                <Grid containerType="section">
+                    <Heading center level={4}>
+                        Blog Posts
+                    </Heading>
+                    <Grid
+                        columns={[
+                            `[left] 1fr [right] 1fr`,
+                            `[left] 1fr [center] 1fr [right] 1fr`,
+                            `[center] 1fr`,
+                            `[center] 1fr`,
+                        ]}
+                        gap={`0 2em`}
+                    >
+                        {recentBlogPosts.map((blogPost, idx) => {
+                            return (
+                                <Card key={idx}>
+                                    <CardHeader>
+                                        <Heading center level={5}>
+                                            <ALink
+                                                to={blogPost.fullUrlPath}
+                                                {...TRANSITION_PROPS}
+                                            >
+                                                {blogPost.title}
+                                            </ALink>
+                                        </Heading>
+                                    </CardHeader>
+                                    <CardBody>
+                                        <MarkdownField
+                                            source={blogPost.preview}
+                                            allowDangerousHtml
+                                            className="paragraph"
+                                        />
+                                    </CardBody>
+                                    {blogPost.tags && blogPost.tags.length > 0 && (
+                                        <CardFooter>
+                                            <Heading center level={5}>
+                                                Tags
+                                            </Heading>
+                                            <Flexbox around wrap key={idx}>
+                                                {blogPost.tags.map(
+                                                    (tag, idx) => {
+                                                        return (
+                                                            <Heading
+                                                                key={idx}
+                                                                level={6}
+                                                            >
+                                                                {tag.name}
+                                                            </Heading>
+                                                        );
+                                                    },
+                                                )}
+                                            </Flexbox>
+                                        </CardFooter>
+                                    )}
+                                </Card>
+                            );
+                        })}
+                    </Grid>
                 </Grid>
             </>
         );
@@ -197,6 +199,14 @@ export default (props: Props) => {
             </>
         );
     };
+
+    const showBodyContent = () => {
+        return <StrapiDynamicZone components={page.body} />;
+    };
+
+    const showBannerContent = () => {
+        return <StrapiDynamicZone components={page.banner} />;
+    };
     return (
         <>
             <SEO />
@@ -206,14 +216,42 @@ export default (props: Props) => {
                 }
                 className="banner-background"
             >
-                <Flexbox>
-                    <StrapiDynamicZone components={page.banner} />
-                </Flexbox>
+                <Flexbox>{showBannerContent()}</Flexbox>
             </BannerBackground>
             <Grid containerType="main-content">
-                <StrapiDynamicZone components={page.body} />
-                {props.pageContext.blogsPageId && showBlogsPageData()}
-                {props.pageContext.offeringsPageId && showOfferingsPageData()}
+                {props.pageContext.blogsPageId && (
+                    <Grid
+                        columns={[
+                            `[content] 3fr [sidebar] 1fr`,
+                            `[content] 3fr [sidebar] 1fr`,
+                            `[content] 3fr [sidebar] 1fr`,
+                            `1fr`,
+                        ]}
+                    >
+                        <Grid style={{gridColumn: `content`}}>
+                            {showBodyContent()}
+                            {showBlogsPageData()}
+                        </Grid>
+                        <Grid
+                            // TODO: Add sidebar content
+                            containerType="aside"
+                            style={{gridColumn: `sidebar`}}
+                        >
+                            <Heading center level={2}>
+                                Sidebar
+                            </Heading>
+                        </Grid>
+                    </Grid>
+                )}
+                {props.pageContext.offeringsPageId && (
+                    <>
+                        {showBodyContent()}
+                        {showOfferingsPageData()}
+                    </>
+                )}
+                {!props.pageContext.offeringsPageId &&
+                    !props.pageContext.blogsPageId &&
+                    showBodyContent()}
             </Grid>
         </>
     );

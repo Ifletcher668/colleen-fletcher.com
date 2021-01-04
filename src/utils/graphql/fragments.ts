@@ -80,6 +80,23 @@ export const StrapiService = graphql`
     }
 `;
 
+export const StrapiCategory = graphql`
+    fragment StrapiCategory on STRAPI_Category {
+        name
+        blog_posts {
+            ...StrapiBlogPost
+        }
+    }
+`;
+export const StrapiTag = graphql`
+    fragment StrapiTag on STRAPI_Tag {
+        name
+        blog_posts {
+            ...StrapiBlogPost
+        }
+    }
+`;
+
 export const FluidImage = graphql`
     fragment FluidImage on File {
         childImageSharp {
