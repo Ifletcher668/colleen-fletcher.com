@@ -4,7 +4,7 @@ import Image from 'gatsby-image';
 import Heading from '../components/Heading';
 import StrapiDynamicZone from '../components/StrapiDynamicZone';
 import BannerBackground from 'gatsby-background-image';
-import {Grid} from '../components/Container';
+import {Flexbox, Grid} from '../components/Container';
 import {Card, CardHeader, CardBody, CardFooter} from '../components/Card';
 import MarkdownField from 'react-markdown';
 import SEO from '../components/SEO';
@@ -206,11 +206,15 @@ export default (props: Props) => {
                 }
                 className="banner-background"
             >
-                <StrapiDynamicZone components={page.banner} />
+                <Flexbox>
+                    <StrapiDynamicZone components={page.banner} />
+                </Flexbox>
             </BannerBackground>
-            <StrapiDynamicZone components={page.body} />
-            {props.pageContext.blogsPageId && showBlogsPageData()}
-            {props.pageContext.offeringsPageId && showOfferingsPageData()}
+            <Grid containerType="main-content">
+                <StrapiDynamicZone components={page.body} />
+                {props.pageContext.blogsPageId && showBlogsPageData()}
+                {props.pageContext.offeringsPageId && showOfferingsPageData()}
+            </Grid>
         </>
     );
 };

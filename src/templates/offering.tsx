@@ -17,10 +17,9 @@ export default (props: Props) => {
         },
     } = props;
     const {TRANSITION_PROPS} = useContext(LayoutContext);
-    console.log(offering);
 
     return (
-        <Grid gap={`2em 0`}>
+        <Grid containerType="main-content" gap={`2em 0`}>
             <Heading level={1} center>
                 {offering.title}
             </Heading>
@@ -41,6 +40,7 @@ export default (props: Props) => {
                                 : [`[text] 2fr [spacer] 0.05fr [image] 1fr `];
                         return (
                             <Grid
+                                key={idx}
                                 columns={zigZagColumns}
                                 rows={[`[content] 1fr [spacer] 0.2fr`]}
                             >
@@ -68,7 +68,7 @@ export default (props: Props) => {
                                     <CardHeader>
                                         <Heading level={3}>
                                             <ALink
-                                                to={service.fullUrlPath}
+                                                to={`${offering.fullUrlPath}${service.slug}`}
                                                 {...TRANSITION_PROPS}
                                             >
                                                 {service.title}

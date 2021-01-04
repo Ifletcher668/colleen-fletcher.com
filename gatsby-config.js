@@ -34,6 +34,7 @@ module.exports = {
                 layout: require.resolve(
                     `${__dirname}/src/components/Layout/index.tsx`,
                 ),
+                injectPageProps: false,
             },
         },
         // {

@@ -17,7 +17,7 @@ interface Props extends DefaultProps {
      * the breakpoints get smaller.
      */
     rows?: [string, string?, string?, string?, string?]; // grid-template-rows
-    containerType?: 'article' | 'section';
+    containerType?: 'article' | 'section' | 'main-content' | 'zigzag';
     autoCols?: string;
 }
 
@@ -78,6 +78,18 @@ const Grid: React.FC<Props> = ({
     rows = ['none'],
     autoCols = 'none',
 }: Props) => {
+    const cn = className
+        ? Array.isArray(className)
+            ? className.join(' ')
+            : className
+        : '';
+
+    // main-content applies predefined and very specific grid styling
+    // Added up here to avoid calculating the useBreakpoints
+    if (containerType === 'main-content') {
+        return <section className={`main-content ${cn}`}>{children}</section>;
+    }
+
     const styles: React.CSSProperties = {
         display: 'grid',
         gridGap: gap,
@@ -85,12 +97,6 @@ const Grid: React.FC<Props> = ({
         gridTemplateRows: useBreakpoints(rows as string[]),
         gridAutoColumns: autoCols,
     };
-
-    const cn = className
-        ? Array.isArray(className)
-            ? className.join(' ')
-            : className
-        : '';
 
     switch (containerType) {
         case 'article':

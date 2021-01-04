@@ -30,4 +30,16 @@ body {
 
 .banner-background {
     height: 400px;
+    width: 100vw;
+}
+
+.main-content {
+    display: grid;
+    grid-template-columns:
+        [full-start] minmax(size(mg-medium), size(mg-large))
+        [content-start] minmax(0, size(fullWidth)) [content-end]
+        minmax(size(mg-medium), size(mg-large)) [full-end];
+    & > * {
+        grid-column: content;
+    }
 }

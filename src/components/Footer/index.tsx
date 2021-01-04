@@ -1,6 +1,5 @@
 import React from 'react';
 import config from '../../../config/website';
-
 import {FaDiscord, FaPinterest, FaFacebook, FaInstagram} from 'react-icons/fa';
 
 const Footer: React.FC = () => {
@@ -25,7 +24,7 @@ const Footer: React.FC = () => {
                             </a>
                         </li>
                         <li>
-                            <a href={config.socials.pintrest}>
+                            <a href={config.socials.pinterest}>
                                 <FaPinterest />
                             </a>
                         </li>
@@ -41,7 +40,11 @@ const Footer: React.FC = () => {
                             Isiah Fletcher
                         </a>
                     </h5>
-                    <h6>Sitemap | Disclaimer</h6>
+                    {/* // TODO: add link to sitemap, setup sitemap, get disclaimer */}
+                    <h6>
+                        Sitemap |{' '}
+                        <span title="this is the disclaimer"> Disclaimer</span>
+                    </h6>
                 </div>
             </div>
         </footer>

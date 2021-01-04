@@ -49,7 +49,15 @@ const MenuItem: React.FC<Props> = ({
                         handleOpenOrClosePanel('', false);
                     }}
                 >
-                    <a href={slug}>{text}</a>
+                    <a
+                        href={`${
+                            slug.match(`^(http|https)://`)
+                                ? slug
+                                : `https://${slug}`
+                        }`}
+                    >
+                        {text}
+                    </a>
                 </li>
             ) : (
                 <li

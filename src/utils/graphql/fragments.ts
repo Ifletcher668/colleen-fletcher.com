@@ -15,6 +15,9 @@ export const StrapiBlog = graphql`
         slug
         fullUrlPath
         meta_description
+        blog_posts {
+            ...StrapiBlogPost
+        }
     }
 `;
 
@@ -25,6 +28,9 @@ export const StrapiBlogPost = graphql`
         slug
         published
         preview
+        cover_image {
+            ...StrapiUploadFile
+        }
         blog {
             name
             slug
@@ -60,7 +66,6 @@ export const StrapiService = graphql`
         id
         title
         slug
-        fullUrlPath
         preview
         preview_image {
             ...StrapiComponentMediaSingleImage

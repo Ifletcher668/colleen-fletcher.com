@@ -228,12 +228,12 @@ exports.createResolvers = async ({
         //                 const s = o.services.filter(
         //                     s => s.id === source.id,
         //                 );
-                        
+
         //                 return offering.slug;
         //             })}/${source.slug}/`;
         //         },
         //     },
-        },
+        // },
     };
     createResolvers(resolvers);
 };
