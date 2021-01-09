@@ -11,30 +11,22 @@ export default class BreakpointHandler {
         );
     }
 
-    // TODO: allow function to accept a parameter of 'element' to eventually pass into getBreakpoints as a more dynamic approach.
-
     public getBreakpoints = (breakpoints: string[]) => {
-        // TODO: Add param string[] to run param.forEach((bp:string)=>this.getCSSVariable(bp))
-        // sizes are taken from whatever is set in 'tokens' sass file
-
-        return breakpoints.map(breakpoint => {
-            const value = this.getCSSVariable(breakpoint);
-            const trimmed = value.trim();
+        return breakpoints.map(name => {
+            const value = this.getCSSVariable(name).trim();
             let numberValue = '';
-
-            for (let i = 0; i < trimmed.length; i++) {
-                const unit = trimmed[i] + trimmed[i + 1];
+            for (let i = 0; i < value.length; i++) {
+                const unit = value[i] + value[i + 1];
                 if (
                     unit === 'em' ||
                     unit === 'rem' ||
                     unit === 'px' ||
-                    trimmed[i] === '%'
+                    value[i] === '%'
                 ) {
                     break;
                 }
-                numberValue += trimmed[i];
+                numberValue += value[i];
             }
-
             return parseInt(numberValue) * this.getFontSize('body');
         });
     };
