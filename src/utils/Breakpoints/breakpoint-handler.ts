@@ -10,6 +10,10 @@ export default class BreakpointHandler {
                 .fontSize,
         );
     }
+    private _stringifyCSSPropertyObject = (object: React.CSSProperties) =>
+        JSON.stringify(object)
+            .replace(/[A-Z]/g, m => '-' + m.toLowerCase())
+            .replace(/"([^"]+)"/g, '$1');
 
     public getBreakpoints: (
         breakpoints: [string, string?, string?, string?, string?],
@@ -69,17 +73,25 @@ export default class BreakpointHandler {
         );
     };
 
-    public below = (min: string | number, children: React.CSSProperties) => {
+    public below: (
+        min: string | number,
+        children: React.CSSProperties,
+    ) => string = (min: string | number, children: React.CSSProperties) => {
         return `@media screen and (max-width:${
             typeof min === 'number' ? min + 'px' : min
         }) {
-            ${JSON.stringify(children).replace(/"([^"]+)"/g, '$1')}
+            ${this._stringifyCSSPropertyObject(children)}
         }
         `;
         // Use? JSON.stringify(children, null, 4)
     };
 
-    public between = (
+    public between: (
+        min: string | number,
+        max: string | number,
+
+        children: React.CSSProperties,
+    ) => string = (
         min: string | number,
         max: string | number,
 
@@ -88,16 +100,19 @@ export default class BreakpointHandler {
         return `@media screen and (min-width:${
             typeof min === 'number' ? min + 'px' : min
         }) and (max-width:${typeof max === 'number' ? max + 'px' : max}) {
-            ${JSON.stringify(children).replace(/"([^"]+)"/g, '$1')}
+            ${this._stringifyCSSPropertyObject(children)}
         }
         `;
     };
 
-    public above = (max: string | number, children: React.CSSProperties) => {
+    public above: (
+        max: string | number,
+        children: React.CSSProperties,
+    ) => string = (max: string | number, children: React.CSSProperties) => {
         return `@media screen and (max-width:${
             typeof max === 'number' ? max + 'px' : max
         }) {
-            ${JSON.stringify(children).replace(/"([^"]+)"/g, '$1')}
+            ${this._stringifyCSSPropertyObject(children)}
         }
         `;
     };
