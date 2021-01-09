@@ -3,7 +3,14 @@ import BreakpointHandler from './breakpoint-handler';
 
 const useBreakpoints = (values: string[]) => {
     const {getBreakpoints, getScreenWidth} = new BreakpointHandler();
-    const breakpoints = getBreakpoints();
+    // TODO: Any way to grab this dynamically?
+    const breakpoints = getBreakpoints([
+        '--size-breakpoint-xlarge',
+        '--size-breakpoint-large',
+        '--size-breakpoint-medium',
+        '--size-breakpoint-small',
+        '--size-breakpoint-xsmall',
+    ]);
     if (!Array.isArray(values)) {
         throw new Error(`value passed was not of type Array.`);
     }
