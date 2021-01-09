@@ -1,5 +1,5 @@
-import Flexbox from './flexbox';
-import Grid from './grid';
+import Flexbox from './Flexbox';
+import Grid from './Grid';
 
 export {Flexbox};
 export {Grid};

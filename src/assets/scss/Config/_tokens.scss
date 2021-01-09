@@ -161,9 +161,9 @@ $sizes: (
     // font weight
     'weight-heading': 600,
     'weight-light': 500,
-    // adding breakpoints here (redundant
-    // but necessary to fetch them
-    // inside my layout components. Grid, Flex, Etc.
+    // adding breakpoints here
+    // (redundant but necessary to fetch them
+    // inside JS files.
     'breakpoint-xsmall': 22.5em,
     'breakpoint-small': 30em,
     'breakpoint-medium': 45em,

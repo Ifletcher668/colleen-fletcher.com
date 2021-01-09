@@ -1,13 +1,22 @@
 export default class BreakpointHandler {
-    private getCSSVariable(name: string) {
+    private getCSSVariable(varName: string) {
         return getComputedStyle(document.documentElement).getPropertyValue(
-            name,
+            varName,
+        );
+    }
+    private getFontSize(htmlElement: string) {
+        return parseFloat(
+            getComputedStyle(document.querySelector(htmlElement) as HTMLElement)
+                .fontSize,
         );
     }
 
+    // TODO: allow function to accept a parameter of 'element' to eventually pass into getBreakpoints as a more dynamic approach.
+
     public getBreakpoints = () => {
+        // TODO: Add param string[] to run param.forEach((bp:string)=>this.getCSSVariable(bp))
         // sizes are taken from whatever is set in 'tokens' sass file
-        // ordered from largest to smallest screen size
+
         const breakpoints = [
             this.getCSSVariable('--size-breakpoint-xlarge'),
             this.getCSSVariable('--size-breakpoint-large'),
@@ -18,20 +27,26 @@ export default class BreakpointHandler {
 
         return breakpoints.map(breakpoint => {
             const trimmed = breakpoint.trim();
-            let valueAsNumberOnly = '';
+            let numberValue = '';
 
             for (let i = 0; i < trimmed.length; i++) {
-                if (trimmed[i] + trimmed[i + 1] === 'em') {
+                const unit = trimmed[i] + trimmed[i + 1];
+                if (
+                    unit === 'em' ||
+                    unit === 'rem' ||
+                    unit === 'px' ||
+                    trimmed[i] === '%'
+                ) {
                     break;
                 }
-                valueAsNumberOnly += trimmed[i];
+                numberValue += trimmed[i];
             }
 
-            return parseInt(valueAsNumberOnly) * this.getBodyEms();
+            return parseInt(numberValue) * this.getFontSize();
         });
     };
 
-    public getWidth() {
+    public getScreenWidth = () => {
         return Math.max(
             document.body.scrollWidth,
             document.documentElement.scrollWidth,
@@ -40,10 +55,9 @@ export default class BreakpointHandler {
             document.documentElement.clientWidth,
             window.innerWidth,
         );
-    }
+    };
 
-    private getBodyEms() {
-        return parseFloat(getComputedStyle(document.body).fontSize);
-    }
-    // TODO: allow function to accept a parameter of 'element' to eventually pass into getBreakpoints as a more dynamic approach.
+    // make Below function
+
+    // make Above function
 }

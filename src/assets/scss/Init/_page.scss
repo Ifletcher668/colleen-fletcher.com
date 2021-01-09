@@ -6,7 +6,7 @@
 }
 
 body {
-    background: var(--background);
+    background: color(background);
     @include clearfix();
     min-height: 100vh;
     scroll-behavior: smooth;
