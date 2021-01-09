@@ -13,29 +13,48 @@ export default class BreakpointHandler {
 
     public getBreakpoints: (
         breakpoints: [string, string?, string?, string?, string?],
+        parentElement?: string,
     ) => number[] = (
         breakpoints: [string, string?, string?, string?, string?],
+        parentElement = 'body',
     ) => {
         return breakpoints.map(breakpoint => {
             const cssVar = this._getCSSVariable(breakpoint!).trim();
             let numberString = '';
+            let unit = '';
+            // TODO: Refactor to use regex?
             for (let i = 0; i < cssVar.length; i++) {
-                const unit = cssVar[i] + cssVar[i + 1];
-                if (
-                    unit === 'em' ||
-                    unit === 'px' ||
-                    cssVar[i] === '%' ||
-                    unit + cssVar[i + 2] === 'rem'
+                if (cssVar[i] === '%') {
+                    unit = cssVar[i];
+                    break;
+                } else if (
+                    cssVar[i] + cssVar[i + 1] === 'em' ||
+                    cssVar[i] + cssVar[i + 1] === 'px'
                 ) {
+                    unit = cssVar[i] + cssVar[i + 1];
+                    break;
+                } else if (
+                    cssVar[i] + cssVar[i + 1] + cssVar[i + 2] ===
+                    'rem'
+                ) {
+                    unit = cssVar[i] + cssVar[i + 1] + cssVar[i + 2];
                     break;
                 }
                 numberString += cssVar[i];
             }
-            // TODO: hardcoded to only return em value
-            // if unit === 'px' return parseFloat(numberString)
-            // if unit === 'rem' return parseFloat(numberString) * this._getFontSize('body');
-            // if unit === 'em' return parseFloat(numberString) * this._getFontSize(parentElement);
-            return parseFloat(numberString) * this._getFontSize('body');
+
+            if (unit === '%') {
+                return this.getScreenWidth() * (parseFloat(numberString) / 100);
+            } else if (unit === 'em') {
+                return (
+                    parseFloat(numberString) * this._getFontSize(parentElement)
+                );
+            } else if (unit === 'rem') {
+                return parseFloat(numberString) * this._getFontSize('body');
+            } else {
+                // if (unit === 'px')
+                return parseFloat(numberString);
+            }
         });
     };
 
@@ -50,5 +69,36 @@ export default class BreakpointHandler {
         );
     };
 
-    // make Above function
+    public below = (min: string | number, children: React.CSSProperties) => {
+        return `@media screen and (max-width:${
+            typeof min === 'number' ? min + 'px' : min
+        }) {
+            ${JSON.stringify(children).replace(/"([^"]+)"/g, '$1')}
+        }
+        `;
+        // Use? JSON.stringify(children, null, 4)
+    };
+
+    public between = (
+        min: string | number,
+        max: string | number,
+
+        children: React.CSSProperties,
+    ) => {
+        return `@media screen and (min-width:${
+            typeof min === 'number' ? min + 'px' : min
+        }) and (max-width:${typeof max === 'number' ? max + 'px' : max}) {
+            ${JSON.stringify(children).replace(/"([^"]+)"/g, '$1')}
+        }
+        `;
+    };
+
+    public above = (max: string | number, children: React.CSSProperties) => {
+        return `@media screen and (max-width:${
+            typeof max === 'number' ? max + 'px' : max
+        }) {
+            ${JSON.stringify(children).replace(/"([^"]+)"/g, '$1')}
+        }
+        `;
+    };
 }
