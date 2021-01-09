@@ -19,6 +19,7 @@ module.exports = {
         `gatsby-plugin-react-helmet`,
         `gatsby-plugin-sitemap`,
         `gatsby-plugin-typescript`,
+        `gatsby-plugin-styled-components`,
         `gatsby-plugin-sass`,
         `gatsby-plugin-postcss`,
         // {
@@ -27,7 +28,6 @@ module.exports = {
         //         postCssPlugins: [require('autoprefixer')()],
         //     },
         // },
-        // `gatsby-plugin-transition-link`,
         {
             resolve: `gatsby-plugin-transition-link`,
             options: {
