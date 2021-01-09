@@ -11,25 +11,31 @@ export default class BreakpointHandler {
         );
     }
 
-    public getBreakpoints: (breakpoints: string[]) => number[] = (
-        breakpoints: string[],
+    public getBreakpoints: (
+        breakpoints: [string, string?, string?, string?, string?],
+    ) => number[] = (
+        breakpoints: [string, string?, string?, string?, string?],
     ) => {
-        return breakpoints.map(name => {
-            const value = this._getCSSVariable(name).trim();
-            let numberValue = '';
-            for (let i = 0; i < value.length; i++) {
-                const unit = value[i] + value[i + 1];
+        return breakpoints.map(breakpoint => {
+            const cssVar = this._getCSSVariable(breakpoint!).trim();
+            let numberString = '';
+            for (let i = 0; i < cssVar.length; i++) {
+                const unit = cssVar[i] + cssVar[i + 1];
                 if (
                     unit === 'em' ||
                     unit === 'px' ||
-                    value[i] === '%' ||
-                    unit + value[i + 2] === 'rem'
+                    cssVar[i] === '%' ||
+                    unit + cssVar[i + 2] === 'rem'
                 ) {
                     break;
                 }
-                numberValue += value[i];
+                numberString += cssVar[i];
             }
-            return parseInt(numberValue) * this._getFontSize('body');
+            // TODO: hardcoded to only return em value
+            // if unit === 'px' return parseFloat(numberString)
+            // if unit === 'rem' return parseFloat(numberString) * this._getFontSize('body');
+            // if unit === 'em' return parseFloat(numberString) * this._getFontSize(parentElement);
+            return parseFloat(numberString) * this._getFontSize('body');
         });
     };
 
@@ -43,8 +49,6 @@ export default class BreakpointHandler {
             window.innerWidth,
         );
     };
-
-    // make Below function
 
     // make Above function
 }
