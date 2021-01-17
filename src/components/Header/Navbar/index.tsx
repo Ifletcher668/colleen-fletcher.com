@@ -1,6 +1,7 @@
-import React, {createContext, useState} from 'react';
-import {useStrapiData} from '../../../utils/graphql/queries/useStrapiData';
-import {LayoutContext} from '../../Layout';
+import {graphql, useStaticQuery} from 'gatsby';
+import React, {createContext, useContext, useState} from 'react';
+import {useMenuItems} from '../../../graphql/queries/useMenuItems';
+import {useStrapiData} from '../../../graphql/queries/useStrapiData';
 import MenuItem from './MenuItem';
 
 // Context
@@ -20,21 +21,20 @@ type NavCtx = {
 
 export const NavbarContext = createContext<NavCtx | {[key: string]: any}>({});
 
-const Navbar: React.FC<DefaultProps> = ({className}: DefaultProps) => {
+const Navbar: React.FC<DefaultProps> = (props: DefaultProps) => {
+    const {className} = props;
     const [isActivePanel, setIsActivePanel] = useState<boolean>(false);
     const [activePanelName, setActivePanelName] = useState<string>('');
 
     const {
-        strapi: {homepage, allOtherMenuItems},
-    } = useStrapiData();
+        strapi: {menuItems},
+    } = useMenuItems();
 
-    const {TRANSITION_PROPS} = React.useContext(LayoutContext);
     const ctx = {
         isActivePanel,
         setIsActivePanel,
         activePanelName,
         setActivePanelName,
-        TRANSITION_PROPS,
     };
 
     return (
@@ -49,13 +49,8 @@ const Navbar: React.FC<DefaultProps> = ({className}: DefaultProps) => {
         >
             <NavbarContext.Provider value={ctx}>
                 <ul className="nav-list">
-                    <MenuItem {...homepage} />
-                    {allOtherMenuItems.map((menuItem, idx) => {
-                        if (
-                            menuItem.page &&
-                            (menuItem.page.blogs.length > 0 ||
-                                menuItem.page.offerings.length > 0)
-                        ) {
+                    {menuItems.map((menuItem, idx) => {
+                        if (menuItem.content.length > 0) {
                             // show active panel
                             let cn = '';
                             if (menuItem.text === activePanelName) {

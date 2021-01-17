@@ -1,15 +1,10 @@
 import React, {useContext} from 'react';
 import {NavbarContext} from '../index';
-import ALink from 'gatsby-plugin-transition-link/AniLink';
 import Panel from '../Panel';
+import PaintDripLink from '../../../TransitionLink';
 
 // props matches type StrapiMenuItem
-interface Props extends DefaultProps {
-    text: string;
-    is_external_link: boolean;
-    slug: string;
-    page?: StrapiPage;
-}
+interface Props extends DefaultProps, StrapiMenuItem {}
 
 // data, className: Props
 const MenuItem: React.FC<Props> = ({
@@ -17,6 +12,7 @@ const MenuItem: React.FC<Props> = ({
     is_external_link,
     slug,
     page,
+    content,
     className,
 }: Props) => {
     const {
@@ -24,7 +20,6 @@ const MenuItem: React.FC<Props> = ({
         setIsActivePanel,
         activePanelName,
         setActivePanelName,
-        TRANSITION_PROPS,
     } = useContext(NavbarContext);
 
     const cn = `nav-list-item ${
@@ -42,6 +37,7 @@ const MenuItem: React.FC<Props> = ({
 
     return (
         <>
+            {/* an external link makes page.id === null */}
             {is_external_link ? (
                 <li
                     className={cn}
@@ -70,23 +66,20 @@ const MenuItem: React.FC<Props> = ({
                         handleOpenOrClosePanel('', false);
                     }}
                 >
-                    <ALink
+                    <PaintDripLink
                         to={`/${
+                            // TODO: hardcoding homepage
                             slug.toLocaleLowerCase() === 'home' ? '' : slug
                         }`}
-                        {...TRANSITION_PROPS}
                     >
                         {text}
-                    </ALink>
-                    {isActivePanel &&
-                        page &&
-                        page.blogs.length > 0 &&
+                    </PaintDripLink>
+                    {content.length > 0 &&
+                        isActivePanel &&
                         activePanelName === text && (
-                            <Panel
-                                className="panel-navbar"
-                                blogs={page.blogs}
-                            />
+                            <Panel className="panel-navbar" content={content} />
                         )}
+                    {/* 
                     {isActivePanel &&
                         page &&
                         page.offerings.length > 0 &&
@@ -95,7 +88,7 @@ const MenuItem: React.FC<Props> = ({
                                 className="panel-navbar"
                                 offerings={page.offerings}
                             />
-                        )}
+                        )} */}
                 </li>
             )}
         </>

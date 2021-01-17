@@ -1,32 +1,98 @@
 import React, {useContext, useState} from 'react';
 import Image from 'gatsby-image';
-import ALink from 'gatsby-plugin-transition-link/AniLink';
-import {useImage} from '../../../../utils/graphql/queries/useImage';
+import {useImage} from '../../../../graphql/queries/useImage';
 import {NavbarContext} from '../index';
+import Services from './SubMenu/services';
+import BlogPosts from './SubMenu/blog-posts';
+import PaintDripLink from '../../../TransitionLink';
 
 interface Props extends DefaultProps {
-    blogs?: StrapiBlog[];
-    offerings?: StrapiOffering[];
+    content: StrapiDynamicZone[];
 }
 
-const Panel: React.FC<Props> = ({blogs, offerings, className}: Props) => {
+const Panel: React.FC<Props> = ({content, className}: Props) => {
     const {frangipaniImg} = useImage();
-    const [subMenuItems, setSubMenuItems] = useState<JSX.Element[]>([]);
     const [activeSubMenuItemName, setActiveSubMenuItemName] = useState('');
-    const {setIsActivePanel, setActivePanelName, TRANSITION_PROPS} = useContext(
-        NavbarContext,
-    );
+    const [blog, setBlog] = useState('');
+    const [offering, setOffering] = useState<{
+        title: string;
+        url: string;
+    }>({title: '', url: ''});
+    const [showBlogPosts, setShowBlogPosts] = useState<boolean>(false);
+    const [showServices, setShowServices] = useState<boolean>(false);
+    const {setIsActivePanel, setActivePanelName} = useContext(NavbarContext);
 
-    const handleOpenOrClosePanel = (
-        title: string,
-        isActive: boolean,
-        items: JSX.Element[],
-    ) => {
-        setActivePanelName(title),
-            setIsActivePanel(isActive),
-            setSubMenuItems(items);
+    const handleOpenOrClosePanel = (title: string, isActive: boolean) => {
+        setActivePanelName(title), setIsActivePanel(isActive);
     };
 
+    const handleSubMenuContent = () => {
+        return content.map((content, idx) => {
+            switch (content.__typename) {
+                case 'STRAPI_ComponentCollectionsBlogs':
+                    // prevents infinite re-render
+                    return content.blogs.map(blog => {
+                        let cn = '';
+                        if (blog.name === activeSubMenuItemName) {
+                            cn += 'active';
+                        }
+                        return (
+                            <li key={blog.name} className={cn}>
+                                <PaintDripLink
+                                    to={blog.fullUrlPath}
+                                    onMouseOver={() => {
+                                        if (
+                                            content.show_blog_posts &&
+                                            showBlogPosts === false
+                                        )
+                                            setShowBlogPosts(true);
+
+                                        setActiveSubMenuItemName(blog.name);
+                                        setBlog(blog.name);
+                                    }}
+                                >
+                                    {blog.name}
+                                </PaintDripLink>
+                            </li>
+                        );
+                    });
+
+                case 'STRAPI_ComponentCollectionsOfferings':
+                    return content.offerings.map(offering => {
+                        let cn = '';
+                        if (offering.title === activeSubMenuItemName) {
+                            cn += 'active';
+                        }
+                        return (
+                            <li key={offering.title} className={cn}>
+                                <PaintDripLink
+                                    to={offering.fullUrlPath}
+                                    onMouseOver={() => {
+                                        if (
+                                            content.show_services &&
+                                            showServices === false
+                                        )
+                                            setShowServices(true);
+
+                                        setActiveSubMenuItemName(
+                                            offering.title,
+                                        );
+                                        setOffering({
+                                            title: offering.title,
+                                            url: offering.fullUrlPath,
+                                        });
+                                    }}
+                                >
+                                    {offering.title}
+                                </PaintDripLink>
+                            </li>
+                        );
+                    });
+                default:
+                    break;
+            }
+        });
+    };
     return (
         <nav
             className={
@@ -36,103 +102,19 @@ const Panel: React.FC<Props> = ({blogs, offerings, className}: Props) => {
                         : className
                     : ''
             }
-            onMouseLeave={() => handleOpenOrClosePanel('', false, [])}
+            onMouseLeave={() => handleOpenOrClosePanel('', false)}
         >
-            <ul className="submenu">
-                {offerings &&
-                    offerings.map(offering => {
-                        const {services} = offering;
-                        let cn = '';
-                        if (
-                            services &&
-                            offering.title === activeSubMenuItemName
-                        ) {
-                            cn += 'active';
-                        }
-                        return (
-                            <li key={offering.title} className={cn}>
-                                <ALink
-                                    to={offering.fullUrlPath}
-                                    onMouseOver={() => {
-                                        if (services) {
-                                            setSubMenuItems(() =>
-                                                services.map((service, idx) => {
-                                                    return (
-                                                        <ALink
-                                                            key={idx}
-                                                            to={`${offering.fullUrlPath}${service.slug}`}
-                                                            {...TRANSITION_PROPS}
-                                                        >
-                                                            {service.title}
-                                                        </ALink>
-                                                    );
-                                                }),
-                                            );
-                                            setActiveSubMenuItemName(
-                                                offering.title,
-                                            );
-                                        }
-                                    }}
-                                    {...TRANSITION_PROPS}
-                                >
-                                    {offering.title}
-                                </ALink>
-                            </li>
-                        );
-                    })}
-                {blogs &&
-                    blogs.map((blog, idx) => {
-                        const {blog_posts} = blog;
-                        let className = '';
-                        if (blog_posts && blog.name === activeSubMenuItemName) {
-                            className += 'active';
-                        }
-                        return (
-                            <li key={idx} className={className}>
-                                <ALink
-                                    to={blog.fullUrlPath}
-                                    onMouseOver={() => {
-                                        if (blog_posts) {
-                                            setSubMenuItems(() =>
-                                                blog_posts.map(
-                                                    (
-                                                        {title, fullUrlPath},
-                                                        idx,
-                                                    ) => {
-                                                        return (
-                                                            <ALink
-                                                                key={idx}
-                                                                to={fullUrlPath}
-                                                                {...TRANSITION_PROPS}
-                                                            >
-                                                                {title}
-                                                            </ALink>
-                                                        );
-                                                    },
-                                                ),
-                                            );
-                                            setActiveSubMenuItemName(blog.name);
-                                        }
-                                    }}
-                                    {...TRANSITION_PROPS}
-                                >
-                                    {blog.name}
-                                </ALink>
-                            </li>
-                        );
-                    })}
-            </ul>
+            <ul className="submenu">{handleSubMenuContent()}</ul>
             <section className="content">
-                {subMenuItems.length < 1 && (
+                {!showServices && !showBlogPosts && (
                     <Image
                         fluid={frangipaniImg.childImageSharp.fluid}
                         style={{width: '200px', height: '200px'}}
                     />
                 )}
                 <ul>
-                    {subMenuItems.map((item, idx) => {
-                        return <li key={idx}>{item}</li>;
-                    })}
+                    {showServices && <Services offering={offering} />}
+                    {showBlogPosts && <BlogPosts blog={blog} />}
                 </ul>
             </section>
         </nav>

@@ -1,49 +1,52 @@
-import React, {createContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Footer from '../Footer';
 import Header from '../Header';
 import Main from '../Main';
+import {ThemeProvider} from 'styled-components';
+import {CSSObject, DefaultTheme} from 'styled-components';
 
-type TransitionProps = {
-    paintDrip: boolean;
-    hex: string;
-    duration: number;
-};
-
-type LayoutCtx = {
-    TRANSITION_PROPS: TransitionProps;
-};
-
-export const LayoutContext = createContext<LayoutCtx | {[key: string]: any}>(
-    {},
-);
+import BreakpointHandler from '../../utils/Breakpoints/breakpoint-handler';
+import {useBreakpoints} from '../../utils/Breakpoints/useBreakpoints';
 
 const Layout: React.FC<PageProps> = ({children, location}: PageProps) => {
     const [documentIsAtTop, setDocumentIsAtTop] = useState<boolean>(true);
-
-    const handleScroll = () =>
+    const handleScrollY = () =>
         window.scrollY < 200
             ? setDocumentIsAtTop(true)
             : setDocumentIsAtTop(false);
 
     useEffect(() => {
-        document.addEventListener('scroll', handleScroll);
-        return document.addEventListener('scroll', handleScroll);
+        document.addEventListener('scroll', handleScrollY);
+        return document.addEventListener('scroll', handleScrollY);
     }, [documentIsAtTop]);
+
+    const {above, below, between} = new BreakpointHandler();
+    // TODO: Should this be in its own folder?
+    const theme: DefaultTheme = {
+        // Semantic helper functions to add media queries
+        above: (max: number, children: CSSObject) => above(max, children),
+        below: (min: number, children: CSSObject) => below(min, children),
+        between: (
+            min: string | number,
+            max: string | number,
+            children: CSSObject,
+        ) => between(min, max, children),
+    };
+
+    const breakpoints = useBreakpoints();
+    // TODO: Horribly brute-forced...
+    breakpoints.forEach((breakpoint, idx) => {
+        if (idx === 0) theme['bp-xl'] = breakpoint as number;
+        else if (idx === 1) theme['bp-lg'] = breakpoint as number;
+        else if (idx === 2) theme['bp-md'] = breakpoint as number;
+        else if (idx === 3) theme['bp-sm'] = breakpoint as number;
+        else if (idx === 4) theme['bp-xs'] = breakpoint as number;
+    });
 
     const headerClassNames = ['site-header'];
     if (documentIsAtTop) {
         headerClassNames.push('at-top');
     }
-
-    const TRANSITION_PROPS: TransitionProps = {
-        paintDrip: true,
-        hex: '#CBEDFC',
-        duration: 0.7,
-    };
-
-    const ctx = {
-        TRANSITION_PROPS,
-    };
 
     const handleHeaderBehavior = () =>
         // hides header at top of homepage
@@ -54,11 +57,11 @@ const Layout: React.FC<PageProps> = ({children, location}: PageProps) => {
         );
 
     return (
-        <LayoutContext.Provider value={ctx}>
+        <ThemeProvider theme={theme}>
             {handleHeaderBehavior()}
             <Main>{children}</Main>
             <Footer />
-        </LayoutContext.Provider>
+        </ThemeProvider>
     );
 };
 

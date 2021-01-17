@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'gatsby-image';
-import {useImage} from '../../utils/graphql/queries/useImage';
+import {useImage} from '../../graphql/queries/useImage';
 import Navbar from './Navbar';
 
 const Header: React.FC<DefaultProps> = ({className}: DefaultProps) => {

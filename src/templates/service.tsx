@@ -5,8 +5,6 @@ import Heading from '../components/Heading';
 import {Grid} from '../components/Container';
 import BannerBackground from 'gatsby-background-image';
 
-import {LayoutContext} from '../components/Layout';
-
 interface Props {
     data: Strapi;
 }
@@ -17,7 +15,6 @@ export default (props: Props) => {
             strapi: {service},
         },
     } = props;
-    console.log(service);
 
     return (
         <>

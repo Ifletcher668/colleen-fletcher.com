@@ -1,5 +1,5 @@
 import React from 'react';
-import {useStrapiData} from '../../utils/graphql/queries/useStrapiData';
+import {useStrapiData} from '../../graphql/queries/useStrapiData';
 
 export default () => {
     const {

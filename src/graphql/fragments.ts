@@ -6,6 +6,40 @@ export const StrapiMenuItem = graphql`
         text
         slug
         is_external_link
+        page {
+            id
+        }
+        content {
+            __typename
+            ... on STRAPI_ComponentCollectionsOfferings {
+                offerings {
+                    title
+                    slug
+                    fullUrlPath
+                }
+                show_services
+            }
+            ... on STRAPI_ComponentCollectionsBlogs {
+                blogs {
+                    name
+                    slug
+                    fullUrlPath
+                }
+                show_blog_posts
+            }
+            ... on STRAPI_ComponentCollectionsBlogPosts {
+                blog_posts {
+                    title
+                    ...StrapiBlogPostFullUrlPath
+                }
+            }
+            ... on STRAPI_ComponentCollectionsServices {
+                services {
+                    title
+                    slug
+                }
+            }
+        }
     }
 `;
 
@@ -21,6 +55,21 @@ export const StrapiBlog = graphql`
     }
 `;
 
+export const StrapiBlogPostFullUrlPath = graphql`
+    fragment StrapiBlogPostFullUrlPath on STRAPI_BlogPost {
+        slug
+        fullUrlPath
+        published
+        blog {
+            name
+            slug
+        }
+        category {
+            name
+            slug
+        }
+    }
+`;
 // Grabs everything except body components
 export const StrapiBlogPost = graphql`
     fragment StrapiBlogPost on STRAPI_BlogPost {

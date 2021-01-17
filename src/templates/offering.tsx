@@ -1,12 +1,11 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {graphql} from 'gatsby';
 import Image from 'gatsby-image';
 import Heading from '../components/Heading';
 import {Flexbox, Grid} from '../components/Container';
 import {Card, CardHeader, CardBody, CardFooter} from '../components/Card';
-import ALink from 'gatsby-plugin-transition-link/AniLink';
-import {LayoutContext} from '../components/Layout';
 import MarkdownField from 'react-markdown';
+import PaintDripLink from '../components/TransitionLink';
 interface Props {
     data: Strapi;
 }
@@ -16,7 +15,6 @@ export default (props: Props) => {
             strapi: {offering},
         },
     } = props;
-    const {TRANSITION_PROPS} = useContext(LayoutContext);
 
     return (
         <Grid containerType="main-content" gap={`2em 0`}>
@@ -67,12 +65,11 @@ export default (props: Props) => {
                                 >
                                     <CardHeader>
                                         <Heading level={3}>
-                                            <ALink
+                                            <PaintDripLink
                                                 to={`${offering.fullUrlPath}${service.slug}`}
-                                                {...TRANSITION_PROPS}
                                             >
                                                 {service.title}
-                                            </ALink>
+                                            </PaintDripLink>
                                         </Heading>
                                     </CardHeader>
                                     <CardBody>

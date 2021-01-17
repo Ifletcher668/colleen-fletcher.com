@@ -164,20 +164,26 @@ $sizes: (
     // adding breakpoints here
     // (redundant but necessary to fetch them
     // inside JS files.
-    'breakpoint-xsmall': 22.5em,
-    'breakpoint-small': 30em,
-    'breakpoint-medium': 45em,
-    'breakpoint-large': 65em,
-    'breakpoint-xlarge': 85em,
+    'breakpoint-xlarge': 120rem,
+    // 1920px
+    'breakpoint-large': 75rem,
+    // 1200px
+    'breakpoint-medium': 63.75rem,
+    // 1020px
+    'breakpoint-small': 48rem,
+    // 768px
+    'breakpoint-xsmall': 30rem,
+    // 480px
 );
 
 // $breakpoints: () !default;
+// TODO: To deprecate when using styled components, only use the size vars that add a css var.
 $breakpoints: (
-    'xsmall': 22.5em,
-    'small': 30em,
-    'medium': 45em,
-    'large': 65em,
-    'xlarge': 85em,
+    'xlarge': 120rem,
+    'large': 75rem,
+    'medium': 63.75rem,
+    'small': 48rem,
+    'xsmall': 30rem,
 );
 
 // $times: () !default;

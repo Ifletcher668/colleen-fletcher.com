@@ -5,28 +5,6 @@ export const useStrapiData: () => Strapi = () =>
     useStaticQuery(graphql`
         query GET_STRAPI_CONTENT {
             strapi {
-                homepage: menuItem(id: "1") {
-                    ...StrapiMenuItem
-                }
-                allOtherMenuItems: menuItems(
-                    sort: "text"
-                    where: {id_ne: "1"}
-                ) {
-                    ...StrapiMenuItem
-                    page {
-                        title
-                        slug
-                        blogs {
-                            ...StrapiBlog
-                            blog_posts {
-                                ...StrapiBlogPost
-                            }
-                        }
-                        offerings {
-                            ...StrapiOffering
-                        }
-                    }
-                }
                 blogs {
                     ...StrapiBlog
                 }

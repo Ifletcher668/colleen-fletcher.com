@@ -5,7 +5,7 @@ import Heading from '../components/Heading';
 import {Grid} from '../components/Container';
 import MarkdownField from 'react-markdown';
 import {Card, CardHeader, CardBody, CardFooter} from '../components/Card';
-import ALink from 'gatsby-plugin-transition-link/AniLink';
+import PaintDripLink from '../components/TransitionLink';
 interface Props {
     data: Strapi;
 }
@@ -71,9 +71,11 @@ export default (props: Props) => {
                                 >
                                     <CardHeader>
                                         <Heading center level={3}>
-                                            <ALink to={blogPost.fullUrlPath}>
+                                            <PaintDripLink
+                                                to={blogPost.fullUrlPath}
+                                            >
                                                 {blogPost.title}
-                                            </ALink>
+                                            </PaintDripLink>
                                         </Heading>
                                     </CardHeader>
                                     <CardBody>
