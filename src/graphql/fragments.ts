@@ -101,9 +101,6 @@ export const StrapiOffering = graphql`
         title
         slug
         meta_description
-        image {
-            ...StrapiComponentMediaSingleImage
-        }
         fullUrlPath
         services {
             ...StrapiService
@@ -115,10 +112,6 @@ export const StrapiService = graphql`
         id
         title
         slug
-        preview
-        preview_image {
-            ...StrapiComponentMediaSingleImage
-        }
         banner_background_image {
             ...StrapiUploadFile
         }
