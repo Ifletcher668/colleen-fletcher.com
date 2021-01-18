@@ -37,7 +37,10 @@ export default (props: Props) => {
                     <StrapiDynamicZone components={page.banner} />
                 </Flexbox>
             </BannerBackground>
-            <Grid containerType="main-content">
+            <Grid
+                containerType="section"
+                columns={[`1fr 1fr 1fr`, `1fr 1fr`, `1fr 1fr 1fr`, `1fr`]}
+            >
                 <StrapiDynamicZone components={page.body} />
             </Grid>
         </>

@@ -12,20 +12,6 @@ exports.createPages = async ({actions, graphql, reporter}) => {
     await graphql(`
         query {
             strapi {
-                generalSetting {
-                    blogs_page {
-                        id
-                        slug
-                    }
-                    home_page {
-                        id
-                        slug
-                    }
-                    offerings_page {
-                        id
-                        slug
-                    }
-                }
                 blogs {
                     id
                     slug
@@ -75,23 +61,12 @@ exports.createPages = async ({actions, graphql, reporter}) => {
             return reporter.panicOnBuild(`Error while running GraphQL query!`);
         }
 
-        const PAGE_SETTINGS = data.strapi.generalSetting;
-
         // Create Pages
         data.strapi.pages.forEach(({id, slug}) => {
-            const pagePath = slug === PAGE_SETTINGS.home_page.slug ? '/' : slug;
+            const pagePath = slug.toLowerCase() === 'home' ? '/' : slug;
             const context = {
                 id,
             };
-            if (id === PAGE_SETTINGS.home_page.id) {
-                context.blogsPageId = PAGE_SETTINGS.home_page.id;
-            }
-            if (id === PAGE_SETTINGS.blogs_page.id) {
-                context.blogsPageId = PAGE_SETTINGS.blogs_page.id;
-            }
-            if (id === PAGE_SETTINGS.offerings_page.id) {
-                context.offeringsPageId = PAGE_SETTINGS.offerings_page.id;
-            }
             createPage({
                 path: pagePath,
                 component: path.resolve(`${__dirname}/src/templates/page.tsx`),
@@ -102,7 +77,7 @@ exports.createPages = async ({actions, graphql, reporter}) => {
         // Create Blog Pages
         data.strapi.blogs.forEach(blog => {
             createPage({
-                path: `${PAGE_SETTINGS.blogs_page.slug}/${blog.slug}`,
+                path: `/blogs/${blog.slug}`,
                 component: path.resolve(`${__dirname}/src/templates/blog.tsx`),
                 context: {
                     id: blog.id,
@@ -134,7 +109,7 @@ exports.createPages = async ({actions, graphql, reporter}) => {
 
         // Create Offerings
         data.strapi.offerings.forEach(({id, slug}) => {
-            const pageSlug = `/${PAGE_SETTINGS.offerings_page.slug}/${slug}/`;
+            const pageSlug = `/work-with-me/${slug}/`;
             createPage({
                 path: pageSlug,
                 component: path.resolve(
@@ -151,7 +126,7 @@ exports.createPages = async ({actions, graphql, reporter}) => {
         data.strapi.services.forEach(service => {
             const {offerings} = service;
             return offerings.forEach(offering => {
-                const pageSlug = `/${PAGE_SETTINGS.offerings_page.slug}/${offering.slug}/${service.slug}`;
+                const pageSlug = `/work-with-me/${offering.slug}/${service.slug}`;
                 createPage({
                     path: pageSlug,
                     component: path.resolve(

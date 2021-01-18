@@ -24,13 +24,6 @@ const Layout: React.FC<PageProps> = ({children, location}: PageProps) => {
     // TODO: Should this be in its own folder?
     const theme: DefaultTheme = {
         // Semantic helper functions to add media queries
-        above: (max: number, children: CSSObject) => above(max, children),
-        below: (min: number, children: CSSObject) => below(min, children),
-        between: (
-            min: string | number,
-            max: string | number,
-            children: CSSObject,
-        ) => between(min, max, children),
     };
 
     const breakpoints = useBreakpoints();
