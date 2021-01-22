@@ -92,12 +92,7 @@ export default class BreakpointHandler {
         );
     };
 
-    public getBreakpoints: (
-        breakpoints: [string, string?, string?, string?, string?],
-        // TODO: Add parentElement param for 'em' type
-    ) => number[] = (
-        breakpoints: [string, string?, string?, string?, string?],
-    ) => {
+    public getBreakpoints = (breakpoints: Breakpoints): Breakpoints => {
         return breakpoints.map(breakpoint => {
             const cssVar = this._getCSSVariable(breakpoint!).trim();
             const [num] = this._convertCSSSizeVariableStringToNumber(cssVar);

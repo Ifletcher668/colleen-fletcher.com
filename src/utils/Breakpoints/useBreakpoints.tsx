@@ -1,7 +1,7 @@
 import {useEffect, useMemo, useState} from 'react';
 import BreakpointHandler from './breakpoint-handler';
 // TODO: Deprecated
-export const useBreakpoints: () => number[] = () => {
+export const useBreakpoints = (): Breakpoints => {
     const {
         getBreakpoints,
         getScreenWidth,
@@ -9,11 +9,11 @@ export const useBreakpoints: () => number[] = () => {
     } = new BreakpointHandler();
     const [width, setWidth] = useState<number | undefined>(undefined);
     const [fontSize, setFontSize] = useState<number | undefined>(undefined);
-
-    // TODO: Any way to grab this dynamically?
     const [breakpoints, setBreakpoints] = useState<number[]>([]);
-    useEffect(() => {
+
+    useMemo(() => {
         setBreakpoints(
+            // TODO: Any way to grab this dynamically?
             getBreakpoints([
                 '--size-breakpoint-xlarge',
                 '--size-breakpoint-large',
@@ -22,10 +22,9 @@ export const useBreakpoints: () => number[] = () => {
                 '--size-breakpoint-xsmall',
             ]),
         );
-        console.log(`changing`);
     }, [fontSize]);
 
-    useEffect(() => {
+    useMemo(() => {
         setFontSize(getFontSize('body'));
     }, [width]);
 
@@ -35,23 +34,32 @@ export const useBreakpoints: () => number[] = () => {
         };
         // immediately set width
         handleResize();
-        window.addEventListener('resize', handleResize);
-        return window.addEventListener('resize', handleResize);
-    }, []);
-
+        // window.addEventListener('resize', handleResize);
+        // return window.addEventListener('resize', handleResize);
+    }, [fontSize]);
     return breakpoints;
 };
 
-export const useScreenWidth = () => {
-    const {getScreenWidth} = new BreakpointHandler();
+export const useScreenWidth = (): number => {
+    const {getScreenWidth, getFontSize} = new BreakpointHandler();
     const [width, setWidth] = useState<number | undefined>(undefined);
+    const [fontSize, setFontSize] = useState<number | undefined>(undefined);
+
     useEffect(() => {
-        const handleResize = () => {
+        setFontSize(getFontSize('body'));
+    }, [width]);
+
+    useMemo(() => {
+        const handleWidthResize = () => {
             setWidth(getScreenWidth());
         };
         // immediately set width
-        handleResize();
-        window.addEventListener('resize', handleResize);
-        return window.addEventListener('resize', handleResize);
-    }, []);
+        handleWidthResize();
+        window.addEventListener('resize', handleWidthResize);
+        return window.addEventListener('resize', handleWidthResize);
+    }, [fontSize]);
+
+    if (width !== undefined) {
+        return width;
+    } else return 0;
 };

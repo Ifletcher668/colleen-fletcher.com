@@ -1,7 +1,5 @@
-import {graphql, useStaticQuery} from 'gatsby';
-import React, {createContext, useContext, useState} from 'react';
+import React, {createContext, useState} from 'react';
 import {useMenuItems} from '../../../graphql/queries/useMenuItems';
-import {useStrapiData} from '../../../graphql/queries/useStrapiData';
 import MenuItem from './MenuItem';
 
 // Context

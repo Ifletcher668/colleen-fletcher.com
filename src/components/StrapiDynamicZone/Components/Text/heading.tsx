@@ -3,10 +3,12 @@ import Heading from '../../../Heading';
 
 export interface Props {
     data: StrapiComponentTextHeading;
+    center?: boolean;
 }
 
 const HeadingField: React.FC<Props> = ({
     data: {headingText, level, tilt},
+    center,
 }: Props) => {
     // string value enum type in database
     // looks better on client-end
@@ -35,7 +37,7 @@ const HeadingField: React.FC<Props> = ({
     }
 
     return (
-        <Heading level={levelAsNum} tilt={tilt}>
+        <Heading center={center ? true : false} level={levelAsNum} tilt={tilt}>
             {headingText}
         </Heading>
     );

@@ -11,7 +11,6 @@ const MenuItem: React.FC<Props> = ({
     text,
     is_external_link,
     slug,
-    page,
     content,
     className,
 }: Props) => {
@@ -79,16 +78,6 @@ const MenuItem: React.FC<Props> = ({
                         activePanelName === text && (
                             <Panel className="panel-navbar" content={content} />
                         )}
-                    {/* 
-                    {isActivePanel &&
-                        page &&
-                        page.offerings.length > 0 &&
-                        activePanelName === text && (
-                            <Panel
-                                className="panel-navbar"
-                                offerings={page.offerings}
-                            />
-                        )} */}
                 </li>
             )}
         </>

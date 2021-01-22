@@ -1,29 +1,34 @@
 import React from 'react';
 import {graphql} from 'gatsby';
-import Image from 'gatsby-image';
-import Heading from '../components/Heading';
 import StrapiDynamicZone from '../components/StrapiDynamicZone';
 import BannerBackground from 'gatsby-background-image';
-import {Flexbox, Grid} from '../components/Container';
+import {Flexbox} from '../components/Container';
+import {ContentWrapper} from '../components/Container/';
 import SEO from '../components/SEO';
 
 type PageContext = {
     id: string;
-    blogsPageId: StrapiBlogPost[];
-    offeringsPageId: StrapiOffering[];
 };
 interface Props {
     data: Strapi;
     pageContext: PageContext;
 }
 
+type Previews = {
+    blogPreviews: StrapiBlog[];
+    offeringPreviews: StrapiOffering[];
+};
 export default (props: Props) => {
     const {
         data: {
-            strapi: {page},
+            strapi: {page, blogs: blogPreviews, offerings: offeringPreviews},
         },
     } = props;
 
+    const previews: Previews = {
+        blogPreviews,
+        offeringPreviews,
+    };
     return (
         <>
             <SEO />
@@ -37,12 +42,9 @@ export default (props: Props) => {
                     <StrapiDynamicZone components={page.banner} />
                 </Flexbox>
             </BannerBackground>
-            <Grid
-                containerType="section"
-                columns={[`1fr 1fr 1fr`, `1fr 1fr`, `1fr 1fr 1fr`, `1fr`]}
-            >
-                <StrapiDynamicZone components={page.body} />
-            </Grid>
+            <ContentWrapper>
+                <StrapiDynamicZone components={page.body} previews={previews} />
+            </ContentWrapper>
         </>
     );
 };
@@ -163,6 +165,30 @@ export const query = graphql`
                     ... on STRAPI_ComponentSectionImageCenterTextEitherSide {
                         ...StrapiComponentSectionImageCenterTextEitherSide
                     }
+                    ... on STRAPI_ComponentCollectionsBlogs {
+                        ...StrapiComponentCollectionsBlogs
+                    }
+                    ... on STRAPI_ComponentCollectionsBlogPosts {
+                        ...StrapiComponentCollectionsBlogPosts
+                    }
+                    ... on STRAPI_ComponentCollectionsOfferings {
+                        ...StrapiComponentCollectionsOfferings
+                    }
+                    ... on STRAPI_ComponentCollectionsServices {
+                        ...StrapiComponentCollectionsServices
+                    }
+                }
+            }
+            blogs {
+                id
+                preview {
+                    ...StrapiComponentGeneralPreview
+                }
+            }
+            offerings {
+                id
+                preview {
+                    ...StrapiComponentGeneralPreview
                 }
             }
         }

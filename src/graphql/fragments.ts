@@ -49,6 +49,9 @@ export const StrapiBlog = graphql`
         slug
         fullUrlPath
         meta_description
+        preview {
+            ...StrapiComponentGeneralPreview
+        }
         blog_posts {
             ...StrapiBlogPost
         }
@@ -101,6 +104,9 @@ export const StrapiOffering = graphql`
         title
         slug
         meta_description
+        preview {
+            ...StrapiComponentGeneralPreview
+        }
         fullUrlPath
         services {
             ...StrapiService
@@ -112,6 +118,9 @@ export const StrapiService = graphql`
         id
         title
         slug
+        preview {
+            ...StrapiComponentGeneralPreview
+        }
         banner_background_image {
             ...StrapiUploadFile
         }
@@ -333,6 +342,56 @@ export const StrapiComponentSectionImageCenterTextEitherSide = graphql`
         }
         text_right {
             ...StrapiComponentTextParagraph
+        }
+    }
+`;
+
+export const StrapiComponentCollectionsBlogs = graphql`
+    fragment StrapiComponentCollectionsBlogs on STRAPI_ComponentCollectionsBlogs {
+        blogs {
+            id
+            ...StrapiBlog
+        }
+    }
+`;
+// show_blog_posts
+
+export const StrapiComponentCollectionsBlogPosts = graphql`
+    fragment StrapiComponentCollectionsBlogPosts on STRAPI_ComponentCollectionsBlogPosts {
+        blog_posts {
+            ...StrapiBlogPost
+        }
+    }
+`;
+export const StrapiComponentCollectionsOfferings = graphql`
+    fragment StrapiComponentCollectionsOfferings on STRAPI_ComponentCollectionsOfferings {
+        offerings {
+            ...StrapiOffering
+        }
+    }
+`;
+// show_services
+export const StrapiComponentCollectionsServices = graphql`
+    fragment StrapiComponentCollectionsServices on STRAPI_ComponentCollectionsServices {
+        services {
+            ...StrapiService
+        }
+    }
+`;
+
+export const StrapiComponentGeneralPreview = graphql`
+    fragment StrapiComponentGeneralPreview on STRAPI_ComponentGeneralPreview {
+        heading {
+            ...StrapiComponentTextHeading
+        }
+        text {
+            ...StrapiComponentTextParagraph
+        }
+        image {
+            ...StrapiComponentMediaSingleImage
+        }
+        button {
+            ...StrapiComponentWidgetButton
         }
     }
 `;

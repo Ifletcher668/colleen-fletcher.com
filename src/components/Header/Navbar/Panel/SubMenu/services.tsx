@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {graphql, useStaticQuery} from 'gatsby';
 import PaintDripLink from '../../../../TransitionLink';
+import {NavbarContext} from '../..';
 
 interface Props extends DefaultProps {
     offering: {
@@ -24,6 +25,7 @@ const data = graphql`
     }
 `;
 const Services: React.FC<Props> = (props: Props) => {
+    const {TRANSITION_PROPS} = useContext(NavbarContext);
     const query: Strapi = useStaticQuery(data);
     return (
         <>
@@ -42,8 +44,8 @@ const Services: React.FC<Props> = (props: Props) => {
                     return (
                         <li key={idx}>
                             <PaintDripLink
-                                key={idx}
                                 to={`${props.offering.url}${service.slug}`}
+                                {...TRANSITION_PROPS}
                             >
                                 {service.title}
                             </PaintDripLink>

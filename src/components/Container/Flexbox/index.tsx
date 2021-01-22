@@ -1,4 +1,11 @@
 import React from 'react';
+import {CSSObject} from 'styled-components';
+import {
+    SectionFlexbox,
+    ArticleFlexbox,
+    AsideFlexbox,
+    Flexbox as DivFlexbox,
+} from './styles';
 
 interface Props extends DefaultProps {
     inline?: boolean;
@@ -17,7 +24,7 @@ interface Props extends DefaultProps {
     between?: boolean;
     around?: boolean;
     gap?: boolean | number; // add margin between children similar to grid-gap on grid
-    containerType?: 'article' | 'section';
+    containerType?: Container;
 }
 
 const getFlexboxProps = ({
@@ -105,36 +112,50 @@ const getFlexboxProps = ({
 };
 
 const Flexbox: React.FC<Props> = (props: Props) => {
-    const styles: React.CSSProperties = {
+    const {className} = props;
+
+    const styles: CSSObject = {
         display: props.inline ? 'inline-flex' : 'flex',
         flexDirection: props.vertical ? 'column' : 'row',
-        flexWrap: props.wrap ? 'wrap' : 'no-wrap',
+        flexWrap: props.wrap ? 'wrap' : 'nowrap',
         flex: props.noGrow ? `0 0 auto` : `1 1 auto`,
         ...getFlexboxProps(props),
+        ...props.style,
     };
 
-    const classes = props.classNames ? props.classNames.join('') : '';
+    const cn = className
+        ? Array.isArray(className)
+            ? className.join(' ')
+            : className
+        : '';
 
     switch (props.containerType) {
         case 'article':
             return (
-                <article style={styles} className={classes}>
+                <ArticleFlexbox styling={styles} className={cn}>
                     {props.children}
-                </article>
+                </ArticleFlexbox>
             );
 
         case 'section':
             return (
-                <section style={styles} className={classes}>
+                <SectionFlexbox styling={styles} className={cn}>
                     {props.children}
-                </section>
+                </SectionFlexbox>
+            );
+
+        case 'aside':
+            return (
+                <AsideFlexbox styling={styles} className={cn}>
+                    {props.children}
+                </AsideFlexbox>
             );
 
         default:
             return (
-                <div style={styles} className={classes}>
+                <DivFlexbox styling={styles} className={cn}>
                     {props.children}
-                </div>
+                </DivFlexbox>
             );
     }
 };

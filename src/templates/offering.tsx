@@ -3,9 +3,11 @@ import {graphql} from 'gatsby';
 import Image from 'gatsby-image';
 import Heading from '../components/Heading';
 import {Flexbox, Grid} from '../components/Container';
+import {ContentWrapper} from '../components/Container/';
 import {Card, CardHeader, CardBody, CardFooter} from '../components/Card';
 import MarkdownField from 'react-markdown';
 import PaintDripLink from '../components/TransitionLink';
+import ImageWithCaption from '../components/Images/ImageWithCaption';
 interface Props {
     data: Strapi;
 }
@@ -17,18 +19,11 @@ export default (props: Props) => {
     } = props;
 
     return (
-        <Grid containerType="main-content" gap={`2em 0`}>
+        <ContentWrapper>
             <Heading level={1} center>
                 {offering.title}
             </Heading>
-            <Flexbox containerType="section" vertical>
-                <Image
-                    alt={offering.image.file.alternativeText}
-                    title={offering.image.file.caption}
-                    fluid={offering.image.file.imageFile.childImageSharp.fluid}
-                />
-                <figcaption>{offering.image.file.caption}</figcaption>
-            </Flexbox>
+            <ImageWithCaption imageComponent={offering.preview.image} />
             {offering.services && offering.services.length > 0 && (
                 <Grid className="services" containerType="section">
                     {offering.services.map((service, idx) => {
@@ -44,12 +39,12 @@ export default (props: Props) => {
                             >
                                 <Image
                                     alt={
-                                        service.preview_image.file
+                                        service.preview.image.file
                                             .alternativeText
                                     }
-                                    title={service.preview_image.file.caption}
+                                    title={service.preview.image.file.caption}
                                     fluid={
-                                        service.preview_image.file.imageFile
+                                        service.preview.image.file.imageFile
                                             .childImageSharp.fluid
                                     }
                                     style={{
@@ -74,7 +69,7 @@ export default (props: Props) => {
                                     </CardHeader>
                                     <CardBody>
                                         <MarkdownField
-                                            source={service.preview}
+                                            source={service.preview.text.body}
                                             className="paragraph"
                                             allowDangerousHtml
                                         />
@@ -91,7 +86,7 @@ export default (props: Props) => {
                     })}
                 </Grid>
             )}
-        </Grid>
+        </ContentWrapper>
     );
 };
 // Here is where I map all this offering's services

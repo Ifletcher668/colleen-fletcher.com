@@ -4,6 +4,7 @@ import Heading from '../components/Heading';
 import StrapiDynamicZone from '../components/StrapiDynamicZone';
 import CoverImage from 'gatsby-image';
 import {Flexbox, Grid} from '../components/Container';
+import {ContentWrapper} from '../components/Container/';
 interface Props {
     data: Strapi;
 }
@@ -18,7 +19,7 @@ export default (props: Props) => {
     } = props;
 
     return (
-        <Grid containerType="main-content">
+        <ContentWrapper>
             <Grid containerType="section">
                 <Heading tilt="even" level={1}>
                     {title}
@@ -35,7 +36,7 @@ export default (props: Props) => {
                 )}
                 <StrapiDynamicZone components={body} />
             </Grid>
-        </Grid>
+        </ContentWrapper>
     );
 };
 

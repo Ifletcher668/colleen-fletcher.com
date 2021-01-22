@@ -8,9 +8,6 @@ const config: Config = {
         discord: 'https://discord.com',
         pinterest: 'https://pinterest.com',
     },
-    baseRoutes: {
-        index: '/',
-    },
 };
 
 export default config;

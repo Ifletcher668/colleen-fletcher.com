@@ -1,9 +1,11 @@
 import React from 'react';
 
+type V = 'primary' | 'secondary' | 'tertiary';
+type T = 'submit' | 'reset' | 'button';
 interface Props {
     children: React.ReactNode;
-    variant: 'primary' | 'secondary' | 'tertiary';
-    type?: 'submit' | 'reset' | 'button';
+    variant: V;
+    type?: T;
     center?: boolean;
     onClick?: () => void;
 }

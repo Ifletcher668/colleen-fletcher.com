@@ -58,14 +58,11 @@ module.exports = {
                 typeName: 'STRAPI',
                 fieldName: 'strapi',
                 // TODO
-                // url: `${
-                //     process.env.NODE_ENV === 'development'
-                //         ? 'http://localhost:1337/graphql'
-                //         : 'https://isiahfletcheradmin.herokuapp.com/graphql'
-                // }`,
-                url: `http://localhost:1337/graphql`,
-                refetchInterval:
-                    process.env.NODE_ENV === 'development' ? 25 : false, // refetches Strapi data every 25 seconds
+                url: `${
+                    process.env.NODE_ENV === 'development'
+                        ? process.env.LOCAL_GRAPHQL_ENDPOINT
+                        : process.env.HEROKU_GRAPHQL_ENDPOINT
+                }`,
             },
         },
     ],

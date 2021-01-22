@@ -3,6 +3,7 @@ import {graphql} from 'gatsby';
 import Image from 'gatsby-image';
 import Heading from '../components/Heading';
 import {Grid} from '../components/Container';
+import {ContentWrapper} from '../components/Container/';
 import MarkdownField from 'react-markdown';
 import {Card, CardHeader, CardBody, CardFooter} from '../components/Card';
 import PaintDripLink from '../components/TransitionLink';
@@ -10,7 +11,7 @@ interface Props {
     data: Strapi;
 }
 
-export default (props: Props) => {
+export default (props: Props): JSX.Element => {
     const {
         data: {
             strapi: {blog},
@@ -19,7 +20,7 @@ export default (props: Props) => {
 
     return (
         <>
-            <Grid containerType="main-content">
+            <ContentWrapper>
                 <Heading center level={1}>
                     {blog.name}
                 </Heading>
@@ -29,32 +30,38 @@ export default (props: Props) => {
                     className="paragraph"
                 />
                 <Grid containerType="section">
-                    {blog.blog_posts.map((blogPost, idx) => {
-                        const zigZagColumns: Grid['columns'] =
+                    {blog.blog_posts.map((post, idx) => {
+                        const zigZagColumns =
                             idx % 2 === 0
-                                ? [`[image] 1fr [spacer] 0.05fr [text] 2fr`]
-                                : [`[text] 2fr [spacer] 0.05fr [image] 1fr `];
+                                ? {
+                                      xlarge: `[image] 1fr [spacer] 0.05fr [text] 2fr`,
+                                      small: `1fr`,
+                                  }
+                                : {
+                                      xlarge: `[text] 2fr [spacer] 0.05fr [image] 1fr`,
+                                      small: `1fr`,
+                                  };
+
                         return (
                             <Grid
                                 key={idx}
                                 columns={zigZagColumns}
-                                rows={[`[content] 1fr [spacer] 0.2fr`]}
+                                rows={{xlarge: `[content] 1fr [spacer] 0.2fr`}}
                             >
                                 <Image
                                     alt={
-                                        blogPost.cover_image
-                                            ? blogPost.cover_image
-                                                  .alternativeText
+                                        post.cover_image
+                                            ? post.cover_image.alternativeText
                                             : ''
                                     }
                                     title={
-                                        blogPost.cover_image
-                                            ? blogPost.cover_image.caption
+                                        post.cover_image
+                                            ? post.cover_image.caption
                                             : ''
                                     }
                                     fluid={
-                                        blogPost.cover_image
-                                            ? blogPost.cover_image.imageFile
+                                        post.cover_image
+                                            ? post.cover_image.imageFile
                                                   .childImageSharp.fluid
                                             : ''
                                     }
@@ -72,15 +79,15 @@ export default (props: Props) => {
                                     <CardHeader>
                                         <Heading center level={3}>
                                             <PaintDripLink
-                                                to={blogPost.fullUrlPath}
+                                                to={post.fullUrlPath}
                                             >
-                                                {blogPost.title}
+                                                {post.title}
                                             </PaintDripLink>
                                         </Heading>
                                     </CardHeader>
                                     <CardBody>
                                         <MarkdownField
-                                            source={blogPost.preview}
+                                            source={post.preview}
                                             allowDangerousHtml
                                             className="paragraph"
                                         />
@@ -90,7 +97,7 @@ export default (props: Props) => {
                         );
                     })}
                 </Grid>
-            </Grid>
+            </ContentWrapper>
         </>
     );
 };

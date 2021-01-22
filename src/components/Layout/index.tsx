@@ -3,9 +3,8 @@ import Footer from '../Footer';
 import Header from '../Header';
 import Main from '../Main';
 import {ThemeProvider} from 'styled-components';
-import {CSSObject, DefaultTheme} from 'styled-components';
+import {DefaultTheme} from 'styled-components';
 
-import BreakpointHandler from '../../utils/Breakpoints/breakpoint-handler';
 import {useBreakpoints} from '../../utils/Breakpoints/useBreakpoints';
 
 const Layout: React.FC<PageProps> = ({children, location}: PageProps) => {
@@ -20,8 +19,6 @@ const Layout: React.FC<PageProps> = ({children, location}: PageProps) => {
         return document.addEventListener('scroll', handleScrollY);
     }, [documentIsAtTop]);
 
-    const {above, below, between} = new BreakpointHandler();
-    // TODO: Should this be in its own folder?
     const theme: DefaultTheme = {
         // Semantic helper functions to add media queries
     };

@@ -1,119 +1,217 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {CSSObject} from 'styled-components';
 import {
-    Grid as DivGrid,
-    MainContentGrid,
-    SectionGrid,
-    AsideGrid,
-    ArticleGrid,
-} from './styles';
+    useBreakpoints,
+    useScreenWidth,
+} from '../../../utils/Breakpoints/useBreakpoints';
+import {Grid as DivGrid, SectionGrid, AsideGrid, ArticleGrid} from './styles';
+
+type BreakpointObject = {
+    xlarge?: string;
+    large?: string;
+    medium?: string;
+    small?: string;
+    xsmall?: string;
+};
 interface Props extends DefaultProps {
-    /**
-     * @param gap
-     * Used to add grid-gap to your container.
-     * Add a string value for any combination of gap styles
-     * or add a number for pixel values.
-     */
-    gap?: string; // grid-gap
-    /**
-     * @param columns
-     * Used to add grid-template-columns to your container.
-     * Each subsequent index in the array maps to
-     * a breakpoint. From left to right,
-     * the breakpoints get smaller.
-     */
-    columns?: string;
-    /**
-     * @param rows
-     * Used to add grid-template-rows to your container.
-     * Add up to five indexes. Each subsequent index maps to
-     * a breakpoint, from widest to skinniest. If you add less
-     * than five indexes, the last value will account for the rest
-     * of the breakpoints.
-     */
-    rows?: string;
-    /**
-     * @param containerType
-     * Changes the default container around which your grid is wrapped.
-     */
-    containerType?: 'article' | 'section' | 'main-content' | 'aside';
-    autoCols?: string;
+    columns?: BreakpointObject;
+    rows?: BreakpointObject;
+    styling?: CSSObject;
+    containerType?: Container;
+    onRenderBehavior?: () => string;
 }
 
-const Grid: React.FC<Props> = ({
-    className,
-    style,
-    children,
-    containerType,
-    gap = 0,
-    columns = 'none',
-    rows = 'none',
-    autoCols = 'none',
-}: Props) => {
+const Grid: React.FC<Props> = (props: Props) => {
+    const {
+        styling,
+        className,
+        children,
+        containerType = 'div',
+        columns = {},
+        rows = {},
+    } = props;
+
     const cn = className
         ? Array.isArray(className)
             ? className.join(' ')
             : className
         : '';
 
-    // main-content applies predefined and very specific grid styling
-    // Added up here to avoid calculating the useBreakpoints
-    // if (containerType === 'main-content') {
-    //     return <section className={`main-content ${cn}`}>{children}</section>;
-    // }
+    // breakpoints always has 5 indexes
+    const breakpoints = useBreakpoints();
+    const [breakpointName, setBreakpointName] = useState('');
+    const width = useScreenWidth();
+
+    const rowsHasXLarge = rows.hasOwnProperty('xlarge');
+    const rowsHasLarge = rows.hasOwnProperty('large');
+    const rowsHasMedium = rows.hasOwnProperty('medium');
+    const rowsHasSmall = rows.hasOwnProperty('small');
+    const rowsHasXSmall = rows.hasOwnProperty('xsmall');
+    const colsHasXLarge = columns.hasOwnProperty('xlarge');
+    const colsHasLarge = columns.hasOwnProperty('large');
+    const colsHasMedium = columns.hasOwnProperty('medium');
+    const colsHasSmall = columns.hasOwnProperty('small');
+    const colsHasXSmall = columns.hasOwnProperty('xsmall');
+    const breakpointXLarge = breakpoints[0];
+    const breakpointLarge = breakpoints[1];
+    const breakpointMedium = breakpoints[2];
+    const breakpointSmall = breakpoints[3];
+    const breakpointXSmall = breakpoints[4];
+
+    useEffect(() => {
+        if (width >= breakpointXLarge) {
+            setBreakpointName('xlarge');
+        } else if (width < breakpointXLarge && width > breakpointLarge) {
+            if (colsHasLarge) {
+                setBreakpointName('large');
+            } else {
+                if (colsHasXLarge) {
+                    setBreakpointName('xlarge');
+                } else if (colsHasMedium) {
+                    setBreakpointName('medium');
+                } else if (colsHasSmall) {
+                    setBreakpointName('small');
+                } else if (colsHasXSmall) {
+                    setBreakpointName('xsmall');
+                }
+            }
+        } else if (width < breakpointLarge && width > breakpointMedium) {
+            if (colsHasMedium) {
+                setBreakpointName('medium');
+            } else {
+                if (colsHasXLarge) {
+                    setBreakpointName('xlarge');
+                } else if (colsHasLarge) {
+                    setBreakpointName('large');
+                } else if (colsHasSmall) {
+                    setBreakpointName('small');
+                } else if (colsHasXSmall) {
+                    setBreakpointName('xsmall');
+                }
+            }
+        } else if (width < breakpointMedium && width > breakpointSmall) {
+            if (colsHasSmall) {
+                setBreakpointName('small');
+            } else {
+                if (colsHasXLarge) {
+                    setBreakpointName('xlarge');
+                } else if (colsHasLarge) {
+                    setBreakpointName('large');
+                } else if (colsHasMedium) {
+                    setBreakpointName('medium');
+                } else if (colsHasXSmall) {
+                    setBreakpointName('xsmall');
+                }
+            }
+        } else if (width < breakpointSmall && width > breakpointXSmall) {
+            if (colsHasXSmall) {
+                setBreakpointName('xsmall');
+            } else {
+                if (colsHasXLarge) {
+                    setBreakpointName('xlarge');
+                } else if (colsHasLarge) {
+                    setBreakpointName('large');
+                } else if (colsHasMedium) {
+                    setBreakpointName('medium');
+                } else if (colsHasSmall) {
+                    setBreakpointName('small');
+                }
+            }
+        }
+    }, [width]);
+
+    useEffect(() => {
+        if (width >= breakpointXLarge) {
+            setBreakpointName('xlarge');
+        } else if (width < breakpointXLarge && width > breakpointLarge) {
+            if (rowsHasLarge) {
+                setBreakpointName('large');
+            } else {
+                if (rowsHasXLarge) {
+                    setBreakpointName('xlarge');
+                } else if (rowsHasMedium) {
+                    setBreakpointName('medium');
+                } else if (rowsHasSmall) {
+                    setBreakpointName('small');
+                } else if (rowsHasXSmall) {
+                    setBreakpointName('xsmall');
+                }
+            }
+        } else if (width < breakpointLarge && width > breakpointMedium) {
+            if (rowsHasMedium) {
+                setBreakpointName('medium');
+            } else {
+                if (rowsHasXLarge) {
+                    setBreakpointName('xlarge');
+                } else if (rowsHasLarge) {
+                    setBreakpointName('large');
+                } else if (rowsHasSmall) {
+                    setBreakpointName('small');
+                } else if (rowsHasXSmall) {
+                    setBreakpointName('xsmall');
+                }
+            }
+        } else if (width < breakpointMedium && width > breakpointSmall) {
+            if (rowsHasSmall) {
+                setBreakpointName('small');
+            } else {
+                if (rowsHasXLarge) {
+                    setBreakpointName('xlarge');
+                } else if (rowsHasLarge) {
+                    setBreakpointName('large');
+                } else if (rowsHasMedium) {
+                    setBreakpointName('medium');
+                } else if (rowsHasXSmall) {
+                    setBreakpointName('xsmall');
+                }
+            }
+        } else if (width < breakpointSmall && width > breakpointXSmall) {
+            if (rowsHasXSmall) {
+                setBreakpointName('xsmall');
+            } else {
+                if (rowsHasXLarge) {
+                    setBreakpointName('xlarge');
+                } else if (rowsHasLarge) {
+                    setBreakpointName('large');
+                } else if (rowsHasMedium) {
+                    setBreakpointName('medium');
+                } else if (rowsHasSmall) {
+                    setBreakpointName('small');
+                }
+            }
+        }
+    }, [width]);
 
     const theme: CSSObject = {
-        gap,
-        gridTemplateColumns: columns,
-        gridTemplateRows: rows,
+        ...styling,
+        gridTemplateColumns: columns[breakpointName],
+        gridTemplateRows: rows[breakpointName],
     };
 
     switch (containerType) {
         case 'article':
             return (
-                <ArticleGrid
-                    gap={gap}
-                    gridTemplateColumns={columns}
-                    gridTemplateRows={rows}
-                >
+                <ArticleGrid className={cn} styling={theme}>
                     {children}
                 </ArticleGrid>
             );
         case 'section':
             return (
-                <SectionGrid
-                    gap={gap}
-                    gridTemplateColumns={columns}
-                    gridTemplateRows={rows}
-                >
+                <SectionGrid className={cn} styling={theme}>
                     {children}
                 </SectionGrid>
-            );
-        case 'main-content':
-            return (
-                <MainContentGrid gap={gap} gridTemplateRows={rows}>
-                    {children}
-                </MainContentGrid>
             );
 
         case 'aside':
             return (
-                <AsideGrid
-                    gap={gap}
-                    gridTemplateColumns={columns}
-                    gridTemplateRows={rows}
-                >
+                <AsideGrid className={cn} styling={theme}>
                     {children}
                 </AsideGrid>
             );
 
         default:
             return (
-                <DivGrid
-                    gap={gap}
-                    gridTemplateColumns={columns}
-                    gridTemplateRows={rows}
-                >
+                <DivGrid className={cn} styling={theme}>
                     {children}
                 </DivGrid>
             );

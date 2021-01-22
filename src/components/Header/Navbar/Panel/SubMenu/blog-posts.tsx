@@ -38,9 +38,8 @@ const BlogPosts: React.FC<Props> = (props: Props) => {
         <>
             {fivePosts.map((post, idx) => {
                 return (
-                    <li>
+                    <li key={idx}>
                         <PaintDripLink
-                            key={idx}
                             to={`${post.fullUrlPath}`}
                             {...TRANSITION_PROPS}
                         >
