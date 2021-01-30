@@ -9,7 +9,7 @@ export const useBreakpoints = (): Breakpoints => {
     } = new BreakpointHandler();
     const [width, setWidth] = useState<number | undefined>(undefined);
     const [fontSize, setFontSize] = useState<number | undefined>(undefined);
-    const [breakpoints, setBreakpoints] = useState<number[]>([]);
+    const [breakpoints, setBreakpoints] = useState<Breakpoints | []>([]);
 
     useMemo(() => {
         setBreakpoints(
@@ -24,7 +24,7 @@ export const useBreakpoints = (): Breakpoints => {
         );
     }, [fontSize]);
 
-    useMemo(() => {
+    useEffect(() => {
         setFontSize(getFontSize('body'));
     }, [width]);
 
@@ -37,6 +37,7 @@ export const useBreakpoints = (): Breakpoints => {
         // window.addEventListener('resize', handleResize);
         // return window.addEventListener('resize', handleResize);
     }, [fontSize]);
+
     return breakpoints;
 };
 

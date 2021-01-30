@@ -134,7 +134,7 @@ export default class BreakpointHandler {
         max: number,
         children: CSSObject,
     ) => {
-        return `@media screen and (max-width:${
+        return `@media screen and (min-width:${
             (max - 0.01).toString() + 'px'
         }) {
             ${this._stringifyCSSPropertyObject(children)}
