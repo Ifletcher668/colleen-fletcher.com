@@ -1,3 +1,2 @@
-import ImageWithCaption from './ImageWithCaption';
-
-export {ImageWithCaption};
+export {default as ImageWithCaption} from './ImageWithCaption';
+export {default as Image} from './Image';

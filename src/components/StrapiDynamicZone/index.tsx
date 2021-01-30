@@ -1,19 +1,22 @@
 import React from 'react';
-import {TextField, HeadingField, QuoteField} from './Components/Text/';
-import {DividerField, ButtonField} from './Components/Widgets';
+import Grid from '../Container/Grid';
 import {
     BlogPostsField,
     BlogsField,
     OfferingsField,
     ServicesField,
 } from './Components/Collections';
-import Grid from '../Container/Grid';
-import SingleImageField from './Components/Media/single-image';
-import ImagesField from './Components/Media/images';
-import TextWithImageLeftSideField from './Components/Section/text-with-image-left-side';
-import TextWithImageRightSideField from './Components/Section/text-with-image-right-side';
-import ImageCenterTextEitherSideField from './Components/Section/center-image-with-text-either-side';
-import TextCenterImageEitherSideField from './Components/Section/center-text-with-image-either-side';
+import {SingleImageField, ImagesField} from './Components/Media';
+import {TextField, HeadingField, QuoteField} from './Components/Text';
+import {DividerField, ButtonField} from './Components/Widgets';
+import {
+    ImageCenterTextEitherSideField,
+    TextCenterImageEitherSideField,
+    HeaderWithImageLeftSideField,
+    HeaderWithImageRightSideField,
+    TextWithImageLeftSideField,
+    TextWithImageRightSideField,
+} from './Components/Section';
 interface Props {
     components: StrapiDynamicZone[];
     previews?: Previews;
@@ -24,7 +27,10 @@ type Previews = {
     offeringPreviews: StrapiOffering[];
 };
 
-const StrapiDynamicZone: React.FC<Props> = ({components, previews}: Props) => {
+const StrapiDynamicZone: React.FC<Props> = ({
+    components,
+    previews,
+}: Props): JSX.Element => {
     return (
         <>
             {components.map((component, idx) => {
@@ -32,7 +38,7 @@ const StrapiDynamicZone: React.FC<Props> = ({components, previews}: Props) => {
                     case 'STRAPI_ComponentMediaSingleImage':
                         return (
                             <SingleImageField
-                                data={component.image}
+                                data={component.file}
                                 key={`${idx}${component.__typename}`}
                             />
                         );
@@ -47,7 +53,7 @@ const StrapiDynamicZone: React.FC<Props> = ({components, previews}: Props) => {
                                 key={`${idx}${component.__typename}`}
                             />
                         );
-                    // TODO:
+                    // TODO: Add file and video support
                     // case 'STRAPI_ComponentMediaSingleFile':
                     //     return (
                     //         <h3
@@ -133,22 +139,26 @@ const StrapiDynamicZone: React.FC<Props> = ({components, previews}: Props) => {
                             />
                         );
                     case 'STRAPI_ComponentSectionHeadingLeftImageRight':
+                        const headerWithImageRightSideData = {
+                            heading: component.heading,
+                            image: component.image,
+                        };
                         return (
-                            <h3
-                                className="center"
+                            <HeaderWithImageRightSideField
+                                data={headerWithImageRightSideData}
                                 key={`${idx}${component.__typename}`}
-                            >
-                                Heading Left Image Right Section
-                            </h3>
+                            />
                         );
                     case 'STRAPI_ComponentSectionHeadingRightImageLeft':
+                        const headerWithImageLeftSideData = {
+                            heading: component.heading,
+                            image: component.image,
+                        };
                         return (
-                            <h3
-                                className="center"
+                            <HeaderWithImageLeftSideField
+                                data={headerWithImageLeftSideData}
                                 key={`${idx}${component.__typename}`}
-                            >
-                                Heading Right Image Left Section
-                            </h3>
+                            />
                         );
                     case 'STRAPI_ComponentSectionTextCenterImageEitherSide':
                         const textCenterImageEitherSideFieldData = {
@@ -235,9 +245,11 @@ const StrapiDynamicZone: React.FC<Props> = ({components, previews}: Props) => {
 
                     default:
                         return (
-                            <h3 className="center" key={component.__typename}>
-                                Nothing
-                            </h3>
+                            <>
+                                {console.log(
+                                    `No component passed to dynamic zone`,
+                                )}
+                            </>
                         );
                 }
             })}

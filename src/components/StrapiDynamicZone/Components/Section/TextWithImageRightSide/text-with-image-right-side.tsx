@@ -1,8 +1,8 @@
 import React from 'react';
-import {Grid} from '../../../Container';
-import SingleImageField from '../Media/single-image';
-import {TextField} from '../Text';
-import {GridArea} from '../../../../Styled-Components/helpers';
+import {Grid} from '../../../../Container';
+import {SingleImageField} from '../../Media/';
+import {TextField} from '../../Text';
+import {GridArea} from '../../../../../StyledComponents/helpers';
 
 export interface Props {
     data: {

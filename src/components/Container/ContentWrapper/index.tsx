@@ -1,9 +1,9 @@
-import React from 'react';
 import styled from 'styled-components';
 
 // TODO: Update with theme variables
 const ContentWrapper = styled.section`
     display: grid;
+    gap: 4em 0;
     grid-template-columns:
         [full-start] minmax(2em, 3em)
         [content-start] minmax(0, 60em) [content-end]

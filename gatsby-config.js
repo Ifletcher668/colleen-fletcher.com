@@ -22,6 +22,7 @@ module.exports = {
         `gatsby-plugin-styled-components`,
         `gatsby-plugin-sass`,
         `gatsby-plugin-postcss`,
+        `gatsby-plugin-catch-links`,
         {
             resolve: 'gatsby-plugin-react-svg',
             options: {

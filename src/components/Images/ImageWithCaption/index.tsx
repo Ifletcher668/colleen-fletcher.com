@@ -1,7 +1,8 @@
 import React from 'react';
 import Image from 'gatsby-image';
 import {Flexbox} from '../../Container';
-import styled, {CSSObject} from 'styled-components';
+import {CSSObject} from 'styled-components';
+import {FigCaption} from '../../Atoms';
 
 interface Props extends FlexboxProps {
     uploadFile?: StrapiUploadFile;
@@ -34,7 +35,7 @@ const ImageWithCaption: React.FC<Props> = (props: Props) => {
                     title={uploadFile.caption}
                     fluid={uploadFile.imageFile.childImageSharp.fluid}
                 />
-                <StyledFigCaption>{uploadFile.caption}</StyledFigCaption>
+                <FigCaption>{uploadFile.caption}</FigCaption>
             </Flexbox>
         );
     } else if (imageComponent) {
@@ -46,9 +47,7 @@ const ImageWithCaption: React.FC<Props> = (props: Props) => {
                     title={imageComponent.file.caption}
                     fluid={imageComponent.file.imageFile.childImageSharp.fluid}
                 />
-                <StyledFigCaption>
-                    {imageComponent.file.caption}
-                </StyledFigCaption>
+                <FigCaption>{imageComponent.file.caption}</FigCaption>
             </Flexbox>
         );
     } else
@@ -61,7 +60,3 @@ const ImageWithCaption: React.FC<Props> = (props: Props) => {
 };
 
 export default ImageWithCaption;
-
-const StyledFigCaption = styled.figcaption`
-    align-self: flex-end;
-`;

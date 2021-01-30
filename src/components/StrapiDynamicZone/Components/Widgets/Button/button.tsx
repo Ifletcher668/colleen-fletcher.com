@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '../../../Button';
+import Button from '../../../../Button';
 import Alink from 'gatsby-plugin-transition-link/AniLink';
 
 export interface Props {

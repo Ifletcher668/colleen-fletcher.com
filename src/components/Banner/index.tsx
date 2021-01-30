@@ -29,7 +29,7 @@ const BannerWrapper = styled.section`
     .background {
         display: flex;
         width: 100vw;
-        height: 400px;
+        min-height: 400px;
     }
 `;
 

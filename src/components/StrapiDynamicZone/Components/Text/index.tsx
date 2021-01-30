@@ -1,7 +1,3 @@
-import HeadingField from './heading';
-import TextField from './paragraph';
-import QuoteField from './quote';
-
-export {HeadingField};
-export {TextField};
-export {QuoteField};
+export {default as HeadingField} from './Heading/heading';
+export {default as TextField} from './Paragraph/paragraph';
+export {default as QuoteField} from './Quote/quote';

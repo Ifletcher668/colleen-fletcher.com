@@ -4,7 +4,7 @@ import Grid from '../../../../Container/Grid';
 import {HeadingField} from '../../Text';
 import {ImageWithCaption} from '../../../../Images/';
 import {ButtonField} from '../../Widgets';
-import {GridArea, GridDivider} from '../../../../../Styled-Components/helpers';
+import {GridArea, GridDivider} from '../../../../../StyledComponents/helpers';
 import Divider from '../../../../Divider';
 
 export interface Props {

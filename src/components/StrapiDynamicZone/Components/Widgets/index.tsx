@@ -1,5 +1,2 @@
-import DividerField from './divider';
-import ButtonField from './button';
-
-export {DividerField};
-export {ButtonField};
+export {default as DividerField} from './Divider/divider';
+export {default as ButtonField} from './Button/button';

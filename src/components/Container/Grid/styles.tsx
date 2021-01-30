@@ -1,4 +1,3 @@
-import React from 'react';
 import styled, {CSSObject} from 'styled-components';
 
 interface Props extends DefaultProps {
@@ -11,8 +10,7 @@ const defaultProps: CSSObject = {
 
 export const SectionGrid = styled.section<Props>`
     ${defaultProps};
-    margin: 0 0 4em 0;
-    ${props => props.styling}
+    ${props => props.styling};
 `;
 
 export const ArticleGrid = styled.article<Props>`
