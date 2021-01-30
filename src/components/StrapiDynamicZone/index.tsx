@@ -8,6 +8,12 @@ import {
     ServicesField,
 } from './Components/Collections';
 import Grid from '../Container/Grid';
+import SingleImageField from './Components/Media/single-image';
+import ImagesField from './Components/Media/images';
+import TextWithImageLeftSideField from './Components/Section/text-with-image-left-side';
+import TextWithImageRightSideField from './Components/Section/text-with-image-right-side';
+import ImageCenterTextEitherSideField from './Components/Section/center-image-with-text-either-side';
+import TextCenterImageEitherSideField from './Components/Section/center-text-with-image-either-side';
 interface Props {
     components: StrapiDynamicZone[];
     previews?: Previews;
@@ -25,40 +31,59 @@ const StrapiDynamicZone: React.FC<Props> = ({components, previews}: Props) => {
                 switch (component.__typename) {
                     case 'STRAPI_ComponentMediaSingleImage':
                         return (
-                            <h1 key={`${idx}${component.__typename}`}>
-                                Single Image
-                            </h1>
+                            <SingleImageField
+                                data={component.image}
+                                key={`${idx}${component.__typename}`}
+                            />
                         );
                     case 'STRAPI_ComponentMediaImages':
+                        const imagesData = {
+                            style: component.style,
+                            files: component.files,
+                        };
                         return (
-                            <h1 key={`${idx}${component.__typename}`}>
-                                Multiple Images
-                            </h1>
+                            <ImagesField
+                                data={imagesData}
+                                key={`${idx}${component.__typename}`}
+                            />
                         );
-                    case 'STRAPI_ComponentMediaSingleFile':
-                        return (
-                            <h1 key={`${idx}${component.__typename}`}>
-                                Single File
-                            </h1>
-                        );
-                    case 'STRAPI_ComponentMediaFiles':
-                        return (
-                            <h1 key={`${idx}$${component.__typename}`}>
-                                Multiple Files
-                            </h1>
-                        );
-                    case 'STRAPI_ComponentMediaSingleVideo':
-                        return (
-                            <h1 key={`${idx}${component.__typename}`}>
-                                Single Video
-                            </h1>
-                        );
-                    case 'STRAPI_ComponentMediaVideos':
-                        return (
-                            <h1 key={`${idx}${component.__typename}`}>
-                                Multiple Videos
-                            </h1>
-                        );
+                    // TODO:
+                    // case 'STRAPI_ComponentMediaSingleFile':
+                    //     return (
+                    //         <h3
+                    //             className="center"
+                    //             key={`${idx}${component.__typename}`}
+                    //         >
+                    //             Single File
+                    //         </h3>
+                    //     );
+                    // case 'STRAPI_ComponentMediaFiles':
+                    //     return (
+                    //         <h3
+                    //             className="center"
+                    //             key={`${idx}$${component.__typename}`}
+                    //         >
+                    //             Multiple Files
+                    //         </h3>
+                    //     );
+                    // case 'STRAPI_ComponentMediaSingleVideo':
+                    //     return (
+                    //         <h3
+                    //             className="center"
+                    //             key={`${idx}${component.__typename}`}
+                    //         >
+                    //             Single Video
+                    //         </h3>
+                    //     );
+                    // case 'STRAPI_ComponentMediaVideos':
+                    //     return (
+                    //         <h3
+                    //             className="center"
+                    //             key={`${idx}${component.__typename}`}
+                    //         >
+                    //             Multiple Videos
+                    //         </h3>
+                    //     );
                     case 'STRAPI_ComponentTextHeading':
                         const headingData = {
                             headingText: component.headingText,
@@ -86,40 +111,68 @@ const StrapiDynamicZone: React.FC<Props> = ({components, previews}: Props) => {
                             />
                         );
                     case 'STRAPI_ComponentSectionTextRightImageLeft':
+                        const textWithImageLeftSideData = {
+                            image: component.image,
+                            text: component.text,
+                        };
                         return (
-                            <h1 key={`${idx}${component.__typename}`}>
-                                Text Right Image Left Section
-                            </h1>
+                            <TextWithImageLeftSideField
+                                key={`${idx}${component.__typename}`}
+                                data={textWithImageLeftSideData}
+                            />
                         );
                     case 'STRAPI_ComponentSectionImageRightTextLeft':
+                        const textWithImageRightSideData = {
+                            image: component.image,
+                            text: component.text,
+                        };
                         return (
-                            <h1 key={`${idx}${component.__typename}`}>
-                                Text Left Image Right Section
-                            </h1>
+                            <TextWithImageRightSideField
+                                data={textWithImageRightSideData}
+                                key={`${idx}${component.__typename}`}
+                            />
                         );
                     case 'STRAPI_ComponentSectionHeadingLeftImageRight':
                         return (
-                            <h1 key={`${idx}${component.__typename}`}>
+                            <h3
+                                className="center"
+                                key={`${idx}${component.__typename}`}
+                            >
                                 Heading Left Image Right Section
-                            </h1>
+                            </h3>
                         );
                     case 'STRAPI_ComponentSectionHeadingRightImageLeft':
                         return (
-                            <h1 key={`${idx}${component.__typename}`}>
+                            <h3
+                                className="center"
+                                key={`${idx}${component.__typename}`}
+                            >
                                 Heading Right Image Left Section
-                            </h1>
+                            </h3>
                         );
                     case 'STRAPI_ComponentSectionTextCenterImageEitherSide':
+                        const textCenterImageEitherSideFieldData = {
+                            image_left: component.image_left,
+                            text: component.text,
+                            image_right: component.image_right,
+                        };
                         return (
-                            <h1 key={`${idx}${component.__typename}`}>
-                                Text Center Image Either Side Section
-                            </h1>
+                            <TextCenterImageEitherSideField
+                                data={textCenterImageEitherSideFieldData}
+                                key={`${idx}${component.__typename}`}
+                            />
                         );
                     case 'STRAPI_ComponentSectionImageCenterTextEitherSide':
+                        const imageCenterTextEitherSideFieldData = {
+                            text_left: component.text_left,
+                            image: component.image,
+                            text_right: component.text_right,
+                        };
                         return (
-                            <h1 key={`${idx}${component.__typename}`}>
-                                Image Center Text Either Side Section
-                            </h1>
+                            <ImageCenterTextEitherSideField
+                                data={imageCenterTextEitherSideFieldData}
+                                key={`${idx}${component.__typename}`}
+                            />
                         );
                     case 'STRAPI_ComponentWidgetDivider':
                         return (
@@ -142,17 +195,11 @@ const StrapiDynamicZone: React.FC<Props> = ({components, previews}: Props) => {
                         );
                     case 'STRAPI_ComponentCollectionsOfferings':
                         return (
-                            <Grid
-                                key={`${idx}${idx}`}
-                                containerType="section"
-                                columns={{xlarge: `[left] 1fr [right] 1fr`}}
-                                styling={{gap: `5em`}}
-                            >
-                                <OfferingsField
-                                    data={component.offerings}
-                                    previews={previews!.offeringPreviews}
-                                />
-                            </Grid>
+                            <OfferingsField
+                                key={`${idx}${component.__typename}`}
+                                data={component.offerings}
+                                previews={previews!.offeringPreviews}
+                            />
                         );
                     case 'STRAPI_ComponentCollectionsBlogs':
                         return (
@@ -187,7 +234,11 @@ const StrapiDynamicZone: React.FC<Props> = ({components, previews}: Props) => {
                         );
 
                     default:
-                        return <h1 key={component.__typename}>Nothing</h1>;
+                        return (
+                            <h3 className="center" key={component.__typename}>
+                                Nothing
+                            </h3>
+                        );
                 }
             })}
         </>

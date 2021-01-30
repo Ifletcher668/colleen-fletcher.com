@@ -1,24 +1,38 @@
 import React from 'react';
-import MarkdownField from 'react-markdown';
-import Heading from '../../Heading';
+import {CSSObject} from 'styled-components';
+import {Grid} from '../../../Container';
+import {ImageWithCaption} from '../../../Images';
 
-export interface Props {
-    data: StrapiBodyContent;
+interface Props {
+    data: {
+        style: Omit<ImageStyle, 'standard' | 'fancy'>;
+        files: StrapiUploadFile[];
+    };
 }
 
-const TextWithImageField: React.FC<Props> = ({
-    data: {header, rich_text, image_right_side},
-}: Props) => {
+const ImagesField: React.FC<Props> = ({data}: Props) => {
+    const {style, files} = data;
+
+    const styles: CSSObject = {
+        gap: `0 1em`,
+    };
+
     return (
-        <section className={image_right_side ? 'img-right' : 'img-left'}>
-            {header && <Heading level={3}>{header}</Heading>}
-            <MarkdownField
-                className="markdown"
-                children={rich_text}
-                allowDangerousHtml
-            />
-        </section>
+        <Grid
+            containerType="section"
+            styling={styles}
+            columns={{
+                xlarge: `repeat(${files.length}, 1fr)`,
+                xsmall: `1fr`,
+            }}
+        >
+            {files.map((image, idx) => {
+                return (
+                    <ImageWithCaption between key={idx} uploadFile={image} />
+                );
+            })}
+        </Grid>
     );
 };
 
-export default TextWithImageField;
+export default ImagesField;

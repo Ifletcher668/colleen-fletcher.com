@@ -3,7 +3,7 @@ import Image from 'gatsby-image';
 import MarkdownField from 'react-markdown';
 import Grid from '../../../../Container/Grid';
 import {HeadingField} from '../../Text';
-import ImageWithCaption from '../../../../Images/ImageWithCaption';
+import {ImageWithCaption} from '../../../../Images/';
 import {ButtonField} from '../../Widgets';
 
 export interface Props {

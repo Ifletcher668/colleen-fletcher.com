@@ -1,24 +1,34 @@
 import React from 'react';
-import MarkdownField from 'react-markdown';
-import Heading from '../../../Heading';
+import {Grid} from '../../../Container';
+import SingleImageField from '../Media/single-image';
+import {TextField} from '../Text';
+import {GridArea} from '../../../../Styled-Components/helpers';
 
 export interface Props {
-    data: StrapiBodyContent;
+    data: {
+        image: StrapiUploadFile;
+        text: StrapiComponentTextParagraph;
+    };
 }
 
-const TextWithImageField: React.FC<Props> = ({
-    data: {header, rich_text, image_right_side},
-}: Props) => {
+const TextWithImageLeftSideField: React.FC<Props> = ({data}: Props) => {
+    const {image, text} = data;
     return (
-        <section className={image_right_side ? 'img-right' : 'img-left'}>
-            {header && <Heading level={3}>{header}</Heading>}
-            <MarkdownField
-                className="markdown"
-                children={rich_text}
-                allowDangerousHtml
-            />
-        </section>
+        <Grid
+            containerType="section"
+            columns={{
+                xlarge: `[image] 1fr [spacer] 0.5fr [text] 2fr`,
+                small: `1f`,
+            }}
+        >
+            <GridArea column="image">
+                <SingleImageField data={image} />
+            </GridArea>
+            <GridArea column="text">
+                <TextField data={text.body} />
+            </GridArea>
+        </Grid>
     );
 };
 
-export default TextWithImageField;
+export default TextWithImageLeftSideField;

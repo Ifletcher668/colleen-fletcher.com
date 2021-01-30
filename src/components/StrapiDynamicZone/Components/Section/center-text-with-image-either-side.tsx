@@ -6,29 +6,33 @@ import {GridArea} from '../../../../Styled-Components/helpers';
 
 export interface Props {
     data: {
-        image: StrapiUploadFile;
         text: StrapiComponentTextParagraph;
+        image_right: StrapiUploadFile;
+        image_left: StrapiUploadFile;
     };
 }
 
-const TextWithImageRightSideField: React.FC<Props> = ({data}: Props) => {
-    const {image, text} = data;
+const TextCenterImageEitherSideField: React.FC<Props> = ({data}: Props) => {
+    const {text, image_right, image_left} = data;
     return (
         <Grid
             containerType="section"
             columns={{
-                xlarge: `[text] 2fr [spacer] 0.5fr [image] 1fr`,
+                xlarge: `[image-left] 1.5fr [spacer] 0.5fr[text] 1fr[spacer] 0.5fr [image-right] 1.5fr`,
                 small: `1f`,
             }}
         >
+            <GridArea column="image-left">
+                <SingleImageField data={image_left} />
+            </GridArea>
             <GridArea column="text">
                 <TextField data={text.body} />
             </GridArea>
-            <GridArea column="image">
-                <SingleImageField data={image} />
+            <GridArea column="image-right">
+                <SingleImageField data={image_right} />
             </GridArea>
         </Grid>
     );
 };
 
-export default TextWithImageRightSideField;
+export default TextCenterImageEitherSideField;
