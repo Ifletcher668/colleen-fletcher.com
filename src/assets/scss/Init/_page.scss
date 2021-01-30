@@ -31,8 +31,15 @@ body {
 .banner-background {
     height: 400px;
     width: 100vw;
+    &::before {
+    }
+}
+// TODO: Use styled components for this.
+.circle {
+    border-radius: 1000px;
 }
 
+// TODO: Remove?
 .main-content {
     display: grid;
     grid-template-columns:

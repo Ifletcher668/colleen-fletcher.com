@@ -127,13 +127,15 @@ span {
 }
 
 hr {
-    .standard {
+    &.standard {
+        width: 100%;
+        height: 1px;
         border: 0;
         border-bottom: solid 1px color(earth);
         margin: 0 0 size(mg-large) 0;
     }
-    .fancy {
-        // frangipanis!
+    &.fancy {
+        // background: url('../../images/svg/blue-frangipani.svg');
     }
 }
 
