@@ -1,45 +1,54 @@
 import React from 'react';
 import Image from 'gatsby-image';
 import {Flexbox} from '../../Container';
+import styled, {CSSObject} from 'styled-components';
 
-interface Props extends DefaultProps {
+interface Props extends FlexboxProps {
     uploadFile?: StrapiUploadFile;
     imageComponent?: StrapiComponentMediaSingleImage;
+    /**
+     * @param styling
+     * ImageWithCaption abstracts Gatsby's Image component
+     * and wraps it around my Flexbox component. Styling
+     * is inherited by Flexbox to add custom styles to
+     * the styled-component.
+     */
+    styling?: CSSObject;
+    circle?: boolean;
 }
 
 const ImageWithCaption: React.FC<Props> = (props: Props) => {
-    if (props.uploadFile) {
+    const {
+        circle,
+        styling,
+        uploadFile,
+        imageComponent,
+        containerType = 'div',
+    } = props;
+    if (uploadFile) {
         return (
-            // TODO: Refactor Flexbox component
-            <Flexbox
-                containerType="section"
-                vertical
-                // style={{maxHeight: `10em`}}
-            >
+            <Flexbox containerType={containerType} vertical {...props}>
                 <Image
-                    alt={props.uploadFile.alternativeText}
-                    title={props.uploadFile.caption}
-                    fluid={props.uploadFile.imageFile.childImageSharp.fluid}
+                    className={circle ? 'circle' : ''}
+                    alt={uploadFile.alternativeText}
+                    title={uploadFile.caption}
+                    fluid={uploadFile.imageFile.childImageSharp.fluid}
                 />
-                <figcaption>{props.uploadFile.caption}</figcaption>
+                <StyledFigCaption>{uploadFile.caption}</StyledFigCaption>
             </Flexbox>
         );
-    } else if (props.imageComponent) {
+    } else if (imageComponent) {
         return (
-            <Flexbox
-                containerType="section"
-                vertical
-                // style={{maxHeight: `10em`}}
-            >
+            <Flexbox containerType={containerType} around vertical {...props}>
                 <Image
-                    alt={props.imageComponent.file.alternativeText}
-                    title={props.imageComponent.file.caption}
-                    fluid={
-                        props.imageComponent.file.imageFile.childImageSharp
-                            .fluid
-                    }
+                    className={circle ? 'circle' : ''}
+                    alt={imageComponent.file.alternativeText}
+                    title={imageComponent.file.caption}
+                    fluid={imageComponent.file.imageFile.childImageSharp.fluid}
                 />
-                <figcaption>{props.imageComponent.file.caption}</figcaption>
+                <StyledFigCaption>
+                    {imageComponent.file.caption}
+                </StyledFigCaption>
             </Flexbox>
         );
     } else
@@ -50,4 +59,9 @@ const ImageWithCaption: React.FC<Props> = (props: Props) => {
             </>
         );
 };
+
 export default ImageWithCaption;
+
+const StyledFigCaption = styled.figcaption`
+    align-self: flex-end;
+`;
