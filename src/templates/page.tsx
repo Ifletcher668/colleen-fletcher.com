@@ -1,10 +1,9 @@
 import React from 'react';
 import {graphql} from 'gatsby';
 import StrapiDynamicZone from '../components/StrapiDynamicZone';
-import BannerBackground from 'gatsby-background-image';
-import {Flexbox} from '../components/Container';
 import {ContentWrapper} from '../components/Container/';
 import SEO from '../components/SEO';
+import BannerBackgroundImage from '../components/Banner';
 
 type PageContext = {
     id: string;
@@ -32,16 +31,10 @@ export default (props: Props) => {
     return (
         <>
             <SEO />
-            <BannerBackground
-                fluid={
-                    page.banner_background_image.imageFile.childImageSharp.fluid
-                }
-                className="banner-background"
-            >
-                <Flexbox>
-                    <StrapiDynamicZone components={page.banner} />
-                </Flexbox>
-            </BannerBackground>
+            <BannerBackgroundImage
+                image={page.banner_background_image}
+                banner={page.banner}
+            />
             <ContentWrapper>
                 <StrapiDynamicZone components={page.body} previews={previews} />
             </ContentWrapper>

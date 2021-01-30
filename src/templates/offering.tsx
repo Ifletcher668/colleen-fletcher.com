@@ -1,23 +1,23 @@
+// Named "Work With Me on the page"
 import React from 'react';
 import {graphql} from 'gatsby';
 import Image from 'gatsby-image';
 import Heading from '../components/Heading';
-import {Flexbox, Grid} from '../components/Container';
+import {Grid} from '../components/Container';
 import {ContentWrapper} from '../components/Container/';
 import {Card, CardHeader, CardBody, CardFooter} from '../components/Card';
 import MarkdownField from 'react-markdown';
 import PaintDripLink from '../components/TransitionLink';
-import ImageWithCaption from '../components/Images/ImageWithCaption';
+import {ImageWithCaption} from '../components/Images';
 interface Props {
     data: Strapi;
 }
-export default (props: Props) => {
+export default (props: Props): JSX.Element => {
     const {
         data: {
             strapi: {offering},
         },
     } = props;
-
     return (
         <ContentWrapper>
             <Heading level={1} center>
@@ -27,15 +27,21 @@ export default (props: Props) => {
             {offering.services && offering.services.length > 0 && (
                 <Grid className="services" containerType="section">
                     {offering.services.map((service, idx) => {
-                        const zigZagColumns: Grid['columns'] =
+                        const zigZagColumns =
                             idx % 2 === 0
-                                ? [`[image] 1fr [spacer] 0.05fr [text] 2fr`]
-                                : [`[text] 2fr [spacer] 0.05fr [image] 1fr `];
+                                ? {
+                                      xlarge: `[image] 1fr [spacer] 0.05fr [text] 2fr`,
+                                      small: `1fr`,
+                                  }
+                                : {
+                                      xlarge: `[text] 2fr [spacer] 0.05fr [image] 1fr`,
+                                      small: `1fr`,
+                                  };
                         return (
                             <Grid
                                 key={idx}
                                 columns={zigZagColumns}
-                                rows={[`[content] 1fr [spacer] 0.2fr`]}
+                                rows={{xlarge: `[content] 1fr [spacer] 0.2fr`}}
                             >
                                 <Image
                                     alt={

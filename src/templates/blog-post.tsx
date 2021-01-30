@@ -2,9 +2,10 @@ import React from 'react';
 import {graphql} from 'gatsby';
 import Heading from '../components/Heading';
 import StrapiDynamicZone from '../components/StrapiDynamicZone';
-import CoverImage from 'gatsby-image';
-import {Flexbox, Grid} from '../components/Container';
+import {Grid} from '../components/Container';
 import {ContentWrapper} from '../components/Container/';
+import {ImageWithCaption} from '../components/Images';
+
 interface Props {
     data: Strapi;
 }
@@ -21,18 +22,14 @@ export default (props: Props) => {
     return (
         <ContentWrapper>
             <Grid containerType="section">
-                <Heading tilt="even" level={1}>
+                <Heading center tilt="even" level={1}>
                     {title}
                 </Heading>
                 {cover_image && (
-                    <>
-                        <CoverImage
-                            fluid={cover_image.imageFile.childImageSharp.fluid}
-                            alt={cover_image.alternativeText}
-                            title={cover_image.caption}
-                        />
-                        <figcaption>{cover_image.caption}</figcaption>
-                    </>
+                    <ImageWithCaption
+                        uploadFile={cover_image}
+                        styling={{margin: `0 0 4em 0`}}
+                    />
                 )}
                 <StrapiDynamicZone components={body} />
             </Grid>
