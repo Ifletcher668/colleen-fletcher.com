@@ -7,24 +7,8 @@ import {
     Flexbox as DivFlexbox,
 } from './styles';
 
-interface Props extends DefaultProps {
-    inline?: boolean;
-    vertical?: boolean; // column
-    wrap?: boolean;
-    noGrow?: boolean; // acts as no-grow and no-shrink
-    grow?: number;
-    shrink?: number;
-    basis?: number | 'auto';
-    top?: boolean;
-    middle?: boolean;
-    bottom?: boolean;
-    left?: boolean;
-    center?: boolean;
-    right?: boolean;
-    between?: boolean;
-    around?: boolean;
-    gap?: boolean | number; // add margin between children similar to grid-gap on grid
-    containerType?: Container;
+interface Props extends FlexboxProps {
+    styling?: CSSObject;
 }
 
 const getFlexboxProps = ({
@@ -102,25 +86,35 @@ const getFlexboxProps = ({
     }
 
     return {
-        justifyContent: x,
-        alignItems: y,
+        'justify-content': x,
+        'align-items': y,
         '& > * + *': {
-            marginLeft: gap && !vertical && gridGap,
-            marginTop: gap && vertical && gridGap,
+            'margin-left': gap && !vertical && gridGap,
+            'margin-top': gap && vertical && gridGap,
         } as any,
     };
 };
 
 const Flexbox: React.FC<Props> = (props: Props) => {
-    const {className} = props;
+    const {
+        className,
+        onClick,
+        inline,
+        vertical,
+        wrap,
+        noGrow,
+        styling,
+        style,
+    } = props;
 
     const styles: CSSObject = {
-        display: props.inline ? 'inline-flex' : 'flex',
-        flexDirection: props.vertical ? 'column' : 'row',
-        flexWrap: props.wrap ? 'wrap' : 'nowrap',
-        flex: props.noGrow ? `0 0 auto` : `1 1 auto`,
+        display: inline ? 'inline-flex' : 'flex',
+        flexDirection: vertical ? 'column' : 'row',
+        flexWrap: wrap ? 'wrap' : 'nowrap',
+        flex: noGrow ? `0 0 auto` : `1 1 auto`,
         ...getFlexboxProps(props),
-        ...props.style,
+        ...styling,
+        ...style,
     };
 
     const cn = className
@@ -132,28 +126,36 @@ const Flexbox: React.FC<Props> = (props: Props) => {
     switch (props.containerType) {
         case 'article':
             return (
-                <ArticleFlexbox styling={styles} className={cn}>
+                <ArticleFlexbox
+                    styling={styles}
+                    className={cn}
+                    onClick={onClick}
+                >
                     {props.children}
                 </ArticleFlexbox>
             );
 
         case 'section':
             return (
-                <SectionFlexbox styling={styles} className={cn}>
+                <SectionFlexbox
+                    styling={styles}
+                    className={cn}
+                    onClick={onClick}
+                >
                     {props.children}
                 </SectionFlexbox>
             );
 
         case 'aside':
             return (
-                <AsideFlexbox styling={styles} className={cn}>
+                <AsideFlexbox styling={styles} className={cn} onClick={onClick}>
                     {props.children}
                 </AsideFlexbox>
             );
 
         default:
             return (
-                <DivFlexbox styling={styles} className={cn}>
+                <DivFlexbox styling={styles} className={cn} onClick={onClick}>
                     {props.children}
                 </DivFlexbox>
             );

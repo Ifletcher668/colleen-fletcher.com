@@ -6,11 +6,12 @@ interface Props extends DefaultProps {
 }
 
 const defaultProps: CSSObject = {
-    display: 'grid',
+    display: `grid`,
 };
 
 export const SectionGrid = styled.section<Props>`
     ${defaultProps};
+    margin: 0 0 4em 0;
     ${props => props.styling}
 `;
 

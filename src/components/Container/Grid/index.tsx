@@ -6,6 +6,104 @@ import {
 } from '../../../utils/Breakpoints/useBreakpoints';
 import {Grid as DivGrid, SectionGrid, AsideGrid, ArticleGrid} from './styles';
 
+const useGridBreakpointLogic = (type: BreakpointObject) => {
+    const breakpoints = useBreakpoints();
+
+    const [breakpointName, setBreakpointName] = useState<
+        'xlarge' | 'large' | 'medium' | 'small' | 'xsmall'
+    >('xlarge'); // setting default to xlarge
+    const width = useScreenWidth();
+
+    const typeHasSizeXLarge = type.hasOwnProperty('xlarge');
+    const typeHasSizeLarge = type.hasOwnProperty('large');
+    const typeHasSizeMedium = type.hasOwnProperty('medium');
+    const typeHasSizeSmall = type.hasOwnProperty('small');
+    const typeHasSizeXSmall = type.hasOwnProperty('xsmall');
+    const breakpointXLarge = breakpoints[0];
+    const breakpointLarge = breakpoints[1];
+    const breakpointMedium = breakpoints[2];
+    const breakpointSmall = breakpoints[3];
+    const breakpointXSmall = breakpoints[4];
+
+    useEffect(() => {
+        if (width > breakpointXLarge) {
+            setBreakpointName('xlarge');
+        } else if (width <= breakpointXLarge && width > breakpointLarge) {
+            // If with is between xlarge and large
+            if (typeHasSizeXLarge) {
+                setBreakpointName('xlarge');
+            } else {
+                if (typeHasSizeLarge) {
+                    setBreakpointName('large');
+                } else if (typeHasSizeMedium) {
+                    setBreakpointName('medium');
+                } else if (typeHasSizeSmall) {
+                    setBreakpointName('small');
+                } else if (typeHasSizeXSmall) {
+                    setBreakpointName('xsmall');
+                }
+            }
+        } else if (width <= breakpointLarge && width > breakpointMedium) {
+            // If width is between large and medium
+            if (typeHasSizeLarge) {
+                setBreakpointName('large');
+            } else {
+                if (typeHasSizeXLarge && !typeHasSizeLarge) {
+                    setBreakpointName('xlarge');
+                } else if (typeHasSizeMedium) {
+                    setBreakpointName('medium');
+                } else if (typeHasSizeSmall) {
+                    setBreakpointName('small');
+                } else if (typeHasSizeXSmall) {
+                    setBreakpointName('xsmall');
+                }
+            }
+        } else if (width <= breakpointMedium && width > breakpointSmall) {
+            // If width is between medium and small
+            if (typeHasSizeMedium) {
+                setBreakpointName('medium');
+            } else {
+                if (typeHasSizeXLarge && !typeHasSizeLarge) {
+                    setBreakpointName('xlarge');
+                } else if (typeHasSizeLarge) {
+                    setBreakpointName('large');
+                } else if (typeHasSizeSmall) {
+                    setBreakpointName('small');
+                } else if (typeHasSizeXSmall) {
+                    setBreakpointName('xsmall');
+                }
+            }
+        } else if (width <= breakpointSmall && width > breakpointXSmall) {
+            // If width is between small and xsmall
+            if (typeHasSizeSmall) {
+                setBreakpointName('small');
+            } else {
+                if (
+                    typeHasSizeXLarge &&
+                    !typeHasSizeLarge &&
+                    !typeHasSizeMedium
+                ) {
+                    setBreakpointName('xlarge');
+                } else if (
+                    typeHasSizeLarge &&
+                    !typeHasSizeMedium &&
+                    !typeHasSizeXSmall
+                ) {
+                    setBreakpointName('large');
+                } else if (typeHasSizeMedium) {
+                    setBreakpointName('medium');
+                } else if (typeHasSizeXSmall) {
+                    setBreakpointName('xsmall');
+                }
+            }
+        } else {
+            // set to xsmall
+            setBreakpointName('xsmall');
+        }
+    }, [width]);
+
+    return breakpointName;
+};
 type BreakpointObject = {
     xlarge?: string;
     large?: string;
@@ -37,155 +135,10 @@ const Grid: React.FC<Props> = (props: Props) => {
             : className
         : '';
 
-    // breakpoints always has 5 indexes
-    const breakpoints = useBreakpoints();
-    const [breakpointName, setBreakpointName] = useState('');
-    const width = useScreenWidth();
-
-    const rowsHasXLarge = rows.hasOwnProperty('xlarge');
-    const rowsHasLarge = rows.hasOwnProperty('large');
-    const rowsHasMedium = rows.hasOwnProperty('medium');
-    const rowsHasSmall = rows.hasOwnProperty('small');
-    const rowsHasXSmall = rows.hasOwnProperty('xsmall');
-    const colsHasXLarge = columns.hasOwnProperty('xlarge');
-    const colsHasLarge = columns.hasOwnProperty('large');
-    const colsHasMedium = columns.hasOwnProperty('medium');
-    const colsHasSmall = columns.hasOwnProperty('small');
-    const colsHasXSmall = columns.hasOwnProperty('xsmall');
-    const breakpointXLarge = breakpoints[0];
-    const breakpointLarge = breakpoints[1];
-    const breakpointMedium = breakpoints[2];
-    const breakpointSmall = breakpoints[3];
-    const breakpointXSmall = breakpoints[4];
-
-    useEffect(() => {
-        if (width >= breakpointXLarge) {
-            setBreakpointName('xlarge');
-        } else if (width < breakpointXLarge && width > breakpointLarge) {
-            if (colsHasLarge) {
-                setBreakpointName('large');
-            } else {
-                if (colsHasXLarge) {
-                    setBreakpointName('xlarge');
-                } else if (colsHasMedium) {
-                    setBreakpointName('medium');
-                } else if (colsHasSmall) {
-                    setBreakpointName('small');
-                } else if (colsHasXSmall) {
-                    setBreakpointName('xsmall');
-                }
-            }
-        } else if (width < breakpointLarge && width > breakpointMedium) {
-            if (colsHasMedium) {
-                setBreakpointName('medium');
-            } else {
-                if (colsHasXLarge) {
-                    setBreakpointName('xlarge');
-                } else if (colsHasLarge) {
-                    setBreakpointName('large');
-                } else if (colsHasSmall) {
-                    setBreakpointName('small');
-                } else if (colsHasXSmall) {
-                    setBreakpointName('xsmall');
-                }
-            }
-        } else if (width < breakpointMedium && width > breakpointSmall) {
-            if (colsHasSmall) {
-                setBreakpointName('small');
-            } else {
-                if (colsHasXLarge) {
-                    setBreakpointName('xlarge');
-                } else if (colsHasLarge) {
-                    setBreakpointName('large');
-                } else if (colsHasMedium) {
-                    setBreakpointName('medium');
-                } else if (colsHasXSmall) {
-                    setBreakpointName('xsmall');
-                }
-            }
-        } else if (width < breakpointSmall && width > breakpointXSmall) {
-            if (colsHasXSmall) {
-                setBreakpointName('xsmall');
-            } else {
-                if (colsHasXLarge) {
-                    setBreakpointName('xlarge');
-                } else if (colsHasLarge) {
-                    setBreakpointName('large');
-                } else if (colsHasMedium) {
-                    setBreakpointName('medium');
-                } else if (colsHasSmall) {
-                    setBreakpointName('small');
-                }
-            }
-        }
-    }, [width]);
-
-    useEffect(() => {
-        if (width >= breakpointXLarge) {
-            setBreakpointName('xlarge');
-        } else if (width < breakpointXLarge && width > breakpointLarge) {
-            if (rowsHasLarge) {
-                setBreakpointName('large');
-            } else {
-                if (rowsHasXLarge) {
-                    setBreakpointName('xlarge');
-                } else if (rowsHasMedium) {
-                    setBreakpointName('medium');
-                } else if (rowsHasSmall) {
-                    setBreakpointName('small');
-                } else if (rowsHasXSmall) {
-                    setBreakpointName('xsmall');
-                }
-            }
-        } else if (width < breakpointLarge && width > breakpointMedium) {
-            if (rowsHasMedium) {
-                setBreakpointName('medium');
-            } else {
-                if (rowsHasXLarge) {
-                    setBreakpointName('xlarge');
-                } else if (rowsHasLarge) {
-                    setBreakpointName('large');
-                } else if (rowsHasSmall) {
-                    setBreakpointName('small');
-                } else if (rowsHasXSmall) {
-                    setBreakpointName('xsmall');
-                }
-            }
-        } else if (width < breakpointMedium && width > breakpointSmall) {
-            if (rowsHasSmall) {
-                setBreakpointName('small');
-            } else {
-                if (rowsHasXLarge) {
-                    setBreakpointName('xlarge');
-                } else if (rowsHasLarge) {
-                    setBreakpointName('large');
-                } else if (rowsHasMedium) {
-                    setBreakpointName('medium');
-                } else if (rowsHasXSmall) {
-                    setBreakpointName('xsmall');
-                }
-            }
-        } else if (width < breakpointSmall && width > breakpointXSmall) {
-            if (rowsHasXSmall) {
-                setBreakpointName('xsmall');
-            } else {
-                if (rowsHasXLarge) {
-                    setBreakpointName('xlarge');
-                } else if (rowsHasLarge) {
-                    setBreakpointName('large');
-                } else if (rowsHasMedium) {
-                    setBreakpointName('medium');
-                } else if (rowsHasSmall) {
-                    setBreakpointName('small');
-                }
-            }
-        }
-    }, [width]);
-
     const theme: CSSObject = {
         ...styling,
-        gridTemplateColumns: columns[breakpointName],
-        gridTemplateRows: rows[breakpointName],
+        gridTemplateColumns: columns[useGridBreakpointLogic(columns)],
+        gridTemplateRows: rows[useGridBreakpointLogic(rows)],
     };
 
     switch (containerType) {
