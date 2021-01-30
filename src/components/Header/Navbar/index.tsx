@@ -1,5 +1,6 @@
 import React, {createContext, useState} from 'react';
 import {useMenuItems} from '../../../graphql/queries/useMenuItems';
+import SearchContainer from '../../SearchContainer';
 import MenuItem from './MenuItem';
 
 // Context
@@ -68,6 +69,7 @@ const Navbar: React.FC<DefaultProps> = (props: DefaultProps) => {
                     })}
                 </ul>
             </NavbarContext.Provider>
+            <SearchContainer />
         </nav>
     );
 };

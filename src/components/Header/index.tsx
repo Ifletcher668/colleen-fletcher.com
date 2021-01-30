@@ -1,11 +1,9 @@
 import React from 'react';
-import Image from 'gatsby-image';
 import {useImage} from '../../graphql/queries/useImage';
 import Navbar from './Navbar';
+import BlueFrangipani from '../../assets/images/svg/blue-frangipani.svg';
 
 const Header: React.FC<DefaultProps> = ({className}: DefaultProps) => {
-    const {frangipaniImg} = useImage();
-
     return (
         <header
             role="header"
@@ -18,17 +16,19 @@ const Header: React.FC<DefaultProps> = ({className}: DefaultProps) => {
             }
         >
             {/* // TODO add correct image*/}
-            <Image
+            {/* <Image
                 className="frangipani"
                 fluid={frangipaniImg.childImageSharp.fluid}
                 style={{maxWidth: '100px', maxHeight: '100px'}}
-            />
+            /> */}
+            <BlueFrangipani width={100} height={100} />
             <Navbar className="navbar" />
-            <Image
+            <BlueFrangipani width={100} height={100} />
+            {/* <Image
                 className="frangipani"
                 fluid={frangipaniImg.childImageSharp.fluid}
                 style={{maxWidth: '100px', maxHeight: '100px'}}
-            />
+            /> */}
         </header>
     );
 };

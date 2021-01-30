@@ -25,7 +25,6 @@ const data = graphql`
     }
 `;
 const Services: React.FC<Props> = (props: Props) => {
-    const {TRANSITION_PROPS} = useContext(NavbarContext);
     const query: Strapi = useStaticQuery(data);
     return (
         <>
@@ -45,7 +44,6 @@ const Services: React.FC<Props> = (props: Props) => {
                         <li key={idx}>
                             <PaintDripLink
                                 to={`${props.offering.url}${service.slug}`}
-                                {...TRANSITION_PROPS}
                             >
                                 {service.title}
                             </PaintDripLink>
