@@ -22,12 +22,14 @@ module.exports = {
         `gatsby-plugin-styled-components`,
         `gatsby-plugin-sass`,
         `gatsby-plugin-postcss`,
-        // {
-        //     resolve: `gatsby-plugin-postcss`,
-        //     options: {
-        //         postCssPlugins: [require('autoprefixer')()],
-        //     },
-        // },
+        {
+            resolve: 'gatsby-plugin-react-svg',
+            options: {
+                rule: {
+                    include: `${__dirname}/src/assets/images/svg`,
+                },
+            },
+        },
         {
             resolve: `gatsby-plugin-transition-link`,
             options: {

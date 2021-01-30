@@ -225,21 +225,21 @@ exports.createResolvers = async ({
                 },
             },
         },
-        // TODO: Find a way to get offering slug from a service
         // STRAPI_Service: {
-        //     fullUrlPath: {
-        //         // TODO: hardcoded to accept work-with-me as the 'offerings' page
-        //         type: `String`,
-        //         resolve(source) {
-        //             return `/work-with-me/${source.offerings.filter(o => {
-        //                 const s = o.services.filter(
-        //                     s => s.id === source.id,
-        //                 );
+        //     // TODO: Find a way to get offering slug from a service
+        //     // fullUrlPath: {
+        //     //     // TODO: hardcoded to accept work-with-me as the 'offerings' page
+        //     //     type: `String`,
+        //     //     resolve(source) {
+        //     //         return `/work-with-me/${source.offerings.filter(o => {
+        //     //             const s = o.services.filter(
+        //     //                 s => s.id === source.id,
+        //     //             );
 
-        //                 return offering.slug;
-        //             })}/${source.slug}/`;
-        //         },
-        //     },
+        //     //             return offering.slug;
+        //     //         })}/${source.slug}/`;
+        //     //     },
+
         // },
     };
     createResolvers(resolvers);

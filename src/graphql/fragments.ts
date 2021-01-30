@@ -55,6 +55,7 @@ export const StrapiBlog = graphql`
         blog_posts {
             ...StrapiBlogPost
         }
+        is_blog
     }
 `;
 
@@ -95,6 +96,7 @@ export const StrapiBlogPost = graphql`
             name
         }
         fullUrlPath
+        is_blog_post
     }
 `;
 
@@ -111,6 +113,7 @@ export const StrapiOffering = graphql`
         services {
             ...StrapiService
         }
+        is_offering
     }
 `;
 export const StrapiService = graphql`
@@ -128,6 +131,7 @@ export const StrapiService = graphql`
             id
             slug
         }
+        is_service
     }
 `;
 
@@ -137,6 +141,7 @@ export const StrapiCategory = graphql`
         blog_posts {
             ...StrapiBlogPost
         }
+        is_category
     }
 `;
 export const StrapiTag = graphql`
@@ -145,13 +150,14 @@ export const StrapiTag = graphql`
         blog_posts {
             ...StrapiBlogPost
         }
+        is_tag
     }
 `;
 
 export const FluidImage = graphql`
     fragment FluidImage on File {
         childImageSharp {
-            fluid {
+            fluid(maxWidth: 6000, quality: 100) {
                 ...GatsbyImageSharpFluid
             }
         }
