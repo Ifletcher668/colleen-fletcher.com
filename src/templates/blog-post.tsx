@@ -10,7 +10,7 @@ interface Props {
     data: Strapi;
 }
 
-export default (props: Props) => {
+export default (props: Props): JSX.Element => {
     const {
         data: {
             strapi: {
@@ -21,7 +21,7 @@ export default (props: Props) => {
 
     return (
         <ContentWrapper>
-            <Grid containerType="section">
+            <Grid containerType="section" gap={`2em 0`}>
                 <Heading center tilt="even" level={1}>
                     {title}
                 </Heading>
