@@ -375,11 +375,11 @@ const SearchContainer = (): JSX.Element => {
     return (
         <Grid>
             <OutsideClickContainer onClickHandler={handleClickOutside}>
-                <Flexbox>
-                    <StyledLabel htmlFor="search-query">
+                <Flexbox inline center middle>
+                    <Label htmlFor="search-query">
                         <FaSearch />
-                    </StyledLabel>
-                    <input
+                    </Label>
+                    <Input
                         id="search-query"
                         type="text"
                         name="search-query"
@@ -389,7 +389,14 @@ const SearchContainer = (): JSX.Element => {
                         }}
                     />
                 </Flexbox>
-                <Grid columns={{xlarge: `repeat(4, 1fr)`, medium: `1fr`}}>
+                <Grid
+                    columns={{
+                        xlarge: `repeat(4, 1fr)`,
+                        medium: `repeat(3, 1fr)`,
+                        small: `1fr 1fr`,
+                        xsmall: `1fr`,
+                    }}
+                >
                     {!isLoading && handleIsStrapiBlog()}
                     {!isLoading && handleIsStrapiBlogPost()}
                     {!isLoading && handleIsStrapiCategory()}
@@ -403,6 +410,14 @@ const SearchContainer = (): JSX.Element => {
 };
 export default SearchContainer;
 
-const StyledLabel = styled.label`
+const Label = styled.label`
     align-self: center;
+`;
+
+const Input = styled.input`
+    max-height: 0.5em;
+    border-radius: 0.2rem;
+    &:focus {
+        background: var(--color-light-blue);
+    }
 `;

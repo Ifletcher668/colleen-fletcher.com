@@ -114,6 +114,7 @@ type BreakpointObject = {
 interface Props extends DefaultProps {
     columns?: BreakpointObject;
     rows?: BreakpointObject;
+    gap?: string | number;
     styling?: CSSObject;
     containerType?: Container;
     onRenderBehavior?: () => string;
@@ -127,6 +128,7 @@ const Grid: React.FC<Props> = (props: Props) => {
         containerType = 'div',
         columns = {},
         rows = {},
+        gap = 0,
     } = props;
 
     const cn = className
@@ -136,6 +138,7 @@ const Grid: React.FC<Props> = (props: Props) => {
         : '';
 
     const theme: CSSObject = {
+        gap: `${typeof gap === 'number' ? `${gap.toString()}px` : gap}`,
         ...styling,
         gridTemplateColumns: columns[useGridBreakpointLogic(columns)],
         gridTemplateRows: rows[useGridBreakpointLogic(rows)],

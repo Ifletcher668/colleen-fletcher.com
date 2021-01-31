@@ -1,17 +1,16 @@
 import React, {useContext, useState} from 'react';
-import Image from 'gatsby-image';
-import {useImage} from '../../../../graphql/queries/useImage';
+import {Grid} from '../../../Container/index';
 import {NavbarContext} from '../index';
 import Services from './SubMenu/services';
 import BlogPosts from './SubMenu/blog-posts';
 import PaintDripLink from '../../../TransitionLink';
+import BlueInfinitySymbol from '../../../../assets/images/svg/colleens-blue-infinity.svg';
 
 interface Props extends DefaultProps {
     content: StrapiDynamicZone[];
 }
 
 const Panel: React.FC<Props> = ({content, className}: Props) => {
-    const {frangipaniImg} = useImage();
     const [activeSubMenuItemName, setActiveSubMenuItemName] = useState('');
     const [blog, setBlog] = useState('');
     const [offering, setOffering] = useState<{
@@ -22,7 +21,10 @@ const Panel: React.FC<Props> = ({content, className}: Props) => {
     const [showServices, setShowServices] = useState<boolean>(false);
     const {setIsActivePanel, setActivePanelName} = useContext(NavbarContext);
 
-    const handleOpenOrClosePanel = (title: string, isActive: boolean) => {
+    const handlePanelOpenOrCloseBehavior = (
+        title: string,
+        isActive: boolean,
+    ) => {
         setActivePanelName(title), setIsActivePanel(isActive);
     };
 
@@ -30,14 +32,13 @@ const Panel: React.FC<Props> = ({content, className}: Props) => {
         return content.map((content, idx) => {
             switch (content.__typename) {
                 case 'STRAPI_ComponentCollectionsBlogs':
-                    // prevents infinite re-render
                     return content.blogs.map(blog => {
                         let cn = '';
                         if (blog.name === activeSubMenuItemName) {
                             cn += 'active';
                         }
                         return (
-                            <li key={blog.name} className={cn}>
+                            <li key={`${idx}${blog.name}`} className={cn}>
                                 <PaintDripLink
                                     to={blog.fullUrlPath}
                                     onMouseOver={() => {
@@ -64,7 +65,7 @@ const Panel: React.FC<Props> = ({content, className}: Props) => {
                             cn += 'active';
                         }
                         return (
-                            <li key={offering.title} className={cn}>
+                            <li key={`${idx}${offering.title}`} className={cn}>
                                 <PaintDripLink
                                     to={offering.fullUrlPath}
                                     onMouseOver={() => {
@@ -89,7 +90,7 @@ const Panel: React.FC<Props> = ({content, className}: Props) => {
                         );
                     });
                 default:
-                    break;
+                    return <></>;
             }
         });
     };
@@ -102,21 +103,20 @@ const Panel: React.FC<Props> = ({content, className}: Props) => {
                         : className
                     : ''
             }
-            onMouseLeave={() => handleOpenOrClosePanel('', false)}
+            onMouseLeave={() => handlePanelOpenOrCloseBehavior('', false)}
         >
             <ul className="submenu">{handleSubMenuContent()}</ul>
-            <section className="content">
+            <Grid className="content" containerType="section">
                 {!showServices && !showBlogPosts && (
-                    <Image
-                        fluid={frangipaniImg.childImageSharp.fluid}
-                        style={{width: '200px', height: '200px'}}
-                    />
+                    <BlueInfinitySymbol width={200} height={200} />
                 )}
-                <ul>
-                    {showServices && <Services offering={offering} />}
-                    {showBlogPosts && <BlogPosts blog={blog} />}
-                </ul>
-            </section>
+                {(showServices || showBlogPosts) && (
+                    <ul>
+                        {showServices && <Services offering={offering} />}
+                        {showBlogPosts && <BlogPosts blog={blog} />}
+                    </ul>
+                )}
+            </Grid>
         </nav>
     );
 };

@@ -1,7 +1,6 @@
 import React from 'react';
-import {useImage} from '../../graphql/queries/useImage';
 import Navbar from './Navbar';
-import BlueFrangipani from '../../assets/images/svg/blue-frangipani.svg';
+import BlueFrangipani from '../../assets/images/svg/wholistic-blue-frangipani.svg';
 
 const Header: React.FC<DefaultProps> = ({className}: DefaultProps) => {
     return (
@@ -15,20 +14,9 @@ const Header: React.FC<DefaultProps> = ({className}: DefaultProps) => {
                     : ''
             }
         >
-            {/* // TODO add correct image*/}
-            {/* <Image
-                className="frangipani"
-                fluid={frangipaniImg.childImageSharp.fluid}
-                style={{maxWidth: '100px', maxHeight: '100px'}}
-            /> */}
             <BlueFrangipani width={100} height={100} />
             <Navbar className="navbar" />
             <BlueFrangipani width={100} height={100} />
-            {/* <Image
-                className="frangipani"
-                fluid={frangipaniImg.childImageSharp.fluid}
-                style={{maxWidth: '100px', maxHeight: '100px'}}
-            /> */}
         </header>
     );
 };
