@@ -40,15 +40,15 @@ module.exports = {
                 injectPageProps: false,
             },
         },
-        // {
-        //     resolve: `gatsby-plugin-manifest`,
-        //     options: {
-        //         name: 'isiahfletcher.com',
-        //         short_name: 'Isiah Fletcher',
-        //         start_url: '/',
-        //         icon: './static/images/isiah-fletcher-logo.png',
-        //     },
-        // },
+        {
+            resolve: `gatsby-plugin-manifest`,
+            options: {
+                name: 'isiahfletcher.com',
+                short_name: 'Isiah Fletcher',
+                start_url: '/',
+                icon: `${__dirname}/static/images/isiah-fletcher-logo.png`,
+            },
+        },
         {
             resolve: 'gatsby-source-filesystem',
             options: {

@@ -38,6 +38,7 @@ const Navbar: React.FC<DefaultProps> = (props: DefaultProps) => {
 
     const [xlarge, large, medium, small, xsmall] = useBreakpoints();
 
+    const innerWidth = typeof window !== 'undefined' ? window.innerWidth : 0;
     const changeMenuListener = () => {
         window.innerWidth >= small ? setIsFullMenu(true) : setIsFullMenu(false);
     };
