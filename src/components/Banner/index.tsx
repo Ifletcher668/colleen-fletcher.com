@@ -5,12 +5,12 @@ import {Flexbox} from '../Container';
 import styled from 'styled-components';
 
 interface Props {
-    image: StrapiUploadFile;
+    image: StrapiUploadFile | null;
     banner: StrapiDynamicZone[];
 }
 
 const BannerBackgroundImage: React.FC<Props> = (props: Props): JSX.Element => {
-    return (
+    return props.image !== null ? (
         <BannerWrapper>
             <BannerBackground
                 fluid={props.image.imageFile.childImageSharp.fluid}
@@ -21,6 +21,8 @@ const BannerBackgroundImage: React.FC<Props> = (props: Props): JSX.Element => {
                 </Flexbox>
             </BannerBackground>
         </BannerWrapper>
+    ) : (
+        <></>
     );
 };
 
