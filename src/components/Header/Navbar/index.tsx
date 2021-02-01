@@ -40,7 +40,7 @@ const Navbar: React.FC<DefaultProps> = (props: DefaultProps) => {
 
     const innerWidth = typeof window !== 'undefined' ? window.innerWidth : 0;
     const changeMenuListener = () => {
-        window.innerWidth >= small ? setIsFullMenu(true) : setIsFullMenu(false);
+        innerWidth >= small ? setIsFullMenu(true) : setIsFullMenu(false);
     };
 
     // verify which menu to use on first render
@@ -51,7 +51,7 @@ const Navbar: React.FC<DefaultProps> = (props: DefaultProps) => {
     useEffect(() => {
         window.addEventListener('resize', changeMenuListener);
         return window.addEventListener('resize', changeMenuListener);
-    }, [window.innerWidth]);
+    }, [innerWidth]);
 
     return (
         <nav
