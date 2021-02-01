@@ -24,7 +24,7 @@ const Navbar: React.FC<DefaultProps> = (props: DefaultProps) => {
     const [activePanelName, setActivePanelName] = useState<string>('');
     const [isFullMenu, setIsFullMenu] = useState<boolean>(true);
     const [innerWidth, setInnerWidth] = useState(
-        typeof window.innerWidth !== `undefined` ? window.innerWidth : 0,
+        typeof window !== `undefined` ? window.innerWidth : 0,
     );
     const ctx = {
         isActivePanel,
