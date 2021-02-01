@@ -14,7 +14,6 @@ module.exports = {
     },
     plugins: [
         `gatsby-transformer-sharp`,
-
         `gatsby-plugin-sharp`,
         `gatsby-plugin-react-helmet`,
         `gatsby-plugin-sitemap`,
@@ -43,10 +42,10 @@ module.exports = {
         {
             resolve: `gatsby-plugin-manifest`,
             options: {
-                name: 'isiahfletcher.com',
-                short_name: 'Isiah Fletcher',
+                name: 'colleen-fletcher.com',
+                short_name: 'Colleen Fletcher',
                 start_url: '/',
-                icon: `${__dirname}/static/images/isiah-fletcher-logo.png`,
+                icon: `${__dirname}/static/blue-flower-colleen-fletcher.png`,
             },
         },
         {
@@ -60,7 +59,7 @@ module.exports = {
             options: {
                 typeName: 'STRAPI',
                 fieldName: 'strapi',
-                // TODO
+                // TODO fix incorrect env setting
                 url: `${
                     process.env.NODE_ENV === 'development'
                         ? process.env.LOCAL_GRAPHQL_ENDPOINT
