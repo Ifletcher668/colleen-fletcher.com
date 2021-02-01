@@ -5,7 +5,7 @@ export default class BreakpointHandler {
             ? window
                   .getComputedStyle(document.documentElement)
                   .getPropertyValue(varName)
-            : null;
+            : '';
     }
 
     // takes object key:value pair, strips quotes, and converts camelCase to hyphen: ex, camelCase ==> camel-case
