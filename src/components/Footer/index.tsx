@@ -42,7 +42,10 @@ const Footer: React.FC = () => {
                     </h5>
                     {/* // TODO: add link to sitemap, setup sitemap, get disclaimer */}
                     <h6>
-                        Sitemap |{' '}
+                        <a href="https://colleen-fletcher.com/sitemap.xml">
+                            Sitemap
+                        </a>
+                        |{' '}
                         <span title="Disclaimer: By agreeing to use the services and guidance of Colleen Fletcher you agree that you understand and know all information is not a diagnosis, nor does it take the place of any medical, legal or financial advice. All information given is educational and is to be used to enhance your knowledge and ability to act in a positive manner in matters concerning your personal wholistic health care. You know your progress is dependent upon your commitment to your goals and that there are no guarantees as to the result or progress to be made. You understand that the success of the treatment is dependent upon your action to your goals. You must be 18 years of age or have a written release from a parent or legal guardian">
                             {' '}
                             Disclaimer

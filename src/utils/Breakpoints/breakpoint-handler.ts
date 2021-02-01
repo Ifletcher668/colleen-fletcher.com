@@ -1,7 +1,7 @@
 import {CSSObject} from 'styled-components';
 export default class BreakpointHandler {
     private _getCSSVariable(varName: string) {
-        return typeof window !== undefined
+        return typeof window !== 'undefined'
             ? window
                   .getComputedStyle(document.documentElement)
                   .getPropertyValue(varName)
@@ -88,7 +88,7 @@ export default class BreakpointHandler {
     public getFontSize: (htmlElement: string) => number = (
         htmlElement = 'html',
     ) => {
-        return typeof window !== undefined
+        return typeof window !== 'undefined'
             ? parseFloat(
                   window.getComputedStyle(
                       document.querySelector(htmlElement) as HTMLElement,
