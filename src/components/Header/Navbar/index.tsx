@@ -23,6 +23,9 @@ const Navbar: React.FC<DefaultProps> = (props: DefaultProps) => {
     const [isActivePanel, setIsActivePanel] = useState<boolean>(false);
     const [activePanelName, setActivePanelName] = useState<string>('');
     const [isFullMenu, setIsFullMenu] = useState<boolean>(true);
+    const [innerWidth, setInnerWidth] = useState(
+        typeof window.innerWidth !== `undefined` ? window.innerWidth : 0,
+    );
     const ctx = {
         isActivePanel,
         setIsActivePanel,
@@ -38,7 +41,6 @@ const Navbar: React.FC<DefaultProps> = (props: DefaultProps) => {
 
     const [xlarge, large, medium, small, xsmall] = useBreakpoints();
 
-    const innerWidth = typeof window !== 'undefined' ? window.innerWidth : 0;
     const changeMenuListener = () => {
         innerWidth >= small ? setIsFullMenu(true) : setIsFullMenu(false);
     };
@@ -46,6 +48,12 @@ const Navbar: React.FC<DefaultProps> = (props: DefaultProps) => {
     // verify which menu to use on first render
     useEffect(() => {
         changeMenuListener();
+    }, []);
+
+    useEffect(() => {
+        const handleResize = () => setInnerWidth(window.innerWidth);
+        window.addEventListener('resize', handleResize);
+        return window.addEventListener('resize', handleResize);
     }, []);
 
     useEffect(() => {
