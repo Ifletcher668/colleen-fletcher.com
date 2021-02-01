@@ -116,14 +116,16 @@ export default class BreakpointHandler {
             and window.innerWidth.
      */
     public getScreenWidth: () => number = () => {
-        return Math.max(
-            document.body.scrollWidth,
-            document.documentElement.scrollWidth,
-            document.body.offsetWidth,
-            document.documentElement.offsetWidth,
-            document.documentElement.clientWidth,
-            window.innerWidth,
-        );
+        return document !== undefined && window !== undefined
+            ? Math.max(
+                  document.body.scrollWidth,
+                  document.documentElement.scrollWidth,
+                  document.body.offsetWidth,
+                  document.documentElement.offsetWidth,
+                  document.documentElement.clientWidth,
+                  window.innerWidth,
+              )
+            : 0;
     };
 
     /**
