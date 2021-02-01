@@ -56,8 +56,10 @@ export const useScreenWidth = (): number => {
         };
         // immediately set width
         handleWidthResize();
-        window.addEventListener('resize', handleWidthResize);
-        return window.addEventListener('resize', handleWidthResize);
+        if (typeof window !== `undefined`) {
+            window.addEventListener('resize', handleWidthResize);
+            return window.addEventListener('resize', handleWidthResize);
+        }
     }, [fontSize]);
 
     if (width !== undefined) {
