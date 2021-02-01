@@ -116,7 +116,7 @@ export default class BreakpointHandler {
             and window.innerWidth.
      */
     public getScreenWidth: () => number = () => {
-        return document !== undefined && window !== undefined
+        return typeof document !== `undefined` && typeof window !== `undefined`
             ? Math.max(
                   document.body.scrollWidth,
                   document.documentElement.scrollWidth,
