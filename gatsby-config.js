@@ -64,7 +64,7 @@ module.exports = {
                 url: `${
                     process.env.NODE_ENV === 'development'
                         ? process.env.LOCAL_GRAPHQL_ENDPOINT
-                        : process.env.HEROKU_GRAPHQL_ENDPOINT
+                        : 'https://colleenfletcher.herokuapp.com/graphql'
                 }`,
             },
         },
