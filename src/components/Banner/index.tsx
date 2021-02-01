@@ -24,7 +24,6 @@ const BannerBackgroundImage: React.FC<Props> = (props: Props): JSX.Element => {
     );
 };
 
-// TODO: why isn't this working?
 const BannerWrapper = styled.section`
     .background {
         display: flex;

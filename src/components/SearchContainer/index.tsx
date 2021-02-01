@@ -323,7 +323,7 @@ const SearchContainer = (): JSX.Element => {
                                         onClick={handleClickOutside}
                                     >
                                         <PaintDripLink
-                                            to={`work-with-me/${offering.slug}`}
+                                            to={`/work-with-me/${offering.slug}`}
                                         >
                                             {offering.title}
                                         </PaintDripLink>
@@ -412,10 +412,12 @@ export default SearchContainer;
 
 const Label = styled.label`
     align-self: center;
+    margin-bottom: 5px;
+    margin-right: 5px;
 `;
 
 const Input = styled.input`
-    max-height: 0.5em;
+    font-size: var(--size-text-xsmall);
     border-radius: 0.2rem;
     &:focus {
         background: var(--color-light-blue);

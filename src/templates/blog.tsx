@@ -29,7 +29,7 @@ export default (props: Props): JSX.Element => {
                     allowDangerousHtml
                     className="paragraph"
                 />
-                <Grid containerType="section">
+                <Grid containerType="section" gap={`2em 0`}>
                     {blog.blog_posts.map((post, idx) => {
                         const zigZagColumns =
                             idx % 2 === 0

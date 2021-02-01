@@ -27,8 +27,22 @@ export default Divider;
 
 const StandardDivider = styled.hr`
     width: 100%;
-    height: 1px;
     border: 0;
     border-bottom: solid 1px color(earth);
     margin: 0 0 size(mg-large) 0;
+    height: 30px;
+    border-style: solid;
+    border-color: var(--color-earth);
+    border-width: 1px 0 0 0;
+    border-radius: 7px;
+    &:before {
+        display: block;
+        content: '';
+        height: 30px;
+        margin-top: -31px;
+        border-style: solid;
+        border-color: var(--color-earth);
+        border-width: 0 0 1px 0;
+        border-radius: 7px;
+    }
 `;

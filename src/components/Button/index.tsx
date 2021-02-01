@@ -1,8 +1,9 @@
 import React from 'react';
+import styled from 'styled-components';
 
-type V = 'primary' | 'secondary' | 'tertiary';
+type V = 'primary' | 'secondary' | 'tertiary' | '';
 type T = 'submit' | 'reset' | 'button';
-interface Props {
+interface Props extends Pick<DefaultProps, 'className'> {
     children: React.ReactNode;
     variant: V;
     type?: T;
@@ -12,7 +13,8 @@ interface Props {
 
 const Button: React.FC<Props> = ({
     children,
-    variant = 'primary',
+    className,
+    variant = '',
     type,
     onClick,
     center = false,
@@ -21,7 +23,7 @@ const Button: React.FC<Props> = ({
         <button
             className={`btn${variant ? ' ' + variant : ''}${
                 center ? ' center' : ''
-            }`}
+            }${className ? ' ' + className : ''}`}
             type={type}
             onClick={onClick}
         >
@@ -31,3 +33,9 @@ const Button: React.FC<Props> = ({
 };
 
 export default Button;
+
+export const MobileMenuToggleButton = styled(Button)`
+    color: var(--color-primary-blue);
+    font-size: var(--size-text-large);
+    transition: var(--time-medium);
+`;

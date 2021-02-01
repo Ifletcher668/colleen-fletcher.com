@@ -96,7 +96,8 @@ h1 {
     font-size: size(h1);
     color: color(earth);
     // corrects font going out of bounds
-    margin: size(mg-xsmall) 0 size(mg-small) 0;
+    // margin: size(mg-xsmall) 0 size(mg-small) 0;
+    margin: 0;
 }
 h2 {
     &::first-letter {
@@ -133,8 +134,6 @@ hr {
         border: 0;
         border-bottom: solid 1px color(earth);
         margin: 0 0 size(mg-large) 0;
-    }
-    &.fancy {
     }
 }
 

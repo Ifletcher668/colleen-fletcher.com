@@ -14,7 +14,7 @@ export interface Props {
 
 const OfferingsField: React.FC<Props> = ({data, previews}: Props) => {
     return (
-        <Grid containerType="section">
+        <Grid containerType="section" gap={`2em 0`}>
             {data.map((blog, idx) => {
                 // TODO: Refactor when Strapi nested component issue fixed
                 const [{preview}] = previews.filter(p => p.id === blog.id);

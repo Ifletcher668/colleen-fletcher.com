@@ -34,6 +34,7 @@
         .nav-list {
             height: 100px;
             display: flex;
+            flex-flow: row wrap;
             justify-content: space-around;
             align-items: center;
             .nav-list-item {
@@ -107,6 +108,9 @@
                     }
                 }
             }
+            // @include below('small') {
+            //     background: red;
+            // }
         }
     }
 }
