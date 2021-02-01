@@ -1,9 +1,11 @@
 import {CSSObject} from 'styled-components';
 export default class BreakpointHandler {
     private _getCSSVariable(varName: string) {
-        return getComputedStyle(document.documentElement).getPropertyValue(
-            varName,
-        );
+        return typeof window !== undefined
+            ? getComputedStyle(document.documentElement).getPropertyValue(
+                  varName,
+              )
+            : null;
     }
 
     // takes object key:value pair, strips quotes, and converts camelCase to hyphen: ex, camelCase ==> camel-case
@@ -86,10 +88,13 @@ export default class BreakpointHandler {
     public getFontSize: (htmlElement: string) => number = (
         htmlElement = 'html',
     ) => {
-        return parseFloat(
-            getComputedStyle(document.querySelector(htmlElement) as HTMLElement)
-                .fontSize,
-        );
+        return typeof window !== undefined
+            ? parseFloat(
+                  getComputedStyle(
+                      document.querySelector(htmlElement) as HTMLElement,
+                  ).fontSize,
+              )
+            : 0;
     };
 
     public getBreakpoints = (breakpoints: Breakpoints): Breakpoints => {
