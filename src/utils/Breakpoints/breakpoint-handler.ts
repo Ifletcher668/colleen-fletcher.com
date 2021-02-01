@@ -2,9 +2,9 @@ import {CSSObject} from 'styled-components';
 export default class BreakpointHandler {
     private _getCSSVariable(varName: string) {
         return typeof window !== undefined
-            ? getComputedStyle(document.documentElement).getPropertyValue(
-                  varName,
-              )
+            ? window
+                  .getComputedStyle(document.documentElement)
+                  .getPropertyValue(varName)
             : null;
     }
 
@@ -90,7 +90,7 @@ export default class BreakpointHandler {
     ) => {
         return typeof window !== undefined
             ? parseFloat(
-                  getComputedStyle(
+                  window.getComputedStyle(
                       document.querySelector(htmlElement) as HTMLElement,
                   ).fontSize,
               )
