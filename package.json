@@ -41,6 +41,7 @@
     "gsap": "^3.5.1",
     "js-search": "^2.0.0",
     "moment": "^2.29.1",
+    "netlify-plugin-minify-html": "^0.3.0",
     "postcss": "^8.2.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
