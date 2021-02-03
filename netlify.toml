@@ -10,5 +10,5 @@ package = "netlify-plugin-image-optim"
 [[plugins]]
   package = "netlify-plugin-minify-html"
   
-[plugins.inputs.minifierOptions]
-  minifyCSS = true
+  [plugins.inputs.minifierOptions]
+    minifyCSS = true
