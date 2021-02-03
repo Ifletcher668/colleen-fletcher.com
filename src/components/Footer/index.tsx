@@ -32,7 +32,7 @@ const Footer: React.FC = () => {
                 </nav>
                 <div className="info">
                     <h4>Colleen Fletcher 1994 - {new Date().getFullYear()}</h4>
-                    <h5>Site Design by Colleen and Isiah Fletcher</h5>
+                    <h5>Site Design by Colleen and her son, Isiah</h5>
                     <h5>
                         Developed by{' '}
                         <a href="https://Isiahfletcher.com" target="_blank">
