@@ -80,11 +80,15 @@ export default (props: Props): JSX.Element => {
                                         </Heading>
                                     </CardHeader>
                                     <CardBody>
-                                        <MarkdownField
-                                            source={service.preview.text.body}
-                                            className="paragraph"
-                                            allowDangerousHtml
-                                        />
+                                        {service.preview && (
+                                            <MarkdownField
+                                                source={
+                                                    service.preview.text.body
+                                                }
+                                                className="paragraph"
+                                                allowDangerousHtml
+                                            />
+                                        )}
                                     </CardBody>
                                     {/* //TODO: is there a date? */}
                                     {/* <CardFooter>
