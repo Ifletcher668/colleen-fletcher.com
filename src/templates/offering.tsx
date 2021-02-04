@@ -45,7 +45,7 @@ export default (props: Props): JSX.Element => {
                                 columns={zigZagColumns}
                                 rows={{xlarge: `[content] 1fr [spacer] 0.2fr`}}
                             >
-                                {service.preview && (
+                                {service.preview && service.preview.image && (
                                     <Image
                                         alt={
                                             service.preview.image.file
