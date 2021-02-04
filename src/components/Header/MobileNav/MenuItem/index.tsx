@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useContext, useState} from 'react';
 import PaintDripLink from '../../../TransitionLink';
 import ChevronDown from '../../../../assets/images/svg/chevron-down.svg';
 import ChevronUp from '../../../../assets/images/svg/chevron-up.svg';
@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import Heading from '../../../Heading';
 import Services from '../../Navbar/Panel/SubMenu/services';
 import BlogPosts from '../../Navbar/Panel/SubMenu/blog-posts';
+import {MobileMenuContext} from '../..';
 
 // props matches type StrapiMenuItem
 interface Props extends DefaultProps, StrapiMenuItem {}
@@ -18,14 +19,6 @@ const MenuItem: React.FC<Props> = ({
     content,
     className,
 }: Props) => {
-    const cn = `nav-list-item ${
-        className
-            ? Array.isArray(className)
-                ? className.join(' ')
-                : className
-            : ''
-    }`;
-
     const [showSubMenu, setShowSubMenu] = useState(false);
     const [blog, setBlog] = useState('');
     const [offering, setOffering] = useState<{
@@ -34,6 +27,15 @@ const MenuItem: React.FC<Props> = ({
     }>({title: '', url: ''});
     const [showBlogPosts, setShowBlogPosts] = useState<boolean>(false);
     const [showServices, setShowServices] = useState<boolean>(false);
+    const {isMobileMenuOpen, toggleMobileMenu} = useContext(MobileMenuContext);
+
+    const cn = `nav-list-item ${
+        className
+            ? Array.isArray(className)
+                ? className.join(' ')
+                : className
+            : ''
+    }`;
 
     const handleSubMenuBehavior = (
         content: StrapiDynamicZone[],
@@ -41,8 +43,6 @@ const MenuItem: React.FC<Props> = ({
         return (
             <ul>
                 {content.map((item, idx) => {
-                    console.log(item.__typename);
-
                     switch (item.__typename) {
                         case 'STRAPI_ComponentCollectionsBlogs':
                             return (
@@ -53,6 +53,16 @@ const MenuItem: React.FC<Props> = ({
                                                 <li>
                                                     {' '}
                                                     <PaintDripLink
+                                                        onClick={() =>
+                                                            toggleMobileMenu(
+                                                                !isMobileMenuOpen,
+                                                            )
+                                                        }
+                                                        onKeyPress={() =>
+                                                            toggleMobileMenu(
+                                                                !isMobileMenuOpen,
+                                                            )
+                                                        }
                                                         to={blog.fullUrlPath}
                                                     >
                                                         {' '}
@@ -89,6 +99,16 @@ const MenuItem: React.FC<Props> = ({
                                                 <li key={idx}>
                                                     {' '}
                                                     <PaintDripLink
+                                                        onClick={() =>
+                                                            toggleMobileMenu(
+                                                                !isMobileMenuOpen,
+                                                            )
+                                                        }
+                                                        onKeyPress={() =>
+                                                            toggleMobileMenu(
+                                                                !isMobileMenuOpen,
+                                                            )
+                                                        }
                                                         to={
                                                             offering.fullUrlPath
                                                         }
@@ -156,6 +176,12 @@ const MenuItem: React.FC<Props> = ({
                     <SubMenuWrapper>
                         <li className={cn}>
                             <PaintDripLink
+                                onClick={() =>
+                                    toggleMobileMenu(!isMobileMenuOpen)
+                                }
+                                onKeyPress={() =>
+                                    toggleMobileMenu(!isMobileMenuOpen)
+                                }
                                 to={`/${
                                     // TODO: hardcoding homepage
                                     slug.toLocaleLowerCase() === 'home'
