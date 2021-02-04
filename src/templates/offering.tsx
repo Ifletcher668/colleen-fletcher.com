@@ -45,21 +45,25 @@ export default (props: Props): JSX.Element => {
                                 columns={zigZagColumns}
                                 rows={{xlarge: `[content] 1fr [spacer] 0.2fr`}}
                             >
-                                <Image
-                                    alt={
-                                        service.preview.image.file
-                                            .alternativeText
-                                    }
-                                    title={service.preview.image.file.caption}
-                                    fluid={
-                                        service.preview.image.file.imageFile
-                                            .childImageSharp.fluid
-                                    }
-                                    style={{
-                                        gridColumn: `image`,
-                                        gridRow: 'content',
-                                    }}
-                                />
+                                {service.preview && (
+                                    <Image
+                                        alt={
+                                            service.preview.image.file
+                                                .alternativeText
+                                        }
+                                        title={
+                                            service.preview.image.file.caption
+                                        }
+                                        fluid={
+                                            service.preview.image.file.imageFile
+                                                .childImageSharp.fluid
+                                        }
+                                        style={{
+                                            gridColumn: `image`,
+                                            gridRow: 'content',
+                                        }}
+                                    />
+                                )}
                                 <Card
                                     style={{
                                         gridColumn: `text`,

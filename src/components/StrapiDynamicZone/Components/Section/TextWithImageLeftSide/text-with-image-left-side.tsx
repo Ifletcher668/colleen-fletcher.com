@@ -10,7 +10,6 @@ export interface Props {
         text: StrapiComponentTextParagraph;
     };
 }
-
 const TextWithImageLeftSideField: React.FC<Props> = ({data}: Props) => {
     const {image, text} = data;
     return (
