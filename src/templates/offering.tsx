@@ -23,7 +23,7 @@ export default (props: Props): JSX.Element => {
             <Heading level={1} center>
                 {offering.title}
             </Heading>
-            {offering.preview.image && (
+            {offering.preview && (
                 <ImageWithCaption imageComponent={offering.preview.image} />
             )}
             {offering.services && offering.services.length > 0 && (
