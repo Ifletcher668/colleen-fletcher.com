@@ -31,7 +31,7 @@ export default (props: Props): JSX.Element => {
                 />
                 <Grid containerType="section" gap={`2em 0`}>
                     {blog.blog_posts.map((post, idx) => {
-                        const zigZagColumns =
+                        const zigZagGridColumns =
                             idx % 2 === 0
                                 ? {
                                       xlarge: `[image] 1fr [spacer] 0.05fr [text] 2fr`,
@@ -45,7 +45,7 @@ export default (props: Props): JSX.Element => {
                         return (
                             <Grid
                                 key={idx}
-                                columns={zigZagColumns}
+                                columns={zigZagGridColumns}
                                 rows={{xlarge: `[content] 1fr [spacer] 0.2fr`}}
                             >
                                 <Image

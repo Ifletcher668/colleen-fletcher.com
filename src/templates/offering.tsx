@@ -9,6 +9,7 @@ import {Card, CardHeader, CardBody, CardFooter} from '../components/Card';
 import MarkdownField from 'react-markdown';
 import PaintDripLink from '../components/TransitionLink';
 import {ImageWithCaption} from '../components/Images';
+import {zigZagGridColumns} from '../utils/zigZagGridColumns';
 interface Props {
     data: Strapi;
 }
@@ -29,22 +30,11 @@ export default (props: Props): JSX.Element => {
             {offering.services && offering.services.length > 0 && (
                 <Grid className="services" containerType="section">
                     {offering.services.map((service, idx) => {
-                        const zigZagColumns =
-                            idx % 2 === 0
-                                ? {
-                                      xlarge: `[image] 1fr [spacer] 0.05fr [text] minmax(900px, 2fr)`,
-                                      medium: `[image] 1fr [spacer] 0.05fr [text] minmax(400px, 2fr)`,
-                                      small: `1fr`,
-                                  }
-                                : {
-                                      xlarge: `[text] minmax(900px, 2fr) [spacer] 0.05fr [image] 1fr`,
-                                      medium: `[text] minmax(400px, 2fr) [spacer] 0.05fr [image] 1fr`,
-                                      small: `1fr`,
-                                  };
+                        const zigZag = zigZagGridColumns(idx);
                         return (
                             <Grid
                                 key={idx}
-                                columns={zigZagColumns}
+                                columns={zigZag}
                                 rows={{xlarge: `[content] 1fr [spacer] 0.2fr`}}
                             >
                                 {service.preview && service.preview.image && (
