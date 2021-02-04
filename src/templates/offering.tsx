@@ -23,7 +23,9 @@ export default (props: Props): JSX.Element => {
             <Heading level={1} center>
                 {offering.title}
             </Heading>
-            <ImageWithCaption imageComponent={offering.preview.image} />
+            {offering.preview.image && (
+                <ImageWithCaption imageComponent={offering.preview.image} />
+            )}
             {offering.services && offering.services.length > 0 && (
                 <Grid className="services" containerType="section">
                     {offering.services.map((service, idx) => {
