@@ -15,13 +15,15 @@ export interface Props {
 const OfferingsField: React.FC<Props> = ({ data, previews }: Props) => {
     return (
         <Grid containerType="section" gap={`2em 0`}>
-            {data.map((service, idx) => {
+            {data.map((offering, idx) => {
                 // TODO: Refactor when Strapi nested component issue fixed
-                const [{ preview }] = previews.filter(p => p.id === service.id);
+                const [{ preview }] = previews.filter(
+                    p => p.id === offering.id,
+                );
                 const { text, heading, image, button } = preview;
+                //TODO: Refactor out forward slash
                 if (button.action === '/' || button.action === '') {
-                    //TODO: Refactor out forward slash
-                    const buttonPath = service.fullUrlPath;
+                    const buttonPath = offering.fullUrlPath;
                     button.action = buttonPath;
                 }
                 const zigZag = zigZagGridColumns(idx);
