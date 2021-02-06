@@ -1,11 +1,12 @@
 import React from 'react';
 import MarkdownField from 'react-markdown';
-import Grid from '../../../../Container/Grid';
+import Grid from '../../Containers/Grid';
 import {HeadingField} from '../../Text';
-import {ImageWithCaption} from '../../../../Images/';
+import {ImageWithCaption} from '../../Images';
 import {ButtonField} from '../../Widgets';
-import {GridArea, GridDivider} from '../../../../../StyledComponents/helpers';
-import Divider from '../../../../Divider';
+import {GridArea, GridDivider} from '../../../StyledComponents/helpers';
+import Divider from '../../Divider';
+import {zigZagGridColumns} from '../../../utils/zigZagGridColumns';
 
 export interface Props {
     data: StrapiOffering[];
@@ -24,23 +25,12 @@ const OfferingsField: React.FC<Props> = ({data, previews}: Props) => {
                     const buttonPath = blog.fullUrlPath;
                     button.action = buttonPath;
                 }
-                const zigZagColumns =
-                    idx % 2 === 0
-                        ? {
-                              xlarge: `[image] 1fr [spacer] 0.5fr [text] minmax(900px, 2fr)`,
-                              medium: `[image] 1fr [spacer] 0.5fr [text] minmax(400, 2fr)`,
-                              small: `1fr`,
-                          }
-                        : {
-                              xlarge: `[text] minmax(900px, 2fr) [spacer] 0.05fr [image] 1fr`,
-                              medium: `[text] minmax(400, 2fr) [spacer] 0.05fr [image] 1fr`,
-                              small: `1fr`,
-                          };
+                const zigZag = zigZagGridColumns(idx);
                 return (
                     <Grid
                         key={idx}
                         containerType="article"
-                        columns={zigZagColumns}
+                        columns={zigZag}
                         rows={{xlarge: `[content] 1fr [divider] 0.001fr`}}
                         styling={{
                             margin: `2em 0em`,

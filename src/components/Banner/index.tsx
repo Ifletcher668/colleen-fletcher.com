@@ -1,7 +1,7 @@
 import React from 'react';
 import BannerBackground from 'gatsby-background-image';
 import StrapiDynamicZone from '../StrapiDynamicZone';
-import {Flexbox} from '../Container';
+import {Flexbox} from '../Containers';
 import styled from 'styled-components';
 
 interface Props {

@@ -1,9 +1,9 @@
 import React from 'react';
 import Image from 'gatsby-image';
 import MarkdownField from 'react-markdown';
-import Grid from '../../../../Container/Grid';
+import Grid from '../../Containers/Grid';
 import {HeadingField} from '../../Text';
-import {ImageWithCaption} from '../../../../Images/';
+import {ImageWithCaption} from '../../Images';
 import {ButtonField} from '../../Widgets';
 
 export interface Props {

@@ -104,13 +104,7 @@ const useGridBreakpointLogic = (type: BreakpointObject) => {
 
     return breakpointName;
 };
-type BreakpointObject = {
-    xlarge?: string;
-    large?: string;
-    medium?: string;
-    small?: string;
-    xsmall?: string;
-};
+
 interface Props extends DefaultProps {
     columns?: BreakpointObject;
     rows?: BreakpointObject;

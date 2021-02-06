@@ -1,14 +1,14 @@
 import React from 'react';
-import Grid from '../Container/Grid';
+import Grid from '../Containers/Grid';
 import {
     BlogPostsField,
     BlogsField,
     OfferingsField,
     ServicesField,
-} from './Components/Collections';
-import {SingleImageField, ImagesField} from './Components/Media';
-import {TextField, HeadingField, QuoteField} from './Components/Text';
-import {DividerField, ButtonField} from './Components/Widgets';
+} from '../Collections';
+import {SingleImageField, ImagesField} from '../Media';
+import {TextField, HeadingField, QuoteField} from '../Text';
+import {DividerField, ButtonField} from '../Widgets';
 import {
     ImageCenterTextEitherSideField,
     TextCenterImageEitherSideField,
@@ -16,16 +16,17 @@ import {
     HeaderWithImageRightSideField,
     TextWithImageLeftSideField,
     TextWithImageRightSideField,
-} from './Components/Section';
-interface Props {
-    components: StrapiDynamicZone[];
-    previews?: Previews;
-}
+} from '../Sections';
 
 type Previews = {
     blogPreviews: StrapiBlog[];
     offeringPreviews: StrapiOffering[];
 };
+
+interface Props {
+    components: StrapiDynamicZone[];
+    previews?: Previews;
+}
 
 const StrapiDynamicZone: React.FC<Props> = ({
     components,
@@ -95,6 +96,8 @@ const StrapiDynamicZone: React.FC<Props> = ({
                             headingText: component.headingText,
                             level: component.level,
                             tilt: component.tilt,
+                            justifyHeading: component.justifyHeading,
+                            alignHeading: component.alignHeading,
                         };
                         return (
                             <HeadingField
@@ -103,10 +106,15 @@ const StrapiDynamicZone: React.FC<Props> = ({
                             />
                         );
                     case 'STRAPI_ComponentTextParagraph':
+                        const bodyData = {
+                            body: component.body,
+                            justifyParagraph: component.justifyParagraph,
+                            alignParagraph: component.alignParagraph,
+                        };
                         return (
                             <TextField
                                 key={`${idx}${component.__typename}`}
-                                data={component.body}
+                                data={bodyData}
                             />
                         );
                     case 'STRAPI_ComponentTextQuote':
@@ -134,8 +142,8 @@ const StrapiDynamicZone: React.FC<Props> = ({
                         };
                         return (
                             <TextWithImageRightSideField
-                                data={textWithImageRightSideData}
                                 key={`${idx}${component.__typename}`}
+                                data={textWithImageRightSideData}
                             />
                         );
                     case 'STRAPI_ComponentSectionHeadingLeftImageRight':
