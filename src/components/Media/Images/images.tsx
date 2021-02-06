@@ -1,7 +1,7 @@
 import React from 'react';
 import {CSSObject} from 'styled-components';
-import {Grid} from '../../../../Container';
-import {ImageWithCaption} from '../../../../Images';
+import {Grid} from '../../Containers';
+import {ImageWithCaption} from '../../Images';
 
 interface Props {
     data: {

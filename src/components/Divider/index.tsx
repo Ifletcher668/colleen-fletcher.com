@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import BlueFrangipani from '../../assets/images/svg/wholistic-blue-frangipani.svg';
-import {Flexbox} from '../Container/';
+import {Flexbox} from '../Containers';
 
 interface Props {
     type: 'standard' | 'fancy';

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, ImageWithCaption} from '../../../../Images';
+import {Image, ImageWithCaption} from '../../Images';
 
 export interface Props {
     data: StrapiUploadFile;

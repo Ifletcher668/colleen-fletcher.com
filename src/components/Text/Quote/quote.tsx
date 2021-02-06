@@ -2,7 +2,7 @@ import React from 'react';
 import MarkdownField from 'react-markdown';
 import YangQuotes from '../../../../../assets/images/svg/yang-quotation.svg';
 import YinQuotes from '../../../../../assets/images/svg/yin-quotation.svg';
-import Flexbox from '../../../../Container/Flexbox/';
+import Flexbox from '../../Containers/Flexbox/';
 export interface Props {
     data: StrapiComponentTextParagraph;
 }

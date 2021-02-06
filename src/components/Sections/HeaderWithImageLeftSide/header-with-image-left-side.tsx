@@ -1,6 +1,6 @@
 import React from 'react';
-import {GridArea} from '../../../../../StyledComponents/helpers';
-import {Grid} from '../../../../Container';
+import {GridArea} from '../../../StyledComponents/helpers';
+import {Grid} from '../../Containers';
 import {SingleImageField} from '../../Media';
 import {HeadingField} from '../../Text';
 
