@@ -9,7 +9,7 @@ import PaintDripLink from '../components/TransitionLink';
 import { ImageWithCaption } from '../components/Images';
 import { zigZagGridColumns } from '../utils/zigZagGridColumns';
 import { Paragraph } from '../components/Text';
-import { GridArea, GridDivider } from '../StyledComponents/helpers';
+import { GridArea } from '../StyledComponents/helpers';
 import Divider from '../components/Divider';
 interface Props {
     data: Strapi;
@@ -74,9 +74,9 @@ export default (props: Props): JSX.Element => {
                                     </Heading>
                                     <Paragraph data={service.preview.text} />
                                 </GridArea>
-                                <GridDivider>
+                                <GridArea column="full" row="divider">
                                     <Divider type="standard" />
-                                </GridDivider>
+                                </GridArea>
                             </Grid>
                         );
                     })}

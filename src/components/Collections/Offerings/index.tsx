@@ -4,7 +4,7 @@ import { HeadingField, Paragraph } from '../../Text';
 import { ImageWithCaption } from '../../Images';
 import { ButtonField } from '../../Widgets';
 import { zigZagGridColumns } from '../../../utils/zigZagGridColumns';
-import { GridArea, GridDivider } from '../../../StyledComponents/helpers';
+import { GridArea } from '../../../StyledComponents/helpers';
 import Divider from '../../Divider';
 
 export interface Props {
@@ -46,7 +46,7 @@ const OfferingsField: React.FC<Props> = ({ data, previews }: Props) => {
                             <Paragraph data={text} />
                             <ButtonField data={button} />
                         </GridArea>
-                        <GridArea column={`1 / span 3`} row="divider">
+                        <GridArea column="full" row="divider">
                             <Divider type="standard" />
                         </GridArea>
                     </Grid>
