@@ -46,7 +46,7 @@ export default (props: Props): JSX.Element => {
                                 }}
                             >
                                 {service.preview && service.preview.image && (
-                                    <GridArea column="image">
+                                    <GridArea column="image" row="content">
                                         <Image
                                             alt={
                                                 service.preview.image.file
@@ -61,13 +61,10 @@ export default (props: Props): JSX.Element => {
                                                     .imageFile.childImageSharp
                                                     .fluid
                                             }
-                                            style={{
-                                                gridRow: 'content',
-                                            }}
                                         />
                                     </GridArea>
                                 )}
-                                <GridArea column="text">
+                                <GridArea column="text" row="content">
                                     <Heading level={3}>
                                         <PaintDripLink
                                             to={`${offering.fullUrlPath}${service.slug}`}
