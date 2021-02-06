@@ -1,10 +1,9 @@
 import React from 'react';
-import Image from 'gatsby-image';
-import MarkdownField from 'react-markdown';
 import Grid from '../../Containers/Grid';
 import {HeadingField} from '../../Text';
 import {ImageWithCaption} from '../../Images';
 import {ButtonField} from '../../Widgets';
+import {Paragraph} from '../../Text';
 
 export interface Props {
     data: StrapiBlog[];
@@ -36,11 +35,7 @@ const BlogsField: React.FC<Props> = ({data, previews}: Props) => {
                     >
                         <HeadingField center data={heading} />
                         <ImageWithCaption imageComponent={image} />
-                        <MarkdownField
-                            key={idx}
-                            source={text.body}
-                            allowDangerousHtml
-                        />
+                        <Paragraph data={text} />
                         <ButtonField data={button} />
                     </Grid>
                 );

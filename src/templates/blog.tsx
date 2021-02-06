@@ -3,7 +3,7 @@ import {graphql} from 'gatsby';
 import Image from 'gatsby-image';
 import Heading from '../components/Heading';
 import {Grid} from '../components/Containers';
-import {ContentWrapper} from '../components/Containers';
+import {PageContainer} from '../components/Containers';
 import MarkdownField from 'react-markdown';
 import {Card, CardHeader, CardBody, CardFooter} from '../components/Card';
 import PaintDripLink from '../components/TransitionLink';
@@ -20,7 +20,7 @@ export default (props: Props): JSX.Element => {
 
     return (
         <>
-            <ContentWrapper>
+            <PageContainer>
                 <Heading center level={1}>
                     {blog.name}
                 </Heading>
@@ -97,7 +97,7 @@ export default (props: Props): JSX.Element => {
                         );
                     })}
                 </Grid>
-            </ContentWrapper>
+            </PageContainer>
         </>
     );
 };

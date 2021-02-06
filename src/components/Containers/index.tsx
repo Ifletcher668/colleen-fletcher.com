@@ -1,7 +1,7 @@
 import Flexbox from './Flexbox';
 import Grid from './Grid';
-import ContentWrapper from './ContentWrapper';
+import PageContainer from './PageContainer';
 
 export {Flexbox};
 export {Grid};
-export {ContentWrapper};
+export {PageContainer};

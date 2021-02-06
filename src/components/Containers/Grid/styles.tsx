@@ -8,6 +8,7 @@ const defaultProps: CSSObject = {
     display: `grid`,
 };
 
+// TODO: Refactor to use 'as' prop
 export const SectionGrid = styled.section<Props>`
     ${defaultProps};
     ${props => props.styling};

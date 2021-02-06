@@ -1,7 +1,7 @@
 import React from 'react';
 import {graphql} from 'gatsby';
 import StrapiDynamicZone from '../components/StrapiDynamicZone';
-import {ContentWrapper} from '../components/Containers';
+import {PageContainer} from '../components/Containers';
 import SEO from '../components/SEO';
 import BannerBackgroundImage from '../components/Banner';
 
@@ -37,9 +37,9 @@ export default (props: Props): JSX.Element => {
                     banner={page.banner}
                 />
             )}
-            <ContentWrapper>
+            <PageContainer>
                 <StrapiDynamicZone components={page.body} previews={previews} />
-            </ContentWrapper>
+            </PageContainer>
         </>
     );
 };

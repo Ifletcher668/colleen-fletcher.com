@@ -7,7 +7,7 @@ import {
     ServicesField,
 } from '../Collections';
 import {SingleImageField, ImagesField} from '../Media';
-import {TextField, HeadingField, QuoteField} from '../Text';
+import {Paragraph, HeadingField, QuoteField} from '../Text';
 import {DividerField, ButtonField} from '../Widgets';
 import {
     ImageCenterTextEitherSideField,
@@ -112,7 +112,7 @@ const StrapiDynamicZone: React.FC<Props> = ({
                             alignParagraph: component.alignParagraph,
                         };
                         return (
-                            <TextField
+                            <Paragraph
                                 key={`${idx}${component.__typename}`}
                                 data={bodyData}
                             />

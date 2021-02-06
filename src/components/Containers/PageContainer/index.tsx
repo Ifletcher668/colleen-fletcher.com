@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 // TODO: Update with theme variables
-const ContentWrapper = styled.section`
+const PageContainer = styled.section`
     display: grid;
     gap: 4em 0;
     grid-template-columns:
@@ -12,4 +12,4 @@ const ContentWrapper = styled.section`
         grid-column: content;
     }
 `;
-export default ContentWrapper;
+export default PageContainer;

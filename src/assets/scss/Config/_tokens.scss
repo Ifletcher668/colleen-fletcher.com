@@ -120,7 +120,11 @@ $sizes: (
         'minus': 1,
         'convert-units': 'em',
     ),
-    'info': '#_base->root',
+    'info': (
+        '%value': '#_base->root',
+        'minus': 0.4,
+        'convert-units': 'em',
+    ),
     // headers
     'h1':
         (

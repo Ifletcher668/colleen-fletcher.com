@@ -4,12 +4,12 @@ import {graphql} from 'gatsby';
 import Image from 'gatsby-image';
 import Heading from '../components/Heading';
 import {Grid} from '../components/Containers';
-import {ContentWrapper} from '../components/Containers';
+import {PageContainer} from '../components/Containers';
 import {Card, CardHeader, CardBody, CardFooter} from '../components/Card';
-import MarkdownField from 'react-markdown';
 import PaintDripLink from '../components/TransitionLink';
 import {ImageWithCaption} from '../components/Images';
 import {zigZagGridColumns} from '../utils/zigZagGridColumns';
+import {Paragraph} from '../components/Text';
 interface Props {
     data: Strapi;
 }
@@ -20,7 +20,7 @@ export default (props: Props): JSX.Element => {
         },
     } = props;
     return (
-        <ContentWrapper>
+        <PageContainer>
             <Heading level={1} center>
                 {offering.title}
             </Heading>
@@ -75,13 +75,8 @@ export default (props: Props): JSX.Element => {
                                     <CardBody>
                                         {service.preview &&
                                             service.preview.text && (
-                                                <MarkdownField
-                                                    source={
-                                                        service.preview.text
-                                                            .body
-                                                    }
-                                                    className="paragraph"
-                                                    allowDangerousHtml
+                                                <Paragraph
+                                                    data={service.preview.text}
                                                 />
                                             )}
                                     </CardBody>
@@ -97,7 +92,7 @@ export default (props: Props): JSX.Element => {
                     })}
                 </Grid>
             )}
-        </ContentWrapper>
+        </PageContainer>
     );
 };
 // Here is where I map all this offering's services

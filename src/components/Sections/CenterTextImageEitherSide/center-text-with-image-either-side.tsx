@@ -1,7 +1,7 @@
 import React from 'react';
 import {Grid} from '../../Containers';
 import {SingleImageField} from '../../Media';
-import {TextField} from '../../Text';
+import {Paragraph} from '../../Text';
 import {GridArea} from '../../../StyledComponents/helpers';
 
 export interface Props {
@@ -26,7 +26,7 @@ const TextCenterImageEitherSideField: React.FC<Props> = ({data}: Props) => {
                 <SingleImageField data={image_left} />
             </GridArea>
             <GridArea column="text">
-                <TextField data={text.body} />
+                <Paragraph data={text.body} />
             </GridArea>
             <GridArea column="image-right">
                 <SingleImageField data={image_right} />

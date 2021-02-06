@@ -37,14 +37,7 @@ body {
     border-radius: 1000px;
 }
 
-// TODO: Remove?
-.main-content {
-    display: grid;
-    grid-template-columns:
-        [full-start] minmax(size(mg-medium), size(mg-large))
-        [content-start] minmax(0, size(fullWidth)) [content-end]
-        minmax(size(mg-medium), size(mg-large)) [full-end];
-    & > * {
-        grid-column: content;
-    }
+.gatsby-image-wrapper {
+    border-radius: 2px;
+    border: 1.5px color(aterrima) solid;
 }

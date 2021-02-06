@@ -3,7 +3,7 @@ import {graphql} from 'gatsby';
 import StrapiDynamicZone from '../components/StrapiDynamicZone';
 import Heading from '../components/Heading';
 import {Grid} from '../components/Containers';
-import {ContentWrapper} from '../components/Containers';
+import {PageContainer} from '../components/Containers';
 import BannerBackground from 'gatsby-background-image';
 
 interface Props {
@@ -40,9 +40,9 @@ export default (props: Props): JSX.Element => {
                         {service.title}
                     </Heading>
                 )}
-            <ContentWrapper>
+            <PageContainer>
                 <StrapiDynamicZone components={service.sales_page} />
-            </ContentWrapper>
+            </PageContainer>
         </Grid>
     );
 };

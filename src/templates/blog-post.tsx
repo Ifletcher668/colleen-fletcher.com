@@ -3,7 +3,7 @@ import {graphql} from 'gatsby';
 import Heading from '../components/Heading';
 import StrapiDynamicZone from '../components/StrapiDynamicZone';
 import {Grid} from '../components/Containers';
-import {ContentWrapper} from '../components/Containers';
+import {PageContainer} from '../components/Containers';
 import {ImageWithCaption} from '../components/Images';
 
 interface Props {
@@ -20,7 +20,7 @@ export default (props: Props): JSX.Element => {
     } = props;
 
     return (
-        <ContentWrapper>
+        <PageContainer>
             <Grid containerType="section" gap={`2em 0`}>
                 <Heading center tilt="even" level={1}>
                     {title}
@@ -33,7 +33,7 @@ export default (props: Props): JSX.Element => {
                 )}
                 <StrapiDynamicZone components={body} />
             </Grid>
-        </ContentWrapper>
+        </PageContainer>
     );
 };
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import MarkdownField from 'react-markdown';
 import Grid from '../../Containers/Grid';
-import {HeadingField} from '../../Text';
+import {HeadingField, Paragraph} from '../../Text';
 import {ImageWithCaption} from '../../Images';
 import {ButtonField} from '../../Widgets';
 import {GridArea, GridDivider} from '../../../StyledComponents/helpers';
@@ -43,11 +43,7 @@ const OfferingsField: React.FC<Props> = ({data, previews}: Props) => {
                         </GridArea>
                         <GridArea column="text">
                             <HeadingField center data={heading} />
-                            <MarkdownField
-                                key={idx}
-                                source={text.body}
-                                allowDangerousHtml
-                            />
+                            <Paragraph data={text} />
                             <ButtonField data={button} />
                         </GridArea>
                         <GridDivider>

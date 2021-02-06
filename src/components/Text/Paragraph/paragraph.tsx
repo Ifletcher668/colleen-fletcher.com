@@ -6,7 +6,7 @@ export interface Props {
     data: StrapiComponentTextParagraph;
 }
 
-const TextField: React.FC<Props> = ({data}: Props) => {
+const Paragraph: React.FC<Props> = ({data}: Props) => {
     const {body, alignParagraph, justifyParagraph} = data;
 
     return (
@@ -29,7 +29,7 @@ const TextField: React.FC<Props> = ({data}: Props) => {
     );
 };
 
-export default TextField;
+export default Paragraph;
 
 interface WrapperProps {
     alignParagraph: AlignValues;

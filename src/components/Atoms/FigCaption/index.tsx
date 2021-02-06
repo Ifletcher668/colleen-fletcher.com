@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
 export default styled.figcaption`
-    align-self: flex-end;
+    text-align: left;
+    font-size: var(--size-info);
 `;
