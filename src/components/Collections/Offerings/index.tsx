@@ -38,17 +38,17 @@ const OfferingsField: React.FC<Props> = ({ data, previews }: Props) => {
                             gap: `1em 0`,
                         }}
                     >
-                        <GridArea column="image">
+                        <GridArea column="image" row="content">
                             <ImageWithCaption circle imageComponent={image} />
                         </GridArea>
-                        <GridArea column="text">
+                        <GridArea column="text" row="content">
                             <HeadingField center data={heading} />
                             <Paragraph data={text} />
                             <ButtonField data={button} />
                         </GridArea>
-                        <GridDivider>
+                        <GridArea column={`1 / span 3`} row="divider">
                             <Divider type="standard" />
-                        </GridDivider>
+                        </GridArea>
                     </Grid>
                 );
             })}
