@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {Grid} from '../../../Container/index';
+import {Grid} from '../../../Containers/index';
 import {NavbarContext} from '../index';
 import Services from './SubMenu/services';
 import BlogPosts from './SubMenu/blog-posts';

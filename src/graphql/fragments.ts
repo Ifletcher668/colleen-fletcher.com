@@ -237,6 +237,8 @@ export const StrapiComponentTextParagraph = graphql`
     fragment StrapiComponentTextParagraph on STRAPI_ComponentTextParagraph {
         id
         body
+        justifyParagraph: justify
+        alignParagraph: align
     }
 `;
 
@@ -246,6 +248,8 @@ export const StrapiComponentTextHeading = graphql`
         level
         headingText: text
         tilt
+        justifyHeading: justify
+        alignHeading: align
     }
 `;
 

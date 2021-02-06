@@ -1,20 +1,21 @@
-import React, {useContext} from 'react';
+import React, {forwardRef, useContext} from 'react';
 import {FaTimes} from 'react-icons/fa';
 
 import styled from 'styled-components';
-import {useMenuItems} from '../../../graphql/queries/useMenuItems';
+
 import {MobileMenuContext} from '../index';
 import MenuItem from './MenuItem';
 
-const MobileMenu: React.FC<DefaultProps> = (props: DefaultProps) => {
+interface Props extends DefaultProps {
+    items: any[];
+}
+
+const MobileMenu: React.FC<Props> = forwardRef(({items}: Props, ref) => {
     const {isMobileMenuOpen, toggleMobileMenu} = useContext(MobileMenuContext);
 
-    const {
-        strapi: {menuItems},
-    } = useMenuItems();
-
     return isMobileMenuOpen ? (
-        <MobileNav isMobileMenuOpen>
+        // TODO: How to pass props to styled-components without actually adding the prop
+        <MobileNav isMobileMenuOpen ref={ref}>
             <MobileNavHeader className="mobile-menu-header">
                 <button
                     type="button"
@@ -25,23 +26,23 @@ const MobileMenu: React.FC<DefaultProps> = (props: DefaultProps) => {
                 </button>
             </MobileNavHeader>
             <MobileNavLinks className="mobile-menu-links">
-                {menuItems.map((menuItem, idx) => {
-                    return <MenuItem key={idx} {...menuItem} />;
+                {items.map((item, idx) => {
+                    return <MenuItem key={idx} {...item} />;
                 })}
             </MobileNavLinks>
         </MobileNav>
     ) : (
         <></>
     );
-};
+});
 
 export default MobileMenu;
 
-interface Props {
+interface StyledProps {
     isMobileMenuOpen: boolean;
 }
 
-const MobileNav = styled.nav<Props>`
+const MobileNav = styled.nav<StyledProps>`
     display: grid;
     grid-template-columns: [spacer]0.5fr [content]2fr;
     background: var(--color-primary-blue);

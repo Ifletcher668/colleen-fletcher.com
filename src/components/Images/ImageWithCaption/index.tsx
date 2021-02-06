@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'gatsby-image';
-import {Flexbox} from '../../Container';
+import {Flexbox} from '../../Containers';
 import {CSSObject} from 'styled-components';
 import {FigCaption} from '../../Atoms';
 
