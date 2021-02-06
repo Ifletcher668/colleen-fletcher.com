@@ -3,8 +3,8 @@ import React from 'react';
 import {graphql} from 'gatsby';
 import Image from 'gatsby-image';
 import Heading from '../components/Heading';
-import {Grid} from '../components/Container';
-import {ContentWrapper} from '../components/Container/';
+import {Grid} from '../components/Containers';
+import {ContentWrapper} from '../components/Containers';
 import {Card, CardHeader, CardBody, CardFooter} from '../components/Card';
 import MarkdownField from 'react-markdown';
 import PaintDripLink from '../components/TransitionLink';
@@ -38,6 +38,7 @@ export default (props: Props): JSX.Element => {
                                 rows={{xlarge: `[content] 1fr [spacer] 0.2fr`}}
                             >
                                 {service.preview && service.preview.image && (
+                                    // TODO: Refactor to use styled-component for grid-colum
                                     <Image
                                         alt={
                                             service.preview.image.file

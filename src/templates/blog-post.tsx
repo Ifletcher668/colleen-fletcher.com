@@ -2,8 +2,8 @@ import React from 'react';
 import {graphql} from 'gatsby';
 import Heading from '../components/Heading';
 import StrapiDynamicZone from '../components/StrapiDynamicZone';
-import {Grid} from '../components/Container';
-import {ContentWrapper} from '../components/Container/';
+import {Grid} from '../components/Containers';
+import {ContentWrapper} from '../components/Containers';
 import {ImageWithCaption} from '../components/Images';
 
 interface Props {

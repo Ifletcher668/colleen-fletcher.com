@@ -1,7 +1,7 @@
 import React from 'react';
 import {graphql} from 'gatsby';
 import StrapiDynamicZone from '../components/StrapiDynamicZone';
-import {ContentWrapper} from '../components/Container/';
+import {ContentWrapper} from '../components/Containers';
 import SEO from '../components/SEO';
 import BannerBackgroundImage from '../components/Banner';
 
@@ -17,7 +17,7 @@ type Previews = {
     blogPreviews: StrapiBlog[];
     offeringPreviews: StrapiOffering[];
 };
-export default (props: Props) => {
+export default (props: Props): JSX.Element => {
     const {
         data: {
             strapi: {page, blogs: blogPreviews, offerings: offeringPreviews},
@@ -31,10 +31,12 @@ export default (props: Props) => {
     return (
         <>
             <SEO />
-            <BannerBackgroundImage
-                image={page.banner_background_image}
-                banner={page.banner}
-            />
+            {page.banner_background_image && (
+                <BannerBackgroundImage
+                    image={page.banner_background_image}
+                    banner={page.banner}
+                />
+            )}
             <ContentWrapper>
                 <StrapiDynamicZone components={page.body} previews={previews} />
             </ContentWrapper>

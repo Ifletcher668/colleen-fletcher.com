@@ -2,15 +2,15 @@ import React from 'react';
 import {graphql} from 'gatsby';
 import StrapiDynamicZone from '../components/StrapiDynamicZone';
 import Heading from '../components/Heading';
-import {Grid} from '../components/Container';
-import {ContentWrapper} from '../components/Container/';
+import {Grid} from '../components/Containers';
+import {ContentWrapper} from '../components/Containers';
 import BannerBackground from 'gatsby-background-image';
 
 interface Props {
     data: Strapi;
 }
 
-export default (props: Props) => {
+export default (props: Props): JSX.Element => {
     const {
         data: {
             strapi: {service},
@@ -18,8 +18,8 @@ export default (props: Props) => {
     } = props;
 
     return (
-        <>
-            <Grid containerType="section">
+        <Grid containerType="section">
+            {service.banner_background_image && (
                 <BannerBackground
                     fluid={
                         service.banner_background_image.imageFile
@@ -27,16 +27,23 @@ export default (props: Props) => {
                     }
                     className="banner-background"
                 >
-                    <StrapiDynamicZone components={service.banner} />
+                    {service.banner && (
+                        <StrapiDynamicZone components={service.banner} />
+                    )}
                 </BannerBackground>
-                <ContentWrapper>
+            )}
+            {service.sales_page &&
+                service.sales_page[0].__typename !==
+                    // Fallback if 'custom' heading isn't added
+                    'STRAPI_ComponentTextHeading' && (
                     <Heading center level={1}>
                         {service.title}
                     </Heading>
-                    <StrapiDynamicZone components={service.sales_page} />
-                </ContentWrapper>
-            </Grid>
-        </>
+                )}
+            <ContentWrapper>
+                <StrapiDynamicZone components={service.sales_page} />
+            </ContentWrapper>
+        </Grid>
     );
 };
 
