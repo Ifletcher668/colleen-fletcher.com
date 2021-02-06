@@ -6,10 +6,14 @@ export interface Props {
 }
 
 const SingleImageField: React.FC<Props> = ({ data }: Props) => {
-    return data && data.caption ? (
-        <ImageWithCaption uploadFile={data} />
+    return data ? (
+        data.caption ? (
+            <ImageWithCaption uploadFile={data} />
+        ) : (
+            <Image uploadFile={data} />
+        )
     ) : (
-        <Image uploadFile={data} />
+        <> {console.log(`No Image found`)}</>
     );
 };
 
