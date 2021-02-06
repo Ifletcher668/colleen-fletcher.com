@@ -1,8 +1,8 @@
 import React from 'react';
 import Image from 'gatsby-image';
-import {Flexbox} from '../../Containers';
-import {CSSObject} from 'styled-components';
-import {FigCaption} from '../../Atoms';
+import { Flexbox } from '../../Containers';
+import { CSSObject } from 'styled-components';
+import { FigCaption } from '../../Atoms';
 
 interface Props extends FlexboxProps {
     uploadFile?: StrapiUploadFile;
@@ -53,9 +53,7 @@ const ImageWithCaption: React.FC<Props> = (props: Props) => {
     } else
         return (
             // probably not the best way to do this...
-            <>
-                <h1>no image</h1>
-            </>
+            <></>
         );
 };
 

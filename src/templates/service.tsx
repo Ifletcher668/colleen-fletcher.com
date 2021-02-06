@@ -1,9 +1,9 @@
 import React from 'react';
-import {graphql} from 'gatsby';
+import { graphql } from 'gatsby';
 import StrapiDynamicZone from '../components/StrapiDynamicZone';
 import Heading from '../components/Heading';
-import {Grid} from '../components/Containers';
-import {PageContainer} from '../components/Containers';
+import { Grid } from '../components/Containers';
+import { PageContainer } from '../components/Containers';
 import BannerBackground from 'gatsby-background-image';
 
 interface Props {
@@ -13,7 +13,7 @@ interface Props {
 export default (props: Props): JSX.Element => {
     const {
         data: {
-            strapi: {service},
+            strapi: { service },
         },
     } = props;
 
@@ -32,15 +32,15 @@ export default (props: Props): JSX.Element => {
                     )}
                 </BannerBackground>
             )}
-            {service.sales_page &&
-                service.sales_page[0].__typename !==
-                    // Fallback if 'custom' heading isn't added
-                    'STRAPI_ComponentTextHeading' && (
-                    <Heading center level={1}>
-                        {service.title}
-                    </Heading>
-                )}
             <PageContainer>
+                {service.sales_page &&
+                    service.sales_page[0].__typename !==
+                        // Fallback if 'custom' heading isn't added
+                        'STRAPI_ComponentTextHeading' && (
+                        <Heading center level={1}>
+                            {service.title}
+                        </Heading>
+                    )}
                 <StrapiDynamicZone components={service.sales_page} />
             </PageContainer>
         </Grid>

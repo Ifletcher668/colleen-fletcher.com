@@ -7,7 +7,7 @@ interface Props extends DefaultProps {
 }
 
 const HeadingField: React.FC<Props> = ({
-    data: {headingText, level, tilt},
+    data: { headingText, level, tilt },
     center,
     style,
 }: Props) => {

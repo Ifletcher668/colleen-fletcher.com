@@ -18,6 +18,8 @@ rules:
     babel/quotes: off
     consistent-return: off
     no-console: 1
+    space-in-brackets:
+        - 'always'
 
 overrides:
     - files:

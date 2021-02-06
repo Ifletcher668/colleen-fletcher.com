@@ -1,22 +1,23 @@
 // Named "Work With Me on the page"
 import React from 'react';
-import {graphql} from 'gatsby';
+import { graphql } from 'gatsby';
 import Image from 'gatsby-image';
 import Heading from '../components/Heading';
-import {Grid} from '../components/Containers';
-import {PageContainer} from '../components/Containers';
-import {Card, CardHeader, CardBody, CardFooter} from '../components/Card';
+import { Grid } from '../components/Containers';
+import { PageContainer } from '../components/Containers';
 import PaintDripLink from '../components/TransitionLink';
-import {ImageWithCaption} from '../components/Images';
-import {zigZagGridColumns} from '../utils/zigZagGridColumns';
-import {Paragraph} from '../components/Text';
+import { ImageWithCaption } from '../components/Images';
+import { zigZagGridColumns } from '../utils/zigZagGridColumns';
+import { Paragraph } from '../components/Text';
+import { GridArea, GridDivider } from '../StyledComponents/helpers';
+import Divider from '../components/Divider';
 interface Props {
     data: Strapi;
 }
 export default (props: Props): JSX.Element => {
     const {
         data: {
-            strapi: {offering},
+            strapi: { offering },
         },
     } = props;
     return (
@@ -28,65 +29,57 @@ export default (props: Props): JSX.Element => {
                 <ImageWithCaption imageComponent={offering.preview.image} />
             )}
             {offering.services && offering.services.length > 0 && (
-                <Grid className="services" containerType="section">
+                <Grid containerType="section">
                     {offering.services.map((service, idx) => {
                         const zigZag = zigZagGridColumns(idx);
                         return (
                             <Grid
                                 key={idx}
+                                containerType="article"
                                 columns={zigZag}
-                                rows={{xlarge: `[content] 1fr [spacer] 0.2fr`}}
+                                rows={{
+                                    xlarge: `[content] 1fr [divider] 0.001fr`,
+                                }}
+                                styling={{
+                                    margin: `2em 0em`,
+                                    gap: `1em 0`,
+                                }}
                             >
                                 {service.preview && service.preview.image && (
-                                    // TODO: Refactor to use styled-component for grid-colum
-                                    <Image
-                                        alt={
-                                            service.preview.image.file
-                                                .alternativeText
-                                        }
-                                        title={
-                                            service.preview.image.file.caption
-                                        }
-                                        fluid={
-                                            service.preview.image.file.imageFile
-                                                .childImageSharp.fluid
-                                        }
-                                        style={{
-                                            gridColumn: `image`,
-                                            gridRow: 'content',
-                                        }}
-                                    />
+                                    <GridArea column="image">
+                                        <Image
+                                            alt={
+                                                service.preview.image.file
+                                                    .alternativeText
+                                            }
+                                            title={
+                                                service.preview.image.file
+                                                    .caption
+                                            }
+                                            fluid={
+                                                service.preview.image.file
+                                                    .imageFile.childImageSharp
+                                                    .fluid
+                                            }
+                                            style={{
+                                                gridRow: 'content',
+                                            }}
+                                        />
+                                    </GridArea>
                                 )}
-                                <Card
-                                    style={{
-                                        gridColumn: `text`,
-                                        gridRow: 'content / span spacer',
-                                    }}
-                                >
-                                    <CardHeader>
-                                        <Heading level={3}>
-                                            <PaintDripLink
-                                                to={`${offering.fullUrlPath}${service.slug}`}
-                                            >
-                                                {service.title}
-                                            </PaintDripLink>
-                                        </Heading>
-                                    </CardHeader>
-                                    <CardBody>
-                                        {service.preview &&
-                                            service.preview.text && (
-                                                <Paragraph
-                                                    data={service.preview.text}
-                                                />
-                                            )}
-                                    </CardBody>
-                                    {/* //TODO: is there a date? */}
-                                    {/* <CardFooter>
-                                    <Heading level={6} >
-                                    {service.}
+                                <GridArea column="text">
+                                    <Heading level={3}>
+                                        <PaintDripLink
+                                            to={`${offering.fullUrlPath}${service.slug}`}
+                                        >
+                                            {service.title}
+                                        </PaintDripLink>
                                     </Heading>
-                                </CardFooter> */}
-                                </Card>
+                                    <Paragraph data={service.preview.text} />
+                                </GridArea>
+                                <GridDivider>
+                                    <Divider type="standard" />
+                                </GridDivider>
                             </Grid>
                         );
                     })}

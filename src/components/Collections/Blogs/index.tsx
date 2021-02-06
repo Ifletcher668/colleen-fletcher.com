@@ -1,22 +1,22 @@
 import React from 'react';
 import Grid from '../../Containers/Grid';
-import {HeadingField} from '../../Text';
-import {ImageWithCaption} from '../../Images';
-import {ButtonField} from '../../Widgets';
-import {Paragraph} from '../../Text';
+import { HeadingField } from '../../Text';
+import { ImageWithCaption } from '../../Images';
+import { ButtonField } from '../../Widgets';
+import { Paragraph } from '../../Text';
 
 export interface Props {
     data: StrapiBlog[];
     previews: StrapiBlog[];
 }
 
-const BlogsField: React.FC<Props> = ({data, previews}: Props) => {
+const BlogsField: React.FC<Props> = ({ data, previews }: Props) => {
     return (
         <>
             {data.map((blog, idx) => {
                 // TODO: Refactor when Strapi issue fixed
-                const [{preview}] = previews.filter(p => p.id === blog.id);
-                const {text, heading, image, button} = preview;
+                const [{ preview }] = previews.filter(p => p.id === blog.id);
+                const { text, heading, image, button } = preview;
                 if (button.action === '/') {
                     const buttonPath = blog.fullUrlPath;
                     button.action = buttonPath;
