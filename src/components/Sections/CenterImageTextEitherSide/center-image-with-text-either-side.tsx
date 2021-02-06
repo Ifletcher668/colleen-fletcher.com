@@ -23,13 +23,13 @@ const ImageCenterTextEitherSideField: React.FC<Props> = ({data}: Props) => {
             }}
         >
             <GridArea column="text-left">
-                <Paragraph data={text_right.body} />
+                <Paragraph data={text_right} />
             </GridArea>
             <GridArea column="image">
                 <SingleImageField data={image} />
             </GridArea>
             <GridArea column="text-right">
-                <Paragraph data={text_left.body} />
+                <Paragraph data={text_left} />
             </GridArea>
         </Grid>
     );

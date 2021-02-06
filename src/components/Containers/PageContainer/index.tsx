@@ -11,5 +11,6 @@ const PageContainer = styled.section`
     & > * {
         grid-column: content;
     }
+    margin: var(--size-mg-large) 0;
 `;
 export default PageContainer;
