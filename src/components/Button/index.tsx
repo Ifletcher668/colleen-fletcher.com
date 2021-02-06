@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Button as ButtonWrapper } from '../Atoms';
 
 type V = 'primary' | 'secondary' | 'tertiary' | '';
 type T = 'submit' | 'reset' | 'button';
@@ -20,7 +21,7 @@ const Button: React.FC<Props> = ({
     center = false,
 }: Props) => {
     return (
-        <button
+        <ButtonWrapper
             className={`btn${variant ? ' ' + variant : ''}${
                 center ? ' center' : ''
             }${className ? ' ' + className : ''}`}
@@ -28,7 +29,7 @@ const Button: React.FC<Props> = ({
             onClick={onClick}
         >
             {children}
-        </button>
+        </ButtonWrapper>
     );
 };
 
