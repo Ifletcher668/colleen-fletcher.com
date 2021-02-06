@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import BreakpointHandler from '../utils/Breakpoints/breakpoint-handler';
 
-const {above} = new BreakpointHandler();
+const { above } = new BreakpointHandler();
 interface Props {
     /**
      * @param column
@@ -18,7 +18,7 @@ export const GridArea = styled.div<Props>`
     grid-column: ${props => props.column};
     ${props =>
         above(props.theme['bp-md'] as number, {
-            'grid-row': 'content',
+            'grid-row': props.row,
         })}
 `;
 

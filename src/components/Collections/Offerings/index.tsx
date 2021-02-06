@@ -31,7 +31,7 @@ const OfferingsField: React.FC<Props> = ({ data, previews }: Props) => {
                     <Grid
                         key={idx}
                         containerType="article"
-                        columns={zigZag}
+                        columns={zigZag} // col names === 'image' and 'content'
                         rows={{ xlarge: `[content] 1fr [divider] 0.001fr` }}
                         styling={{
                             margin: `2em 0em`,
