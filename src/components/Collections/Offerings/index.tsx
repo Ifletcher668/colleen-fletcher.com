@@ -6,12 +6,14 @@ import { ButtonField } from '../../Widgets';
 import { zigZagGridColumns } from '../../../utils/zigZagGridColumns';
 import { GridArea } from '../../../StyledComponents/helpers';
 import Divider from '../../Divider';
+import styled from 'styled-components';
 
 export interface Props {
     data: StrapiOffering[];
     previews: StrapiOffering[];
 }
 
+// Component only used in StrapiDynamicZone
 const OfferingsField: React.FC<Props> = ({ data, previews }: Props) => {
     return (
         <Grid containerType="section" gap={`2em 0`}>
@@ -21,28 +23,32 @@ const OfferingsField: React.FC<Props> = ({ data, previews }: Props) => {
                     p => p.id === offering.id,
                 );
                 const { text, heading, image, button } = preview;
-                //TODO: Refactor out forward slash
-                if (button.action === '/' || button.action === '') {
-                    const buttonPath = offering.fullUrlPath;
-                    button.action = buttonPath;
+                if (
+                    button.action === '/' ||
+                    button.action === '' ||
+                    button.action === offering.slug // mutate data based on input in strapi
+                ) {
+                    button.action = offering.fullUrlPath;
                 }
-                const zigZag = zigZagGridColumns(idx);
+
+                const zigZagColumnLayout = zigZagGridColumns(idx);
+
                 return (
                     <Grid
                         key={idx}
                         containerType="article"
-                        columns={zigZag} // col names === 'image' and 'content'
-                        rows={{ xlarge: `[content] 1fr [divider] 0.001fr` }}
+                        columns={zigZagColumnLayout} // col names === 'image' and 'content'
+                        rows={{ xlarge: `[content] 1fr [divider] 0.01fr` }}
                         styling={{
                             margin: `2em 0em`,
                             gap: `1em 0`,
                         }}
                     >
                         <GridArea column="image" row="content">
-                            <ImageWithCaption circle imageComponent={image} />
+                            <ImageWithCaption data={image} />
                         </GridArea>
                         <GridArea column="text" row="content">
-                            <HeadingField center data={heading} />
+                            <HeadingField data={heading} />
                             <Paragraph data={text} />
                             <ButtonField data={button} />
                         </GridArea>

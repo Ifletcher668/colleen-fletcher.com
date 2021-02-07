@@ -1,17 +1,14 @@
 import React from 'react';
-import {CSSObject} from 'styled-components';
-import {Grid} from '../../Containers';
-import {ImageWithCaption} from '../../Images';
+import { CSSObject } from 'styled-components';
+import { Grid } from '../../Containers';
+import { ImageWithCaption } from '../../Images';
 
 interface Props {
-    data: {
-        style: Omit<ImageStyle, 'standard' | 'fancy'>;
-        files: StrapiUploadFile[];
-    };
+    data: StrapiComponentMediaImages;
 }
 
-const ImagesField: React.FC<Props> = ({data}: Props) => {
-    const {style, files} = data;
+const ImagesField: React.FC<Props> = ({ data }: Props) => {
+    const { style, files, isCircle, hasBorder } = data;
 
     const styles: CSSObject = {
         gap: `0 1em`,
@@ -27,9 +24,12 @@ const ImagesField: React.FC<Props> = ({data}: Props) => {
             }}
         >
             {files.map((image, idx) => {
-                return (
-                    <ImageWithCaption between key={idx} uploadFile={image} />
-                );
+                const imageData = {
+                    file: image,
+                    isCircle,
+                    hasBorder,
+                };
+                return <ImageWithCaption key={idx} between data={imageData} />;
             })}
         </Grid>
     );

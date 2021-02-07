@@ -1,15 +1,12 @@
 import React from 'react';
 import Heading from '../../Heading';
 
-interface Props extends DefaultProps {
+interface Props {
     data: StrapiComponentTextHeading;
-    center?: boolean;
 }
 
 const HeadingField: React.FC<Props> = ({
-    data: { headingText, level, tilt },
-    center,
-    style,
+    data: { headingText, level, tilt, alignHeading, justifyHeading },
 }: Props) => {
     // string value enum type in database
     // looks better on client-end
@@ -39,10 +36,10 @@ const HeadingField: React.FC<Props> = ({
 
     return (
         <Heading
-            center={center ? true : false}
             level={levelAsNum}
             tilt={tilt}
-            style={style}
+            alignHeading={alignHeading}
+            justifyHeading={justifyHeading}
         >
             {headingText}
         </Heading>

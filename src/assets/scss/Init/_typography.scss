@@ -50,8 +50,11 @@ button {
 
 strong,
 b {
+    font-weight: size(weight-heading);
     color: color(aterrima);
-    @include font-family('MA Sexy');
+    &::first-letter {
+        @include font-family('MA Sexy');
+    }
 }
 
 em,

@@ -1,11 +1,6 @@
 import React from 'react';
-import {CSSObject} from 'styled-components';
-import {
-    SectionFlexbox,
-    ArticleFlexbox,
-    AsideFlexbox,
-    Flexbox as DivFlexbox,
-} from './styles';
+import { CSSObject } from 'styled-components';
+import { Flexbox as FlexboxWrapper } from './styles';
 
 interface Props extends FlexboxProps {
     styling?: CSSObject;
@@ -105,6 +100,7 @@ const Flexbox: React.FC<Props> = (props: Props) => {
         noGrow,
         styling,
         style,
+        containerType = 'div',
     } = props;
 
     const styles: CSSObject = {
@@ -123,42 +119,17 @@ const Flexbox: React.FC<Props> = (props: Props) => {
             : className
         : '';
 
-    switch (props.containerType) {
-        case 'article':
-            return (
-                <ArticleFlexbox
-                    styling={styles}
-                    className={cn}
-                    onClick={onClick}
-                >
-                    {props.children}
-                </ArticleFlexbox>
-            );
-
-        case 'section':
-            return (
-                <SectionFlexbox
-                    styling={styles}
-                    className={cn}
-                    onClick={onClick}
-                >
-                    {props.children}
-                </SectionFlexbox>
-            );
-
-        case 'aside':
-            return (
-                <AsideFlexbox styling={styles} className={cn} onClick={onClick}>
-                    {props.children}
-                </AsideFlexbox>
-            );
-
-        default:
-            return (
-                <DivFlexbox styling={styles} className={cn} onClick={onClick}>
-                    {props.children}
-                </DivFlexbox>
-            );
+    return (
+        <FlexboxWrapper
+            as={containerType}
+            styling={styles}
+            className={cn}
+            onClick={onClick}
+        >
+            {props.children}
+        </FlexboxWrapper>
+    );
+    {
     }
 };
 

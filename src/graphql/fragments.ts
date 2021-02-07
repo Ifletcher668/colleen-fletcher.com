@@ -1,4 +1,4 @@
-import {graphql} from 'gatsby';
+import { graphql } from 'gatsby';
 
 // Strapi Content Types
 export const StrapiMenuItem = graphql`
@@ -185,15 +185,20 @@ export const StrapiComponentMediaSingleImage = graphql`
         file {
             ...StrapiUploadFile
         }
+        isCircle: is_circle
+        hasBorder: has_border
     }
 `;
 
 export const StrapiComponentMediaImages = graphql`
     fragment StrapiComponentMediaImages on STRAPI_ComponentMediaImages {
         id
+        imageLayout: style
         files {
             ...StrapiUploadFile
         }
+        isCircle: is_circle
+        hasBorder: has_border
     }
 `;
 
@@ -285,7 +290,7 @@ export const StrapiComponentSectionHeadingRightImageLeft = graphql`
             ...StrapiComponentTextHeading
         }
         image {
-            ...StrapiUploadFile
+            ...StrapiComponentMediaSingleImage
         }
     }
 `;
@@ -294,7 +299,7 @@ export const StrapiComponentSectionHeadingLeftImageRight = graphql`
     fragment StrapiComponentSectionHeadingLeftImageRight on STRAPI_ComponentSectionHeadingLeftImageRight {
         id
         image {
-            ...StrapiUploadFile
+            ...StrapiComponentMediaSingleImage
         }
         heading {
             ...StrapiComponentTextHeading
@@ -306,7 +311,7 @@ export const StrapiComponentSectionImageRightTextLeft = graphql`
     fragment StrapiComponentSectionImageRightTextLeft on STRAPI_ComponentSectionImageRightTextLeft {
         id
         image {
-            ...StrapiUploadFile
+            ...StrapiComponentMediaSingleImage
         }
         text {
             ...StrapiComponentTextParagraph
@@ -318,10 +323,10 @@ export const StrapiComponentSectionTextRightImageLeft = graphql`
     fragment StrapiComponentSectionTextRightImageLeft on STRAPI_ComponentSectionTextRightImageLeft {
         id
         text {
-            body
+            ...StrapiComponentTextParagraph
         }
         image {
-            ...StrapiUploadFile
+            ...StrapiComponentMediaSingleImage
         }
     }
 `;
@@ -330,13 +335,13 @@ export const StrapiComponentSectionTextCenterImageEitherSide = graphql`
     fragment StrapiComponentSectionTextCenterImageEitherSide on STRAPI_ComponentSectionTextCenterImageEitherSide {
         id
         image_left {
-            ...StrapiUploadFile
+            ...StrapiComponentMediaSingleImage
         }
         text {
-            body
+            ...StrapiComponentTextParagraph
         }
         image_right {
-            ...StrapiUploadFile
+            ...StrapiComponentMediaSingleImage
         }
     }
 `;
@@ -348,7 +353,7 @@ export const StrapiComponentSectionImageCenterTextEitherSide = graphql`
             ...StrapiComponentTextParagraph
         }
         image {
-            ...StrapiUploadFile
+            ...StrapiComponentMediaSingleImage
         }
         text_right {
             ...StrapiComponentTextParagraph

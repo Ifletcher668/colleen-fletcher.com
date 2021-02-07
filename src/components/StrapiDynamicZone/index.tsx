@@ -6,9 +6,9 @@ import {
     OfferingsField,
     ServicesField,
 } from '../Collections';
-import {SingleImageField, ImagesField} from '../Media';
-import {Paragraph, HeadingField, QuoteField} from '../Text';
-import {DividerField, ButtonField} from '../Widgets';
+import { SingleImageField, ImagesField } from '../Media';
+import { Paragraph, HeadingField, QuoteField } from '../Text';
+import { DividerField, ButtonField } from '../Widgets';
 import {
     ImageCenterTextEitherSideField,
     TextCenterImageEitherSideField,
@@ -37,16 +37,23 @@ const StrapiDynamicZone: React.FC<Props> = ({
             {components.map((component, idx) => {
                 switch (component.__typename) {
                     case 'STRAPI_ComponentMediaSingleImage':
+                        const singleImageData = {
+                            file: component.file,
+                            isCircle: component.isCircle,
+                            hasBorder: component.hasBorder,
+                        };
                         return (
                             <SingleImageField
-                                data={component.file}
+                                data={singleImageData}
                                 key={`${idx}${component.__typename}`}
                             />
                         );
                     case 'STRAPI_ComponentMediaImages':
-                        const imagesData = {
+                        const imagesData: StrapiComponentMediaImages = {
                             style: component.style,
                             files: component.files,
+                            isCircle: component.isCircle,
+                            hasBorder: component.hasBorder,
                         };
                         return (
                             <ImagesField
@@ -54,43 +61,9 @@ const StrapiDynamicZone: React.FC<Props> = ({
                                 key={`${idx}${component.__typename}`}
                             />
                         );
+
                     // TODO: Add file and video support
-                    // case 'STRAPI_ComponentMediaSingleFile':
-                    //     return (
-                    //         <h3
-                    //             className="center"
-                    //             key={`${idx}${component.__typename}`}
-                    //         >
-                    //             Single File
-                    //         </h3>
-                    //     );
-                    // case 'STRAPI_ComponentMediaFiles':
-                    //     return (
-                    //         <h3
-                    //             className="center"
-                    //             key={`${idx}$${component.__typename}`}
-                    //         >
-                    //             Multiple Files
-                    //         </h3>
-                    //     );
-                    // case 'STRAPI_ComponentMediaSingleVideo':
-                    //     return (
-                    //         <h3
-                    //             className="center"
-                    //             key={`${idx}${component.__typename}`}
-                    //         >
-                    //             Single Video
-                    //         </h3>
-                    //     );
-                    // case 'STRAPI_ComponentMediaVideos':
-                    //     return (
-                    //         <h3
-                    //             className="center"
-                    //             key={`${idx}${component.__typename}`}
-                    //         >
-                    //             Multiple Videos
-                    //         </h3>
-                    //     );
+
                     case 'STRAPI_ComponentTextHeading':
                         const headingData = {
                             headingText: component.headingText,
@@ -105,6 +78,7 @@ const StrapiDynamicZone: React.FC<Props> = ({
                                 data={headingData}
                             />
                         );
+
                     case 'STRAPI_ComponentTextParagraph':
                         const bodyData = {
                             body: component.body,
@@ -117,6 +91,7 @@ const StrapiDynamicZone: React.FC<Props> = ({
                                 data={bodyData}
                             />
                         );
+
                     case 'STRAPI_ComponentTextQuote':
                         return (
                             <QuoteField
@@ -124,17 +99,20 @@ const StrapiDynamicZone: React.FC<Props> = ({
                                 data={component.text}
                             />
                         );
+
                     case 'STRAPI_ComponentSectionTextRightImageLeft':
                         const textWithImageLeftSideData = {
                             image: component.image,
                             text: component.text,
                         };
+
                         return (
                             <TextWithImageLeftSideField
                                 key={`${idx}${component.__typename}`}
                                 data={textWithImageLeftSideData}
                             />
                         );
+
                     case 'STRAPI_ComponentSectionImageRightTextLeft':
                         const textWithImageRightSideData = {
                             image: component.image,
@@ -146,6 +124,7 @@ const StrapiDynamicZone: React.FC<Props> = ({
                                 data={textWithImageRightSideData}
                             />
                         );
+
                     case 'STRAPI_ComponentSectionHeadingLeftImageRight':
                         const headerWithImageRightSideData = {
                             heading: component.heading,
@@ -157,6 +136,7 @@ const StrapiDynamicZone: React.FC<Props> = ({
                                 key={`${idx}${component.__typename}`}
                             />
                         );
+
                     case 'STRAPI_ComponentSectionHeadingRightImageLeft':
                         const headerWithImageLeftSideData = {
                             heading: component.heading,
@@ -168,6 +148,7 @@ const StrapiDynamicZone: React.FC<Props> = ({
                                 key={`${idx}${component.__typename}`}
                             />
                         );
+
                     case 'STRAPI_ComponentSectionTextCenterImageEitherSide':
                         const textCenterImageEitherSideFieldData = {
                             image_left: component.image_left,
@@ -180,6 +161,7 @@ const StrapiDynamicZone: React.FC<Props> = ({
                                 key={`${idx}${component.__typename}`}
                             />
                         );
+
                     case 'STRAPI_ComponentSectionImageCenterTextEitherSide':
                         const imageCenterTextEitherSideFieldData = {
                             text_left: component.text_left,
@@ -192,6 +174,7 @@ const StrapiDynamicZone: React.FC<Props> = ({
                                 key={`${idx}${component.__typename}`}
                             />
                         );
+
                     case 'STRAPI_ComponentWidgetDivider':
                         return (
                             <DividerField
@@ -199,6 +182,7 @@ const StrapiDynamicZone: React.FC<Props> = ({
                                 data={component.style}
                             />
                         );
+
                     case 'STRAPI_ComponentWidgetButton':
                         const buttonData: StrapiComponentWidgetButton = {
                             buttonText: component.buttonText,
@@ -211,6 +195,7 @@ const StrapiDynamicZone: React.FC<Props> = ({
                                 data={buttonData}
                             />
                         );
+
                     case 'STRAPI_ComponentCollectionsOfferings':
                         return (
                             <OfferingsField
@@ -219,6 +204,7 @@ const StrapiDynamicZone: React.FC<Props> = ({
                                 previews={previews!.offeringPreviews}
                             />
                         );
+
                     case 'STRAPI_ComponentCollectionsBlogs':
                         return (
                             <Grid
@@ -228,7 +214,7 @@ const StrapiDynamicZone: React.FC<Props> = ({
                                     xlarge: `[left] 1fr [right] 1fr`,
                                     small: `1fr`,
                                 }}
-                                styling={{gap: `5em`}}
+                                styling={{ gap: `5em` }}
                             >
                                 <BlogsField
                                     data={component.blogs}
@@ -236,6 +222,7 @@ const StrapiDynamicZone: React.FC<Props> = ({
                                 />
                             </Grid>
                         );
+
                     case 'STRAPI_ComponentCollectionsBlogPosts':
                         return (
                             <BlogPostsField
@@ -243,6 +230,7 @@ const StrapiDynamicZone: React.FC<Props> = ({
                                 data={component.blog_posts}
                             />
                         );
+
                     case 'STRAPI_ComponentCollectionsServices':
                         return (
                             <ServicesField

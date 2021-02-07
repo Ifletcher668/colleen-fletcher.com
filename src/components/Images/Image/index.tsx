@@ -3,59 +3,41 @@ import GatsbyImage, { GatsbyImageFluidProps } from 'gatsby-image';
 import styled from 'styled-components';
 
 interface Props {
-    uploadFile?: StrapiUploadFile;
-    imageComponent?: StrapiComponentMediaSingleImage;
-    circle?: boolean;
+    data: StrapiComponentMediaSingleImage;
 }
 
-const Image: React.FC<Props> = (props: Props) => {
-    const { uploadFile, imageComponent } = props;
-    if (uploadFile) {
-        const { alternativeText, caption, imageFile } = uploadFile;
-        return (
-            <ImageWrapper
-                alt={alternativeText ? alternativeText : ''}
-                title={caption ? caption : ''}
-                fluid={
-                    imageFile.childImageSharp.fluid
-                        ? imageFile.childImageSharp.fluid
-                        : ''
-                }
-            />
-        );
-    } else if (imageComponent) {
-        const { file } = imageComponent;
-        if (file === null || file === undefined) {
-            console.log('imageComponent file is null');
-            return <></>;
-        }
+const Image: React.FC<Props> = ({ data }: Props) => {
+    const { file, hasBorder, isCircle } = data;
+    if (file === null || file === undefined) {
+        console.log('imageComponent file is null');
+        return <></>;
+    }
 
-        const { alternativeText, caption, imageFile } = file;
-        return (
-            <ImageWrapper
-                alt={alternativeText ? alternativeText : ''}
-                title={caption ? caption : ''}
-                fluid={
-                    imageFile.childImageSharp.fluid
-                        ? imageFile.childImageSharp.fluid
-                        : ''
-                }
-            />
-        );
-    } else
-        return (
-            <>
-                {console.error(
-                    `Error! No image found when passing to 'Image' component`,
-                )}
-            </>
-        );
+    const { alternativeText, caption, imageFile } = file;
+    return (
+        <ImageWrapper
+            alt={alternativeText ? alternativeText : ''}
+            title={caption ? caption : ''}
+            fluid={
+                imageFile.childImageSharp.fluid
+                    ? imageFile.childImageSharp.fluid
+                    : ''
+            }
+            hasBorder={hasBorder}
+            isCircle={isCircle}
+        />
+    );
 };
 
 export default Image;
 
-interface WrapperProps extends Props, Pick<GatsbyImageFluidProps, 'fluid'> {}
+interface WrapperProps extends Pick<GatsbyImageFluidProps, 'fluid'> {
+    hasBorder: boolean;
+    isCircle: boolean;
+}
 
 const ImageWrapper = styled(GatsbyImage)<WrapperProps>`
-    border-radius: ${p => (p.circle ? '1000px' : '2px')};
+    border: ${p =>
+        p.hasBorder ? '1.5px solid' + p.theme.color.aterrima : 'none'};
+    border-radius: ${p => (p.isCircle ? '1000px' : '2px')};
 `;

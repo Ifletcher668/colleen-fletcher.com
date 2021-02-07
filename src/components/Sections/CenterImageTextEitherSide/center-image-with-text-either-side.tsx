@@ -1,19 +1,19 @@
 import React from 'react';
-import {Grid} from '../../Containers';
-import {SingleImageField} from '../../Media';
-import {Paragraph} from '../../Text';
-import {GridArea} from '../../../StyledComponents/helpers';
+import { Grid } from '../../Containers';
+import { SingleImageField } from '../../Media';
+import { Paragraph } from '../../Text';
+import { GridArea } from '../../../StyledComponents/helpers';
 
 export interface Props {
     data: {
-        image: StrapiUploadFile;
+        image: StrapiComponentMediaSingleImage;
         text_right: StrapiComponentTextParagraph;
         text_left: StrapiComponentTextParagraph;
     };
 }
 
-const ImageCenterTextEitherSideField: React.FC<Props> = ({data}: Props) => {
-    const {image, text_right, text_left} = data;
+const ImageCenterTextEitherSideField: React.FC<Props> = ({ data }: Props) => {
+    const { image, text_right, text_left } = data;
     return (
         <Grid
             containerType="section"

@@ -1,17 +1,17 @@
 import React from 'react';
 import Button from '../../Button';
-import Alink from 'gatsby-plugin-transition-link/AniLink';
+import PaintDripLink from '../../TransitionLink';
 
 export interface Props {
     data: StrapiComponentWidgetButton;
 }
 
 const ButtonField: React.FC<Props> = ({
-    data: {buttonText, variant, action},
+    data: { buttonText, variant, action },
 }: Props) => {
     return (
         <Button center variant={variant} type="button">
-            <Alink to={action}>{buttonText}</Alink>
+            <PaintDripLink to={action}>{buttonText}</PaintDripLink>
         </Button>
     );
 };

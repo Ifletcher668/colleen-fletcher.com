@@ -21,6 +21,7 @@ const BlogsField: React.FC<Props> = ({ data, previews }: Props) => {
                     const buttonPath = blog.fullUrlPath;
                     button.action = buttonPath;
                 }
+
                 return (
                     <Grid
                         key={idx}
@@ -33,8 +34,8 @@ const BlogsField: React.FC<Props> = ({ data, previews }: Props) => {
                             xlarge: `0.1fr minmax(5em, 10em) 1fr minmax(1em,1.5em)`,
                         }}
                     >
-                        <HeadingField center data={heading} />
-                        <ImageWithCaption imageComponent={image} />
+                        <HeadingField data={heading} />
+                        <ImageWithCaption data={image} />
                         <Paragraph data={text} />
                         <ButtonField data={button} />
                     </Grid>

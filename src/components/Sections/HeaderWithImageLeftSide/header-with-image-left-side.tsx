@@ -1,18 +1,19 @@
 import React from 'react';
-import {GridArea} from '../../../StyledComponents/helpers';
-import {Grid} from '../../Containers';
-import {SingleImageField} from '../../Media';
-import {HeadingField} from '../../Text';
+import { GridArea } from '../../../StyledComponents/helpers';
+import { Grid } from '../../Containers';
+import { SingleImageField } from '../../Media';
+import { HeadingField } from '../../Text';
 
 export interface Props {
     data: {
         heading: StrapiComponentTextHeading;
-        image: StrapiUploadFile;
+        image: StrapiComponentMediaSingleImage;
     };
 }
 
-const HeaderWithImageLeftSideField: React.FC<Props> = ({data}: Props) => {
-    const {heading, image} = data;
+const HeaderWithImageLeftSideField: React.FC<Props> = ({ data }: Props) => {
+    const { heading, image } = data;
+
     return (
         <Grid
             containerType="section"
@@ -20,7 +21,6 @@ const HeaderWithImageLeftSideField: React.FC<Props> = ({data}: Props) => {
                 xlarge: `[image] 1fr [spacer] 0.5fr [text] 2fr`,
                 small: `1f`,
             }}
-            styling={{alignItems: `center`}}
         >
             <GridArea column="text">
                 <HeadingField data={heading} />

@@ -6,8 +6,8 @@ export interface Props {
     data: StrapiComponentTextParagraph;
 }
 
-const Paragraph: React.FC<Props> = ({data}: Props) => {
-    const {body, alignParagraph, justifyParagraph} = data;
+const Paragraph: React.FC<Props> = ({ data }: Props) => {
+    const { body, alignParagraph, justifyParagraph } = data;
 
     return (
         <TextWrapper
@@ -17,7 +17,7 @@ const Paragraph: React.FC<Props> = ({data}: Props) => {
             allowDangerousHtml
             className="paragraph"
             renderers={{
-                link: ({href, title}) => {
+                link: ({ href, title }) => {
                     return (
                         <a href={href} target="__blank">
                             {title}
@@ -35,11 +35,28 @@ interface WrapperProps {
     alignParagraph: AlignValues;
     justifyParagraph: JustifyValues;
 }
-// left == start | center == center | right == end
-//
-const TextWrapper = styled(MarkdownField)<WrapperProps>`
-    display: grid;
-    justify-content: ${props => props.justifyParagraph};
 
-    align-items: ${props => props.alignParagraph};
+const TextWrapper = styled(MarkdownField)<WrapperProps>`
+    align-self: ${props => {
+        switch (props.alignParagraph) {
+            case 'top':
+                return 'start';
+            case 'center':
+                return 'center';
+            default:
+                // end
+                return 'end';
+        }
+    }};
+    justify-self: ${props => {
+        switch (props.justifyParagraph) {
+            case 'left':
+                return 'start';
+            case 'center':
+                return 'center';
+            default:
+                // right
+                return 'end';
+        }
+    }};
 `;

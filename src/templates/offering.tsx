@@ -5,12 +5,12 @@ import { Image } from '../components/Images/';
 import Heading from '../components/Heading';
 import { Grid } from '../components/Containers';
 import { PageContainer } from '../components/Containers';
-import PaintDripLink from '../components/TransitionLink';
 import { ImageWithCaption } from '../components/Images';
 import { zigZagGridColumns } from '../utils/zigZagGridColumns';
-import { Paragraph } from '../components/Text';
+import { HeadingField, Paragraph } from '../components/Text';
 import { GridArea } from '../StyledComponents/helpers';
 import Divider from '../components/Divider';
+import { ButtonField } from '../components/Widgets';
 interface Props {
     data: Strapi;
 }
@@ -31,14 +31,21 @@ export default (props: Props): JSX.Element => {
             {offering.services && offering.services.length > 0 && (
                 <Grid containerType="section">
                     {offering.services.map((service, idx) => {
-                        const zigZag = zigZagGridColumns(idx);
+                        const zigZagColumLayout = zigZagGridColumns(idx);
+
+                        // Mutating button data to append offering's url
+                        const buttonData: StrapiComponentWidgetButton = {
+                            action: `${offering.fullUrlPath}${service.slug}`,
+                            buttonText: service.preview.button.buttonText,
+                            variant: service.preview.button.variant,
+                        };
                         return (
                             <Grid
                                 key={idx}
                                 containerType="article"
-                                columns={zigZag}
+                                columns={zigZagColumLayout}
                                 rows={{
-                                    xlarge: `[content] 1fr [divider] 0.001fr`,
+                                    xlarge: `[content] 1fr [divider] 0.01fr`,
                                 }}
                                 styling={{
                                     margin: `2em 0em`,
@@ -47,23 +54,25 @@ export default (props: Props): JSX.Element => {
                             >
                                 {service.preview && service.preview.image && (
                                     <GridArea column="image" row="content">
-                                        <Image
+                                        <ImageWithCaption
+                                            circle
                                             imageComponent={
                                                 service.preview.image
                                             }
                                         />
                                     </GridArea>
                                 )}
+
                                 <GridArea column="text" row="content">
-                                    <Heading level={3}>
-                                        <PaintDripLink
-                                            to={`${offering.fullUrlPath}${service.slug}`}
-                                        >
-                                            {service.title}
-                                        </PaintDripLink>
-                                    </Heading>
+                                    <HeadingField
+                                        data={service.preview.heading}
+                                    />
+
                                     <Paragraph data={service.preview.text} />
+
+                                    <ButtonField data={buttonData} />
                                 </GridArea>
+
                                 <GridArea column="full" row="divider">
                                     <Divider type="standard" />
                                 </GridArea>
@@ -75,7 +84,6 @@ export default (props: Props): JSX.Element => {
         </PageContainer>
     );
 };
-// Here is where I map all this offering's services
 
 export const query = graphql`
     query GET_OFFERING_PAGE($id: ID!) {

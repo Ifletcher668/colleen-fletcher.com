@@ -1,59 +1,70 @@
 import React from 'react';
+import styled from 'styled-components';
+import { Heading as HeadingAtom } from '../Atoms';
 
 interface Props extends DefaultProps {
     level: 1 | 2 | 3 | 4 | 5 | 6;
     tilt?: 'up' | 'even' | 'down';
-    center?: boolean;
+    alignHeading?: AlignValues;
+    justifyHeading?: JustifyValues;
 }
 
 const Heading: React.FC<Props> = ({
     level,
     children,
-    style,
     tilt,
-    center,
-}: Props) => {
-    const cn = `${
-        tilt === 'even' || tilt === undefined ? '' : `tilt-${tilt}`
-    } ${center ? 'center' : ''}`;
-    switch (level) {
-        case 1:
-            return (
-                <h1 style={style} className={cn}>
-                    {children}
-                </h1>
-            );
-        case 2:
-            return (
-                <h2 style={style} className={cn}>
-                    {children}
-                </h2>
-            );
-        case 3:
-            return (
-                <h3 style={style} className={cn}>
-                    {children}
-                </h3>
-            );
-        case 4:
-            return (
-                <h4 style={style} className={cn}>
-                    {children}
-                </h4>
-            );
-        case 5:
-            return (
-                <h5 style={style} className={cn}>
-                    {children}
-                </h5>
-            );
-        default:
-            return (
-                <h6 style={style} className={cn}>
-                    {children}
-                </h6>
-            );
-    }
+    alignHeading,
+    justifyHeading,
+}: Props): JSX.Element => {
+    return (
+        <HeadingWrapper
+            tilt={tilt}
+            alignHeading={alignHeading}
+            justifyHeading={justifyHeading}
+            as={`h${level}`}
+        >
+            {children}
+        </HeadingWrapper>
+    );
 };
 
 export default Heading;
+
+interface WrapperProps
+    extends Pick<Props, 'tilt' | 'alignHeading' | 'justifyHeading'> {}
+
+const HeadingWrapper = styled(HeadingAtom)<WrapperProps>`
+    transform: ${props => {
+        switch (props.tilt) {
+            case 'even':
+                return 'rotate(0deg)';
+            case 'down':
+                return 'rotate(-1deg)';
+            default:
+                // 'up
+                return 'rotate(1deg)';
+        }
+    }};
+    align-self: ${props => {
+        switch (props.alignHeading) {
+            case 'top':
+                return 'start';
+            case 'center':
+                return 'center';
+            default:
+                // end
+                return 'end';
+        }
+    }};
+    justify-self: ${props => {
+        switch (props.justifyHeading) {
+            case 'left':
+                return 'start';
+            case 'center':
+                return 'center';
+            default:
+                // right
+                return 'end';
+        }
+    }};
+`;

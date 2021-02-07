@@ -15,17 +15,13 @@ interface Props {
     row?: 'content' | 'divider';
 }
 export const GridArea = styled.div<Props>`
+    display: grid; // allows text to move based on props
     grid-column: ${props =>
-        props.column === 'full' ? '1 / span 3' : props.column};
-    grid-row: ${props => props.row === 'divider' && props.row};
+        props.column === 'full'
+            ? '1 / span 3'
+            : props.column}; // 1 / span 3 makes it full width
     ${props =>
-        above(props.theme.breakpoint.medium, {
+        above(props.theme.breakpoint.small, {
             'grid-row': props.row,
         })};
-`;
-
-// 1 / span 3 makes it full width
-export const GridDivider = styled.div<Props>`
-    grid-column: 1 / span 3;
-    grid-row: divider;
 `;

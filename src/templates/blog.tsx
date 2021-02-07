@@ -1,11 +1,11 @@
 import React from 'react';
-import {graphql} from 'gatsby';
+import { graphql } from 'gatsby';
 import Image from 'gatsby-image';
 import Heading from '../components/Heading';
-import {Grid} from '../components/Containers';
-import {PageContainer} from '../components/Containers';
+import { Grid } from '../components/Containers';
+import { PageContainer } from '../components/Containers';
 import MarkdownField from 'react-markdown';
-import {Card, CardHeader, CardBody, CardFooter} from '../components/Card';
+import { Card, CardHeader, CardBody, CardFooter } from '../components/Card';
 import PaintDripLink from '../components/TransitionLink';
 interface Props {
     data: Strapi;
@@ -14,7 +14,7 @@ interface Props {
 export default (props: Props): JSX.Element => {
     const {
         data: {
-            strapi: {blog},
+            strapi: { blog },
         },
     } = props;
 
@@ -46,7 +46,9 @@ export default (props: Props): JSX.Element => {
                             <Grid
                                 key={idx}
                                 columns={zigZagGridColumns}
-                                rows={{xlarge: `[content] 1fr [spacer] 0.2fr`}}
+                                rows={{
+                                    xlarge: `[content] 1fr [spacer] 0.2fr`,
+                                }}
                             >
                                 <Image
                                     alt={
