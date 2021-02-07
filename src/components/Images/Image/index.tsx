@@ -25,7 +25,10 @@ const Image: React.FC<Props> = (props: Props) => {
         );
     } else if (imageComponent) {
         const { file } = imageComponent;
-        if (file === null || file === undefined) return <> </>;
+        if (file === null || file === undefined) {
+            console.log('imageComponent file is null');
+            return <></>;
+        }
 
         const { alternativeText, caption, imageFile } = file;
         return (
