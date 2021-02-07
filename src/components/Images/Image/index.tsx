@@ -24,6 +24,7 @@ const Image: React.FC<Props> = (props: Props) => {
             />
         );
     } else if (imageComponent) {
+        console.log(imageComponent);
         const {
             file: { alternativeText, caption, imageFile },
         } = imageComponent;
