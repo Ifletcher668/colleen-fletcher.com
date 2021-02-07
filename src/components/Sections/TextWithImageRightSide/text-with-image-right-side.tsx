@@ -1,8 +1,8 @@
 import React from 'react';
-import {Grid} from '../../Containers';
-import {SingleImageField} from '../../Media';
-import {Paragraph} from '../../Text';
-import {GridArea} from '../../../StyledComponents/helpers';
+import { Grid } from '../../Containers';
+import { SingleImageField } from '../../Media';
+import { Paragraph } from '../../Text';
+import { GridArea } from '../../../StyledComponents/helpers';
 
 export interface Props {
     data: {
@@ -11,8 +11,10 @@ export interface Props {
     };
 }
 
-const TextWithImageRightSideField: React.FC<Props> = ({data}: Props) => {
-    const {image, text} = data;
+const TextWithImageRightSideField: React.FC<Props> = ({
+    data,
+}: Props): JSX.Element => {
+    const { image, text } = data;
 
     return (
         <Grid

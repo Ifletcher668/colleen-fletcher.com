@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from 'gatsby-image';
+import { Image } from '../index';
 import { Flexbox } from '../../Containers';
 import { CSSObject } from 'styled-components';
 import { FigCaption } from '../../Atoms';
@@ -19,34 +19,19 @@ interface Props extends FlexboxProps {
 }
 
 const ImageWithCaption: React.FC<Props> = (props: Props) => {
-    const {
-        circle,
-        styling,
-        uploadFile,
-        imageComponent,
-        containerType = 'div',
-    } = props;
+    const { uploadFile, imageComponent, containerType = 'div' } = props;
+
     if (uploadFile) {
         return (
             <Flexbox containerType={containerType} vertical {...props}>
-                <Image
-                    className={circle ? 'circle' : ''}
-                    alt={uploadFile.alternativeText}
-                    title={uploadFile.caption}
-                    fluid={uploadFile.imageFile.childImageSharp.fluid}
-                />
+                <Image uploadFile={uploadFile} />
                 <FigCaption>{uploadFile.caption}</FigCaption>
             </Flexbox>
         );
     } else if (imageComponent) {
         return (
             <Flexbox containerType={containerType} around vertical {...props}>
-                <Image
-                    className={circle ? 'circle' : ''}
-                    alt={imageComponent.file.alternativeText}
-                    title={imageComponent.file.caption}
-                    fluid={imageComponent.file.imageFile.childImageSharp.fluid}
-                />
+                <Image imageComponent={imageComponent} />
                 <FigCaption>{imageComponent.file.caption}</FigCaption>
             </Flexbox>
         );

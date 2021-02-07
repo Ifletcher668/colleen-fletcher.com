@@ -19,10 +19,9 @@ export const GridArea = styled.div<Props>`
         props.column === 'full' ? '1 / span 3' : props.column};
     grid-row: ${props => props.row === 'divider' && props.row};
     ${props =>
-        above(props.theme['bp-md'] as number, {
+        above(props.theme.breakpoint.medium, {
             'grid-row': props.row,
         })};
-    ${p => console.log(p.theme)}
 `;
 
 // 1 / span 3 makes it full width

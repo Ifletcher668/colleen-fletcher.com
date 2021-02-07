@@ -1,4 +1,4 @@
-import {CSSObject} from 'styled-components';
+import { CSSObject } from 'styled-components';
 export default class BreakpointHandler {
     private _getCSSVariable(varName: string) {
         return typeof window !== 'undefined'
@@ -137,13 +137,20 @@ export default class BreakpointHandler {
      * An object of CSS properties to pass into the media query.
      */
     // TODO: refactor to allow all value types
-    public above: (max: number, children: CSSObject) => string = (
-        max: number,
+    public above: (max: number | string, children: CSSObject) => string = (
+        max: number | string,
         children: CSSObject,
     ) => {
-        return `@media screen and (min-width:${
-            (max - 0.01).toString() + 'px'
-        }) {
+        const rootFontSize = this.getFontSize('html');
+        const val =
+            typeof max === 'number'
+                ? (max - 0.01).toString() + 'px'
+                : this._convertCSSSizeVariableStringToNumber(max).reduce(
+                      (p, c) =>
+                          ((p as number) / rootFontSize - 0.01).toString() + c,
+                  );
+
+        return `@media screen and (min-width:${val}) {
             ${this._stringifyCSSPropertyObject(children)}
         }
         `;
@@ -158,13 +165,19 @@ export default class BreakpointHandler {
      * @param children
      * An object of CSS properties to pass into the media query.
      */
-    public below: (min: number, children: CSSObject) => string = (
-        min: number,
+    public below: (min: number | string, children: CSSObject) => string = (
+        min: number | string,
         children: CSSObject,
     ) => {
-        return `@media screen and (max-width:${
-            (min + 0.01).toString() + 'px'
-        }) {
+        const rootFontSize = this.getFontSize('html');
+        const val =
+            typeof min === 'number'
+                ? (min - 0.01).toString() + 'px'
+                : this._convertCSSSizeVariableStringToNumber(min).reduce(
+                      (p, c) =>
+                          ((p as number) / rootFontSize - 0.01).toString() + c,
+                  );
+        return `@media screen and (max-width:${val}) {
             ${this._stringifyCSSPropertyObject(children)}
         }
         `;

@@ -1,5 +1,6 @@
 import React from 'react';
-import GatsbyImage from 'gatsby-image';
+import GatsbyImage, { GatsbyImageFluidProps } from 'gatsby-image';
+import styled from 'styled-components';
 
 interface Props {
     uploadFile?: StrapiUploadFile;
@@ -8,23 +9,33 @@ interface Props {
 }
 
 const Image: React.FC<Props> = (props: Props) => {
-    const {circle, uploadFile, imageComponent} = props;
+    const { uploadFile, imageComponent } = props;
     if (uploadFile) {
+        const { alternativeText, caption, imageFile } = uploadFile;
         return (
-            <GatsbyImage
-                className={circle ? 'circle' : ''}
-                alt={uploadFile.alternativeText}
-                title={uploadFile.caption}
-                fluid={uploadFile.imageFile.childImageSharp.fluid}
+            <ImageWrapper
+                alt={alternativeText ? alternativeText : ''}
+                title={caption ? caption : ''}
+                fluid={
+                    imageFile.childImageSharp.fluid
+                        ? imageFile.childImageSharp.fluid
+                        : ''
+                }
             />
         );
     } else if (imageComponent) {
+        const {
+            file: { alternativeText, caption, imageFile },
+        } = imageComponent;
         return (
-            <GatsbyImage
-                className={circle ? 'circle' : ''}
-                alt={imageComponent.file.alternativeText}
-                title={imageComponent.file.caption}
-                fluid={imageComponent.file.imageFile.childImageSharp.fluid}
+            <ImageWrapper
+                alt={alternativeText ? alternativeText : ''}
+                title={caption ? caption : ''}
+                fluid={
+                    imageFile.childImageSharp.fluid
+                        ? imageFile.childImageSharp.fluid
+                        : ''
+                }
             />
         );
     } else
@@ -38,3 +49,9 @@ const Image: React.FC<Props> = (props: Props) => {
 };
 
 export default Image;
+
+interface WrapperProps extends Props, Pick<GatsbyImageFluidProps, 'fluid'> {}
+
+const ImageWrapper = styled(GatsbyImage)<WrapperProps>`
+    border-radius: ${p => (p.circle ? '1000px' : '2px')};
+`;
