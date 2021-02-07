@@ -1,7 +1,7 @@
 // Named "Work With Me on the page"
 import React from 'react';
 import { graphql } from 'gatsby';
-import Image from 'gatsby-image';
+import { Image } from '../components/Images/';
 import Heading from '../components/Heading';
 import { Grid } from '../components/Containers';
 import { PageContainer } from '../components/Containers';
@@ -48,18 +48,8 @@ export default (props: Props): JSX.Element => {
                                 {service.preview && service.preview.image && (
                                     <GridArea column="image" row="content">
                                         <Image
-                                            alt={
-                                                service.preview.image.file
-                                                    .alternativeText
-                                            }
-                                            title={
-                                                service.preview.image.file
-                                                    .caption
-                                            }
-                                            fluid={
-                                                service.preview.image.file
-                                                    .imageFile.childImageSharp
-                                                    .fluid
+                                            imageComponent={
+                                                service.preview.image
                                             }
                                         />
                                     </GridArea>
