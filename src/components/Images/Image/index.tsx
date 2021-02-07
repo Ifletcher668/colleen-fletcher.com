@@ -24,10 +24,10 @@ const Image: React.FC<Props> = (props: Props) => {
             />
         );
     } else if (imageComponent) {
-        console.log(imageComponent);
-        const {
-            file: { alternativeText, caption, imageFile },
-        } = imageComponent;
+        const { file } = imageComponent;
+        if (file === null || file === undefined) return <> </>;
+
+        const { alternativeText, caption, imageFile } = file;
         return (
             <ImageWrapper
                 alt={alternativeText ? alternativeText : ''}
