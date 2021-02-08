@@ -45,12 +45,14 @@ export default (props: Props): JSX.Element => {
 
                         const buttonData: StrapiComponentWidgetButton = {
                             action: `${post.fullUrlPath}`,
-                            buttonText: post.preview.button
-                                ? post.preview.button.buttonText
-                                : 'Click',
-                            variant: post.preview.button
-                                ? post.preview.button.variant
-                                : 'primary',
+                            buttonText:
+                                post.preview && post.preview.button
+                                    ? post.preview.button.buttonText
+                                    : 'Click',
+                            variant:
+                                post.preview && post.preview.button
+                                    ? post.preview.button.variant
+                                    : 'primary',
                         };
 
                         return (
