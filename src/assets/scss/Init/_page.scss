@@ -6,7 +6,15 @@
 }
 
 body {
-    background: color(background);
+    background: linear-gradient(
+            to bottom,
+            transparentize(#000, 0.8),
+            transparentize(#fff, 1),
+            transparentize(#fff, 0.7),
+            transparentize(#fff, 1),
+            transparentize(#000, 0.8)
+        ),
+        url('../images/background-milky-way.png') no-repeat center center fixed;
     @include clearfix();
     min-height: 100vh;
     scroll-behavior: smooth;
