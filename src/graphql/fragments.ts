@@ -250,7 +250,7 @@ export const StrapiComponentSectionHeadingRightImageLeft = graphql`
             ...StrapiComponentTextHeading
         }
         image {
-            ...StrapiComponentMediaSingleImage
+            ...StrapiUploadFile
         }
     }
 `;
@@ -259,7 +259,7 @@ export const StrapiComponentSectionHeadingLeftImageRight = graphql`
     fragment StrapiComponentSectionHeadingLeftImageRight on STRAPI_ComponentSectionHeadingLeftImageRight {
         id
         image {
-            ...StrapiComponentMediaSingleImage
+            ...StrapiUploadFile
         }
         heading {
             ...StrapiComponentTextHeading
@@ -271,7 +271,7 @@ export const StrapiComponentSectionImageRightTextLeft = graphql`
     fragment StrapiComponentSectionImageRightTextLeft on STRAPI_ComponentSectionImageRightTextLeft {
         id
         image {
-            ...StrapiComponentMediaSingleImage
+            ...StrapiUploadFile
         }
         text {
             ...StrapiComponentTextParagraph
@@ -286,7 +286,7 @@ export const StrapiComponentSectionTextRightImageLeft = graphql`
             ...StrapiComponentTextParagraph
         }
         image {
-            ...StrapiComponentMediaSingleImage
+            ...StrapiUploadFile
         }
     }
 `;
@@ -295,13 +295,13 @@ export const StrapiComponentSectionTextCenterImageEitherSide = graphql`
     fragment StrapiComponentSectionTextCenterImageEitherSide on STRAPI_ComponentSectionTextCenterImageEitherSide {
         id
         image_left {
-            ...StrapiComponentMediaSingleImage
+            ...StrapiUploadFile
         }
         text {
             ...StrapiComponentTextParagraph
         }
         image_right {
-            ...StrapiComponentMediaSingleImage
+            ...StrapiUploadFile
         }
     }
 `;
@@ -313,7 +313,7 @@ export const StrapiComponentSectionImageCenterTextEitherSide = graphql`
             ...StrapiComponentTextParagraph
         }
         image {
-            ...StrapiComponentMediaSingleImage
+            ...StrapiUploadFile
         }
         text_right {
             ...StrapiComponentTextParagraph
@@ -363,7 +363,7 @@ export const StrapiComponentGeneralPreview = graphql`
             ...StrapiComponentTextParagraph
         }
         image {
-            ...StrapiComponentMediaSingleImage
+            ...StrapiUploadFile
         }
         button {
             ...StrapiComponentWidgetButton
