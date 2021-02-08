@@ -185,6 +185,8 @@ export const StrapiComponentMediaSingleImage = graphql`
         file {
             ...StrapiUploadFile
         }
+        isCircle: is_circle
+        hasBorder: has_border
     }
 `;
 
@@ -195,42 +197,8 @@ export const StrapiComponentMediaImages = graphql`
         files {
             ...StrapiUploadFile
         }
-    }
-`;
-
-export const StrapiComponentMediaSingleVideo = graphql`
-    fragment StrapiComponentMediaSingleVideo on STRAPI_ComponentMediaSingleVideo {
-        id
-        file {
-            ...StrapiUploadFile
-        }
-    }
-`;
-
-export const StrapiComponentMediaVideos = graphql`
-    fragment StrapiComponentMediaVideos on STRAPI_ComponentMediaVideos {
-        id
-        files {
-            ...StrapiUploadFile
-        }
-    }
-`;
-
-export const StrapiComponentMediaSingleFile = graphql`
-    fragment StrapiComponentMediaSingleFile on STRAPI_ComponentMediaSingleFile {
-        id
-        file {
-            ...StrapiUploadFile
-        }
-    }
-`;
-
-export const StrapiComponentMediaFiles = graphql`
-    fragment StrapiComponentMediaFiles on STRAPI_ComponentMediaFiles {
-        id
-        files {
-            ...StrapiUploadFile
-        }
+        isCircle: is_circle
+        hasBorder: has_border
     }
 `;
 
