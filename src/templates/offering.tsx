@@ -28,7 +28,7 @@ export default (props: Props): JSX.Element => {
             {offering.services && offering.services.length > 0 && (
                 <Grid containerType="section">
                     {offering.services.map((service, idx) => {
-                        const zigZagColumLayout = zigZagGridColumns(idx);
+                        const zigZagColumnLayout = zigZagGridColumns(idx);
 
                         // Mutating button data to append offering's url
                         const buttonData: StrapiComponentWidgetButton = {
@@ -40,7 +40,7 @@ export default (props: Props): JSX.Element => {
                             <Grid
                                 key={idx}
                                 containerType="article"
-                                columns={zigZagColumLayout}
+                                columns={zigZagColumnLayout}
                                 rows={{
                                     xlarge: `[content] 1fr [divider] 0.01fr`,
                                 }}

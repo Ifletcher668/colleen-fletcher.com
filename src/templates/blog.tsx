@@ -8,6 +8,11 @@ import MarkdownField from 'react-markdown';
 import { Card, CardHeader, CardBody, CardFooter } from '../components/Card';
 import PaintDripLink from '../components/TransitionLink';
 import { zigZagGridColumns } from '../utils/zigZagGridColumns';
+import { GridArea } from '../StyledComponents/helpers';
+import { ImageWithCaption } from '../components/Images';
+import { HeadingField, Paragraph } from '../components/Text';
+import { ButtonField } from '../components/Widgets';
+import Divider from '../components/Divider';
 interface Props {
     data: Strapi;
 }
@@ -38,63 +43,50 @@ export default (props: Props): JSX.Element => {
                     {blog.blog_posts.map((post, idx) => {
                         const zigZagColumnLayout = zigZagGridColumns(idx);
 
+                        const buttonData: StrapiComponentWidgetButton = {
+                            action: `${blog.fullUrlPath}`,
+                            buttonText: post.preview.button.buttonText,
+                            variant: post.preview.button.variant,
+                        };
+
                         return (
                             <Grid
                                 key={idx}
+                                containerType="article"
                                 columns={zigZagColumnLayout}
                                 rows={{
-                                    xlarge: `[content] 1fr [spacer] 0.2fr`,
+                                    xlarge: `[content] 1fr [divider] 0.01fr`,
+                                }}
+                                styling={{
+                                    margin: `2em 0em`,
+                                    gap: `1em 0`,
                                 }}
                             >
-                                <Image
-                                    alt={
-                                        post.cover_image
-                                            ? post.cover_image.alternativeText
-                                            : ''
-                                    }
-                                    title={
-                                        post.cover_image
-                                            ? post.cover_image.caption
-                                            : ''
-                                    }
-                                    fluid={
-                                        post.cover_image
-                                            ? post.cover_image.imageFile
-                                                  .childImageSharp.fluid
-                                            : ''
-                                    }
-                                    style={{
-                                        gridColumn: `image`,
-                                        gridRow: 'content',
-                                    }}
-                                />
-                                <Card
-                                    style={{
-                                        gridColumn: `text`,
-                                        gridRow: 'content / span spacer',
-                                    }}
-                                >
-                                    <CardHeader>
-                                        <Heading
-                                            alignHeading="top"
-                                            justifyHeading="right"
-                                            level={3}
-                                        >
-                                            <PaintDripLink
-                                                to={post.fullUrlPath}
-                                            >
-                                                {post.title}
-                                            </PaintDripLink>
-                                        </Heading>
-                                    </CardHeader>
-                                    <CardBody>
-                                        <MarkdownField
-                                            source={post.preview}
-                                            allowDangerousHtml
-                                            className="paragraph"
+                                {post.preview && post.preview.image ? (
+                                    <GridArea column="image" row="content">
+                                        <ImageWithCaption
+                                            data={post.preview.image}
                                         />
-                                    </CardBody>
-                                </Card>
+                                    </GridArea>
+                                ) : (
+                                    <></>
+                                )}
+                                {post.preview && post.preview.heading ? (
+                                    <GridArea column="text" row="content">
+                                        <HeadingField
+                                            data={post.preview.heading}
+                                        />
+
+                                        <Paragraph data={post.preview.text} />
+
+                                        <ButtonField data={buttonData} />
+                                    </GridArea>
+                                ) : (
+                                    <></>
+                                )}
+                                <GridArea column="full" row="divider">
+                                    <Divider type="standard" />
+                                </GridArea>
                             </Grid>
                         );
                     })}

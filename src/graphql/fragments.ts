@@ -80,7 +80,9 @@ export const StrapiBlogPost = graphql`
         title
         slug
         published
-        preview
+        preview {
+            ...StrapiComponentGeneralPreview
+        }
         cover_image {
             ...StrapiUploadFile
         }
