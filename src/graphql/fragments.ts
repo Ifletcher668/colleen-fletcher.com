@@ -185,6 +185,8 @@ export const StrapiComponentMediaSingleImage = graphql`
         file {
             ...StrapiUploadFile
         }
+        isCircle: is_circle
+        hasBorder: has_border
     }
 `;
 
@@ -195,6 +197,8 @@ export const StrapiComponentMediaImages = graphql`
         files {
             ...StrapiUploadFile
         }
+        isCircle: is_circle
+        hasBorder: has_border
     }
 `;
 
