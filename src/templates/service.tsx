@@ -54,18 +54,7 @@ export const query = graphql`
                     ... on STRAPI_ComponentMediaImages {
                         ...StrapiComponentMediaImages
                     }
-                    ... on STRAPI_ComponentMediaSingleVideo {
-                        ...StrapiComponentMediaSingleVideo
-                    }
-                    ... on STRAPI_ComponentMediaVideos {
-                        ...StrapiComponentMediaVideos
-                    }
-                    ... on STRAPI_ComponentMediaSingleFile {
-                        ...StrapiComponentMediaSingleFile
-                    }
-                    ... on STRAPI_ComponentMediaFiles {
-                        ...StrapiComponentMediaFiles
-                    }
+
                     ... on STRAPI_ComponentTextParagraph {
                         ...StrapiComponentTextParagraph
                     }
@@ -107,18 +96,6 @@ export const query = graphql`
                     }
                     ... on STRAPI_ComponentMediaImages {
                         ...StrapiComponentMediaImages
-                    }
-                    ... on STRAPI_ComponentMediaSingleVideo {
-                        ...StrapiComponentMediaSingleVideo
-                    }
-                    ... on STRAPI_ComponentMediaVideos {
-                        ...StrapiComponentMediaVideos
-                    }
-                    ... on STRAPI_ComponentMediaSingleFile {
-                        ...StrapiComponentMediaSingleFile
-                    }
-                    ... on STRAPI_ComponentMediaFiles {
-                        ...StrapiComponentMediaFiles
                     }
                     ... on STRAPI_ComponentTextParagraph {
                         ...StrapiComponentTextParagraph

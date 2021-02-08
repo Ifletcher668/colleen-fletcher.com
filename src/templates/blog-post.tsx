@@ -1,10 +1,10 @@
 import React from 'react';
-import {graphql} from 'gatsby';
+import { graphql } from 'gatsby';
 import Heading from '../components/Heading';
 import StrapiDynamicZone from '../components/StrapiDynamicZone';
-import {Grid} from '../components/Containers';
-import {PageContainer} from '../components/Containers';
-import {ImageWithCaption} from '../components/Images';
+import { Grid } from '../components/Containers';
+import { PageContainer } from '../components/Containers';
+import { ImageWithCaption } from '../components/Images';
 
 interface Props {
     data: Strapi;
@@ -14,7 +14,7 @@ export default (props: Props): JSX.Element => {
     const {
         data: {
             strapi: {
-                blogPost: {title, body, cover_image},
+                blogPost: { title, body, cover_image },
             },
         },
     } = props;
@@ -28,7 +28,7 @@ export default (props: Props): JSX.Element => {
                 {cover_image && (
                     <ImageWithCaption
                         uploadFile={cover_image}
-                        styling={{margin: `0 0 4em 0`}}
+                        styling={{ margin: `0 0 4em 0` }}
                     />
                 )}
                 <StrapiDynamicZone components={body} />
@@ -55,18 +55,6 @@ export const query = graphql`
                     }
                     ... on STRAPI_ComponentMediaImages {
                         ...StrapiComponentMediaImages
-                    }
-                    ... on STRAPI_ComponentMediaSingleVideo {
-                        ...StrapiComponentMediaSingleVideo
-                    }
-                    ... on STRAPI_ComponentMediaVideos {
-                        ...StrapiComponentMediaVideos
-                    }
-                    ... on STRAPI_ComponentMediaSingleFile {
-                        ...StrapiComponentMediaSingleFile
-                    }
-                    ... on STRAPI_ComponentMediaFiles {
-                        ...StrapiComponentMediaFiles
                     }
                     ... on STRAPI_ComponentTextParagraph {
                         ...StrapiComponentTextParagraph

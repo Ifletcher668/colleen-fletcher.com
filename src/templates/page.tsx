@@ -1,7 +1,7 @@
 import React from 'react';
-import {graphql} from 'gatsby';
+import { graphql } from 'gatsby';
 import StrapiDynamicZone from '../components/StrapiDynamicZone';
-import {PageContainer} from '../components/Containers';
+import { PageContainer } from '../components/Containers';
 import SEO from '../components/SEO';
 import BannerBackgroundImage from '../components/Banner';
 
@@ -20,7 +20,7 @@ type Previews = {
 export default (props: Props): JSX.Element => {
     const {
         data: {
-            strapi: {page, blogs: blogPreviews, offerings: offeringPreviews},
+            strapi: { page, blogs: blogPreviews, offerings: offeringPreviews },
         },
     } = props;
 
@@ -60,18 +60,6 @@ export const query = graphql`
                     }
                     ... on STRAPI_ComponentMediaImages {
                         ...StrapiComponentMediaImages
-                    }
-                    ... on STRAPI_ComponentMediaSingleVideo {
-                        ...StrapiComponentMediaSingleVideo
-                    }
-                    ... on STRAPI_ComponentMediaVideos {
-                        ...StrapiComponentMediaVideos
-                    }
-                    ... on STRAPI_ComponentMediaSingleFile {
-                        ...StrapiComponentMediaSingleFile
-                    }
-                    ... on STRAPI_ComponentMediaFiles {
-                        ...StrapiComponentMediaFiles
                     }
                     ... on STRAPI_ComponentTextParagraph {
                         ...StrapiComponentTextParagraph
@@ -115,18 +103,7 @@ export const query = graphql`
                     ... on STRAPI_ComponentMediaImages {
                         ...StrapiComponentMediaImages
                     }
-                    ... on STRAPI_ComponentMediaSingleVideo {
-                        ...StrapiComponentMediaSingleVideo
-                    }
-                    ... on STRAPI_ComponentMediaVideos {
-                        ...StrapiComponentMediaVideos
-                    }
-                    ... on STRAPI_ComponentMediaSingleFile {
-                        ...StrapiComponentMediaSingleFile
-                    }
-                    ... on STRAPI_ComponentMediaFiles {
-                        ...StrapiComponentMediaFiles
-                    }
+
                     ... on STRAPI_ComponentTextParagraph {
                         ...StrapiComponentTextParagraph
                     }
