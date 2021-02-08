@@ -49,22 +49,22 @@ const HeadingWrapper = styled(HeadingAtom)<WrapperProps>`
         switch (props.alignHeading) {
             case 'top':
                 return 'start';
-            case 'center':
-                return 'center';
+            case 'bottom':
+                return 'end';
             default:
                 // end
-                return 'end';
+                return 'center';
         }
     }};
     justify-self: ${props => {
         switch (props.justifyHeading) {
-            case 'left':
-                return 'start';
+            case 'right':
+                return 'end';
             case 'center':
                 return 'center';
             default:
                 // right
-                return 'end';
+                return 'start';
         }
     }};
 `;

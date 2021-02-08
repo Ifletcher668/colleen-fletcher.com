@@ -59,7 +59,6 @@ module.exports = {
             options: {
                 typeName: 'STRAPI',
                 fieldName: 'strapi',
-                // TODO fix incorrect env setting
                 url: `${
                     process.env.NODE_ENV === 'development'
                         ? process.env.LOCAL_GRAPHQL_ENDPOINT

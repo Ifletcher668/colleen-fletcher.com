@@ -1,7 +1,6 @@
 // Named "Work With Me on the page"
 import React from 'react';
 import { graphql } from 'gatsby';
-import { Image } from '../components/Images/';
 import Heading from '../components/Heading';
 import { Grid } from '../components/Containers';
 import { PageContainer } from '../components/Containers';
@@ -22,11 +21,9 @@ export default (props: Props): JSX.Element => {
     } = props;
     return (
         <PageContainer>
-            <Heading level={1} center>
-                {offering.title}
-            </Heading>
+            <Heading level={1}>{offering.title}</Heading>
             {offering.preview && (
-                <ImageWithCaption imageComponent={offering.preview.image} />
+                <ImageWithCaption data={offering.preview.image} />
             )}
             {offering.services && offering.services.length > 0 && (
                 <Grid containerType="section">
@@ -55,10 +52,7 @@ export default (props: Props): JSX.Element => {
                                 {service.preview && service.preview.image && (
                                     <GridArea column="image" row="content">
                                         <ImageWithCaption
-                                            circle
-                                            imageComponent={
-                                                service.preview.image
-                                            }
+                                            data={service.preview.image}
                                         />
                                     </GridArea>
                                 )}

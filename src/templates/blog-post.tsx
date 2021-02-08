@@ -22,12 +22,12 @@ export default (props: Props): JSX.Element => {
     return (
         <PageContainer>
             <Grid containerType="section" gap={`2em 0`}>
-                <Heading center tilt="even" level={1}>
+                <Heading tilt="even" level={1}>
                     {title}
                 </Heading>
                 {cover_image && (
                     <ImageWithCaption
-                        uploadFile={cover_image}
+                        data={cover_image}
                         styling={{ margin: `0 0 4em 0` }}
                     />
                 )}

@@ -19,7 +19,7 @@ interface Props extends FlexboxProps {
 
 const ImageWithCaption: React.FC<Props> = (props: Props) => {
     const { data, containerType = 'div', styling } = props;
-    if (data === undefined)
+    if (!data)
         return (
             <>
                 {console.log(

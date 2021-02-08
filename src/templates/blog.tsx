@@ -7,6 +7,7 @@ import { PageContainer } from '../components/Containers';
 import MarkdownField from 'react-markdown';
 import { Card, CardHeader, CardBody, CardFooter } from '../components/Card';
 import PaintDripLink from '../components/TransitionLink';
+import { zigZagGridColumns } from '../utils/zigZagGridColumns';
 interface Props {
     data: Strapi;
 }
@@ -21,7 +22,11 @@ export default (props: Props): JSX.Element => {
     return (
         <>
             <PageContainer>
-                <Heading center level={1}>
+                <Heading
+                    alignHeading="center"
+                    justifyHeading="center"
+                    level={1}
+                >
                     {blog.name}
                 </Heading>
                 <MarkdownField
@@ -31,21 +36,12 @@ export default (props: Props): JSX.Element => {
                 />
                 <Grid containerType="section" gap={`2em 0`}>
                     {blog.blog_posts.map((post, idx) => {
-                        const zigZagGridColumns =
-                            idx % 2 === 0
-                                ? {
-                                      xlarge: `[image] 1fr [spacer] 0.05fr [text] 2fr`,
-                                      small: `1fr`,
-                                  }
-                                : {
-                                      xlarge: `[text] 2fr [spacer] 0.05fr [image] 1fr`,
-                                      small: `1fr`,
-                                  };
+                        const zigZagColumnLayout = zigZagGridColumns(idx);
 
                         return (
                             <Grid
                                 key={idx}
-                                columns={zigZagGridColumns}
+                                columns={zigZagColumnLayout}
                                 rows={{
                                     xlarge: `[content] 1fr [spacer] 0.2fr`,
                                 }}
@@ -79,7 +75,11 @@ export default (props: Props): JSX.Element => {
                                     }}
                                 >
                                     <CardHeader>
-                                        <Heading center level={3}>
+                                        <Heading
+                                            alignHeading="top"
+                                            justifyHeading="right"
+                                            level={3}
+                                        >
                                             <PaintDripLink
                                                 to={post.fullUrlPath}
                                             >
