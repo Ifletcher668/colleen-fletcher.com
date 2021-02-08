@@ -44,9 +44,13 @@ export default (props: Props): JSX.Element => {
                         const zigZagColumnLayout = zigZagGridColumns(idx);
 
                         const buttonData: StrapiComponentWidgetButton = {
-                            action: `${blog.fullUrlPath}`,
-                            buttonText: post.preview.button.buttonText,
-                            variant: post.preview.button.variant,
+                            action: `${post.fullUrlPath}`,
+                            buttonText: post.preview.button
+                                ? post.preview.button.buttonText
+                                : 'Click',
+                            variant: post.preview.button
+                                ? post.preview.button.variant
+                                : 'primary',
                         };
 
                         return (

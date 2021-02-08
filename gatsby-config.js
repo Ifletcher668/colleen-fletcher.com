@@ -12,6 +12,7 @@ module.exports = {
         description: config.siteDescription,
         author: config.author,
     },
+
     plugins: [
         `gatsby-transformer-sharp`,
         `gatsby-plugin-sharp`,
@@ -30,6 +31,7 @@ module.exports = {
                 },
             },
         },
+
         {
             resolve: `gatsby-plugin-transition-link`,
             options: {
@@ -39,6 +41,7 @@ module.exports = {
                 injectPageProps: false,
             },
         },
+
         {
             resolve: `gatsby-plugin-manifest`,
             options: {
@@ -48,12 +51,14 @@ module.exports = {
                 icon: `${__dirname}/static/blue-flower-colleen-fletcher.png`,
             },
         },
+
         {
             resolve: 'gatsby-source-filesystem',
             options: {
                 path: `${__dirname}/src/assets/images`,
             },
         },
+
         {
             resolve: 'gatsby-source-graphql',
             options: {
