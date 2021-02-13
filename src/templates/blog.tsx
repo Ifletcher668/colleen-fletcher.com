@@ -6,7 +6,7 @@ import { Grid } from '../components/Containers';
 import { PageContainer } from '../components/Containers';
 import MarkdownField from 'react-markdown';
 import { Card, CardHeader, CardBody, CardFooter } from '../components/Card';
-import PaintDripLink from '../components/TransitionLink';
+import PaintDripLink from '../components/PaintDripLink';
 import { zigZagGridColumns } from '../utils/zigZagGridColumns';
 import { GridArea } from '../StyledComponents/helpers';
 import { ImageWithCaption } from '../components/Images';
@@ -59,26 +59,42 @@ export default (props: Props): JSX.Element => {
                             <Grid
                                 key={idx}
                                 containerType="article"
-                                columns={zigZagColumnLayout}
+                                columns={zigZagColumnLayout} // col names === 'image' and 'content'
                                 rows={{
-                                    xlarge: `[content] 1fr [divider] 0.01fr`,
+                                    large: `[content-start] 1fr [content-middle] auto [content-end] 0.02fr`,
+                                    medium: `[content-start] auto [content-middle] auto [content-end] auto`,
                                 }}
                                 styling={{
                                     margin: `2em 0em`,
                                     gap: `1em 0`,
                                 }}
                             >
-                                {post.preview && post.preview.image ? (
-                                    <GridArea column="image" row="content">
-                                        <ImageWithCaption
-                                            data={post.preview.image}
-                                        />
-                                    </GridArea>
-                                ) : (
-                                    <></>
-                                )}
-                                {post.preview && post.preview.heading ? (
-                                    <GridArea column="text" row="content">
+                                <GridArea
+                                    col-xl="image"
+                                    col-lg="image"
+                                    col-md="image"
+                                    row-xl="content-start"
+                                    row-lg="content-start"
+                                    row-md="content-start"
+                                    row-sm="content-start"
+                                    row-xs="content-start"
+                                >
+                                    <ImageWithCaption
+                                        data={post.preview.image}
+                                    />
+                                </GridArea>
+
+                                <GridArea
+                                    col-xl="text"
+                                    col-lg="text"
+                                    col-md="text"
+                                    row-xl="content-start / content-end"
+                                    row-lg="content-start / content-end"
+                                    row-md="content-start / content-end"
+                                    row-sm="content-middle"
+                                    row-xs="content-middle"
+                                >
+                                    <Grid>
                                         <HeadingField
                                             data={post.preview.heading}
                                         />
@@ -86,11 +102,19 @@ export default (props: Props): JSX.Element => {
                                         <Paragraph data={post.preview.text} />
 
                                         <ButtonField data={buttonData} />
-                                    </GridArea>
-                                ) : (
-                                    <></>
-                                )}
-                                <GridArea column="full" row="divider">
+                                    </Grid>
+                                </GridArea>
+
+                                <GridArea
+                                    col-xl="1 / span 3"
+                                    col-lg="1 / span 3"
+                                    col-md="1 / span 3"
+                                    row-xl="content-end"
+                                    row-lg="content-end"
+                                    row-md="content-end"
+                                    row-sm="content-end"
+                                    row-xs="content-end"
+                                >
                                     <Divider type="standard" />
                                 </GridArea>
                             </Grid>

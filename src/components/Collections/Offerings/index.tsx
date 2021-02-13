@@ -6,7 +6,6 @@ import { ButtonField } from '../../Widgets';
 import { zigZagGridColumns } from '../../../utils/zigZagGridColumns';
 import { GridArea } from '../../../StyledComponents/helpers';
 import Divider from '../../Divider';
-import styled from 'styled-components';
 
 export interface Props {
     data: StrapiOffering[];
@@ -38,21 +37,57 @@ const OfferingsField: React.FC<Props> = ({ data, previews }: Props) => {
                         key={idx}
                         containerType="article"
                         columns={zigZagColumnLayout} // col names === 'image' and 'content'
-                        rows={{ xlarge: `[content] 1fr [divider] 0.01fr` }}
+                        rows={{
+                            large: `[content-start] 1fr [content-middle] auto [content-end] 0.02fr`,
+                            medium: `[content-start] auto [content-middle] auto [content-end] auto`,
+                        }}
                         styling={{
                             margin: `2em 0em`,
                             gap: `1em 0`,
                         }}
                     >
-                        <GridArea column="image" row="content">
+                        <GridArea
+                            col-xl="image"
+                            col-lg="image"
+                            col-md="image"
+                            row-xl="content-start"
+                            row-lg="content-start"
+                            row-md="content-start"
+                            row-sm="content-start"
+                            row-xs="content-start"
+                        >
                             <ImageWithCaption data={image} />
                         </GridArea>
-                        <GridArea column="text" row="content">
-                            <HeadingField data={heading} />
-                            <Paragraph data={text} />
-                            <ButtonField data={button} />
+
+                        <GridArea
+                            col-xl="text"
+                            col-lg="text"
+                            col-md="text"
+                            row-xl="content-start / content-end"
+                            row-lg="content-start / content-end"
+                            row-md="content-start / content-end"
+                            row-sm="content-middle"
+                            row-xs="content-middle"
+                        >
+                            <Grid>
+                                <HeadingField data={heading} />
+
+                                <Paragraph data={text} />
+
+                                <ButtonField data={button} />
+                            </Grid>
                         </GridArea>
-                        <GridArea column="full" row="divider">
+
+                        <GridArea
+                            col-xl="1 / span 3"
+                            col-lg="1 / span 3"
+                            col-md="1 / span 3"
+                            row-xl="content-end"
+                            row-lg="content-end"
+                            row-md="content-end"
+                            row-sm="content-end"
+                            row-xs="content-end"
+                        >
                             <Divider type="standard" />
                         </GridArea>
                     </Grid>

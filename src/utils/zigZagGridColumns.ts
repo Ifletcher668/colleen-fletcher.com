@@ -7,13 +7,13 @@
 export const zigZagGridColumns = (idx: number): BreakpointObject => {
     return idx % 2 === 0
         ? {
-              xlarge: `[image] 1fr [spacer] 0.4fr [text] minmax(700px, 2fr)`,
-              medium: `[image] 1fr [spacer] 0.4fr [text] minmax(250px, 2fr)`,
+              xlarge: `[image] 1fr [spacer] 50px [text] 2fr`,
+              large: `[image] 1fr [spacer] 20px [text] 1fr`,
               small: `1fr`,
           }
         : {
-              xlarge: `[text] minmax(700px, 2fr) [spacer] 0.4fr [image] 1fr`,
-              medium: `[text] minmax(250px, 2fr) [spacer] 0.4fr [image] 1fr`,
+              xlarge: `[text] 2fr [spacer] 50px [image] 1fr`,
+              large: `[text] 1fr [spacer] 20px [image] 1fr`,
               small: `1fr`,
           };
 };

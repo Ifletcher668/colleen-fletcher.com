@@ -12,6 +12,7 @@ export default class BreakpointHandler {
     private _stringifyCSSPropertyObject = (object: CSSObject) =>
         JSON.stringify(object)
             .replace(/[A-Z]/g, m => '-' + m.toLowerCase())
+            .replace(/"[,]"/g, m => ';')
             .replace(/"([^"]+)"/g, '$1');
 
     /**

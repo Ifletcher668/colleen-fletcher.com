@@ -1,25 +1,25 @@
-import React, {useContext, useState} from 'react';
-import {Grid} from '../../../Containers/index';
-import {NavbarContext} from '../index';
+import React, { useContext, useState } from 'react';
+import { Grid } from '../../../Containers/index';
+import { NavbarContext } from '../index';
 import Services from './SubMenu/services';
 import BlogPosts from './SubMenu/blog-posts';
-import PaintDripLink from '../../../TransitionLink';
+import PaintDripLink from '../../../PaintDripLink';
 import BlueInfinitySymbol from '../../../../assets/images/svg/colleens-blue-infinity.svg';
 
 interface Props extends DefaultProps {
     content: StrapiDynamicZone[];
 }
 
-const Panel: React.FC<Props> = ({content, className}: Props) => {
+const Panel: React.FC<Props> = ({ content, className }: Props) => {
     const [activeSubMenuItemName, setActiveSubMenuItemName] = useState('');
     const [blog, setBlog] = useState('');
     const [offering, setOffering] = useState<{
         title: string;
         url: string;
-    }>({title: '', url: ''});
+    }>({ title: '', url: '' });
     const [showBlogPosts, setShowBlogPosts] = useState<boolean>(false);
     const [showServices, setShowServices] = useState<boolean>(false);
-    const {setIsActivePanel, setActivePanelName} = useContext(NavbarContext);
+    const { setIsActivePanel, setActivePanelName } = useContext(NavbarContext);
 
     const handlePanelOpenOrCloseBehavior = (
         title: string,

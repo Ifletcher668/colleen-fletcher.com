@@ -1,7 +1,7 @@
-import React, {useContext} from 'react';
-import {NavbarContext} from '../../index';
-import {graphql, useStaticQuery} from 'gatsby';
-import PaintDripLink from '../../../../TransitionLink';
+import React, { useContext } from 'react';
+import { NavbarContext } from '../../index';
+import { graphql, useStaticQuery } from 'gatsby';
+import PaintDripLink from '../../../../PaintDripLink';
 
 interface Props extends DefaultProps {
     blog: string;
@@ -22,7 +22,7 @@ const data = graphql`
 `;
 
 const BlogPosts: React.FC<Props> = (props: Props) => {
-    const {TRANSITION_PROPS} = useContext(NavbarContext);
+    const { TRANSITION_PROPS } = useContext(NavbarContext);
     const query: Strapi = useStaticQuery(data);
 
     // TODO: A better way to handle limit?

@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
     useBreakpoints,
     useScreenWidth,
@@ -6,6 +6,7 @@ import {
 
 export const useGridBreakpointLogic = (type: BreakpointObject) => {
     const breakpoints = useBreakpoints();
+    // const breakpoints = useMemo(() => useBreakpoints(), []);
 
     const [breakpointName, setBreakpointName] = useState<
         'xlarge' | 'large' | 'medium' | 'small' | 'xsmall'
@@ -94,9 +95,29 @@ export const useGridBreakpointLogic = (type: BreakpointObject) => {
                     setBreakpointName('xsmall');
                 }
             }
-        } else {
-            // set to xsmall
-            setBreakpointName('xsmall');
+        } else if (width <= breakpointXSmall) {
+            if (typeHasSizeXSmall) {
+                setBreakpointName('xsmall');
+            } else {
+                if (
+                    typeHasSizeXLarge &&
+                    !typeHasSizeLarge &&
+                    !typeHasSizeMedium &&
+                    !typeHasSizeSmall
+                ) {
+                    setBreakpointName('xlarge');
+                } else if (
+                    typeHasSizeLarge &&
+                    !typeHasSizeMedium &&
+                    !typeHasSizeSmall
+                ) {
+                    setBreakpointName('large');
+                } else if (typeHasSizeMedium && !typeHasSizeSmall) {
+                    setBreakpointName('medium');
+                } else if (typeHasSizeSmall) {
+                    setBreakpointName('small');
+                }
+            }
         }
     }, [width]);
 

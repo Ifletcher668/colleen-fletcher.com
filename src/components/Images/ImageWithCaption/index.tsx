@@ -18,7 +18,7 @@ interface Props extends FlexboxProps {
 }
 
 const ImageWithCaption: React.FC<Props> = (props: Props) => {
-    const { data, containerType = 'div', styling } = props;
+    const { data, containerType = 'article', styling } = props;
     if (!data)
         return (
             <>
@@ -29,12 +29,7 @@ const ImageWithCaption: React.FC<Props> = (props: Props) => {
         );
 
     return (
-        <Flexbox
-            containerType={containerType}
-            around
-            vertical
-            styling={styling}
-        >
+        <Flexbox containerType={containerType} vertical styling={styling}>
             <Image data={data} />
             {data.file && <FigCaption>{data.file.caption}</FigCaption>}
         </Flexbox>

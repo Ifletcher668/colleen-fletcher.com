@@ -1,14 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 import * as JsSearch from 'js-search';
-import {FaSearch} from 'react-icons/fa';
+import { FaSearch } from 'react-icons/fa';
 import SearchSection from './SearchSection';
 import Heading from '../Heading';
 import Grid from '../Containers/Grid';
 import Flexbox from '../Containers/Flexbox';
-import PaintDripLink from '../TransitionLink';
+import PaintDripLink from '../PaintDripLink';
 import OutsideClickContainer from '../OutsideClickContainer';
-import {formatDateOnSlug} from '../../utils/format-date';
+import { formatDateOnSlug } from '../../utils/format-date';
 import styled from 'styled-components';
 
 const SearchContainer = (): JSX.Element => {

@@ -1,5 +1,7 @@
 import React from 'react';
 import ALink from 'gatsby-plugin-transition-link/AniLink';
+import styled from 'styled-components';
+import { anchor } from '../Atoms/Anchor';
 
 interface Props extends DefaultProps {
     to: string;
@@ -8,6 +10,11 @@ interface Props extends DefaultProps {
     onClick?: () => void;
     onKeyPress?: () => void;
 }
+
+export const Wrapper = styled(ALink)`
+    ${anchor};
+`;
+
 const PaintDripLink: React.FC<Props> = ({
     to,
     children,
@@ -17,7 +24,7 @@ const PaintDripLink: React.FC<Props> = ({
     onKeyPress,
 }: Props) => {
     return (
-        <ALink
+        <Wrapper
             to={to}
             paintDrip
             hex="#CBEDFC"
@@ -28,7 +35,7 @@ const PaintDripLink: React.FC<Props> = ({
             onMouseLeave={onMouseLeave}
         >
             {children}
-        </ALink>
+        </Wrapper>
     );
 };
 

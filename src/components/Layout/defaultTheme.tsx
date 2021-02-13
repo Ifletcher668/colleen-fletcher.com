@@ -77,6 +77,7 @@ export const theme: DefaultTheme = {
 
     radius: {
         edge: '2px',
+        smooth: '10px',
         circle: '1000px',
     },
 

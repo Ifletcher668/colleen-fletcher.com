@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '../../Button';
-import PaintDripLink from '../../TransitionLink';
+import PaintDripLink from '../../PaintDripLink';
 
 export interface Props {
     data: StrapiComponentWidgetButton;

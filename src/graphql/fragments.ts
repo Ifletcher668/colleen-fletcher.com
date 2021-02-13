@@ -74,6 +74,7 @@ export const StrapiBlogPostFullUrlPath = graphql`
         }
     }
 `;
+
 // Grabs everything except body components
 export const StrapiBlogPost = graphql`
     fragment StrapiBlogPost on STRAPI_BlogPost {
@@ -159,8 +160,8 @@ export const StrapiTag = graphql`
 export const FluidImage = graphql`
     fragment FluidImage on File {
         childImageSharp {
-            fluid(maxWidth: 6000, quality: 100) {
-                ...GatsbyImageSharpFluid
+            fluid(quality: 50) {
+                ...GatsbyImageSharpFluid_noBase64
             }
         }
     }

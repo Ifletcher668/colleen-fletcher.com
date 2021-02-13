@@ -31,15 +31,6 @@ textarea {
     }
 }
 
-a {
-    color: color(aterrima);
-    text-decoration: none;
-    &:hover {
-        transition: time('fast') ease-out;
-        border-bottom: color(lilac) solid 3px;
-        color: color(dark-blue);
-    }
-}
 button {
     a {
         &:hover {
@@ -136,60 +127,6 @@ hr {
         border: 0;
         border-bottom: solid 1px color(earth);
         margin: 0 0 size(mg-large) 0;
-    }
-}
-
-.btn {
-    display: flex;
-    align-items: center;
-    border: none;
-    overflow: hidden;
-    outline: none;
-    box-shadow: none;
-    padding: 0 size(pad-small);
-    border-radius: size(radius);
-    letter-spacing: size(letter-spacing-fancy);
-    margin: size(mg-xsmall);
-    color: color(background);
-    &:hover {
-        transition: time(medium) ease-in-out;
-        transform: scale(1.01);
-    }
-    &.primary {
-        background: radial-gradient(
-                68.84% 68.84% at 50% 50%,
-                color(lilac) 0%,
-                rgba(255, 255, 255, 0) 70.83%
-            ),
-            color(lilac);
-        a {
-            color: color(background);
-        }
-    }
-    //
-
-    &.secondary {
-        background: radial-gradient(
-                68.84% 68.84% at 50% 50%,
-                color(primary-blue) 0%,
-                rgba(255, 255, 255, 0) 70.83%
-            ),
-            color(primary-blue);
-        a {
-            color: color(background);
-        }
-    }
-    &.tertiary {
-        background: radial-gradient(
-                68.84% 68.84% at 50% 50%,
-                color(earth) 0%,
-                rgba(255, 255, 255, 0) 70.83%
-            ),
-            color(earth);
-        color: color(primary-blue);
-        a {
-            color: color(primary-blue);
-        }
     }
 }
 

@@ -1,4 +1,4 @@
-import {useEffect, useMemo, useState} from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import BreakpointHandler from './breakpoint-handler';
 // TODO: Deprecated
 export const useBreakpoints = (): Breakpoints => {
@@ -34,15 +34,15 @@ export const useBreakpoints = (): Breakpoints => {
         };
         // immediately set width
         handleResize();
-        // window.addEventListener('resize', handleResize);
-        // return window.addEventListener('resize', handleResize);
+        window.addEventListener('resize', handleResize);
+        return window.addEventListener('resize', handleResize);
     }, [fontSize]);
 
     return breakpoints;
 };
 
 export const useScreenWidth = (): number => {
-    const {getScreenWidth, getFontSize} = new BreakpointHandler();
+    const { getScreenWidth, getFontSize } = new BreakpointHandler();
     const [width, setWidth] = useState<number | undefined>(undefined);
     const [fontSize, setFontSize] = useState<number | undefined>(undefined);
 

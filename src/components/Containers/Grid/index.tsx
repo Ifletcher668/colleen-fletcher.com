@@ -1,7 +1,6 @@
 import React from 'react';
-import {CSSObject} from 'styled-components';
-import {Grid as DivGrid, SectionGrid, AsideGrid, ArticleGrid} from './styles';
-import {useGridBreakpointLogic} from './useGridBreakpoint';
+import styled, { CSSObject } from 'styled-components';
+import { useGridBreakpointLogic } from './useGridBreakpoint';
 
 interface Props extends DefaultProps {
     columns?: BreakpointObject;
@@ -11,6 +10,11 @@ interface Props extends DefaultProps {
     containerType?: Container;
     onRenderBehavior?: () => string;
 }
+
+export const Wrapper = styled.div<Props>`
+    display: grid;
+    ${props => props.styling};
+`;
 
 const Grid: React.FC<Props> = (props: Props) => {
     const {
@@ -36,35 +40,11 @@ const Grid: React.FC<Props> = (props: Props) => {
         ...styling,
     };
 
-    switch (containerType) {
-        case 'article':
-            return (
-                <ArticleGrid className={cn} styling={theme}>
-                    {children}
-                </ArticleGrid>
-            );
-
-        case 'section':
-            return (
-                <SectionGrid className={cn} styling={theme}>
-                    {children}
-                </SectionGrid>
-            );
-
-        case 'aside':
-            return (
-                <AsideGrid className={cn} styling={theme}>
-                    {children}
-                </AsideGrid>
-            );
-
-        default:
-            return (
-                <DivGrid className={cn} styling={theme}>
-                    {children}
-                </DivGrid>
-            );
-    }
+    return (
+        <Wrapper as={containerType} className={cn} styling={theme}>
+            {children}
+        </Wrapper>
+    );
 };
 
 export default Grid;

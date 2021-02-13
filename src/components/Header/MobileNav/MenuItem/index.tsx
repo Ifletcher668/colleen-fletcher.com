@@ -1,12 +1,12 @@
-import React, {Fragment, useContext, useState} from 'react';
-import PaintDripLink from '../../../TransitionLink';
+import React, { Fragment, useContext, useState } from 'react';
+import PaintDripLink from '../../../PaintDripLink';
 import ChevronDown from '../../../../assets/images/svg/chevron-down.svg';
 import ChevronUp from '../../../../assets/images/svg/chevron-up.svg';
 import styled from 'styled-components';
 import Heading from '../../../Heading';
 import Services from '../../Navbar/Panel/SubMenu/services';
 import BlogPosts from '../../Navbar/Panel/SubMenu/blog-posts';
-import {MobileMenuContext} from '../..';
+import { MobileMenuContext } from '../..';
 
 // props matches type StrapiMenuItem
 interface Props extends DefaultProps, StrapiMenuItem {}
@@ -24,10 +24,12 @@ const MenuItem: React.FC<Props> = ({
     const [offering, setOffering] = useState<{
         title: string;
         url: string;
-    }>({title: '', url: ''});
+    }>({ title: '', url: '' });
     const [showBlogPosts, setShowBlogPosts] = useState<boolean>(false);
     const [showServices, setShowServices] = useState<boolean>(false);
-    const {isMobileMenuOpen, toggleMobileMenu} = useContext(MobileMenuContext);
+    const { isMobileMenuOpen, toggleMobileMenu } = useContext(
+        MobileMenuContext,
+    );
 
     const cn = `nav-list-item ${
         className

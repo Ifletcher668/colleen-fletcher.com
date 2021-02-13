@@ -1,7 +1,8 @@
-import React, {useContext} from 'react';
-import {NavbarContext} from '../index';
+import React, { useContext } from 'react';
+import { NavbarContext } from '../index';
 import Panel from '../Panel';
-import PaintDripLink from '../../../TransitionLink';
+import PaintDripLink from '../../../PaintDripLink';
+import { Anchor } from '../../../Atoms';
 
 // props matches type StrapiMenuItem
 interface Props extends DefaultProps, StrapiMenuItem {}
@@ -44,7 +45,7 @@ const MenuItem: React.FC<Props> = ({
                         handleOpenOrClosePanel('', false);
                     }}
                 >
-                    <a
+                    <Anchor
                         href={`${
                             slug.match(`^(http|https)://`)
                                 ? slug
@@ -52,7 +53,7 @@ const MenuItem: React.FC<Props> = ({
                         }`}
                     >
                         {text}
-                    </a>
+                    </Anchor>
                 </li>
             ) : (
                 <li

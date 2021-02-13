@@ -1,6 +1,7 @@
 import React from 'react';
 import MarkdownField from 'react-markdown/with-html';
 import styled from 'styled-components';
+import { Anchor } from '../../Atoms';
 
 export interface Props {
     data: StrapiComponentTextParagraph;
@@ -8,6 +9,8 @@ export interface Props {
 
 const Paragraph: React.FC<Props> = ({ data }: Props) => {
     const { body, alignParagraph, justifyParagraph } = data;
+
+    console.log(body);
 
     return (
         <TextWrapper
@@ -19,9 +22,9 @@ const Paragraph: React.FC<Props> = ({ data }: Props) => {
             renderers={{
                 link: ({ href, title }) => {
                     return (
-                        <a href={href} target="__blank">
+                        <Anchor href={href} target="__blank">
                             {title}
-                        </a>
+                        </Anchor>
                     );
                 },
             }}
@@ -48,6 +51,7 @@ const TextWrapper = styled(MarkdownField)<WrapperProps>`
                 return 'end';
         }
     }};
+
     justify-self: ${props => {
         switch (props.justifyParagraph) {
             case 'left':
