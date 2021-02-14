@@ -23,7 +23,6 @@ export default (props: Props): JSX.Element => {
                 {cover_image && (
                     <Image
                         style={{
-                            margin: `auto`,
                             maxWidth: `600px`,
                             maxHeight: `600px`,
                         }}
