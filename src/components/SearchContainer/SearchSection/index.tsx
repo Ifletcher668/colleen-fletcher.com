@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 interface Props extends Pick<DefaultProps, 'children'> {
@@ -19,7 +19,7 @@ const SearchSection: React.FC<Props> = ({
 
     // return a styled list item with a hide/show prop
     return (
-        <StyledListItem className={`${isHidden ? 'hide' : 'show'}`}>
+        <StyledListItem hide={isHidden ? true : false}>
             {children}
         </StyledListItem>
     );
@@ -27,11 +27,9 @@ const SearchSection: React.FC<Props> = ({
 
 export default SearchSection;
 
-const StyledListItem = styled.li`
-    &.hide {
-        display: none;
-    }
-    &.show {
-        display: block;
-    }
+interface StyleProps {
+    hide: boolean;
+}
+const StyledListItem = styled.li<StyleProps>`
+    display: ${props => (props.hide ? 'none' : 'block')};
 `;

@@ -39,6 +39,7 @@
     "gatsby-transformer-sharp": "^2.7.0",
     "global": "^4.4.0",
     "gsap": "^3.5.1",
+    "html-react-parser": "^1.2.4",
     "js-search": "^2.0.0",
     "moment": "^2.29.1",
     "netlify-plugin-minify-html": "^0.3.0",

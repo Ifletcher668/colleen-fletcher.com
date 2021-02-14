@@ -31,7 +31,7 @@ const BlogsField: React.FC<Props> = ({ data, previews }: Props) => {
                             gap: `1em 0`,
                         }}
                         rows={{
-                            xlarge: `0.05fr minmax(5em, 20em) auto minmax(50px, 70px)`,
+                            xlarge: `0.05fr auto auto minmax(50px, 70px)`,
                         }}
                     >
                         <HeadingField data={heading} />

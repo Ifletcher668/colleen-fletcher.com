@@ -1,45 +1,20 @@
 import React from 'react';
-import MarkdownField from 'react-markdown/with-html';
 import styled from 'styled-components';
-import { Anchor } from '../../Atoms';
+import { Anchor, Heading, Paragraph as P, Span } from '../../Atoms';
+import parse, { domToReact, HTMLReactParserOptions } from 'html-react-parser';
+import { Element } from 'domhandler/lib/node';
+import { Grid } from '../../Containers';
 
 export interface Props {
     data: StrapiComponentTextParagraph;
 }
-
-const Paragraph: React.FC<Props> = ({ data }: Props) => {
-    const { body, alignParagraph, justifyParagraph } = data;
-
-    console.log(body);
-
-    return (
-        <TextWrapper
-            alignParagraph={alignParagraph}
-            justifyParagraph={justifyParagraph}
-            children={body}
-            allowDangerousHtml
-            className="paragraph"
-            renderers={{
-                link: ({ href, title }) => {
-                    return (
-                        <Anchor href={href} target="__blank">
-                            {title}
-                        </Anchor>
-                    );
-                },
-            }}
-        />
-    );
-};
-
-export default Paragraph;
 
 interface WrapperProps {
     alignParagraph: AlignValues;
     justifyParagraph: JustifyValues;
 }
 
-const TextWrapper = styled(MarkdownField)<WrapperProps>`
+const TextWrapper = styled(P)<WrapperProps>`
     align-self: ${props => {
         switch (props.alignParagraph) {
             case 'top':
@@ -52,15 +27,152 @@ const TextWrapper = styled(MarkdownField)<WrapperProps>`
         }
     }};
 
-    justify-self: ${props => {
+    text-align: ${props => {
         switch (props.justifyParagraph) {
             case 'left':
-                return 'start';
+                return 'left';
             case 'center':
                 return 'center';
             default:
                 // right
+                return 'right';
+        }
+    }};
+
+    justify-self: ${props => {
+        switch (props.justifyParagraph) {
+            case 'right':
                 return 'end';
+            case 'center':
+                return 'center';
+            default:
+                // left
+                return 'start';
         }
     }};
 `;
+
+const H1 = styled(Heading).attrs({ as: 'h1' })``;
+
+const H2 = styled(Heading).attrs({ as: 'h2' })``;
+
+const H3 = styled(Heading).attrs({ as: 'h3' })``;
+
+const Paragraph: React.FC<Props> = ({ data }: Props) => {
+    const { body, alignParagraph, justifyParagraph } = data;
+
+    const options: HTMLReactParserOptions = {
+        replace: domNode => {
+            if (!(domNode instanceof Element)) return null;
+
+            const { name, children, attribs } = domNode;
+
+            if (name === 'a')
+                return (
+                    <Anchor
+                        href={attribs.href}
+                        target={attribs.target}
+                        rel={attribs.rel}
+                    >
+                        {domToReact(children, options)}
+                    </Anchor>
+                );
+
+            if (name === 'h1')
+                return (
+                    <TextWrapper
+                        as={H1}
+                        alignParagraph={alignParagraph}
+                        justifyParagraph={justifyParagraph}
+                    >
+                        {domToReact(children, options)}
+                    </TextWrapper>
+                );
+
+            if (name === 'h2')
+                return (
+                    <TextWrapper
+                        as={H2}
+                        alignParagraph={alignParagraph}
+                        justifyParagraph={justifyParagraph}
+                    >
+                        {domToReact(children, options)}
+                    </TextWrapper>
+                );
+
+            if (name === 'h3')
+                return (
+                    <TextWrapper
+                        as={H3}
+                        alignParagraph={alignParagraph}
+                        justifyParagraph={justifyParagraph}
+                    >
+                        {domToReact(children, options)}
+                    </TextWrapper>
+                );
+
+            if (name === 'p')
+                return (
+                    <TextWrapper
+                        alignParagraph={alignParagraph}
+                        justifyParagraph={justifyParagraph}
+                    >
+                        {domToReact(children, options)}
+                    </TextWrapper>
+                );
+            if (name === 'ul')
+                return (
+                    <TextWrapper
+                        as="ul"
+                        alignParagraph={alignParagraph}
+                        justifyParagraph={justifyParagraph}
+                    >
+                        {domToReact(children, options)}
+                    </TextWrapper>
+                );
+            if (name === 'ol')
+                return (
+                    <TextWrapper
+                        as="ol"
+                        alignParagraph={alignParagraph}
+                        justifyParagraph={justifyParagraph}
+                    >
+                        {domToReact(children, options)}
+                    </TextWrapper>
+                );
+            if (name === 'blockquote')
+                return (
+                    <TextWrapper
+                        as="blockquote"
+                        alignParagraph={alignParagraph}
+                        justifyParagraph={justifyParagraph}
+                    >
+                        {domToReact(children, options)}
+                    </TextWrapper>
+                );
+
+            if (attribs.class === 'ql-size-huge')
+                return <Span size="huge">{domToReact(children, options)}</Span>;
+
+            if (attribs.class === 'ql-size-large')
+                return (
+                    <Span size="large">{domToReact(children, options)}</Span>
+                );
+
+            if (attribs.class === 'ql-size-small')
+                return (
+                    <Span size="small">{domToReact(children, options)}</Span>
+                );
+        },
+    };
+    return (
+        <Grid
+            containerType="section"
+            styling={{ height: `100%`, width: `100%` }}
+        >
+            {parse(body, options)}
+        </Grid>
+    );
+};
+
+export default Paragraph;

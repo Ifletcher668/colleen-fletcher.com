@@ -52,12 +52,13 @@ export const theme: DefaultTheme = {
         },
 
         size: {
-            xlarge: '2em',
-            large: '1.7em',
-            medium: '1.4em',
-            small: '1.2em',
-            xsmall: '1em',
-            info: '0.6em',
+            xxlarge: '2.2rem',
+            xlarge: '2rem',
+            large: '1.7rem',
+            medium: '1.4rem',
+            small: '1.2rem',
+            xsmall: '1rem',
+            info: '0.6rem',
         },
 
         'letter-spacing': {

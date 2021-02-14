@@ -65,7 +65,7 @@ export default styled.button<Props>`
     ${Anchor}:hover, ${PaintDripLink}:hover {
         &,
         > * {
-            transition: ${props => props.theme.time.medium} ease-in-out;
+            transition: ${props => props.theme.time.fast} ease-in-out;
             background: ${props => props.theme.color.background};
             color: ${props => {
                 switch (props.variant) {
