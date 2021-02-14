@@ -22,6 +22,10 @@ export default (props: Props): JSX.Element => {
             <Grid containerType="section" gap={`2em 0`}>
                 {cover_image && (
                     <Image
+                        style={{
+                            maxWidth: `600px`,
+                            maxHeight: `600px`,
+                        }}
                         fluid={cover_image.imageFile.childImageSharp.fluid}
                     />
                 )}
