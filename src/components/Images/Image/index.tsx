@@ -52,6 +52,7 @@ const ImageWrapper = styled(GatsbyImage)<WrapperProps>`
     ${props =>
         below(props.theme.breakpoint.medium, {
             alignSelf: 'center',
+            margin: 'auto',
             minHeight: '300px',
             minWidth: '300px',
             maxHeight: '300px',
