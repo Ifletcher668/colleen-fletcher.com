@@ -21,10 +21,18 @@ export default (props: Props): JSX.Element => {
     } = props;
     return (
         <PageContainer>
-            <Heading level={1}>{offering.title}</Heading>
+            <Heading level={1} justifyHeading="center" alignHeading="center">
+                {offering.title}
+            </Heading>
             {offering.preview && (
-                <ImageWithCaption data={offering.preview.image} />
+                <ImageWithCaption
+                    data={offering.preview.image}
+                    styling={{
+                        margin: `auto`,
+                    }}
+                />
             )}
+
             {offering.services && offering.services.length > 0 && (
                 <Grid containerType="section">
                     {offering.services.map((service, idx) => {
