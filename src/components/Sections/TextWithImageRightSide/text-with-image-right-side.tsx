@@ -20,8 +20,9 @@ const TextWithImageRightSideField: React.FC<Props> = ({
         <Grid
             containerType="article"
             columns={{
-                xlarge: `[text] minmax(64%, 2fr) [spacer] 50px [image] minmax(34%, 1fr)`,
-                small: `1f`,
+                xlarge: `[text] minmax(64%, 2fr) [spacer] 2% [image] minmax(34%, 1fr)`,
+                large: `[text] minmax(60%, 1fr) [spacer] 4% [image] minmax(36%, 1fr)`,
+                small: `1fr`,
             }}
             rows={{
                 large: `[content-start] 1fr [content-middle] auto [content-end] auto`,
@@ -32,6 +33,7 @@ const TextWithImageRightSideField: React.FC<Props> = ({
                 col-xl="text"
                 col-lg="text"
                 col-md="text"
+                col-sm="1"
                 row-xl="content-start / content-end"
                 row-lg="content-start / content-end"
                 row-md="content-start / content-end"
@@ -45,6 +47,7 @@ const TextWithImageRightSideField: React.FC<Props> = ({
                 col-xl="image"
                 col-lg="image"
                 col-md="image"
+                col-sm="1"
                 row-xl="content-start"
                 row-lg="content-start"
                 row-md="content-start"

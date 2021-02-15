@@ -7,7 +7,7 @@ interface Props extends DefaultProps {
     rows?: BreakpointObject;
     gap?: string | number;
     styling?: CSSObject;
-    containerType?: Container;
+    containerType?: ContainerType;
     onRenderBehavior?: () => string;
 }
 

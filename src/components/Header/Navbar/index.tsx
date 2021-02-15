@@ -1,12 +1,12 @@
-import React, {createContext, useContext, useEffect, useState} from 'react';
-import {useMenuItems} from '../../../graphql/queries/useMenuItems';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { useMenuItems } from '../../../graphql/queries/useMenuItems';
 import SearchContainer from '../../SearchContainer';
 import MenuItem from './MenuItem';
-import {FaAlignJustify} from 'react-icons/fa';
-import {MobileMenuToggleButton} from '../../Button';
+import { FaAlignJustify } from 'react-icons/fa';
+import { MobileMenuToggleButton } from '../../Button';
 import Heading from '../../Heading';
-import {useBreakpoints} from '../../../utils/Breakpoints/useBreakpoints';
-import {MobileMenuContext} from '../index';
+import { useBreakpoints } from '../../../utils/Breakpoints/useBreakpoints';
+import { MobileMenuContext } from '../index';
 
 type NavCtx = {
     isActivePanel: boolean;
@@ -15,10 +15,10 @@ type NavCtx = {
     setActivePanelName: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export const NavbarContext = createContext<NavCtx | {[key: string]: any}>({});
+export const NavbarContext = createContext<NavCtx | { [key: string]: any }>({});
 
 const Navbar: React.FC<DefaultProps> = (props: DefaultProps) => {
-    const {className} = props;
+    const { className } = props;
 
     const [isActivePanel, setIsActivePanel] = useState<boolean>(false);
     const [activePanelName, setActivePanelName] = useState<string>('');
@@ -33,10 +33,10 @@ const Navbar: React.FC<DefaultProps> = (props: DefaultProps) => {
         setActivePanelName,
     };
 
-    const {toggleMobileMenu} = useContext(MobileMenuContext);
+    const { toggleMobileMenu } = useContext(MobileMenuContext);
 
     const {
-        strapi: {menuItems},
+        strapi: { menuItems },
     } = useMenuItems();
 
     const [xlarge, large, medium, small, xsmall] = useBreakpoints();

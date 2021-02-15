@@ -1,7 +1,9 @@
 import React from 'react';
 import GatsbyImage, { GatsbyImageFluidProps } from 'gatsby-image';
 import styled from 'styled-components';
+import BreakPointHandler from '../../../utils/Breakpoints/breakpoint-handler';
 
+const { below } = new BreakPointHandler();
 interface Props {
     data: StrapiComponentMediaSingleImage;
 }
@@ -9,7 +11,7 @@ interface Props {
 const Image: React.FC<Props> = ({ data }: Props) => {
     const { file, hasBorder, isCircle } = data;
     if (file === null || file === undefined) {
-        console.log('imageComponent file is null');
+        console.log('<Image /> file is null');
         return <></>;
     }
 
@@ -40,4 +42,14 @@ const ImageWrapper = styled(GatsbyImage)<WrapperProps>`
     border: ${p =>
         p.hasBorder ? '1.5px solid' + p.theme.color.aterrima : 'none'};
     border-radius: ${p => (p.isCircle ? '1000px' : '2px')};
+
+    /* TODO: Poorly handling gatsby-image fluid */
+    ${props =>
+        below(props.theme.breakpoint.medium, {
+            alignSelf: 'center',
+            minHeight: '300px',
+            minWidth: '300px',
+            maxHeight: '300px',
+            maxWidth: '300px',
+        })}
 `;

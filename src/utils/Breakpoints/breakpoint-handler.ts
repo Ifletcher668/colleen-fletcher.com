@@ -1,7 +1,13 @@
 import { CSSObject } from 'styled-components';
 export default class BreakpointHandler {
+    private _isRenderingInBrowser(): boolean {
+        return typeof document !== `undefined` && typeof window !== `undefined`
+            ? true
+            : false;
+    }
+
     private _getCSSVariable(varName: string) {
-        return typeof window !== 'undefined'
+        return this._isRenderingInBrowser()
             ? window
                   .getComputedStyle(document.documentElement)
                   .getPropertyValue(varName)
@@ -49,6 +55,7 @@ export default class BreakpointHandler {
     ) => [num: number, unit: string] = (cssVar: string) => {
         let numberString = '';
         let unit = '';
+
         // TODO: Refactor to use regex?
         for (let i = 0; i < cssVar.length; i++) {
             if (cssVar[i] === '%') {
@@ -62,6 +69,7 @@ export default class BreakpointHandler {
                 break;
             } else if (cssVar[i] + cssVar[i + 1] + cssVar[i + 2] === 'rem') {
                 unit = cssVar[i] + cssVar[i + 1] + cssVar[i + 2];
+
                 break;
             }
             numberString += cssVar[i];
@@ -89,7 +97,7 @@ export default class BreakpointHandler {
     public getFontSize: (htmlElement: string) => number = (
         htmlElement = 'html',
     ) => {
-        return typeof window !== 'undefined'
+        return this._isRenderingInBrowser()
             ? parseFloat(
                   window.getComputedStyle(
                       document.querySelector(htmlElement) as HTMLElement,
@@ -100,8 +108,10 @@ export default class BreakpointHandler {
 
     public getBreakpoints = (breakpoints: Breakpoints): Breakpoints => {
         return breakpoints.map(breakpoint => {
-            const cssVar = this._getCSSVariable(breakpoint!).trim();
-            const [num] = this._convertCSSSizeVariableStringToNumber(cssVar);
+            const [num] = this._convertCSSSizeVariableStringToNumber(
+                breakpoint,
+            );
+
             return num;
         });
     };
@@ -117,7 +127,7 @@ export default class BreakpointHandler {
             and window.innerWidth.
      */
     public getScreenWidth: () => number = () => {
-        return typeof document !== `undefined` && typeof window !== `undefined`
+        return this._isRenderingInBrowser()
             ? Math.max(
                   document.body.scrollWidth,
                   document.documentElement.scrollWidth,
@@ -126,7 +136,7 @@ export default class BreakpointHandler {
                   document.documentElement.clientWidth,
                   window.innerWidth,
               )
-            : 0;
+            : 0; // when rendering on server, return screen width of zero
     };
 
     /**
@@ -158,6 +168,7 @@ export default class BreakpointHandler {
         // Use? JSON.stringify(children, null, 4)
     };
 
+    // TODO: Change the 'children' prop to accept a template string
     /**
      * @function
      * @param min

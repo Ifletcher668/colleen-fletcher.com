@@ -1,9 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import StrapiDynamicZone from '../components/StrapiDynamicZone';
-import { Grid } from '../components/Containers';
 import { PageContainer } from '../components/Containers';
-import Image from 'gatsby-image';
 interface Props {
     data: Strapi;
 }
@@ -12,25 +10,14 @@ export default (props: Props): JSX.Element => {
     const {
         data: {
             strapi: {
-                blogPost: { title, body, cover_image },
+                blogPost: { body },
             },
         },
     } = props;
 
     return (
         <PageContainer>
-            <Grid containerType="section" gap={`2em 0`}>
-                {cover_image && (
-                    <Image
-                        style={{
-                            maxWidth: `600px`,
-                            maxHeight: `600px`,
-                        }}
-                        fluid={cover_image.imageFile.childImageSharp.fluid}
-                    />
-                )}
-                <StrapiDynamicZone components={body} />
-            </Grid>
+            <StrapiDynamicZone components={body} />
         </PageContainer>
     );
 };
@@ -39,10 +26,6 @@ export const query = graphql`
     query GET_BLOG_POST($id: ID!) {
         strapi {
             blogPost(id: $id) {
-                title
-                cover_image {
-                    ...StrapiUploadFile
-                }
                 tags {
                     name
                 }

@@ -74,6 +74,7 @@ const MenuItem: React.FC<Props> = ({
                     >
                         {text}
                     </PaintDripLink>
+
                     {content.length > 0 &&
                         isActivePanel &&
                         activePanelName === text && (

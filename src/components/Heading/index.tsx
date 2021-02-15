@@ -9,42 +9,22 @@ interface Props extends DefaultProps {
     justifyHeading?: JustifyValues;
 }
 
-const Heading: React.FC<Props> = ({
-    level,
-    children,
-    tilt,
-    alignHeading,
-    justifyHeading,
-}: Props): JSX.Element => {
-    return (
-        <HeadingWrapper
-            tilt={tilt}
-            alignHeading={alignHeading}
-            justifyHeading={justifyHeading}
-            as={`h${level}`}
-        >
-            {children}
-        </HeadingWrapper>
-    );
-};
-
-export default Heading;
-
 interface WrapperProps
     extends Pick<Props, 'tilt' | 'alignHeading' | 'justifyHeading'> {}
 
 const HeadingWrapper = styled(HeadingAtom)<WrapperProps>`
     transform: ${props => {
         switch (props.tilt) {
-            case 'even':
-                return 'rotate(0deg)';
+            case 'up':
+                return 'rotate(2deg)';
             case 'down':
-                return 'rotate(-1deg)';
+                return 'rotate(-2deg)';
             default:
-                // 'up
-                return 'rotate(1deg)';
+                // even
+                return 'rotate(0deg)';
         }
     }};
+
     align-self: ${props => {
         switch (props.alignHeading) {
             case 'top':
@@ -56,6 +36,7 @@ const HeadingWrapper = styled(HeadingAtom)<WrapperProps>`
                 return 'center';
         }
     }};
+
     justify-self: ${props => {
         switch (props.justifyHeading) {
             case 'right':
@@ -68,3 +49,31 @@ const HeadingWrapper = styled(HeadingAtom)<WrapperProps>`
         }
     }};
 `;
+
+const Heading: React.FC<Props> = ({
+    level = 1,
+    children,
+    tilt = 'even',
+    alignHeading,
+    justifyHeading,
+}: Props): JSX.Element => {
+    const titleCaseStringChildren =
+        typeof children === 'string'
+            ? children.replace(/(^|\s)\S/g, (firstLetter: string) =>
+                  firstLetter.toUpperCase(),
+              )
+            : children;
+
+    return (
+        <HeadingWrapper
+            tilt={tilt}
+            alignHeading={alignHeading}
+            justifyHeading={justifyHeading}
+            as={`h${level.toString()}`}
+        >
+            {titleCaseStringChildren}
+        </HeadingWrapper>
+    );
+};
+
+export default Heading;

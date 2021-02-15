@@ -58,7 +58,7 @@ export const theme: DefaultTheme = {
             medium: '1.4rem',
             small: '1.2rem',
             xsmall: '1rem',
-            info: '0.6rem',
+            info: '0.8rem',
         },
 
         'letter-spacing': {

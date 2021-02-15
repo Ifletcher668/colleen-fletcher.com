@@ -6,6 +6,14 @@
         [full-start] minmax(size(mg-large), (size(mg-large) * 2))
         [footer-start] minmax(0, 60em) [footer-end]
         minmax(size(mg-large), (size(mg-large) * 2)) [full-end];
+
+    @include below(small) {
+        grid-template-columns:
+            [full-start] 4%
+            [footer-start] 92% [footer-end]
+            4% [full-end];
+    }
+
     place-items: center;
     text-align: center;
     .content {

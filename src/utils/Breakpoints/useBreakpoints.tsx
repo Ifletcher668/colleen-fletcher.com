@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import BreakpointHandler from './breakpoint-handler';
+import { useTheme } from 'styled-components';
 // TODO: Deprecated
 export const useBreakpoints = (): Breakpoints => {
     const {
@@ -7,22 +8,18 @@ export const useBreakpoints = (): Breakpoints => {
         getScreenWidth,
         getFontSize,
     } = new BreakpointHandler();
+
     const [width, setWidth] = useState<number | undefined>(undefined);
     const [fontSize, setFontSize] = useState<number | undefined>(undefined);
     const [breakpoints, setBreakpoints] = useState<Breakpoints | []>([]);
 
+    const {
+        breakpoint: { xlarge, large, medium, small, xsmall },
+    } = useTheme();
+
     useMemo(() => {
-        setBreakpoints(
-            // TODO: Any way to grab this dynamically?
-            getBreakpoints([
-                '--size-breakpoint-xlarge',
-                '--size-breakpoint-large',
-                '--size-breakpoint-medium',
-                '--size-breakpoint-small',
-                '--size-breakpoint-xsmall',
-            ]),
-        );
-    }, [fontSize]);
+        setBreakpoints(getBreakpoints([xlarge, large, medium, small, xsmall]));
+    }, []);
 
     useEffect(() => {
         setFontSize(getFontSize('body'));
@@ -32,8 +29,10 @@ export const useBreakpoints = (): Breakpoints => {
         const handleResize = () => {
             setWidth(getScreenWidth());
         };
+
         // immediately set width
         handleResize();
+
         window.addEventListener('resize', handleResize);
         return window.addEventListener('resize', handleResize);
     }, [fontSize]);

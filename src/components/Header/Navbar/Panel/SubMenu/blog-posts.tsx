@@ -22,7 +22,6 @@ const data = graphql`
 `;
 
 const BlogPosts: React.FC<Props> = (props: Props) => {
-    const { TRANSITION_PROPS } = useContext(NavbarContext);
     const query: Strapi = useStaticQuery(data);
 
     // TODO: A better way to handle limit?
@@ -39,10 +38,7 @@ const BlogPosts: React.FC<Props> = (props: Props) => {
             {fivePosts.map((post, idx) => {
                 return (
                     <li key={idx}>
-                        <PaintDripLink
-                            to={`${post.fullUrlPath}`}
-                            {...TRANSITION_PROPS}
-                        >
+                        <PaintDripLink to={`${post.fullUrlPath}`}>
                             {post.title}
                         </PaintDripLink>
                     </li>

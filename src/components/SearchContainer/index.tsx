@@ -11,12 +11,36 @@ import OutsideClickContainer from '../OutsideClickContainer';
 import { formatDateOnSlug } from '../../utils/format-date';
 import styled from 'styled-components';
 
+const Label = styled.label`
+    align-self: center;
+    margin-bottom: 5px;
+    margin-right: 5px;
+`;
+
+const Input = styled.input`
+    font-size: var(--size-text-xsmall);
+    border-radius: 0.2rem;
+    &:focus {
+        background: var(--color-light-blue);
+    }
+`;
+
+type SearchResult = Array<
+    | StrapiBlog
+    | StrapiBlogPost
+    | StrapiCategory
+    | StrapiTag
+    | StrapiOffering
+    | StrapiService
+>;
+
 const SearchContainer = (): JSX.Element => {
-    const [isLoading, setIsLoading] = useState(true);
+    // the search
     const [query, setQuery] = useState('');
     const [search, setSearch] = useState<JsSearch.Search | null>(null);
     const [searchResult, setSearchResult] = useState<SearchResult>([]);
-    // the searches
+
+    // the data
     const [blogs, setBlogs] = useState<StrapiBlog[] | null>(null);
     const [blogPosts, setBlogPosts] = useState<StrapiBlogPost[] | null>(null);
     const [categories, setCategories] = useState<StrapiCategory[] | null>(null);
@@ -24,6 +48,9 @@ const SearchContainer = (): JSX.Element => {
     const [offerings, setOfferings] = useState<StrapiOffering[] | null>(null);
     const [services, setServices] = useState<StrapiService[] | null>(null);
 
+    // behavior logic
+    const [isLoading, setIsLoading] = useState(true);
+    const [hasFound, setHasFound] = useState<boolean>(true);
     const [showBlogSearches, setShowBlogSearches] = useState(false);
     const [showBlogPostSearches, setShowBlogPostSearches] = useState(false);
     const [showCategorySearches, setShowCategorySearches] = useState(false);
@@ -34,18 +61,23 @@ const SearchContainer = (): JSX.Element => {
     const isStrapiBlog = (sr: SearchResult): sr is StrapiBlog[] => {
         return (sr as StrapiBlog[]) !== undefined;
     };
+
     const isStrapiBlogPost = (sr: SearchResult): sr is StrapiBlogPost[] => {
         return (sr as StrapiBlogPost[]) !== undefined;
     };
+
     const isStrapiCategory = (sr: SearchResult): sr is StrapiCategory[] => {
         return (sr as StrapiCategory[]) !== undefined;
     };
+
     const isStrapiTag = (sr: SearchResult): sr is StrapiTag[] => {
         return (sr as StrapiTag[]) !== undefined;
     };
+
     const isStrapiOffering = (sr: SearchResult): sr is StrapiOffering[] => {
         return (sr as StrapiOffering[]) !== undefined;
     };
+
     const isStrapiService = (sr: SearchResult): sr is StrapiService[] => {
         return (sr as StrapiService[]) !== undefined;
     };
@@ -78,8 +110,10 @@ const SearchContainer = (): JSX.Element => {
             );
             setServices(services.data);
         };
+
         fetchData();
     }, []);
+
     useEffect(() => {
         if (
             blogs !== null &&
@@ -149,21 +183,27 @@ const SearchContainer = (): JSX.Element => {
         if (blogs !== null) {
             dataToSearch.addDocuments(blogs);
         }
+
         if (blogPosts !== null) {
             dataToSearch.addDocuments(blogPosts);
         }
+
         if (categories !== null) {
             dataToSearch.addDocuments(categories);
         }
+
         if (tags !== null) {
             dataToSearch.addDocuments(tags);
         }
+
         if (offerings !== null) {
             dataToSearch.addDocuments(offerings);
         }
+
         if (services !== null) {
             dataToSearch.addDocuments(services);
         }
+
         setSearch(dataToSearch);
     };
 
@@ -173,21 +213,24 @@ const SearchContainer = (): JSX.Element => {
             setSearchResult(queryResult);
         }
     };
+
     const handleIsStrapiBlog = () => {
         return (
             <SearchSection hideElement={showBlogSearches}>
                 <Heading level={5}>Blogs</Heading>
-                <ul>
-                    {isStrapiBlog(searchResult) &&
-                        searchResult
+                {isStrapiBlog(searchResult) && (
+                    <ul>
+                        {searchResult
                             .filter(data => (data.is_blog ? data : ''))
                             .map(blog => {
                                 if (!showBlogSearches)
                                     setShowBlogSearches(true);
                                 return (
                                     <li
-                                        key={blog.id}
-                                        onClick={handleClickOutside}
+                                        key={`${blog.name}-${blog.id}`}
+                                        onClick={
+                                            handleCloseSearchContainerOnClickOutside
+                                        }
                                     >
                                         <PaintDripLink
                                             to={`/blogs/${blog.slug}`}
@@ -197,25 +240,29 @@ const SearchContainer = (): JSX.Element => {
                                     </li>
                                 );
                             })}
-                </ul>
+                    </ul>
+                )}
             </SearchSection>
         );
     };
+
     const handleIsStrapiBlogPost = () => {
         return (
             <SearchSection hideElement={showBlogPostSearches}>
                 <Heading level={5}>Blog Posts</Heading>
-                <ul>
-                    {isStrapiBlogPost(searchResult) &&
-                        searchResult
+                {isStrapiBlogPost(searchResult) && (
+                    <ul>
+                        {searchResult
                             .filter(data => (data.is_blog_post ? data : ''))
                             .map(post => {
                                 if (!showBlogPostSearches)
                                     setShowBlogPostSearches(true);
                                 return (
                                     <li
-                                        key={post.id}
-                                        onClick={handleClickOutside}
+                                        key={`${post.title}-${post.id}`}
+                                        onClick={
+                                            handleCloseSearchContainerOnClickOutside
+                                        }
                                     >
                                         {' '}
                                         {post.category ? (
@@ -241,7 +288,8 @@ const SearchContainer = (): JSX.Element => {
                                     </li>
                                 );
                             })}
-                </ul>
+                    </ul>
+                )}
             </SearchSection>
         );
     };
@@ -250,9 +298,9 @@ const SearchContainer = (): JSX.Element => {
         return (
             <SearchSection hideElement={showCategorySearches}>
                 <Heading level={5}>Categories</Heading>
-                <ul>
-                    {isStrapiCategory(searchResult) &&
-                        searchResult
+                {isStrapiCategory(searchResult) && (
+                    <ul>
+                        {searchResult
                             .filter(data => {
                                 if (data.is_category) return data;
                             })
@@ -261,8 +309,10 @@ const SearchContainer = (): JSX.Element => {
                                     setShowCategorySearches(true);
                                 return (
                                     <li
-                                        key={category.id}
-                                        onClick={handleClickOutside}
+                                        key={`${category.name}-${category.id}`}
+                                        onClick={
+                                            handleCloseSearchContainerOnClickOutside
+                                        }
                                     >
                                         <PaintDripLink
                                             to={`/categories/${category.slug}`}
@@ -272,7 +322,8 @@ const SearchContainer = (): JSX.Element => {
                                     </li>
                                 );
                             })}
-                </ul>
+                    </ul>
+                )}
             </SearchSection>
         );
     };
@@ -281,9 +332,9 @@ const SearchContainer = (): JSX.Element => {
         return (
             <SearchSection hideElement={showTagSearches}>
                 <Heading level={5}>Tags</Heading>
-                <ul>
-                    {isStrapiTag(searchResult) &&
-                        searchResult
+                {isStrapiTag(searchResult) && (
+                    <ul>
+                        {searchResult
                             .filter(data => {
                                 if (data.is_tag) return data;
                             })
@@ -291,8 +342,10 @@ const SearchContainer = (): JSX.Element => {
                                 if (!showTagSearches) setShowTagSearches(true);
                                 return (
                                     <li
-                                        key={tag.id}
-                                        onClick={handleClickOutside}
+                                        key={`${tag.name}-${tag.id}`}
+                                        onClick={
+                                            handleCloseSearchContainerOnClickOutside
+                                        }
                                     >
                                         <PaintDripLink to={`/tags/${tag.slug}`}>
                                             {tag.name}
@@ -300,17 +353,19 @@ const SearchContainer = (): JSX.Element => {
                                     </li>
                                 );
                             })}
-                </ul>
+                    </ul>
+                )}
             </SearchSection>
         );
     };
+
     const handleIsStrapiOffering = () => {
         return (
             <SearchSection hideElement={showOfferingSearches}>
                 <Heading level={5}>Offerings</Heading>
-                <ul>
-                    {isStrapiOffering(searchResult) &&
-                        searchResult
+                {isStrapiOffering(searchResult) && (
+                    <ul>
+                        {searchResult
                             .filter(data => {
                                 if (data.is_offering) return data;
                             })
@@ -319,8 +374,10 @@ const SearchContainer = (): JSX.Element => {
                                     setShowOfferingSearches(true);
                                 return (
                                     <li
-                                        key={offering.id}
-                                        onClick={handleClickOutside}
+                                        key={`${offering.title}-${offering.id}`}
+                                        onClick={
+                                            handleCloseSearchContainerOnClickOutside
+                                        }
                                     >
                                         <PaintDripLink
                                             to={`/work-with-me/${offering.slug}`}
@@ -330,7 +387,8 @@ const SearchContainer = (): JSX.Element => {
                                     </li>
                                 );
                             })}
-                </ul>
+                    </ul>
+                )}
             </SearchSection>
         );
     };
@@ -339,9 +397,9 @@ const SearchContainer = (): JSX.Element => {
         return (
             <SearchSection hideElement={showServiceSearches}>
                 <Heading level={5}>Services</Heading>
-                <ul>
-                    {isStrapiService(searchResult) &&
-                        searchResult
+                {isStrapiService(searchResult) && (
+                    <ul>
+                        {searchResult
                             .filter(data => {
                                 if (data.is_service) return data;
                             })
@@ -351,8 +409,10 @@ const SearchContainer = (): JSX.Element => {
                                 return service.offerings.map(offering => {
                                     return (
                                         <li
-                                            key={service.id}
-                                            onClick={handleClickOutside}
+                                            key={`${service.title}${offering.id}-${service.id}`}
+                                            onClick={
+                                                handleCloseSearchContainerOnClickOutside
+                                            }
                                         >
                                             {' '}
                                             <PaintDripLink
@@ -364,32 +424,85 @@ const SearchContainer = (): JSX.Element => {
                                     );
                                 });
                             })}
-                </ul>
+                    </ul>
+                )}
             </SearchSection>
         );
     };
-    const handleClickOutside = () => {
+
+    const handleCloseSearchContainerOnClickOutside = () => {
         setQuery('');
         setSearchResult([]);
     };
+
+    const findRandomBlogPost = () => {
+        if (!blogPosts) return <> </>;
+
+        const randomPost =
+            blogPosts[Math.floor(Math.random() * blogPosts.length)];
+
+        return (
+            <div>
+                <p>
+                    😮 Oh no! We couldn't find anything under "{query}". How
+                    about we pull a random blog post for you to read, instead?
+                </p>
+                <li onClick={handleCloseSearchContainerOnClickOutside}>
+                    {randomPost.category ? (
+                        <PaintDripLink
+                            to={`/blogs/${randomPost.blog.slug}/${
+                                randomPost.category.slug
+                            }/${formatDateOnSlug(randomPost.published)}/${
+                                randomPost.slug
+                            }`}
+                        >
+                            {randomPost.title}
+                        </PaintDripLink>
+                    ) : (
+                        <PaintDripLink
+                            to={`/blogs/${randomPost.blog.slug}/
+                }${formatDateOnSlug(randomPost.published)}/${randomPost.slug}`}
+                        >
+                            {randomPost.title}
+                        </PaintDripLink>
+                    )}
+                </li>
+            </div>
+        );
+    };
+
+    useEffect(() => {
+        searchResult.length === 0 ? setHasFound(false) : setHasFound(true);
+
+        query.length === 0 && setHasFound(true); // don't show if empty
+    }, [query]);
+
     return (
         <Grid>
-            <OutsideClickContainer onClickHandler={handleClickOutside}>
+            <OutsideClickContainer
+                onClickHandler={handleCloseSearchContainerOnClickOutside}
+            >
                 <Flexbox inline center middle>
                     <Label htmlFor="search-query">
                         <FaSearch />
                     </Label>
+
                     <Input
                         id="search-query"
                         type="text"
                         name="search-query"
                         value={query}
+                        onBlur={() => setHasFound(true)}
                         onChange={event => {
-                            searchData(event), setQuery(event.target.value);
+                            const inputValue = event.target.value;
+
+                            searchData(event), setQuery(inputValue);
                         }}
                     />
                 </Flexbox>
+
                 <Grid
+                    containerType="ul"
                     columns={{
                         xlarge: `repeat(4, 1fr)`,
                         medium: `repeat(3, 1fr)`,
@@ -398,28 +511,23 @@ const SearchContainer = (): JSX.Element => {
                     }}
                 >
                     {!isLoading && handleIsStrapiBlog()}
+
                     {!isLoading && handleIsStrapiBlogPost()}
+
                     {!isLoading && handleIsStrapiCategory()}
+
                     {!isLoading && handleIsStrapiTag()}
+
                     {!isLoading && handleIsStrapiOffering()}
+
                     {!isLoading && handleIsStrapiService()}
+
+                    {!hasFound &&
+                        searchResult.length < 1 &&
+                        findRandomBlogPost()}
                 </Grid>
             </OutsideClickContainer>
         </Grid>
     );
 };
 export default SearchContainer;
-
-const Label = styled.label`
-    align-self: center;
-    margin-bottom: 5px;
-    margin-right: 5px;
-`;
-
-const Input = styled.input`
-    font-size: var(--size-text-xsmall);
-    border-radius: 0.2rem;
-    &:focus {
-        background: var(--color-light-blue);
-    }
-`;
