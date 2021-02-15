@@ -12,7 +12,7 @@ import { DividerField, ButtonField } from '../Widgets';
 import {
     ImageCenterTextEitherSideField,
     TextCenterImageEitherSideField,
-    HeaderWithImageLeftSideField,
+    HeadingWithImageLeftSideField,
     HeaderWithImageRightSideField,
     TextWithImageLeftSideField,
     TextWithImageRightSideField,
@@ -143,7 +143,7 @@ const StrapiDynamicZone: React.FC<Props> = ({
                             image: component.image,
                         };
                         return (
-                            <HeaderWithImageLeftSideField
+                            <HeadingWithImageLeftSideField
                                 data={headerWithImageLeftSideData}
                                 key={`${idx}${component.__typename}`}
                             />

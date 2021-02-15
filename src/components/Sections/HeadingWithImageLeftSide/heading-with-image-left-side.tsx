@@ -11,7 +11,7 @@ export interface Props {
     };
 }
 
-const HeaderWithImageLeftSideField: React.FC<Props> = ({ data }: Props) => {
+const HeadingWithImageLeftSideField: React.FC<Props> = ({ data }: Props) => {
     const { heading, image } = data;
 
     return (
@@ -32,4 +32,4 @@ const HeaderWithImageLeftSideField: React.FC<Props> = ({ data }: Props) => {
     );
 };
 
-export default HeaderWithImageLeftSideField;
+export default HeadingWithImageLeftSideField;

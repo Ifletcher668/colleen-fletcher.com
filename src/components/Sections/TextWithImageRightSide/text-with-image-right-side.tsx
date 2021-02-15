@@ -18,16 +18,39 @@ const TextWithImageRightSideField: React.FC<Props> = ({
 
     return (
         <Grid
-            containerType="section"
+            containerType="article"
             columns={{
-                xlarge: `[text] 2fr [spacer] 0.5fr [image] 1fr`,
+                xlarge: `[text] minmax(64%, 2fr) [spacer] 50px [image] minmax(34%, 1fr)`,
                 small: `1f`,
             }}
+            rows={{
+                large: `[content-start] 1fr [content-middle] auto [content-end] auto`,
+                medium: `[content-start] auto [content-end] auto`,
+            }}
         >
-            <GridArea column="text">
+            <GridArea
+                col-xl="text"
+                col-lg="text"
+                col-md="text"
+                row-xl="content-start / content-end"
+                row-lg="content-start / content-end"
+                row-md="content-start / content-end"
+                row-sm="content-middle"
+                row-xs="content-middle"
+            >
                 <Paragraph data={text} />
             </GridArea>
-            <GridArea column="image">
+
+            <GridArea
+                col-xl="image"
+                col-lg="image"
+                col-md="image"
+                row-xl="content-start"
+                row-lg="content-start"
+                row-md="content-start"
+                row-sm="content-start"
+                row-xs="content-start"
+            >
                 <SingleImageField data={image} />
             </GridArea>
         </Grid>
