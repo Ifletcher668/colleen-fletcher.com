@@ -11,7 +11,7 @@ const ImagesField: React.FC<Props> = ({ data }: Props) => {
     const { style, files, isCircle, hasBorder } = data;
 
     const styles: CSSObject = {
-        gap: `0 1em`,
+        gap: `1rem`,
     };
 
     return (
@@ -19,7 +19,7 @@ const ImagesField: React.FC<Props> = ({ data }: Props) => {
             containerType="section"
             styling={styles}
             columns={{
-                xlarge: `repeat(${files.length}, 1fr)`,
+                xlarge: `repeat(auto-fit, minmax(224px, 1fr))`,
                 xsmall: `1fr`,
             }}
         >

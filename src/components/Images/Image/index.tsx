@@ -8,6 +8,33 @@ interface Props {
     data: StrapiComponentMediaSingleImage;
 }
 
+interface WrapperProps extends Pick<GatsbyImageFluidProps, 'fluid'> {
+    hasBorder: boolean;
+    isCircle: boolean;
+}
+
+const ImageWrapper = styled(GatsbyImage)<WrapperProps>`
+    border: ${p =>
+        p.hasBorder ? '1.5px solid' + p.theme.color.aterrima : 'none'};
+    border-radius: ${p => (p.isCircle ? '1000px' : '2px')};
+
+    /* TODO: Poorly handling gatsby-image fluid */
+    min-height: 300px;
+    min-width: 300px;
+    max-width: 600px;
+    max-height: 600px;
+
+    ${props =>
+        below(props.theme.breakpoint.medium, {
+            alignSelf: 'center',
+            margin: 'auto',
+            minHeight: '224px',
+            minWidth: '224px',
+            maxHeight: '224px',
+            maxWidth: '224px',
+        })}
+`;
+
 const Image: React.FC<Props> = ({ data }: Props) => {
     const { file, hasBorder, isCircle } = data;
     if (file === null || file === undefined) {
@@ -32,30 +59,3 @@ const Image: React.FC<Props> = ({ data }: Props) => {
 };
 
 export default Image;
-
-interface WrapperProps extends Pick<GatsbyImageFluidProps, 'fluid'> {
-    hasBorder: boolean;
-    isCircle: boolean;
-}
-
-const ImageWrapper = styled(GatsbyImage)<WrapperProps>`
-    border: ${p =>
-        p.hasBorder ? '1.5px solid' + p.theme.color.aterrima : 'none'};
-    border-radius: ${p => (p.isCircle ? '1000px' : '2px')};
-
-    /* TODO: Poorly handling gatsby-image fluid */
-    min-height: 300px;
-    min-width: 300px;
-    max-width: 600px;
-    max-height: 600px;
-
-    ${props =>
-        below(props.theme.breakpoint.medium, {
-            alignSelf: 'center',
-            margin: 'auto',
-            minHeight: '300px',
-            minWidth: '300px',
-            maxHeight: '300px',
-            maxWidth: '300px',
-        })}
-`;
