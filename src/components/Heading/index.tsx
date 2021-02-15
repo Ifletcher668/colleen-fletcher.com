@@ -16,9 +16,9 @@ const HeadingWrapper = styled(HeadingAtom)<WrapperProps>`
     transform: ${props => {
         switch (props.tilt) {
             case 'up':
-                return 'rotate(2deg)';
+                return 'rotate(1deg)';
             case 'down':
-                return 'rotate(-2deg)';
+                return 'rotate(-1deg)';
             default:
                 // even
                 return 'rotate(0deg)';
@@ -46,6 +46,18 @@ const HeadingWrapper = styled(HeadingAtom)<WrapperProps>`
             default:
                 // right
                 return 'start';
+        }
+    }};
+
+    text-align: ${props => {
+        switch (props.justifyHeading) {
+            case 'right':
+                return 'right';
+            case 'center':
+                return 'center';
+            default:
+                // right
+                return 'left';
         }
     }};
 `;

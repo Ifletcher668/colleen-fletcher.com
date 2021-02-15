@@ -26,6 +26,9 @@ const TextWithImageLeftSideField: React.FC<Props> = ({ data }: Props) => {
                 large: `[content-start] 1fr [content-end] 0.02fr`,
                 medium: `[content-start] auto [content-end] auto`,
             }}
+            styling={{
+                width: `100%`,
+            }}
         >
             <GridArea
                 col-xl="image"

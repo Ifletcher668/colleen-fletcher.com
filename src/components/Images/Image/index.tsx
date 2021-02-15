@@ -44,6 +44,11 @@ const ImageWrapper = styled(GatsbyImage)<WrapperProps>`
     border-radius: ${p => (p.isCircle ? '1000px' : '2px')};
 
     /* TODO: Poorly handling gatsby-image fluid */
+    min-height: 300px;
+    min-width: 300px;
+    max-width: 600px;
+    max-height: 600px;
+
     ${props =>
         below(props.theme.breakpoint.medium, {
             alignSelf: 'center',
