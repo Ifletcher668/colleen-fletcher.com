@@ -160,7 +160,7 @@ export const StrapiTag = graphql`
 export const FluidImage = graphql`
     fragment FluidImage on File {
         childImageSharp {
-            fluid(quality: 50, maxWidth: 600, maxHeight: 600) {
+            fluid(quality: 100, maxWidth: 600, maxHeight: 600) {
                 ...GatsbyImageSharpFluid_noBase64
             }
         }

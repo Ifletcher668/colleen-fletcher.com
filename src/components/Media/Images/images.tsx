@@ -8,7 +8,7 @@ interface Props {
 }
 
 const ImagesField: React.FC<Props> = ({ data }: Props) => {
-    const { style, files, isCircle, hasBorder } = data;
+    const { files, isCircle, hasBorder } = data;
 
     const styles: CSSObject = {
         gap: `1rem`,

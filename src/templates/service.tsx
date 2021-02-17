@@ -3,7 +3,7 @@ import { graphql } from 'gatsby';
 import StrapiDynamicZone from '../components/StrapiDynamicZone';
 import { Grid } from '../components/Containers';
 import { PageContainer } from '../components/Containers';
-import BannerBackground from 'gatsby-background-image';
+import BannerBackgroundImage from '../components/Banner/';
 
 interface Props {
     data: Strapi;
@@ -18,18 +18,11 @@ export default (props: Props): JSX.Element => {
 
     return (
         <Grid containerType="section">
-            {service.banner_background_image && (
-                <BannerBackground
-                    fluid={
-                        service.banner_background_image.imageFile
-                            .childImageSharp.fluid
-                    }
-                    className="banner-background"
-                >
-                    {service.banner && (
-                        <StrapiDynamicZone components={service.banner} />
-                    )}
-                </BannerBackground>
+            {service.banner_background_image && service.banner && (
+                <BannerBackgroundImage
+                    image={service.banner_background_image}
+                    banner={service.banner}
+                />
             )}
             <PageContainer>
                 <StrapiDynamicZone components={service.sales_page} />
