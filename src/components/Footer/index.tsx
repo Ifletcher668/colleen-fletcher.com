@@ -62,7 +62,7 @@ const Footer: React.FC = () => {
                             Isiah Fletcher
                         </Anchor>
                     </h5>
-                    {/* // TODO: add link to sitemap, setup sitemap, get disclaimer */}
+                    {/* // TODO: Make disclaimer a modal */}
                     <h6>
                         <Anchor
                             color="earth"

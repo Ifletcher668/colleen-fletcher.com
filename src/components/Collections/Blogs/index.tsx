@@ -17,7 +17,12 @@ const BlogsField: React.FC<Props> = ({ data, previews }: Props) => {
                 // TODO: Refactor when Strapi issue fixed
                 const [{ preview }] = previews.filter(p => p.id === blog.id);
                 const { text, heading, image, button } = preview;
-                if (button.action === '/') {
+                // TODO: Refactor when handling routes better
+                if (
+                    button.action === '/' ||
+                    button.action === '' ||
+                    button.action === blog.slug
+                ) {
                     const buttonPath = blog.fullUrlPath;
                     button.action = buttonPath;
                 }
