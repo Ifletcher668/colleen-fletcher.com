@@ -4,6 +4,7 @@ import { Anchor, Heading, Paragraph as P, Span } from '../../Atoms';
 import parse, { domToReact, HTMLReactParserOptions } from 'html-react-parser';
 import { Element } from 'domhandler/lib/node';
 import { Grid } from '../../Containers';
+import PaintDripLink from '../../PaintDripLink';
 
 export interface Props {
     data: StrapiComponentTextParagraph;
@@ -61,22 +62,30 @@ const H3 = styled(Heading).attrs({ as: 'h3' })``;
 const Paragraph: React.FC<Props> = ({ data }: Props) => {
     const { body, alignParagraph, justifyParagraph } = data;
 
+    // TODO: Add images to parser
     const options: HTMLReactParserOptions = {
         replace: domNode => {
             if (!(domNode instanceof Element)) return null;
 
             const { name, children, attribs } = domNode;
 
-            if (name === 'a')
-                return (
+            if (name === 'a') {
+                const isExternalLink = attribs.href.match(`^(http|https)://`);
+                return isExternalLink ? (
                     <Anchor
+                        color={'earth'}
                         href={attribs.href}
                         target={attribs.target}
                         rel={attribs.rel}
                     >
                         {domToReact(children, options)}
                     </Anchor>
+                ) : (
+                    <PaintDripLink to={attribs.href}>
+                        {domToReact(children, options)}
+                    </PaintDripLink>
                 );
+            }
 
             if (name === 'h1')
                 return (

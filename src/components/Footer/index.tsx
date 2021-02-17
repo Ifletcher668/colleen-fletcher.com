@@ -54,6 +54,7 @@ const Footer: React.FC = () => {
                     <h5>
                         Developed by{' '}
                         <Anchor
+                            color="earth"
                             href="https://Isiahfletcher.com"
                             target="_blank"
                         >
@@ -63,7 +64,10 @@ const Footer: React.FC = () => {
                     </h5>
                     {/* // TODO: add link to sitemap, setup sitemap, get disclaimer */}
                     <h6>
-                        <Anchor href="https://colleen-fletcher.com/sitemap.xml">
+                        <Anchor
+                            color="earth"
+                            href="https://colleen-fletcher.com/sitemap.xml"
+                        >
                             Sitemap
                         </Anchor>{' '}
                         |{' '}
