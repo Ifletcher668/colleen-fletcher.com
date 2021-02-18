@@ -34,22 +34,22 @@ export const GridArea = styled.div<Props>`
     grid-column: ${props => props['col-xl']};
 
     ${below.large`
-        grid-row: ${props => props['row-lg']},
-        grid-column: ${props => props['col-lg']},
+        grid-row: ${props => props['row-lg']};
+        grid-column: ${props => props['col-lg']};
     `}
 
     ${below.medium`
-        grid-row: ${props => props['row-md']},
-        grid-column: ${props => props['col-md']},
+        grid-row: ${props => props['row-md']};
+        grid-column: ${props => props['col-md']};
     `}
         
     ${below.small`
-        grid-row: ${props => props['row-sm']},
-        grid-column: ${props => props['col-sm']},
+        grid-row: ${props => props['row-sm']};
+        grid-column: ${props => props['col-sm']};
     `}
         
     ${below.xsmall`
-        grid-row: ${props => props['row-xs']},
-        grid-column: ${props => props['col-xs']},
+        grid-row: ${props => props['row-xs']};
+        grid-column: ${props => props['col-xs']};
     `}
 `;
