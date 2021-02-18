@@ -32,6 +32,7 @@ const BlogsField: React.FC<Props> = ({ data, previews }: Props) => {
                         key={idx}
                         containerType="article"
                         styling={{
+                            placeItems: 'center',
                             margin: `2em 0em`,
                             gap: `1em 0`,
                         }}
