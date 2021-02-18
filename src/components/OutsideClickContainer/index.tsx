@@ -1,4 +1,4 @@
-import React, {useRef, useEffect} from 'react';
+import React, { useRef, useEffect } from 'react';
 
 interface Props extends Pick<DefaultProps, 'children'> {
     onClickHandler: () => void;
@@ -9,13 +9,10 @@ const OutsideClickContainer = ({
     children,
 }: Props): JSX.Element => {
     const wrapperRef = useRef(null);
+
     useOutsideClickDetection(wrapperRef, onClickHandler);
 
-    return (
-        <div className="outside-click-container" ref={wrapperRef}>
-            {children}
-        </div>
-    );
+    return <div ref={wrapperRef}>{children}</div>;
 };
 
 export default OutsideClickContainer;
@@ -37,8 +34,7 @@ const useOutsideClickDetection = (
         };
 
         document.addEventListener('mousedown', handleClickOutside);
-        return () => {
+        return () =>
             document.removeEventListener('mousedown', handleClickOutside);
-        };
     }, [ref]);
 };

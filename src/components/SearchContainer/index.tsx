@@ -10,6 +10,7 @@ import PaintDripLink from '../PaintDripLink';
 import OutsideClickContainer from '../OutsideClickContainer';
 import { formatDateOnSlug } from '../../utils/format-date';
 import styled from 'styled-components';
+import { Paragraph } from '../Atoms';
 
 const Label = styled.label`
     align-self: center;
@@ -442,40 +443,39 @@ const SearchContainer = (): JSX.Element => {
             blogPosts[Math.floor(Math.random() * blogPosts.length)];
 
         return (
-            <div>
-                <p>
-                    😮 Oh no! We couldn't find anything under "{query}". How
-                    about we pull a random blog post for you to read, instead?
-                </p>
-                <li onClick={handleCloseSearchContainerOnClickOutside}>
-                    {randomPost.category ? (
-                        <PaintDripLink
-                            to={`/blogs/${randomPost.blog.slug}/${
-                                randomPost.category.slug
-                            }/${formatDateOnSlug(randomPost.published)}/${
-                                randomPost.slug
-                            }`}
-                        >
-                            {randomPost.title}
-                        </PaintDripLink>
-                    ) : (
-                        <PaintDripLink
-                            to={`/blogs/${randomPost.blog.slug}/
-                }${formatDateOnSlug(randomPost.published)}/${randomPost.slug}`}
-                        >
-                            {randomPost.title}
-                        </PaintDripLink>
-                    )}
-                </li>
-            </div>
+            <>
+                <Paragraph>
+                    Oh no! 😮 We couldn't find anything under "{query}". <br />{' '}
+                    How about we pull a random blog post for you to read,
+                    instead?
+                </Paragraph>
+
+                <PaintDripLink
+                    to={
+                        randomPost.category
+                            ? `/blogs/${randomPost.blog.slug}/${
+                                  randomPost.category.slug
+                              }/${formatDateOnSlug(randomPost.published)}/${
+                                  randomPost.slug
+                              }`
+                            : `/blogs/${
+                                  randomPost.blog.slug
+                              }/${formatDateOnSlug(randomPost.published)}/${
+                                  randomPost.slug
+                              }`
+                    }
+                    onClick={handleCloseSearchContainerOnClickOutside}
+                >
+                    {randomPost.title}
+                </PaintDripLink>
+            </>
         );
     };
 
     useEffect(() => {
         searchResult.length === 0 ? setHasFound(false) : setHasFound(true);
-
         query.length === 0 && setHasFound(true); // don't show if empty
-    }, [query]);
+    }, [searchResult]);
 
     return (
         <Grid>
@@ -492,40 +492,38 @@ const SearchContainer = (): JSX.Element => {
                         type="text"
                         name="search-query"
                         value={query}
-                        onBlur={() => setHasFound(true)}
+                        // onBlur={() => setHasFound(true)}
                         onChange={event => {
                             const inputValue = event.target.value;
-
                             searchData(event), setQuery(inputValue);
                         }}
                     />
                 </Flexbox>
 
-                <Grid
-                    containerType="ul"
-                    columns={{
-                        xlarge: `repeat(4, 1fr)`,
-                        medium: `repeat(3, 1fr)`,
-                        small: `1fr 1fr`,
-                        xsmall: `1fr`,
-                    }}
-                >
-                    {!isLoading && handleIsStrapiBlog()}
+                {!hasFound && searchResult.length < 1 && findRandomBlogPost()}
+                {hasFound && searchResult.length > 0 && (
+                    <Grid
+                        containerType="ul"
+                        columns={{
+                            xlarge: `repeat(4, 1fr)`,
+                            medium: `repeat(3, 1fr)`,
+                            small: `1fr 1fr`,
+                            xsmall: `1fr`,
+                        }}
+                    >
+                        {!isLoading && handleIsStrapiBlog()}
 
-                    {!isLoading && handleIsStrapiBlogPost()}
+                        {!isLoading && handleIsStrapiBlogPost()}
 
-                    {!isLoading && handleIsStrapiCategory()}
+                        {!isLoading && handleIsStrapiCategory()}
 
-                    {!isLoading && handleIsStrapiTag()}
+                        {!isLoading && handleIsStrapiTag()}
 
-                    {!isLoading && handleIsStrapiOffering()}
+                        {!isLoading && handleIsStrapiOffering()}
 
-                    {!isLoading && handleIsStrapiService()}
-
-                    {!hasFound &&
-                        searchResult.length < 1 &&
-                        findRandomBlogPost()}
-                </Grid>
+                        {!isLoading && handleIsStrapiService()}
+                    </Grid>
+                )}
             </OutsideClickContainer>
         </Grid>
     );
