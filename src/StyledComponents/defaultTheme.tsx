@@ -1,4 +1,5 @@
 import { DefaultTheme } from 'styled-components';
+
 export const theme: DefaultTheme = {
     color: {
         background: '#fff',
@@ -16,8 +17,6 @@ export const theme: DefaultTheme = {
     },
 
     size: {
-        fullWidth: '60em',
-
         column: {
             xlarge: '16em',
             large: '12em',
@@ -82,7 +81,7 @@ export const theme: DefaultTheme = {
         circle: '1000px',
     },
 
-    breakpoint: {
+    breakpoints: {
         xlarge: '120rem',
         large: '75rem',
         medium: '63.75rem',

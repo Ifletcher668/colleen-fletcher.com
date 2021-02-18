@@ -1,7 +1,5 @@
 import styled from 'styled-components';
-import BreakpointHandler from '../utils/Breakpoints/breakpoint-handler';
-
-const { above, below } = new BreakpointHandler();
+import { below } from '../StyledComponents/_mixins';
 interface Props {
     /**
      * @param column
@@ -35,27 +33,23 @@ export const GridArea = styled.div<Props>`
     grid-row: ${props => props['row-xl']};
     grid-column: ${props => props['col-xl']};
 
-    ${props =>
-        below(props.theme.breakpoint.large, {
-            gridRow: props['row-lg'],
-            gridColumn: props['col-lg'],
-        })}
+    ${below.large`
+        gridRow: props['row-lg'],
+        gridColumn: props['col-lg'],
+    `}
 
-    ${props =>
-        below(props.theme.breakpoint.medium, {
-            gridRow: props['row-md'],
-            gridColumn: props['col-md'],
-        })}
+    ${below.medium`
+        gridRow: props['row-md'],
+        gridColumn: props['col-md'],
+    `}
         
-    ${props =>
-        below(props.theme.breakpoint.small, {
-            gridRow: props['row-sm'],
-            gridColumn: props['col-sm'],
-        })}
+    ${below.small`
+        gridRow: props['row-sm'],
+        gridColumn: props['col-sm'],
+    `}
         
-    ${props =>
-        below(props.theme.breakpoint.xsmall, {
-            gridRow: props['row-xs'],
-            gridColumn: props['col-xs'],
-        })}
+    ${below.xsmall`
+        gridRow: props['row-xs'],
+        gridColumn: props['col-xs'],
+    `}
 `;

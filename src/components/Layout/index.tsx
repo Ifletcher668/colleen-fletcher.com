@@ -3,7 +3,7 @@ import Footer from '../Footer';
 import Header from '../Header';
 import Main from '../Main';
 import { ThemeProvider } from 'styled-components';
-import { theme } from './defaultTheme';
+import { theme } from '../../StyledComponents/defaultTheme';
 
 const Layout: React.FC<PageProps> = ({ children, location }: PageProps) => {
     const [documentIsAtTop, setDocumentIsAtTop] = useState<boolean>(true);

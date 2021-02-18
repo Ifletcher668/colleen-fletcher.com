@@ -14,7 +14,7 @@ export const useBreakpoints = (): Breakpoints => {
     const [breakpoints, setBreakpoints] = useState<Breakpoints | []>([]);
 
     const {
-        breakpoint: { xlarge, large, medium, small, xsmall },
+        breakpoints: { xlarge, large, medium, small, xsmall },
     } = useTheme();
 
     useMemo(() => {

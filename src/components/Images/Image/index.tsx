@@ -1,9 +1,7 @@
 import React from 'react';
 import GatsbyImage, { GatsbyImageFluidProps } from 'gatsby-image';
 import styled from 'styled-components';
-import BreakPointHandler from '../../../utils/Breakpoints/breakpoint-handler';
-
-const { below } = new BreakPointHandler();
+import { below, color } from '../../../StyledComponents/_mixins';
 interface Props {
     data: StrapiComponentMediaSingleImage;
 }
@@ -14,8 +12,7 @@ interface WrapperProps extends Pick<GatsbyImageFluidProps, 'fluid'> {
 }
 
 const ImageWrapper = styled(GatsbyImage)<WrapperProps>`
-    border: ${p =>
-        p.hasBorder ? '1.5px solid' + p.theme.color.aterrima : 'none'};
+    border: ${p => (p.hasBorder ? '1.5px solid' + color('aterrima') : 'none')};
     border-radius: ${p => (p.isCircle ? '1000px' : '2px')};
 
     /* TODO: Poorly handling gatsby-image fluid */
@@ -24,15 +21,14 @@ const ImageWrapper = styled(GatsbyImage)<WrapperProps>`
     max-width: 600px;
     max-height: 600px;
 
-    ${props =>
-        below(props.theme.breakpoint.medium, {
-            alignSelf: 'center',
-            margin: 'auto',
-            minHeight: '224px',
-            minWidth: '224px',
-            maxHeight: '224px',
-            maxWidth: '224px',
-        })}
+    ${below.medium`
+        align-self: 'center',
+        margin: 'auto',
+        min-height: '224px',
+        min-width: '224px',
+        max-height: '224px',
+        max-width: '224px',
+    `}
 `;
 
 const Image: React.FC<Props> = ({ data }: Props) => {

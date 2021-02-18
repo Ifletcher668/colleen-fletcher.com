@@ -70,6 +70,7 @@ const Paragraph: React.FC<Props> = ({ data }: Props) => {
             const { name, children, attribs } = domNode;
 
             if (name === 'a') {
+                // TODO: Every link in production starts with https... Fix
                 const isExternalLink = attribs.href.match(`^(http|https)://`);
                 return isExternalLink ? (
                     <Anchor

@@ -1,7 +1,5 @@
 import styled from 'styled-components';
-import BreakpointHandler from '../../../utils/Breakpoints/breakpoint-handler';
-
-const { below } = new BreakpointHandler();
+import { below, size } from '../../../StyledComponents/_mixins';
 
 // TODO: Update with theme variables
 const PageContainer = styled.section`
@@ -15,11 +13,18 @@ const PageContainer = styled.section`
         grid-column: content;
     }
 
-    ${props =>
-        below(props.theme.breakpoint.small, {
-            gridTemplateColumns: `[full-start] 4% [content-start] 92% [content-end] 4% [full-end]; & > * { grid-column: content;}`,
-        })}
+    ${below.small`
+            grid-template-columns: 
+                [full-start] 4%
+                [content-start] 92%
+                [content-end] 4%
+                [full-end];
+                
+                & > * {
+                    grid-column: content;
+                }
+        `};
 
-    margin: ${props => props.theme.size.margin.large} 0;
+    margin: ${size('margin', 'large')} 0;
 `;
 export default PageContainer;
