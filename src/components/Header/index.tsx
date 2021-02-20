@@ -10,16 +10,18 @@ import gsap from 'gsap';
 import Navbar from './Navbar';
 import BlueFrangipani from '../../assets/images/svg/wholistic-blue-frangipani.svg';
 import MobileMenu from './MobileNav';
-import {useMenuItems} from '../../graphql/queries/useMenuItems';
+import { useMenuItems } from '../../graphql/queries/useMenuItems';
 
 type Ctx = {
     isMobileMenuOpen: boolean;
     toggleMobileMenu: () => void;
 };
 
-export const MobileMenuContext = createContext<Ctx | {[key: string]: any}>({});
+export const MobileMenuContext = createContext<Ctx | { [key: string]: any }>(
+    {},
+);
 
-const Header: React.FC<DefaultProps> = ({className}: DefaultProps) => {
+const Header: React.FC<DefaultProps> = ({ className }: DefaultProps) => {
     const target: RefObject<HTMLDivElement> = createRef();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 
@@ -29,19 +31,19 @@ const Header: React.FC<DefaultProps> = ({className}: DefaultProps) => {
 
     const navRef = useRef();
     const {
-        strapi: {menuItems},
+        strapi: { menuItems },
     } = useMenuItems();
 
     const [strapiMenuItems] = useState(
         menuItems.map(item => {
-            return {...item, ref: createRef()};
+            return { ...item, ref: createRef() };
         }),
     );
 
     const [timeline] = useState(
         gsap.timeline({
             paused: true,
-            defaults: {duration: 1, ease: 'expo.out'},
+            defaults: { duration: 1, ease: 'expo.out' },
         }),
     );
 

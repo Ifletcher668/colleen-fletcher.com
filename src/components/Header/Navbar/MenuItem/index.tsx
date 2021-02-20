@@ -47,6 +47,7 @@ const MenuItem: React.FC<Props> = ({
                 >
                     <Anchor
                         href={`${
+                            // Ensures an external link for Gatsby to not think it's local
                             slug.match(`^(http|https)://`)
                                 ? slug
                                 : `https://${slug}`

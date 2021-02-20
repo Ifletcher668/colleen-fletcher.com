@@ -26,6 +26,7 @@ const Navbar: React.FC<DefaultProps> = (props: DefaultProps) => {
     const [innerWidth, setInnerWidth] = useState(
         typeof window !== `undefined` ? window.innerWidth : 0,
     );
+
     const ctx = {
         isActivePanel,
         setIsActivePanel,
@@ -51,15 +52,15 @@ const Navbar: React.FC<DefaultProps> = (props: DefaultProps) => {
     }, []);
 
     useEffect(() => {
-        const handleResize = () => setInnerWidth(window.innerWidth);
-        window.addEventListener('resize', handleResize);
-        return window.addEventListener('resize', handleResize);
-    }, []);
+        window.addEventListener('resize', changeMenuListener);
+        return () => window.addEventListener('resize', changeMenuListener);
+    }, [innerWidth]);
 
     useEffect(() => {
-        window.addEventListener('resize', changeMenuListener);
-        return window.addEventListener('resize', changeMenuListener);
-    }, [innerWidth]);
+        const handleResize = () => setInnerWidth(window.innerWidth);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     return (
         <nav
@@ -98,7 +99,7 @@ const Navbar: React.FC<DefaultProps> = (props: DefaultProps) => {
                             <Heading level={1}>Colleen Fletcher</Heading>
                             <MobileMenuToggleButton
                                 type="button"
-                                variant=""
+                                variant="primary"
                                 className="toggle-menu"
                                 onClick={() => toggleMobileMenu()}
                             >

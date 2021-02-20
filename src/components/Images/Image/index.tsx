@@ -33,12 +33,22 @@ const ImageWrapper = styled(GatsbyImage)<WrapperProps>`
 
 const Image: React.FC<Props> = ({ data }: Props) => {
     const { file, hasBorder, isCircle } = data;
+
     if (file === null || file === undefined) {
-        console.log('<Image /> file is null');
+        console.log('file passed to <Image /> component is null ');
         return <></>;
     }
 
     const { alternativeText, caption, imageFile } = file;
+
+    if (imageFile === null || imageFile === undefined) {
+        console.log(
+            `imageFile is null on <Image /> Component! Here is the file that was passed to the <Image /> component`,
+        );
+        console.log(file);
+
+        return <></>;
+    }
     return (
         <ImageWrapper
             alt={alternativeText ? alternativeText : ''}

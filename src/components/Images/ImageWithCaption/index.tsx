@@ -31,7 +31,9 @@ const ImageWithCaption: React.FC<Props> = (props: Props) => {
     return (
         <Flexbox containerType={containerType} vertical styling={styling}>
             <Image data={data} />
-            {data.file && <FigCaption>{data.file.caption}</FigCaption>}
+            {data.file && data.file.caption && (
+                <FigCaption>{data.file.caption}</FigCaption>
+            )}
         </Flexbox>
     );
 };

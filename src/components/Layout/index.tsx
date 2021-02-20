@@ -14,7 +14,7 @@ const Layout: React.FC<PageProps> = ({ children, location }: PageProps) => {
 
     useEffect(() => {
         document.addEventListener('scroll', handleScrollY);
-        return document.addEventListener('scroll', handleScrollY);
+        return () => document.removeEventListener('scroll', handleScrollY);
     }, [documentIsAtTop]);
 
     const headerClassNames = ['site-header'];

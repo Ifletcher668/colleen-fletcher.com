@@ -18,8 +18,8 @@ const ImageCenterTextEitherSideField: React.FC<Props> = ({ data }: Props) => {
         <Grid
             containerType="section"
             columns={{
-                xlarge: `[text-left] 1.5fr [spacer] 0.5fr[image] 1fr[spacer] 0.5fr [text-right] 1.5fr`,
-                small: `1f`,
+                xlarge: `[text-left] 1.5fr [spacer] 0.5fr [image] 1fr [spacer] 0.5fr [text-right] 1.5fr`,
+                medium: `1fr`,
             }}
         >
             <GridArea column="text-left">

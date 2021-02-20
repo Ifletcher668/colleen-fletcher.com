@@ -20,7 +20,7 @@ const TextWithImageLeftSideField: React.FC<Props> = ({ data }: Props) => {
             columns={{
                 xlarge: `[image] minmax(34%, 1fr) [spacer] 2% [text] minmax(64%, 2fr)`,
                 large: `[image] minmax(36%, 1fr) [spacer] 4% [text] minmax(60%, 1fr)`,
-                small: `1f`,
+                small: `1fr`,
             }}
             rows={{
                 large: `[content-start] 1fr [content-end] 0.02fr`,
