@@ -7,6 +7,7 @@ import { MobileMenuToggleButton } from '../../Button';
 import Heading from '../../Heading';
 import { useBreakpoints } from '../../../utils/Breakpoints/useBreakpoints';
 import { MobileMenuContext } from '../index';
+import { log } from 'console';
 
 type NavCtx = {
     isActivePanel: boolean;
@@ -49,11 +50,11 @@ const Navbar: React.FC<DefaultProps> = (props: DefaultProps) => {
     // verify which menu to use on first render
     useEffect(() => {
         changeMenuListener();
-    }, []);
+    }, [small]); // initially returns 0 until theme vars are calculated
 
     useEffect(() => {
         window.addEventListener('resize', changeMenuListener);
-        return () => window.addEventListener('resize', changeMenuListener);
+        return () => window.removeEventListener('resize', changeMenuListener);
     }, [innerWidth]);
 
     useEffect(() => {

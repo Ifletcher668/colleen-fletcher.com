@@ -9,17 +9,19 @@ const PageContainer = styled.section`
         [full-start] minmax(2em, 3em)
         [content-start] minmax(0, 60em) [content-end]
         minmax(2em, 3em) [full-end];
+
     & > * {
         grid-column: content;
     }
 
     ${below.small`
+            place-items:center;
             grid-template-columns: 
                 [full-start] 4%
                 [content-start] 92%
                 [content-end] 4%
                 [full-end];
-                
+
                 & > * {
                     grid-column: content;
                 }
