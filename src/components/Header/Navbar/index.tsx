@@ -110,7 +110,7 @@ const Navbar: React.FC<DefaultProps> = (props: DefaultProps) => {
                     )}
                 </ul>
             </NavbarContext.Provider>
-            <SearchContainer />
+            {/* <SearchContainer /> */}
         </nav>
     );
 };
