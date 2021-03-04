@@ -89,25 +89,27 @@ const SearchContainer = (): JSX.Element => {
             setBlogs(blogs.data);
 
             const blogPosts = await Axios(
-                `${process.env.GATSBY_HEROKU_URL}blog-posts`,
+                `${process.env.GATSBY_HEROKU_URL}blog-posts/search`,
             );
             setBlogPosts(blogPosts.data);
 
             const categories = await Axios(
-                `${process.env.GATSBY_HEROKU_URL}categories`,
+                `${process.env.GATSBY_HEROKU_URL}categories/search`,
             );
             setCategories(categories.data);
 
-            const tags = await Axios(`${process.env.GATSBY_HEROKU_URL}tags`);
+            const tags = await Axios(
+                `${process.env.GATSBY_HEROKU_URL}tags/search`,
+            );
             setTags(tags.data);
 
             const offerings = await Axios(
-                `${process.env.GATSBY_HEROKU_URL}offerings`,
+                `${process.env.GATSBY_HEROKU_URL}offerings/search`,
             );
             setOfferings(offerings.data);
 
             const services = await Axios(
-                `${process.env.GATSBY_HEROKU_URL}services`,
+                `${process.env.GATSBY_HEROKU_URL}services/search`,
             );
             setServices(services.data);
         };
@@ -178,8 +180,9 @@ const SearchContainer = (): JSX.Element => {
         dataToSearch.searchIndex = new TfIdfSearchIndex('id');
         dataToSearch.addIndex('name');
         dataToSearch.addIndex('title');
-        dataToSearch.addIndex('preview'); // blog preview
-        dataToSearch.addIndex(['preview', 'text', 'body']);
+        dataToSearch.addIndex('slug');
+        // dataToSearch.addIndex('preview'); // blog preview
+        // dataToSearch.addIndex(['preview', 'text', 'body']);
 
         if (blogs !== null) {
             dataToSearch.addDocuments(blogs);
@@ -223,12 +226,12 @@ const SearchContainer = (): JSX.Element => {
                     <ul>
                         {searchResult
                             .filter(data => (data.is_blog ? data : ''))
-                            .map(blog => {
+                            .map((blog, idx) => {
                                 if (!showBlogSearches)
                                     setShowBlogSearches(true);
                                 return (
                                     <li
-                                        key={`${blog.name}-${blog.id}`}
+                                        key={`${blog.name}-${idx}`}
                                         onClick={
                                             handleCloseSearchContainerOnClickOutside
                                         }
@@ -255,12 +258,12 @@ const SearchContainer = (): JSX.Element => {
                     <ul>
                         {searchResult
                             .filter(data => (data.is_blog_post ? data : ''))
-                            .map(post => {
+                            .map((post, idx) => {
                                 if (!showBlogPostSearches)
                                     setShowBlogPostSearches(true);
                                 return (
                                     <li
-                                        key={`${post.title}-${post.id}`}
+                                        key={`${post.title}-${idx}`}
                                         onClick={
                                             handleCloseSearchContainerOnClickOutside
                                         }
@@ -305,12 +308,12 @@ const SearchContainer = (): JSX.Element => {
                             .filter(data => {
                                 if (data.is_category) return data;
                             })
-                            .map(category => {
+                            .map((category, idx) => {
                                 if (!showCategorySearches)
                                     setShowCategorySearches(true);
                                 return (
                                     <li
-                                        key={`${category.name}-${category.id}`}
+                                        key={`${category.name}-${idx}`}
                                         onClick={
                                             handleCloseSearchContainerOnClickOutside
                                         }
@@ -339,11 +342,11 @@ const SearchContainer = (): JSX.Element => {
                             .filter(data => {
                                 if (data.is_tag) return data;
                             })
-                            .map(tag => {
+                            .map((tag, idx) => {
                                 if (!showTagSearches) setShowTagSearches(true);
                                 return (
                                     <li
-                                        key={`${tag.name}-${tag.id}`}
+                                        key={`${tag.name}-${idx}`}
                                         onClick={
                                             handleCloseSearchContainerOnClickOutside
                                         }
@@ -370,12 +373,12 @@ const SearchContainer = (): JSX.Element => {
                             .filter(data => {
                                 if (data.is_offering) return data;
                             })
-                            .map(offering => {
+                            .map((offering, idx) => {
                                 if (!showOfferingSearches)
                                     setShowOfferingSearches(true);
                                 return (
                                     <li
-                                        key={`${offering.title}-${offering.id}`}
+                                        key={`${offering.title}-${idx}`}
                                         onClick={
                                             handleCloseSearchContainerOnClickOutside
                                         }
@@ -404,26 +407,28 @@ const SearchContainer = (): JSX.Element => {
                             .filter(data => {
                                 if (data.is_service) return data;
                             })
-                            .map(service => {
+                            .map((service, index) => {
                                 if (!showServiceSearches)
                                     setShowServiceSearches(true);
-                                return service.offerings.map(offering => {
-                                    return (
-                                        <li
-                                            key={`${service.title}${offering.id}-${service.id}`}
-                                            onClick={
-                                                handleCloseSearchContainerOnClickOutside
-                                            }
-                                        >
-                                            {' '}
-                                            <PaintDripLink
-                                                to={`/work-with-me/${offering.slug}/${service.slug}`}
+                                return service.offerings.map(
+                                    (offering, idx) => {
+                                        return (
+                                            <li
+                                                key={`${service.title}${index}-${idx}`}
+                                                onClick={
+                                                    handleCloseSearchContainerOnClickOutside
+                                                }
                                             >
-                                                {`${offering.title}—${service.title}`}
-                                            </PaintDripLink>{' '}
-                                        </li>
-                                    );
-                                });
+                                                {' '}
+                                                <PaintDripLink
+                                                    to={`/work-with-me/${offering.slug}/${service.slug}`}
+                                                >
+                                                    {`${offering.title}—${service.title}`}
+                                                </PaintDripLink>{' '}
+                                            </li>
+                                        );
+                                    },
+                                );
                             })}
                     </ul>
                 )}

@@ -1,13 +1,8 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useState } from 'react';
 import { useMenuItems } from '../../../graphql/queries/useMenuItems';
-import SearchContainer from '../../SearchContainer';
+// import SearchContainer from '../../SearchContainer';
 import MenuItem from './MenuItem';
-import { FaAlignJustify } from 'react-icons/fa';
-import { MobileMenuToggleButton } from '../../Button';
-import Heading from '../../Heading';
-import { useBreakpoints } from '../../../utils/Breakpoints/useBreakpoints';
-import { MobileMenuContext } from '../index';
-import { log } from 'console';
+import { Nav } from '../../Atoms';
 
 type NavCtx = {
     isActivePanel: boolean;
@@ -16,17 +11,14 @@ type NavCtx = {
     setActivePanelName: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export const NavbarContext = createContext<NavCtx | { [key: string]: any }>({});
+export const NavbarContext = createContext<NavCtx>({} as NavCtx);
 
 const Navbar: React.FC<DefaultProps> = (props: DefaultProps) => {
+    // TODO: Remove
     const { className } = props;
 
     const [isActivePanel, setIsActivePanel] = useState<boolean>(false);
     const [activePanelName, setActivePanelName] = useState<string>('');
-    const [isFullMenu, setIsFullMenu] = useState<boolean>(true);
-    const [innerWidth, setInnerWidth] = useState(
-        typeof window !== `undefined` ? window.innerWidth : 0,
-    );
 
     const ctx = {
         isActivePanel,
@@ -35,36 +27,12 @@ const Navbar: React.FC<DefaultProps> = (props: DefaultProps) => {
         setActivePanelName,
     };
 
-    const { toggleMobileMenu } = useContext(MobileMenuContext);
-
     const {
         strapi: { menuItems },
     } = useMenuItems();
 
-    const [xlarge, large, medium, small, xsmall] = useBreakpoints();
-
-    const changeMenuListener = () => {
-        innerWidth >= small ? setIsFullMenu(true) : setIsFullMenu(false);
-    };
-
-    // verify which menu to use on first render
-    useEffect(() => {
-        changeMenuListener();
-    }, [small]); // initially returns 0 until theme vars are calculated
-
-    useEffect(() => {
-        window.addEventListener('resize', changeMenuListener);
-        return () => window.removeEventListener('resize', changeMenuListener);
-    }, [innerWidth]);
-
-    useEffect(() => {
-        const handleResize = () => setInnerWidth(window.innerWidth);
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
-
     return (
-        <nav
+        <Nav
             className={
                 className
                     ? Array.isArray(className)
@@ -75,43 +43,29 @@ const Navbar: React.FC<DefaultProps> = (props: DefaultProps) => {
         >
             <NavbarContext.Provider value={ctx}>
                 <ul className="nav-list">
-                    {isFullMenu ? (
-                        menuItems.map((menuItem, idx) => {
-                            if (menuItem.content.length > 0) {
-                                // show active panel
-                                let cn = '';
-                                if (menuItem.text === activePanelName) {
-                                    cn += 'active';
-                                }
-                                return (
-                                    <MenuItem
-                                        key={idx}
-                                        className={cn}
-                                        {...menuItem}
-                                    />
-                                );
-                            } else {
-                                // no data to show
-                                return <MenuItem key={idx} {...menuItem} />;
+                    {menuItems.map((menuItem, idx) => {
+                        if (menuItem.content.length > 0) {
+                            // show active panel
+                            let cn = '';
+                            if (menuItem.text === activePanelName) {
+                                cn += 'active';
                             }
-                        })
-                    ) : (
-                        <>
-                            <Heading level={1}>Colleen Fletcher</Heading>
-                            <MobileMenuToggleButton
-                                type="button"
-                                variant="primary"
-                                className="toggle-menu"
-                                onClick={() => toggleMobileMenu()}
-                            >
-                                <FaAlignJustify />
-                            </MobileMenuToggleButton>
-                        </>
-                    )}
+                            return (
+                                <MenuItem
+                                    key={idx}
+                                    className={cn}
+                                    {...menuItem}
+                                />
+                            );
+                        } else {
+                            // no data to show
+                            return <MenuItem key={idx} {...menuItem} />;
+                        }
+                    })}
                 </ul>
             </NavbarContext.Provider>
             {/* <SearchContainer /> */}
-        </nav>
+        </Nav>
     );
 };
 

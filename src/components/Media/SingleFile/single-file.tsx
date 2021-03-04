@@ -1,9 +1,7 @@
 import React from 'react';
-import MarkdownField from 'react-markdown';
-import Heading from '../../Heading';
 
 export interface Props {
-    data: StrapiBodyContent;
+    data: any;
 }
 
 const TextWithImageField: React.FC<Props> = ({}: Props) => {

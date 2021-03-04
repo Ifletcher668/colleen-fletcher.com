@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { DefaultTheme, ThemedStyledFunction } from 'styled-components';
 import { Heading as HeadingAtom } from '../Atoms';
 
 interface Props extends DefaultProps {
@@ -10,7 +10,11 @@ interface Props extends DefaultProps {
 }
 
 interface WrapperProps
-    extends Pick<Props, 'tilt' | 'alignHeading' | 'justifyHeading'> {}
+    extends ThemedStyledFunction<'h1', DefaultTheme, {}, never> {
+    tilt?: 'up' | 'even' | 'down';
+    alignHeading?: AlignValues;
+    justifyHeading?: JustifyValues;
+}
 
 const HeadingWrapper = styled(HeadingAtom)<WrapperProps>`
     transform: ${props => {
@@ -77,10 +81,15 @@ const Heading: React.FC<Props> = ({
             : children;
 
     return (
+        // TODO:
+        /* @ts-ignore */
         <HeadingWrapper
             tilt={tilt}
             alignHeading={alignHeading}
             justifyHeading={justifyHeading}
+            // Unsure of how to ensure styled-components
+            // that this string will only be of the correct type
+            /* @ts-ignore */
             as={`h${level.toString()}`}
         >
             {titleCaseStringChildren}

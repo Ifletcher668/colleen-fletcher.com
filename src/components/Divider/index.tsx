@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import BlueFrangipani from '../../assets/images/svg/wholistic-blue-frangipani.svg';
-import {Flexbox} from '../Containers';
+import { Flexbox } from '../Containers';
 
 interface Props {
-    type: 'standard' | 'fancy';
+    type: DividerStyle;
 }
 
-const Divider = ({type}: Props): JSX.Element =>
+const Divider = ({ type }: Props): JSX.Element =>
     type === 'standard' ? (
         <StandardDivider />
     ) : (

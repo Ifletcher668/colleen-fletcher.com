@@ -1,8 +1,6 @@
 import React from 'react';
 import styled, { CSSObject } from 'styled-components';
 import { below } from '../../../StyledComponents/_mixins';
-import { useGridBreakpointLogic } from './useGridBreakpoint';
-
 interface Props extends DefaultProps {
     columns?: BreakpointObject;
     rows?: BreakpointObject;

@@ -1,11 +1,10 @@
 import React from 'react';
-import MarkdownField from 'react-markdown';
+// TODO:
 
 export interface Props {
     data: StrapiBlogPost[];
 }
-
-const BlogPostsField: React.FC<Props> = ({data}: Props) => {
+const BlogPostsField: React.FC<Props> = ({ data }: Props) => {
     return (
         <>
             {/* <MarkdownField source={data} allowDangerousHtml className="paragraph" /> */}

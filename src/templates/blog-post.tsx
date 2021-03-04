@@ -2,6 +2,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import StrapiDynamicZone from '../components/StrapiDynamicZone';
 import { PageContainer } from '../components/Containers';
+import SEO from '../components/SEO';
 interface Props {
     data: Strapi;
 }
@@ -10,15 +11,18 @@ export default (props: Props): JSX.Element => {
     const {
         data: {
             strapi: {
-                blogPost: { body },
+                blogPost: { title, body, meta_description },
             },
         },
     } = props;
 
     return (
-        <PageContainer>
-            <StrapiDynamicZone components={body} />
-        </PageContainer>
+        <>
+            <SEO title={title} description={meta_description} />
+            <PageContainer>
+                <StrapiDynamicZone components={body} />
+            </PageContainer>
+        </>
     );
 };
 
@@ -26,6 +30,8 @@ export const query = graphql`
     query GET_BLOG_POST($id: ID!) {
         strapi {
             blogPost(id: $id) {
+                title
+                meta_description
                 tags {
                     name
                 }

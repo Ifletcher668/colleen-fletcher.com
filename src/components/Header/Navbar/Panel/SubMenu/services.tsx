@@ -1,7 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import PaintDripLink from '../../../../PaintDripLink';
-import { NavbarContext } from '../..';
 
 interface Props extends DefaultProps {
     offering: {

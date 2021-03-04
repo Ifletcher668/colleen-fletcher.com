@@ -30,7 +30,7 @@ export default (props: Props): JSX.Element => {
     };
     return (
         <>
-            <SEO />
+            <SEO title={page.title} description={page.meta_description} />
             {page.banner_background_image && (
                 <BannerBackgroundImage
                     image={page.banner_background_image}

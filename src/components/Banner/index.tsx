@@ -13,6 +13,7 @@ const BannerBackgroundImage: React.FC<Props> = ({
     banner,
 }: Props): JSX.Element => {
     if (image === null) return <> </>;
+    if (image?.imageFile === null) return <> </>;
 
     return (
         <BannerWrapper

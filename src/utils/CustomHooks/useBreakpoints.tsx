@@ -1,7 +1,13 @@
-import { useEffect, useState } from 'react';
+import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import { useTheme } from 'styled-components';
 
-type CSSUnit = 'em' | 'rem' | 'px' | '%';
+type Breakpoints = {
+    xlarge: number | string;
+    large: number | string;
+    medium: number | string;
+    small: number | string;
+    xsmall: number | string;
+};
 
 const _isRenderingInBrowser =
     typeof window !== `undefined` || typeof document !== `undefined`;
@@ -54,9 +60,7 @@ const _convertStringToPercentageValue = (numberString: string): number => {
     return _getScreenWidth() * (parseFloat(numberString) / 100);
 };
 
-const _convertCSSSizeVariableStringToNumber = (
-    breakpoint: string,
-): [number, CSSUnit] => {
+const _convertCSSVariableStringToNumber = (breakpoint: string): number => {
     if (typeof breakpoint === 'number') return breakpoint;
 
     let numberString = '';
@@ -85,50 +89,48 @@ const _convertCSSSizeVariableStringToNumber = (
     }
 
     if (unit === '%') {
-        return [_convertStringToPercentageValue(numberString), unit];
+        return _convertStringToPercentageValue(numberString);
     } else if (unit === 'em') {
-        return [_convertStringToEmValue(numberString), unit];
+        return _convertStringToEmValue(numberString);
     } else if (unit === 'rem') {
-        return [_convertStringToRemValue(numberString), unit];
+        return _convertStringToRemValue(numberString);
     } else {
         // not type safe?
-        return [parseFloat(numberString), 'px'];
+        return parseFloat(numberString);
     }
 };
 
-export const useBreakpoints = (): Breakpoints => {
+export const useBreakpoints = (): MutableRefObject<Breakpoints> => {
     const [width, setWidth] = useState<number | undefined>(undefined);
     const [fontSize, setFontSize] = useState<number | undefined>(undefined);
-    const [breakpoints, setBreakpoints] = useState<Breakpoints>([
-        0,
-        0,
-        0,
-        0,
-        0,
-    ]);
 
+    const breakpoints = useRef<Breakpoints>({} as Breakpoints);
     const { breakpoints: themeBreakpoints } = useTheme();
 
     useEffect(() => {
-        const breakpointNums: Breakpoints | any[] = [];
-        for (const breakpoint in themeBreakpoints) {
-            if (
-                Object.prototype.hasOwnProperty.call(
-                    themeBreakpoints,
-                    breakpoint,
-                )
-            ) {
-                if (typeof breakpoint === 'number') return breakpoint;
+        const vals = Object.values(themeBreakpoints);
 
-                const [value] = _convertCSSSizeVariableStringToNumber(
-                    themeBreakpoints[breakpoint],
-                );
-
-                breakpointNums.push(value);
+        vals.forEach((val, idx) => {
+            const num = _convertCSSVariableStringToNumber(val);
+            switch (idx) {
+                case 0:
+                    breakpoints.current.xlarge = num;
+                    break;
+                case 1:
+                    breakpoints.current.large = num;
+                    break;
+                case 2:
+                    breakpoints.current.medium = num;
+                    break;
+                case 3:
+                    breakpoints.current.small = num;
+                    break;
+                default:
+                    breakpoints.current.xsmall = num;
+                    break;
             }
-        }
-        setBreakpoints(breakpointNums as Breakpoints);
-    }, []);
+        });
+    }, [themeBreakpoints]);
 
     useEffect(() => {
         setFontSize(_getFontSize('body'));

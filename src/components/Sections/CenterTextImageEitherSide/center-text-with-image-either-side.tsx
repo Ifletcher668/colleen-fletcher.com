@@ -7,8 +7,8 @@ import { GridArea } from '../../../StyledComponents/helpers';
 export interface Props {
     data: {
         text: StrapiComponentTextParagraph;
-        image_right: StrapiUploadFile;
-        image_left: StrapiUploadFile;
+        image_right: StrapiComponentMediaSingleImage;
+        image_left: StrapiComponentMediaSingleImage;
     };
 }
 

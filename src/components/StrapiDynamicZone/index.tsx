@@ -176,10 +176,17 @@ const StrapiDynamicZone: React.FC<Props> = ({
                         );
 
                     case 'STRAPI_ComponentWidgetDivider':
-                        return (
+                        // TODO: refactor
+                        return component.style === 'fancy' ||
+                            component.style === 'standard' ? (
                             <DividerField
                                 key={`${idx}${component.__typename}`}
-                                data={component.style}
+                                data={{ style: component.style }}
+                            />
+                        ) : (
+                            <DividerField
+                                key={`${idx}${component.__typename}`}
+                                data={{ style: 'standard' }}
                             />
                         );
 

@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import { NavbarContext } from '../../index';
+import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import PaintDripLink from '../../../../PaintDripLink';
 

@@ -4,6 +4,7 @@ import StrapiDynamicZone from '../components/StrapiDynamicZone';
 import { Grid } from '../components/Containers';
 import { PageContainer } from '../components/Containers';
 import BannerBackgroundImage from '../components/Banner/';
+import SEO from '../components/SEO';
 
 interface Props {
     data: Strapi;
@@ -12,22 +13,33 @@ interface Props {
 export default (props: Props): JSX.Element => {
     const {
         data: {
-            strapi: { service },
+            strapi: {
+                service: {
+                    banner_background_image,
+                    banner,
+                    title,
+                    sales_page,
+                    meta_description,
+                },
+            },
         },
     } = props;
 
     return (
-        <Grid containerType="section">
-            {service.banner_background_image && service.banner && (
-                <BannerBackgroundImage
-                    image={service.banner_background_image}
-                    banner={service.banner}
-                />
-            )}
-            <PageContainer>
-                <StrapiDynamicZone components={service.sales_page} />
-            </PageContainer>
-        </Grid>
+        <>
+            <SEO title={title} description={meta_description} />
+            <Grid containerType="section">
+                {banner_background_image && banner && (
+                    <BannerBackgroundImage
+                        image={banner_background_image}
+                        banner={banner}
+                    />
+                )}
+                <PageContainer>
+                    <StrapiDynamicZone components={sales_page} />
+                </PageContainer>
+            </Grid>
+        </>
     );
 };
 
@@ -36,6 +48,7 @@ export const query = graphql`
         strapi {
             service(id: $id) {
                 title
+                meta_description
                 banner_background_image {
                     ...StrapiUploadFile
                 }

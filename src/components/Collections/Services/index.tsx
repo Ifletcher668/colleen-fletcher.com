@@ -9,7 +9,7 @@ import Divider from '../../Divider';
 
 export interface Props {
     data: StrapiService[];
-    previews: StrapiService[];
+    previews?: StrapiService[];
 }
 
 const ServicesField: React.FC<Props> = ({

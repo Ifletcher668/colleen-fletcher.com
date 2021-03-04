@@ -1,6 +1,5 @@
 import React from 'react';
-import { CSSObject } from 'styled-components';
-import { Flexbox as FlexboxWrapper } from './styles';
+import styled, { CSSObject } from 'styled-components';
 
 interface Props extends FlexboxProps {
     styling?: CSSObject;
@@ -90,6 +89,14 @@ const getFlexboxProps = ({
     };
 };
 
+const Wrapper = styled.div<Props>`
+    display: ${({ inline }) => (inline ? 'inline-flex' : 'flex')};
+    flex-direction: ${({ vertical }) => (vertical ? 'column' : 'row')};
+    flex-wrap: ${({ wrap }) => (wrap ? 'wrap' : 'nowrap')};
+    flex: ${({ noGrow }) => (noGrow ? `0 0 auto` : `1 1 auto`)};
+    ${props => getFlexboxProps(props)};
+    ${props => props.styling};
+`;
 const Flexbox: React.FC<Props> = (props: Props) => {
     const {
         className,
@@ -99,19 +106,8 @@ const Flexbox: React.FC<Props> = (props: Props) => {
         wrap,
         noGrow,
         styling,
-        style,
         containerType = 'div',
     } = props;
-
-    const styles: CSSObject = {
-        display: inline ? 'inline-flex' : 'flex',
-        flexDirection: vertical ? 'column' : 'row',
-        flexWrap: wrap ? 'wrap' : 'nowrap',
-        flex: noGrow ? `0 0 auto` : `1 1 auto`,
-        ...getFlexboxProps(props),
-        ...styling,
-        ...style,
-    };
 
     const cn = className
         ? Array.isArray(className)
@@ -120,17 +116,19 @@ const Flexbox: React.FC<Props> = (props: Props) => {
         : '';
 
     return (
-        <FlexboxWrapper
+        <Wrapper
             as={containerType}
-            styling={styles}
-            className={cn}
+            wrap={wrap}
+            noGrow={noGrow}
+            inline={inline}
             onClick={onClick}
+            styling={styling}
+            vertical={vertical}
+            className={cn}
         >
             {props.children}
-        </FlexboxWrapper>
+        </Wrapper>
     );
-    {
-    }
 };
 
 export default Flexbox;

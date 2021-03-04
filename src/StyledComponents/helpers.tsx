@@ -5,7 +5,14 @@ interface Props {
      * @param column
      * The grid-column name
      */
-    column?: 'text' | 'image' | 'full';
+    column?:
+        | 'text'
+        | 'text-left'
+        | 'text-right'
+        | 'image'
+        | 'image-left'
+        | 'image-right'
+        | 'full';
     /**
      * @param row
      * The grid-row name
@@ -33,23 +40,23 @@ export const GridArea = styled.div<Props>`
     grid-row: ${props => props['row-xl']};
     grid-column: ${props => props['col-xl']};
 
-    ${below.large`
-        grid-row: ${props => props['row-lg']};
-        grid-column: ${props => props['col-lg']};
+    ${props => below.large`
+        grid-row: ${props['row-lg']};
+        grid-column: ${props['col-lg']};
     `}
 
-    ${below.medium`
-        grid-row: ${props => props['row-md']};
-        grid-column: ${props => props['col-md']};
+    ${props => below.medium`
+        grid-row: ${props['row-md']};
+        grid-column: ${props['col-md']};
     `}
         
-    ${below.small`
-        grid-row: ${props => props['row-sm']};
-        grid-column: ${props => props['col-sm']};
+    ${props => below.small`
+        grid-row: ${props['row-sm']};
+        grid-column: ${props['col-sm']};
     `}
         
-    ${below.xsmall`
-        grid-row: ${props => props['row-xs']};
-        grid-column: ${props => props['col-xs']};
+    ${props => below.xsmall`
+        grid-row: ${props['row-xs']};
+        grid-column: ${props['col-xs']};
     `}
 `;

@@ -1,12 +1,9 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import Image from 'gatsby-image';
 import Heading from '../components/Heading';
 import { Grid } from '../components/Containers';
 import { PageContainer } from '../components/Containers';
 import MarkdownField from 'react-markdown';
-import { Card, CardHeader, CardBody, CardFooter } from '../components/Card';
-import PaintDripLink from '../components/PaintDripLink';
 import { zigZagGridColumns } from '../utils/zigZagGridColumns';
 import { GridArea } from '../StyledComponents/helpers';
 import { ImageWithCaption } from '../components/Images';
