@@ -1,4 +1,7 @@
-interface DefaultProps extends React.HTMLAttributes<{}> {
+interface DefaultProps
+    extends React.HTMLAttributes<any>,
+        React.DOMAttributes<any>,
+        React.RefAttributes<any> {
     id?: string;
     title?: string;
     className?: string | string[];
@@ -6,13 +9,11 @@ interface DefaultProps extends React.HTMLAttributes<{}> {
     children?: React.ReactNode;
 }
 
-interface FlexboxProps
-    extends DefaultProps,
-        React.DOMAttributes<HTMLDivElement> {
+interface FlexboxProps extends DefaultProps {
     inline?: boolean;
     vertical?: boolean; // column
     wrap?: boolean;
-    noGrow?: boolean; // acts as no-grow and no-shrink
+    flex?: string;
     grow?: number;
     shrink?: number;
     basis?: number | 'auto';
@@ -25,7 +26,14 @@ interface FlexboxProps
     between?: boolean;
     around?: boolean;
     gap?: boolean | number; // add margin between children similar to grid-gap on grid
-    containerType?: 'div' | 'nav' | 'section' | 'aside' | 'article';
+    containerType?:
+        | 'div'
+        | 'nav'
+        | 'section'
+        | 'aside'
+        | 'article'
+        | 'ul'
+        | 'li';
 }
 
 interface PageProps extends DefaultProps {

@@ -112,6 +112,7 @@ const Header: React.FC<DefaultProps> = ({ className }: DefaultProps) => {
             ref={target}
         >
             <BlueFrangipani width={100} height={100} />
+
             <MobileMenuContext.Provider
                 value={{
                     toggleIsFullMenu,
@@ -125,6 +126,7 @@ const Header: React.FC<DefaultProps> = ({ className }: DefaultProps) => {
                     <MobileNav ref={navRef} items={strapiMenuItems.current} />
                 )}
             </MobileMenuContext.Provider>
+
             <BlueFrangipani width={100} height={100} />
         </header>
     );

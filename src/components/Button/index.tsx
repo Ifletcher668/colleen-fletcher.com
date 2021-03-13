@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { size } from '../../StyledComponents/_mixins';
 import { Button as ButtonWrapper } from '../Atoms';
 
 type V = 'primary' | 'secondary' | 'tertiary';
@@ -21,7 +22,11 @@ const Button: React.FC<Props> = ({
     center = false,
 }: Props) => {
     return (
-        <ButtonWrapper variant={variant} type={type} onClick={onClick}>
+        <ButtonWrapper
+            variant={variant}
+            type={type ?? 'submit'}
+            onClick={onClick}
+        >
             {children}
         </ButtonWrapper>
     );
@@ -29,8 +34,9 @@ const Button: React.FC<Props> = ({
 
 export default Button;
 
-export const MobileMenuToggleButton = styled(Button)`
+export const MobileMenuToggleButton = styled(ButtonWrapper)`
     color: var(--color-primary-blue);
     font-size: var(--size-text-large);
     transition: var(--time-medium);
+    padding: ${size('padding', 'xsmall')};
 `;

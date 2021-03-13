@@ -17,8 +17,21 @@ export default styled.button<Props>`
     margin: ${props => props.theme.size.margin.xsmall} auto;
     padding: 0 ${props => props.theme.size.padding.small};
 
-    border-radius: ${props => props.theme.radius.smooth};
     letter-spacing: ${props => props.theme.font['letter-spacing'].fancy};
+    border-radius: ${props => props.theme.radius.smooth};
+    border: 1px solid
+        ${props => {
+            switch (props.variant) {
+                case 'secondary':
+                    return props.theme.color['primary-blue'];
+
+                case 'tertiary':
+                    return props.theme.color.earth;
+
+                default:
+                    return props.theme.color.lilac;
+            }
+        }};
 
     background: ${props => {
         switch (props.variant) {
@@ -82,13 +95,18 @@ export default styled.button<Props>`
         }
     }
 
-    /* Only want to draw a border around the button itself */
+    /**
+    * Only want to draw a border around the button itself 
+    * Border around 'hover' as well, due to an unknown bug
+    * where the bottom border doesn't show up
+    */
     &:hover {
         border: 1px solid
             ${props => {
                 switch (props.variant) {
                     case 'secondary':
                         return props.theme.color['primary-blue'];
+
                     case 'tertiary':
                         return props.theme.color.earth;
 

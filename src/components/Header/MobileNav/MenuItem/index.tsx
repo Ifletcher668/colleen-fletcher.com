@@ -2,13 +2,12 @@ import React, { forwardRef, Fragment, useContext, useState } from 'react';
 import PaintDripLink from '../../../PaintDripLink';
 import ChevronDown from '../../../../assets/images/svg/chevron-down.svg';
 // import ChevronUp from '../../../../assets/images/svg/chevron-up.svg';
-import styled from 'styled-components';
 import Heading from '../../../Heading';
 import Services from '../../Navbar/Panel/SubMenu/services';
 import BlogPosts from '../../Navbar/Panel/SubMenu/blog-posts';
 import { MobileMenuContext } from '../..';
+import { Flexbox } from '../../../Containers';
 
-// props matches type StrapiMenuItem
 interface Props extends DefaultProps, StrapiMenuItem {
     ref: React.ForwardedRef<any>;
 }
@@ -38,7 +37,7 @@ const MenuItem: React.FC<Props> = forwardRef(
             content: StrapiDynamicZone[],
         ): JSX.Element => {
             return (
-                <ul>
+                <Flexbox containerType="ul" vertical>
                     {content.map((item, idx) => {
                         switch (item.__typename) {
                             case 'STRAPI_ComponentCollectionsBlogs':
@@ -46,26 +45,25 @@ const MenuItem: React.FC<Props> = forwardRef(
                                     <Fragment key={idx}>
                                         {item.blogs.map((blog, idx) => {
                                             return (
-                                                <Fragment key={idx}>
-                                                    <li>
+                                                <Flexbox
+                                                    key={idx}
+                                                    containerType="li"
+                                                >
+                                                    {' '}
+                                                    <PaintDripLink
+                                                        onClick={() =>
+                                                            toggleMobileMenu()
+                                                        }
+                                                        onKeyPress={() =>
+                                                            toggleMobileMenu()
+                                                        }
+                                                        to={blog.fullUrlPath}
+                                                    >
                                                         {' '}
-                                                        <PaintDripLink
-                                                            onClick={() =>
-                                                                toggleMobileMenu()
-                                                            }
-                                                            onKeyPress={() =>
-                                                                toggleMobileMenu()
-                                                            }
-                                                            to={
-                                                                blog.fullUrlPath
-                                                            }
-                                                        >
-                                                            {' '}
-                                                            <Heading level={6}>
-                                                                {blog.name}
-                                                            </Heading>
-                                                        </PaintDripLink>
-                                                    </li>
+                                                        <Heading level={6}>
+                                                            {blog.name}
+                                                        </Heading>
+                                                    </PaintDripLink>
                                                     <ChevronDown
                                                         onClick={() => {
                                                             setBlog(blog.name);
@@ -80,7 +78,7 @@ const MenuItem: React.FC<Props> = forwardRef(
                                                             );
                                                         }}
                                                     />
-                                                </Fragment>
+                                                </Flexbox>
                                             );
                                         })}
                                     </Fragment>
@@ -90,26 +88,27 @@ const MenuItem: React.FC<Props> = forwardRef(
                                     <Fragment key={idx}>
                                         {item.offerings.map((offering, idx) => {
                                             return (
-                                                <>
-                                                    <li key={idx}>
+                                                <Flexbox
+                                                    containerType="li"
+                                                    key={idx}
+                                                >
+                                                    {' '}
+                                                    <PaintDripLink
+                                                        onClick={() =>
+                                                            toggleMobileMenu()
+                                                        }
+                                                        onKeyPress={() =>
+                                                            toggleMobileMenu()
+                                                        }
+                                                        to={
+                                                            offering.fullUrlPath
+                                                        }
+                                                    >
                                                         {' '}
-                                                        <PaintDripLink
-                                                            onClick={() =>
-                                                                toggleMobileMenu()
-                                                            }
-                                                            onKeyPress={() =>
-                                                                toggleMobileMenu()
-                                                            }
-                                                            to={
-                                                                offering.fullUrlPath
-                                                            }
-                                                        >
-                                                            {' '}
-                                                            <Heading level={6}>
-                                                                {offering.title}
-                                                            </Heading>
-                                                        </PaintDripLink>
-                                                    </li>
+                                                        <Heading level={6}>
+                                                            {offering.title}
+                                                        </Heading>
+                                                    </PaintDripLink>
                                                     <ChevronDown
                                                         onClick={() => {
                                                             setShowServices(
@@ -134,7 +133,7 @@ const MenuItem: React.FC<Props> = forwardRef(
                                                             });
                                                         }}
                                                     />
-                                                </>
+                                                </Flexbox>
                                             );
                                         })}
                                     </Fragment>
@@ -143,7 +142,7 @@ const MenuItem: React.FC<Props> = forwardRef(
                                 return <></>;
                         }
                     })}
-                </ul>
+                </Flexbox>
             );
         };
 
@@ -163,8 +162,8 @@ const MenuItem: React.FC<Props> = forwardRef(
                         </a>
                     </li>
                 ) : (
-                    <>
-                        <SubMenuWrapper ref={ref}>
+                    <Flexbox ref={ref}>
+                        <Flexbox flex="1 1 20%">
                             <li className={cn}>
                                 <PaintDripLink
                                     onClick={() => toggleMobileMenu()}
@@ -184,17 +183,19 @@ const MenuItem: React.FC<Props> = forwardRef(
                                     onClick={() => setShowSubMenu(!showSubMenu)}
                                 />
                             )}
-                        </SubMenuWrapper>
-                        {showSubMenu && handleSubMenuBehavior(content)}
-                        {(showServices || showBlogPosts) && (
-                            <ul>
-                                {showServices && (
-                                    <Services offering={offering} />
-                                )}
-                                {showBlogPosts && <BlogPosts blog={blog} />}
-                            </ul>
-                        )}
-                    </>
+                        </Flexbox>
+                        <Flexbox flex="2 0 80%">
+                            {showSubMenu && handleSubMenuBehavior(content)}
+                            {(showServices || showBlogPosts) && (
+                                <Flexbox containerType="ul" vertical>
+                                    {showServices && (
+                                        <Services offering={offering} />
+                                    )}
+                                    {showBlogPosts && <BlogPosts blog={blog} />}
+                                </Flexbox>
+                            )}
+                        </Flexbox>
+                    </Flexbox>
                 )}
             </>
         );
@@ -202,10 +203,3 @@ const MenuItem: React.FC<Props> = forwardRef(
 );
 
 export default MenuItem;
-
-const SubMenuWrapper = styled.div`
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 0 0.5em;
-`;

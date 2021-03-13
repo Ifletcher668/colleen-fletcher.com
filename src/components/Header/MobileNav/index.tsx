@@ -10,7 +10,6 @@ import MenuItem from './MenuItem';
 
 interface Props extends DefaultProps {
     items: any[];
-    ref: React.ForwardedRef<HTMLUListElement>;
 }
 
 interface StyledProps {
@@ -32,7 +31,8 @@ const MobileNav = styled(Nav)<StyledProps>`
 const MobileNavHeader = styled.div`
     position: absolute;
     top: 0;
-    right: 15px;
+    right: 10px;
+    padding: 1rem;
 `;
 
 const MobileNavLinks = styled.ul`
@@ -70,6 +70,7 @@ const MobileMenu: React.FC<Props> = forwardRef(({ items }: Props, ref) => {
                     <FaTimes />
                 </button>
             </MobileNavHeader>
+
             <MobileNavLinks className="mobile-menu-links">
                 {items.map((item, idx) => {
                     return <MenuItem key={idx} {...item} />;
@@ -79,6 +80,7 @@ const MobileMenu: React.FC<Props> = forwardRef(({ items }: Props, ref) => {
     ) : (
         <Flexbox containerType="nav" vertical>
             <Heading level={1}>Colleen Fletcher</Heading>
+
             <MobileMenuToggleButton
                 type="button"
                 variant="primary"
