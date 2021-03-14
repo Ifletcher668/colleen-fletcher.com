@@ -5574,15 +5574,28 @@ export type Unnamed_1_Query = { strapi: { blogPosts?: Maybe<Array<Maybe<(
 export type Unnamed_2_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_2_Query = { strapi: { services?: Maybe<Array<Maybe<(
-      Pick<Strapi_Service, 'title' | 'slug'>
-      & { offerings?: Maybe<Array<Maybe<Pick<Strapi_Offering, 'title' | 'slug'>>>> }
+export type Unnamed_2_Query = { strapi: { blogs?: Maybe<Array<Maybe<(
+      Pick<Strapi_Blog, 'name' | 'slug'>
+      & { blog_posts?: Maybe<Array<Maybe<Pick<Strapi_BlogPost, 'title' | 'slug'>>>> }
     )>>> } };
 
 export type Unnamed_3_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_3_Query = { site?: Maybe<{ siteMetadata?: Maybe<(
+export type Unnamed_3_Query = { strapi: { offerings?: Maybe<Array<Maybe<Pick<Strapi_Offering, 'title' | 'slug'>>>> } };
+
+export type Unnamed_4_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Unnamed_4_Query = { strapi: { services?: Maybe<Array<Maybe<(
+      Pick<Strapi_Service, 'title' | 'slug'>
+      & { offerings?: Maybe<Array<Maybe<Pick<Strapi_Offering, 'title' | 'slug'>>>> }
+    )>>> } };
+
+export type Unnamed_5_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Unnamed_5_Query = { site?: Maybe<{ siteMetadata?: Maybe<(
       Pick<SiteSiteMetadata, 'title' | 'description'>
       & { author?: Maybe<Pick<SiteSiteMetadataAuthor, 'name' | 'bio'>> }
     )> }> };
@@ -5728,10 +5741,10 @@ export type StrapiComponentCollectionsServicesFragment = { services?: Maybe<Arra
 
 export type StrapiComponentGeneralPreviewFragment = { heading?: Maybe<StrapiComponentTextHeadingFragment>, text?: Maybe<StrapiComponentTextParagraphFragment>, image?: Maybe<StrapiComponentMediaSingleImageFragment>, button?: Maybe<StrapiComponentWidgetButtonFragment> };
 
-export type Unnamed_4_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_6_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_4_Query = { frangipaniImg?: Maybe<FluidImageFragment> };
+export type Unnamed_6_Query = { frangipaniImg?: Maybe<FluidImageFragment> };
 
 export type Get_Strapi_Menu_ItemsQueryVariables = Exact<{ [key: string]: never; }>;
 

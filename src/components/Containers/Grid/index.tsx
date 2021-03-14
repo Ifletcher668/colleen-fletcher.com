@@ -7,9 +7,8 @@ interface Props extends DefaultProps {
     gap?: string | number;
     styling?: CSSObject;
     containerType?: ContainerType;
-    onRenderBehavior?: () => string;
 }
-
+// TODO: fix logic to infer which key to use when others are missing
 export const Wrapper = styled.div<Props>`
     display: grid;
 
