@@ -6,11 +6,10 @@ import SearchSection from './SearchSection';
 import Heading from '../Heading';
 import Grid from '../Containers/Grid';
 import Flexbox from '../Containers/Flexbox';
-import PaintDripLink from '../PaintDripLink';
 import OutsideClickContainer from '../OutsideClickContainer';
 import { formatDateOnSlug } from '../../utils/format-date';
 import styled from 'styled-components';
-import { Paragraph } from '../Atoms';
+import { Paragraph, Link } from '../Atoms';
 
 const Label = styled.label`
     align-self: center;
@@ -236,11 +235,9 @@ const SearchContainer = (): JSX.Element => {
                                             handleCloseSearchContainerOnClickOutside
                                         }
                                     >
-                                        <PaintDripLink
-                                            to={`/blogs/${blog.slug}`}
-                                        >
+                                        <Link to={`/blogs/${blog.slug}`}>
                                             {blog.name}
-                                        </PaintDripLink>
+                                        </Link>
                                     </li>
                                 );
                             })}
@@ -270,7 +267,7 @@ const SearchContainer = (): JSX.Element => {
                                     >
                                         {' '}
                                         {post.category ? (
-                                            <PaintDripLink
+                                            <Link
                                                 to={`/blogs/${post.blog.slug}/${
                                                     post.category.slug
                                                 }/${formatDateOnSlug(
@@ -278,16 +275,16 @@ const SearchContainer = (): JSX.Element => {
                                                 )}/${post.slug}`}
                                             >
                                                 {post.title}
-                                            </PaintDripLink>
+                                            </Link>
                                         ) : (
-                                            <PaintDripLink
+                                            <Link
                                                 to={`/blogs/${post.blog.slug}/
                                             }${formatDateOnSlug(
                                                 post.published,
                                             )}/${post.slug}`}
                                             >
                                                 {post.title}
-                                            </PaintDripLink>
+                                            </Link>
                                         )}
                                     </li>
                                 );
@@ -318,11 +315,11 @@ const SearchContainer = (): JSX.Element => {
                                             handleCloseSearchContainerOnClickOutside
                                         }
                                     >
-                                        <PaintDripLink
+                                        <Link
                                             to={`/categories/${category.slug}`}
                                         >
                                             {category.name}
-                                        </PaintDripLink>
+                                        </Link>
                                     </li>
                                 );
                             })}
@@ -351,9 +348,9 @@ const SearchContainer = (): JSX.Element => {
                                             handleCloseSearchContainerOnClickOutside
                                         }
                                     >
-                                        <PaintDripLink to={`/tags/${tag.slug}`}>
+                                        <Link to={`/tags/${tag.slug}`}>
                                             {tag.name}
-                                        </PaintDripLink>
+                                        </Link>
                                     </li>
                                 );
                             })}
@@ -383,11 +380,11 @@ const SearchContainer = (): JSX.Element => {
                                             handleCloseSearchContainerOnClickOutside
                                         }
                                     >
-                                        <PaintDripLink
+                                        <Link
                                             to={`/work-with-me/${offering.slug}`}
                                         >
                                             {offering.title}
-                                        </PaintDripLink>
+                                        </Link>
                                     </li>
                                 );
                             })}
@@ -420,11 +417,11 @@ const SearchContainer = (): JSX.Element => {
                                                 }
                                             >
                                                 {' '}
-                                                <PaintDripLink
+                                                <Link
                                                     to={`/work-with-me/${offering.slug}/${service.slug}`}
                                                 >
                                                     {`${offering.title}—${service.title}`}
-                                                </PaintDripLink>{' '}
+                                                </Link>{' '}
                                             </li>
                                         );
                                     },
@@ -455,7 +452,7 @@ const SearchContainer = (): JSX.Element => {
                     instead?
                 </Paragraph>
 
-                <PaintDripLink
+                <Link
                     to={
                         randomPost.category
                             ? `/blogs/${randomPost.blog.slug}/${
@@ -472,7 +469,7 @@ const SearchContainer = (): JSX.Element => {
                     onClick={handleCloseSearchContainerOnClickOutside}
                 >
                     {randomPost.title}
-                </PaintDripLink>
+                </Link>
             </>
         );
     };

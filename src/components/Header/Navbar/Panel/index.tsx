@@ -3,7 +3,7 @@ import { Grid } from '../../../Containers/index';
 import { NavbarContext } from '../index';
 import Services from '../../Collections/services';
 import BlogPosts from '../../Collections/blog-posts';
-import PaintDripLink from '../../../PaintDripLink';
+import { Link } from '../../../Atoms';
 import BlueInfinitySymbol from '../../../../assets/images/svg/colleens-blue-infinity.svg';
 
 interface Props extends DefaultProps {
@@ -39,7 +39,7 @@ const Panel: React.FC<Props> = ({ content, className }: Props) => {
                         }
                         return (
                             <li key={`${idx}${blog.name}`} className={cn}>
-                                <PaintDripLink
+                                <Link
                                     to={blog.fullUrlPath}
                                     onMouseOver={() => {
                                         if (
@@ -53,7 +53,7 @@ const Panel: React.FC<Props> = ({ content, className }: Props) => {
                                     }}
                                 >
                                     {blog.name}
-                                </PaintDripLink>
+                                </Link>
                             </li>
                         );
                     });
@@ -66,7 +66,7 @@ const Panel: React.FC<Props> = ({ content, className }: Props) => {
                         }
                         return (
                             <li key={`${idx}${offering.title}`} className={cn}>
-                                <PaintDripLink
+                                <Link
                                     to={offering.fullUrlPath}
                                     onMouseOver={() => {
                                         if (
@@ -85,7 +85,7 @@ const Panel: React.FC<Props> = ({ content, className }: Props) => {
                                     }}
                                 >
                                     {offering.title}
-                                </PaintDripLink>
+                                </Link>
                             </li>
                         );
                     });

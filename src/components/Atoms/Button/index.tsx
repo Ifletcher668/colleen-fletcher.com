@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { Anchor } from '..';
-import { Wrapper as PaintDripLink } from '../../PaintDripLink';
+import { Anchor, Link } from '..';
 
 type Props = {
     variant?: 'primary' | 'secondary' | 'tertiary';
@@ -62,7 +61,7 @@ export default styled.button<Props>`
     }};
 
     &,
-    ${Anchor}, ${PaintDripLink} {
+    ${Anchor}, ${Link} {
         color: ${props =>
             ['tertiary', undefined].includes(props.variant)
                 ? props.theme.color['primary-blue']
@@ -75,7 +74,7 @@ export default styled.button<Props>`
     }
 
     &:hover,
-    ${Anchor}:hover, ${PaintDripLink}:hover {
+    ${Anchor}:hover, ${Link}:hover {
         &,
         > * {
             transition: ${props => props.theme.time.fast} ease-in-out;
@@ -117,7 +116,7 @@ export default styled.button<Props>`
     }
 
     &:active,
-    ${Anchor}:active, ${PaintDripLink}:active {
+    ${Anchor}:active, ${Link}:active {
         transition: 0.01s;
         color: ${props =>
             ['tertiary', undefined].includes(props.variant)

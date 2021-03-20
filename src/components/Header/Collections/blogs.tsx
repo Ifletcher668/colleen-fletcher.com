@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import PaintDripLink from '../../PaintDripLink';
+import { Link } from '../../Atoms';
 
 const data = graphql`
     query {
@@ -24,9 +24,7 @@ const Blogs: React.FC = (): JSX.Element => {
             {query.strapi.blogs.map((blog, idx) => {
                 return (
                     <li key={idx}>
-                        <PaintDripLink to={`/${blog.slug}`}>
-                            {blog.name}
-                        </PaintDripLink>
+                        <Link to={`/${blog.slug}`}>{blog.name}</Link>
                     </li>
                 );
             })}

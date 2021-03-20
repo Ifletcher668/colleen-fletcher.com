@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import PaintDripLink from '../../PaintDripLink';
+import { Link } from '../../Atoms';
 
 interface Props extends DefaultProps {
     blog: string;
@@ -37,9 +37,7 @@ const BlogPosts: React.FC<Props> = (props: Props) => {
             {fivePosts.map((post, idx) => {
                 return (
                     <li key={idx}>
-                        <PaintDripLink to={`${post.fullUrlPath}`}>
-                            {post.title}
-                        </PaintDripLink>
+                        <Link to={`${post.fullUrlPath}`}>{post.title}</Link>
                     </li>
                 );
             })}

@@ -1,7 +1,7 @@
 import React, { forwardRef, Fragment, useContext, useState } from 'react';
-import PaintDripLink from '../../../PaintDripLink';
 import ChevronDown from '../../../../assets/images/svg/chevron-down.svg';
 // import ChevronUp from '../../../../assets/images/svg/chevron-up.svg';
+import { Link } from '../../../Atoms';
 import Heading from '../../../Heading';
 import Services from '../../Collections/services';
 import BlogPosts from '../../Collections/blog-posts';
@@ -52,7 +52,7 @@ const MenuItem: React.FC<Props> = forwardRef(
                                                     containerType="li"
                                                 >
                                                     {' '}
-                                                    <PaintDripLink
+                                                    <Link
                                                         onClick={() =>
                                                             toggleMobileMenu()
                                                         }
@@ -65,7 +65,7 @@ const MenuItem: React.FC<Props> = forwardRef(
                                                         <Heading level={6}>
                                                             {blog.name}
                                                         </Heading>
-                                                    </PaintDripLink>
+                                                    </Link>
                                                     <ChevronDown
                                                         onClick={() => {
                                                             setBlog(blog.name);
@@ -95,7 +95,7 @@ const MenuItem: React.FC<Props> = forwardRef(
                                                     key={idx}
                                                 >
                                                     {' '}
-                                                    <PaintDripLink
+                                                    <Link
                                                         onClick={() =>
                                                             toggleMobileMenu()
                                                         }
@@ -110,7 +110,7 @@ const MenuItem: React.FC<Props> = forwardRef(
                                                         <Heading level={6}>
                                                             {offering.title}
                                                         </Heading>
-                                                    </PaintDripLink>
+                                                    </Link>
                                                     <ChevronDown
                                                         onClick={() => {
                                                             setShowServices(
@@ -167,7 +167,7 @@ const MenuItem: React.FC<Props> = forwardRef(
                     <Flexbox ref={ref}>
                         <Flexbox flex="1 1 20%">
                             <li className={cn}>
-                                <PaintDripLink
+                                <Link
                                     onClick={() => toggleMobileMenu()}
                                     onKeyPress={() => toggleMobileMenu()}
                                     to={`/${
@@ -178,7 +178,7 @@ const MenuItem: React.FC<Props> = forwardRef(
                                     }`}
                                 >
                                     {text}{' '}
-                                </PaintDripLink>
+                                </Link>
                             </li>
                             {content.length > 0 && (
                                 <ChevronDown

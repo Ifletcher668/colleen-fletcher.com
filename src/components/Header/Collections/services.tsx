@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import PaintDripLink from '../../PaintDripLink';
+import { Link } from '../../Atoms';
 
 interface Props extends DefaultProps {
     offering: {
@@ -41,11 +41,9 @@ const Services: React.FC<Props> = (props: Props) => {
                 .map((service, idx) => {
                     return (
                         <li key={idx}>
-                            <PaintDripLink
-                                to={`${props.offering.url}${service.slug}`}
-                            >
+                            <Link to={`${props.offering.url}${service.slug}`}>
                                 {service.title}
-                            </PaintDripLink>
+                            </Link>
                         </li>
                     );
                 })}

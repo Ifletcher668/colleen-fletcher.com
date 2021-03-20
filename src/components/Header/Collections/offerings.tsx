@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import PaintDripLink from '../../PaintDripLink';
+import { Link } from '../../Atoms';
 
 const data = graphql`
     query {
@@ -19,9 +19,7 @@ const Offerings: React.FC = (): JSX.Element => {
             {query.strapi.services.map((offering, idx) => {
                 return (
                     <li key={idx}>
-                        <PaintDripLink to={`${offering.slug}`}>
-                            {offering.title}
-                        </PaintDripLink>
+                        <Link to={`${offering.slug}`}>{offering.title}</Link>
                     </li>
                 );
             })}

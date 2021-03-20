@@ -1,27 +1,31 @@
-import styled, { css, DefaultTheme } from 'styled-components';
+import styled, { DefaultTheme } from 'styled-components';
+import { Link as GatsbyLink } from 'gatsby';
+import { color, time } from '../../../StyledComponents/_mixins';
 
-// used in PaintDripLink
-export const anchor = css`
-    color: ${props => props.theme.color.aterrima};
+type Props = {
+    color?: keyof DefaultTheme['color'];
+};
+
+// External Link
+export const Anchor = styled.a<Props>`
+    color: ${props => (props.color ? color(props.color) : color('aterrima'))};
+    text-decoration: none;
+
+    &:hover {
+        transition: ${time('fast')} ease-out;
+        border-bottom: ${color('lilac')} solid 2px;
+        color: ${color('dark-blue')};
+    }
+`;
+
+// Internal Link
+export const Link = styled(GatsbyLink)`
+    color: ${color('aterrima')};
     text-decoration: none;
 
     &:hover {
         transition: ${props => props.theme.time.fast} ease-out;
-        border-bottom: ${props => props.theme.color.lilac} solid 2px;
-        color: ${props => props.theme.color['dark-blue']};
+        border-bottom: ${color('lilac')} solid 2px;
+        color: ${color('dark-blue')};
     }
 `;
-
-interface Props {
-    color?: keyof DefaultTheme['color'];
-}
-
-const Anchor = styled.a<Props>`
-    ${anchor};
-    color: ${props =>
-        props.color
-            ? props.theme.color[props.color]
-            : props.theme.color.aterrima};
-`;
-
-export default Anchor;

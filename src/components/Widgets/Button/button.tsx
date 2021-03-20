@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '../../Button';
-import PaintDripLink from '../../PaintDripLink';
+import { Link } from '../../Atoms';
 
 export interface Props {
     data: StrapiComponentWidgetButton;
@@ -11,7 +11,7 @@ const ButtonField: React.FC<Props> = ({
 }: Props) => {
     return (
         <Button center variant={variant} type="button">
-            <PaintDripLink to={action}>{buttonText}</PaintDripLink>
+            <Link to={action}>{buttonText}</Link>
         </Button>
     );
 };

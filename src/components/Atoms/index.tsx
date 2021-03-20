@@ -1,4 +1,4 @@
-export { default as Anchor } from './Anchor';
+export { Anchor, Link } from './Anchor'; // Link is just a styled gatsby link
 export { default as Button } from './Button';
 export { default as FigCaption } from './FigCaption';
 export { default as Heading } from './Heading';

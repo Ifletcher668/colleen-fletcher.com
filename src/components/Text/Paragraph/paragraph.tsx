@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Anchor, Heading, Paragraph as P, Span } from '../../Atoms';
+import { Anchor, Link, Heading, Paragraph as P, Span } from '../../Atoms';
 import parse, { domToReact, HTMLReactParserOptions } from 'html-react-parser';
 import { Element } from 'domhandler/lib/node';
 import { Grid } from '../../Containers';
-import PaintDripLink from '../../PaintDripLink';
 
 export interface Props {
     data: StrapiComponentTextParagraph;
@@ -82,9 +81,9 @@ const Paragraph: React.FC<Props> = ({ data }: Props) => {
                         {domToReact(children, options)}
                     </Anchor>
                 ) : (
-                    <PaintDripLink to={attribs.href}>
+                    <Link to={attribs.href}>
                         {domToReact(children, options)}
-                    </PaintDripLink>
+                    </Link>
                 );
             }
 
