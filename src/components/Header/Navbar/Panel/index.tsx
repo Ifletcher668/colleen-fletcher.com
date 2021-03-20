@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { Grid } from '../../../Containers/index';
 import { NavbarContext } from '../index';
-import Services from './SubMenu/services';
-import BlogPosts from './SubMenu/blog-posts';
+import Services from '../../Collections/services';
+import BlogPosts from '../../Collections/blog-posts';
 import PaintDripLink from '../../../PaintDripLink';
 import BlueInfinitySymbol from '../../../../assets/images/svg/colleens-blue-infinity.svg';
 

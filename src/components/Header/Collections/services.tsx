@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import PaintDripLink from '../../../../PaintDripLink';
+import PaintDripLink from '../../PaintDripLink';
 
 interface Props extends DefaultProps {
     offering: {

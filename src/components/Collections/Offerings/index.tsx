@@ -38,6 +38,7 @@ const OfferingsField: React.FC<Props> = ({ data, previews }: Props) => {
                         containerType="article"
                         columns={zigZagColumnLayout} // col names === 'image' and 'content'
                         rows={{
+                            xlarge: `[content-start] 1fr [content-middle] auto [content-end] 0.02fr`,
                             large: `[content-start] 1fr [content-middle] auto [content-end] 0.02fr`,
                             medium: `[content-start] auto [content-middle] auto [content-end] auto`,
                         }}

@@ -3,26 +3,28 @@ import PaintDripLink from '../../../PaintDripLink';
 import ChevronDown from '../../../../assets/images/svg/chevron-down.svg';
 // import ChevronUp from '../../../../assets/images/svg/chevron-up.svg';
 import Heading from '../../../Heading';
-import Services from '../../Navbar/Panel/SubMenu/services';
-import BlogPosts from '../../Navbar/Panel/SubMenu/blog-posts';
+import Services from '../../Collections/services';
+import BlogPosts from '../../Collections/blog-posts';
 import { MobileMenuContext } from '../..';
 import { Flexbox } from '../../../Containers';
 
 interface Props extends DefaultProps, StrapiMenuItem {
     ref: React.ForwardedRef<any>;
 }
+type Offering = {
+    title: string;
+    url: string;
+};
 
 // data, className: Props
 const MenuItem: React.FC<Props> = forwardRef(
     ({ text, is_external_link, slug, content, className }: Props, ref) => {
         const [showSubMenu, setShowSubMenu] = useState(false);
         const [blog, setBlog] = useState('');
-        const [offering, setOffering] = useState<{
-            title: string;
-            url: string;
-        }>({ title: '', url: '' });
+        const [offering, setOffering] = useState<Offering>({} as Offering);
         const [showBlogPosts, setShowBlogPosts] = useState<boolean>(false);
         const [showServices, setShowServices] = useState<boolean>(false);
+
         const { toggleMobileMenu } = useContext(MobileMenuContext);
 
         const cn = `nav-list-item ${
@@ -37,7 +39,7 @@ const MenuItem: React.FC<Props> = forwardRef(
             content: StrapiDynamicZone[],
         ): JSX.Element => {
             return (
-                <Flexbox containerType="ul" vertical>
+                <>
                     {content.map((item, idx) => {
                         switch (item.__typename) {
                             case 'STRAPI_ComponentCollectionsBlogs':
@@ -142,7 +144,7 @@ const MenuItem: React.FC<Props> = forwardRef(
                                 return <></>;
                         }
                     })}
-                </Flexbox>
+                </>
             );
         };
 
@@ -185,15 +187,25 @@ const MenuItem: React.FC<Props> = forwardRef(
                             )}
                         </Flexbox>
                         <Flexbox flex="2 0 80%">
-                            {showSubMenu && handleSubMenuBehavior(content)}
-                            {(showServices || showBlogPosts) && (
-                                <Flexbox containerType="ul" vertical>
-                                    {showServices && (
-                                        <Services offering={offering} />
-                                    )}
-                                    {showBlogPosts && <BlogPosts blog={blog} />}
+                            <Flexbox containerType="ul">
+                                <Flexbox vertical>
+                                    {showSubMenu &&
+                                        handleSubMenuBehavior(content)}
                                 </Flexbox>
-                            )}
+
+                                <Flexbox>
+                                    {(showServices || showBlogPosts) && (
+                                        <Flexbox containerType="ul" vertical>
+                                            {showServices && (
+                                                <Services offering={offering} />
+                                            )}
+                                            {showBlogPosts && (
+                                                <BlogPosts blog={blog} />
+                                            )}
+                                        </Flexbox>
+                                    )}
+                                </Flexbox>
+                            </Flexbox>
                         </Flexbox>
                     </Flexbox>
                 )}
