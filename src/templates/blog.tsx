@@ -11,12 +11,9 @@ import { HeadingField, Paragraph } from '../components/Text';
 import { ButtonField } from '../components/Widgets';
 import Divider from '../components/Divider';
 import Layout from '../components/Layout';
-interface Props {
-    data: Strapi;
-    location: Location;
-}
+import { TemplateProps } from './types';
 
-export default (props: Props): JSX.Element => {
+export default (props: TemplateProps): JSX.Element => {
     const {
         data: {
             strapi: { blog },

@@ -12,11 +12,9 @@ import Divider from '../components/Divider';
 import { ButtonField } from '../components/Widgets';
 import SEO from '../components/SEO';
 import Layout from '../components/Layout';
-interface Props {
-    data: Strapi;
-    location: Location;
-}
-export default (props: Props): JSX.Element => {
+import { TemplateProps } from './types';
+
+export default (props: TemplateProps): JSX.Element => {
     const {
         data: {
             strapi: { offering },

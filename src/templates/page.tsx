@@ -5,21 +5,14 @@ import { PageContainer } from '../components/Containers';
 import SEO from '../components/SEO';
 import BannerBackgroundImage from '../components/Banner';
 import Layout from '../components/Layout';
-
-type PageContext = {
-    id: string;
-};
-interface Props {
-    data: Strapi;
-    pageContext: PageContext;
-    location: Location;
-}
+import { TemplateProps } from './types';
 
 type Previews = {
     blogPreviews: StrapiBlog[];
     offeringPreviews: StrapiOffering[];
 };
-export default (props: Props): JSX.Element => {
+
+export default (props: TemplateProps): JSX.Element => {
     const {
         data: {
             strapi: { page, blogs: blogPreviews, offerings: offeringPreviews },

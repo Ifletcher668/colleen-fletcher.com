@@ -1,12 +1,9 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import Layout from '../components/Layout';
+import { TemplateProps } from './types';
 
-interface Props {
-    data: Strapi;
-    location: Location;
-}
-export default (props: Props) => {
+export default (props: TemplateProps) => {
     // TODO: Paginate Blog Posts
     const {
         data: {

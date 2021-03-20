@@ -6,13 +6,9 @@ import { PageContainer } from '../components/Containers';
 import BannerBackgroundImage from '../components/Banner/';
 import SEO from '../components/SEO';
 import Layout from '../components/Layout';
+import { TemplateProps } from './types';
 
-interface Props {
-    data: Strapi;
-    location: Location;
-}
-
-export default (props: Props): JSX.Element => {
+export default (props: TemplateProps): JSX.Element => {
     const {
         data: {
             strapi: {

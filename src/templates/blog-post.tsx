@@ -4,12 +4,9 @@ import StrapiDynamicZone from '../components/StrapiDynamicZone';
 import { PageContainer } from '../components/Containers';
 import SEO from '../components/SEO';
 import Layout from '../components/Layout';
-interface Props {
-    data: Strapi;
-    location: Location;
-}
+import { TemplateProps } from './types';
 
-export default (props: Props): JSX.Element => {
+export default (props: TemplateProps): JSX.Element => {
     const {
         data: {
             strapi: {
