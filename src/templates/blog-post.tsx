@@ -3,8 +3,10 @@ import { graphql } from 'gatsby';
 import StrapiDynamicZone from '../components/StrapiDynamicZone';
 import { PageContainer } from '../components/Containers';
 import SEO from '../components/SEO';
+import Layout from '../components/Layout';
 interface Props {
     data: Strapi;
+    location: Location;
 }
 
 export default (props: Props): JSX.Element => {
@@ -17,12 +19,12 @@ export default (props: Props): JSX.Element => {
     } = props;
 
     return (
-        <>
+        <Layout location={props.location}>
             <SEO title={title} description={meta_description} />
             <PageContainer>
                 <StrapiDynamicZone components={body} />
             </PageContainer>
-        </>
+        </Layout>
     );
 };
 

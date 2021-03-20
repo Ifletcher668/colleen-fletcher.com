@@ -10,8 +10,10 @@ import { ImageWithCaption } from '../components/Images';
 import { HeadingField, Paragraph } from '../components/Text';
 import { ButtonField } from '../components/Widgets';
 import Divider from '../components/Divider';
+import Layout from '../components/Layout';
 interface Props {
     data: Strapi;
+    location: Location;
 }
 
 export default (props: Props): JSX.Element => {
@@ -22,7 +24,7 @@ export default (props: Props): JSX.Element => {
     } = props;
 
     return (
-        <>
+        <Layout location={props.location}>
             <PageContainer>
                 <Heading
                     alignHeading="center"
@@ -120,7 +122,7 @@ export default (props: Props): JSX.Element => {
                     })}
                 </Grid>
             </PageContainer>
-        </>
+        </Layout>
     );
 };
 

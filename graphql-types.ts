@@ -2479,8 +2479,6 @@ export type SitePageFieldsEnum =
   | 'pluginCreator___pluginOptions___sourceMapContents'
   | 'pluginCreator___pluginOptions___sourceMapEmbed'
   | 'pluginCreator___pluginOptions___rule___include'
-  | 'pluginCreator___pluginOptions___layout'
-  | 'pluginCreator___pluginOptions___injectPageProps'
   | 'pluginCreator___pluginOptions___name'
   | 'pluginCreator___pluginOptions___short_name'
   | 'pluginCreator___pluginOptions___start_url'
@@ -2707,8 +2705,6 @@ export type SitePluginFieldsEnum =
   | 'pluginOptions___sourceMapContents'
   | 'pluginOptions___sourceMapEmbed'
   | 'pluginOptions___rule___include'
-  | 'pluginOptions___layout'
-  | 'pluginOptions___injectPageProps'
   | 'pluginOptions___name'
   | 'pluginOptions___short_name'
   | 'pluginOptions___start_url'
@@ -2863,8 +2859,6 @@ export type SitePluginPluginOptions = {
   sourceMapContents?: Maybe<Scalars['Boolean']>;
   sourceMapEmbed?: Maybe<Scalars['Boolean']>;
   rule?: Maybe<SitePluginPluginOptionsRule>;
-  layout?: Maybe<Scalars['String']>;
-  injectPageProps?: Maybe<Scalars['Boolean']>;
   name?: Maybe<Scalars['String']>;
   short_name?: Maybe<Scalars['String']>;
   start_url?: Maybe<Scalars['String']>;
@@ -2907,8 +2901,6 @@ export type SitePluginPluginOptionsFilterInput = {
   sourceMapContents?: Maybe<BooleanQueryOperatorInput>;
   sourceMapEmbed?: Maybe<BooleanQueryOperatorInput>;
   rule?: Maybe<SitePluginPluginOptionsRuleFilterInput>;
-  layout?: Maybe<StringQueryOperatorInput>;
-  injectPageProps?: Maybe<BooleanQueryOperatorInput>;
   name?: Maybe<StringQueryOperatorInput>;
   short_name?: Maybe<StringQueryOperatorInput>;
   start_url?: Maybe<StringQueryOperatorInput>;

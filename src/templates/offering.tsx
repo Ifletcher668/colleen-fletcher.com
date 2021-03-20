@@ -11,8 +11,10 @@ import { GridArea } from '../StyledComponents/helpers';
 import Divider from '../components/Divider';
 import { ButtonField } from '../components/Widgets';
 import SEO from '../components/SEO';
+import Layout from '../components/Layout';
 interface Props {
     data: Strapi;
+    location: Location;
 }
 export default (props: Props): JSX.Element => {
     const {
@@ -21,7 +23,7 @@ export default (props: Props): JSX.Element => {
         },
     } = props;
     return (
-        <>
+        <Layout location={props.location}>
             <SEO
                 title={offering.title}
                 description={offering.meta_description}
@@ -125,7 +127,7 @@ export default (props: Props): JSX.Element => {
                     </Grid>
                 )}
             </PageContainer>
-        </>
+        </Layout>
     );
 };
 

@@ -1,16 +1,18 @@
 import React from 'react';
-import {useStrapiData} from '../../graphql/queries/useStrapiData';
+import { PageProps } from 'gatsby';
+import { useStrapiData } from '../../graphql/queries/useStrapiData';
+import Layout from '../../components/Layout';
 
-export default () => {
+export default (props: PageProps) => {
     const {
-        strapi: {tags},
+        strapi: { tags },
     } = useStrapiData();
     console.log(tags);
 
     return (
-        <>
+        <Layout location={props.location}>
             All Tags
             {/*  */}
-        </>
+        </Layout>
     );
 };

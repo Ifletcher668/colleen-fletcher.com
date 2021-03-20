@@ -1,23 +1,25 @@
 import React from 'react';
-import {graphql} from 'gatsby';
+import { graphql } from 'gatsby';
+import Layout from '../components/Layout';
 
 interface Props {
     data: Strapi;
+    location: Location;
 }
 export default (props: Props) => {
     // TODO: Paginate Blog Posts
     const {
         data: {
-            strapi: {category},
+            strapi: { category },
         },
     } = props;
     console.log(category);
 
     return (
-        <>
+        <Layout location={props.location}>
             {/*  */}
             {/*  */}
-        </>
+        </Layout>
     );
 };
 

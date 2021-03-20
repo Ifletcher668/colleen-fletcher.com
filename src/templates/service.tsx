@@ -5,9 +5,11 @@ import { Grid } from '../components/Containers';
 import { PageContainer } from '../components/Containers';
 import BannerBackgroundImage from '../components/Banner/';
 import SEO from '../components/SEO';
+import Layout from '../components/Layout';
 
 interface Props {
     data: Strapi;
+    location: Location;
 }
 
 export default (props: Props): JSX.Element => {
@@ -26,7 +28,7 @@ export default (props: Props): JSX.Element => {
     } = props;
 
     return (
-        <>
+        <Layout location={props.location}>
             <SEO title={title} description={meta_description} />
             <Grid containerType="section">
                 {banner_background_image && banner && (
@@ -39,7 +41,7 @@ export default (props: Props): JSX.Element => {
                     <StrapiDynamicZone components={sales_page} />
                 </PageContainer>
             </Grid>
-        </>
+        </Layout>
     );
 };
 

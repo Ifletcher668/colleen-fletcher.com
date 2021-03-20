@@ -33,16 +33,6 @@ module.exports = {
         },
 
         {
-            resolve: `gatsby-plugin-transition-link`,
-            options: {
-                layout: require.resolve(
-                    `${__dirname}/src/components/Layout/index.tsx`,
-                ),
-                injectPageProps: false,
-            },
-        },
-
-        {
             resolve: `gatsby-plugin-manifest`,
             options: {
                 name: 'colleen-fletcher.com',

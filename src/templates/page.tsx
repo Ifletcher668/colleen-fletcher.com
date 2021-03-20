@@ -4,6 +4,7 @@ import StrapiDynamicZone from '../components/StrapiDynamicZone';
 import { PageContainer } from '../components/Containers';
 import SEO from '../components/SEO';
 import BannerBackgroundImage from '../components/Banner';
+import Layout from '../components/Layout';
 
 type PageContext = {
     id: string;
@@ -11,6 +12,7 @@ type PageContext = {
 interface Props {
     data: Strapi;
     pageContext: PageContext;
+    location: Location;
 }
 
 type Previews = {
@@ -29,7 +31,7 @@ export default (props: Props): JSX.Element => {
         offeringPreviews,
     };
     return (
-        <>
+        <Layout location={props.location}>
             <SEO title={page.title} description={page.meta_description} />
             {page.banner_background_image && (
                 <BannerBackgroundImage
@@ -40,7 +42,7 @@ export default (props: Props): JSX.Element => {
             <PageContainer>
                 <StrapiDynamicZone components={page.body} previews={previews} />
             </PageContainer>
-        </>
+        </Layout>
     );
 };
 
