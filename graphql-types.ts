@@ -5641,12 +5641,12 @@ export type StrapiServiceFragment = (
 
 export type StrapiCategoryFragment = (
   Pick<Strapi_Category, 'name' | 'is_category'>
-  & { blog_posts?: Maybe<Array<Maybe<StrapiBlogPostFragment>>> }
+  & { blog_posts?: Maybe<Array<Maybe<Pick<Strapi_BlogPost, 'title' | 'slug'>>>> }
 );
 
 export type StrapiTagFragment = (
   Pick<Strapi_Tag, 'name' | 'is_tag'>
-  & { blog_posts?: Maybe<Array<Maybe<StrapiBlogPostFragment>>> }
+  & { blog_posts?: Maybe<Array<Maybe<Pick<Strapi_BlogPost, 'title' | 'slug'>>>> }
 );
 
 export type FluidImageFragment = { childImageSharp?: Maybe<{ fluid?: Maybe<GatsbyImageSharpFluid_NoBase64Fragment> }> };
@@ -5720,14 +5720,11 @@ export type StrapiComponentSectionImageCenterTextEitherSideFragment = (
   & { text_left?: Maybe<StrapiComponentTextParagraphFragment>, image?: Maybe<StrapiComponentMediaSingleImageFragment>, text_right?: Maybe<StrapiComponentTextParagraphFragment> }
 );
 
-export type StrapiComponentCollectionsBlogsFragment = { blogs?: Maybe<Array<Maybe<(
-    Pick<Strapi_Blog, 'id'>
-    & StrapiBlogFragment
-  )>>> };
+export type StrapiComponentCollectionsBlogsFragment = { blogs?: Maybe<Array<Maybe<Pick<Strapi_Blog, 'id' | 'name' | 'slug' | 'fullUrlPath'>>>> };
 
-export type StrapiComponentCollectionsBlogPostsFragment = { blog_posts?: Maybe<Array<Maybe<StrapiBlogPostFragment>>> };
+export type StrapiComponentCollectionsBlogPostsFragment = { blog_posts?: Maybe<Array<Maybe<{ preview?: Maybe<StrapiComponentGeneralPreviewFragment> }>>> };
 
-export type StrapiComponentCollectionsOfferingsFragment = { offerings?: Maybe<Array<Maybe<StrapiOfferingFragment>>> };
+export type StrapiComponentCollectionsOfferingsFragment = { offerings?: Maybe<Array<Maybe<Pick<Strapi_Offering, 'id' | 'title' | 'slug' | 'fullUrlPath'>>>> };
 
 export type StrapiComponentCollectionsServicesFragment = { services?: Maybe<Array<Maybe<StrapiServiceFragment>>> };
 
@@ -5742,11 +5739,6 @@ export type Get_Strapi_Menu_ItemsQueryVariables = Exact<{ [key: string]: never; 
 
 
 export type Get_Strapi_Menu_ItemsQuery = { strapi: { menuItems?: Maybe<Array<Maybe<StrapiMenuItemFragment>>> } };
-
-export type Get_Strapi_ContentQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Get_Strapi_ContentQuery = { strapi: { blogs?: Maybe<Array<Maybe<StrapiBlogFragment>>>, blogPosts?: Maybe<Array<Maybe<StrapiBlogPostFragment>>>, recentBlogPosts?: Maybe<Array<Maybe<StrapiBlogPostFragment>>>, offerings?: Maybe<Array<Maybe<StrapiOfferingFragment>>>, tags?: Maybe<Array<Maybe<StrapiTagFragment>>>, categories?: Maybe<Array<Maybe<StrapiCategoryFragment>>> } };
 
 export type Get_Blog_PostQueryVariables = Exact<{
   id: Scalars['ID'];

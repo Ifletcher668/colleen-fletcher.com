@@ -33,9 +33,13 @@ rules:
     babel/quotes: off
     consistent-return: off
     no-console: 1
+    prettier/prettier: 'warn'
     space-in-brackets:
         - 'always'
-
+     @typescript-eslint/explicit-function-return-type:
+        - 'error'
+            allowExpressions: true,
+            allowTypedFunctionExpressions: true,
 overrides:
     - files:
           - 'src/**/*.ts'
