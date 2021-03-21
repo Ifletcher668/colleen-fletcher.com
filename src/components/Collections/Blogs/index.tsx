@@ -6,7 +6,7 @@ import { ButtonField } from '../../Widgets';
 import { Paragraph } from '../../Text';
 
 export interface Props {
-    data: StrapiBlog[];
+    data: Array<Pick<StrapiBlog, 'id' | 'slug' | 'fullUrlPath'>>;
     previews: StrapiBlog[];
 }
 

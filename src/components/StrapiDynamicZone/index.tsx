@@ -18,13 +18,18 @@ import {
     TextWithImageRightSideField,
 } from '../Sections';
 
+/**
+ * Necessary secondary query until
+ * Strapi is able to fix querying
+ * for components inside a Dynamic zone
+ */
 type Previews = {
     blogPreviews: StrapiBlog[];
     offeringPreviews: StrapiOffering[];
 };
 
 interface Props {
-    components: StrapiDynamicZone[];
+    components: NonNullable<Array<StrapiDynamicZone>>;
     previews?: Previews;
 }
 
@@ -42,12 +47,14 @@ const StrapiDynamicZone: React.FC<Props> = ({
                             isCircle: component.isCircle,
                             hasBorder: component.hasBorder,
                         };
+
                         return (
                             <SingleImageField
                                 data={singleImageData}
                                 key={`${idx}${component.__typename}`}
                             />
                         );
+
                     case 'STRAPI_ComponentMediaImages':
                         const imagesData: StrapiComponentMediaImages = {
                             style: component.style,
@@ -55,6 +62,7 @@ const StrapiDynamicZone: React.FC<Props> = ({
                             isCircle: component.isCircle,
                             hasBorder: component.hasBorder,
                         };
+
                         return (
                             <ImagesField
                                 data={imagesData}
@@ -72,6 +80,7 @@ const StrapiDynamicZone: React.FC<Props> = ({
                             justifyHeading: component.justifyHeading,
                             alignHeading: component.alignHeading,
                         };
+
                         return (
                             <HeadingField
                                 key={`${idx}${component.__typename}`}
@@ -118,6 +127,7 @@ const StrapiDynamicZone: React.FC<Props> = ({
                             image: component.image,
                             text: component.text,
                         };
+
                         return (
                             <TextWithImageRightSideField
                                 key={`${idx}${component.__typename}`}
@@ -130,6 +140,7 @@ const StrapiDynamicZone: React.FC<Props> = ({
                             heading: component.heading,
                             image: component.image,
                         };
+
                         return (
                             <HeaderWithImageRightSideField
                                 data={headerWithImageRightSideData}
@@ -142,6 +153,7 @@ const StrapiDynamicZone: React.FC<Props> = ({
                             heading: component.heading,
                             image: component.image,
                         };
+
                         return (
                             <HeadingWithImageLeftSideField
                                 data={headerWithImageLeftSideData}
@@ -155,6 +167,7 @@ const StrapiDynamicZone: React.FC<Props> = ({
                             text: component.text,
                             image_right: component.image_right,
                         };
+
                         return (
                             <TextCenterImageEitherSideField
                                 data={textCenterImageEitherSideFieldData}
@@ -168,6 +181,7 @@ const StrapiDynamicZone: React.FC<Props> = ({
                             image: component.image,
                             text_right: component.text_right,
                         };
+
                         return (
                             <ImageCenterTextEitherSideField
                                 data={imageCenterTextEitherSideFieldData}
@@ -176,7 +190,7 @@ const StrapiDynamicZone: React.FC<Props> = ({
                         );
 
                     case 'STRAPI_ComponentWidgetDivider':
-                        // TODO: refactor
+                        // TODO: refactor from this simple Typescript workaround
                         return component.style === 'fancy' ||
                             component.style === 'standard' ? (
                             <DividerField
@@ -196,6 +210,7 @@ const StrapiDynamicZone: React.FC<Props> = ({
                             variant: component.variant,
                             action: component.action,
                         };
+
                         return (
                             <ButtonField
                                 key={`${idx}${component.__typename}`}

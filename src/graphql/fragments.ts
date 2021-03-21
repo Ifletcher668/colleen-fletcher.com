@@ -43,6 +43,7 @@ export const StrapiMenuItem = graphql`
     }
 `;
 
+// blog fullUrlPath requires name and slug
 export const StrapiBlog = graphql`
     fragment StrapiBlog on STRAPI_Blog {
         name
@@ -142,7 +143,8 @@ export const StrapiCategory = graphql`
     fragment StrapiCategory on STRAPI_Category {
         name
         blog_posts {
-            ...StrapiBlogPost
+            title
+            slug
         }
         is_category
     }
@@ -151,7 +153,8 @@ export const StrapiTag = graphql`
     fragment StrapiTag on STRAPI_Tag {
         name
         blog_posts {
-            ...StrapiBlogPost
+            title
+            slug
         }
         is_tag
     }
@@ -328,30 +331,53 @@ export const StrapiComponentSectionImageCenterTextEitherSide = graphql`
     }
 `;
 
+/**
+ * The blog "preview" is queried inside of page.tsx
+ * But the ingredients needed for the blog's fullUrlPath,
+ * along with the blog id, are queried here to sync them.
+ * This is a dirty workaround and should be fixed when
+ * Strapi addresses https://github.com/strapi/strapi/issues/7454
+ */
 export const StrapiComponentCollectionsBlogs = graphql`
     fragment StrapiComponentCollectionsBlogs on STRAPI_ComponentCollectionsBlogs {
         blogs {
             id
-            ...StrapiBlog
+            name
+            slug
+            fullUrlPath
         }
     }
 `;
-// show_blog_posts
 
+// show_blog_posts
 export const StrapiComponentCollectionsBlogPosts = graphql`
     fragment StrapiComponentCollectionsBlogPosts on STRAPI_ComponentCollectionsBlogPosts {
         blog_posts {
-            ...StrapiBlogPost
+            preview {
+                ...StrapiComponentGeneralPreview
+            }
         }
     }
 `;
+
+/**
+ * The offering "preview" is queried inside of page.tsx
+ * But the ingredients needed for the offering's fullUrlPath,
+ * along with the blog id, are queried here to sync them.
+ * This is a dirty workaround and should be fixed when
+ * Strapi addresses https://github.com/strapi/strapi/issues/7454
+ */
 export const StrapiComponentCollectionsOfferings = graphql`
     fragment StrapiComponentCollectionsOfferings on STRAPI_ComponentCollectionsOfferings {
         offerings {
-            ...StrapiOffering
+            id
+            title
+            slug
+            fullUrlPath
         }
     }
 `;
+
 // show_services
 export const StrapiComponentCollectionsServices = graphql`
     fragment StrapiComponentCollectionsServices on STRAPI_ComponentCollectionsServices {

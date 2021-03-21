@@ -8,7 +8,7 @@ import { GridArea } from '../../../StyledComponents/helpers';
 import Divider from '../../Divider';
 
 export interface Props {
-    data: StrapiOffering[];
+    data: Array<Pick<StrapiOffering, 'id' | 'slug' | 'fullUrlPath'>>;
     previews: StrapiOffering[];
 }
 
@@ -22,6 +22,7 @@ const OfferingsField: React.FC<Props> = ({ data, previews }: Props) => {
                     p => p.id === offering.id,
                 );
                 const { text, heading, image, button } = preview;
+
                 if (
                     button.action === '/' ||
                     button.action === '' ||
