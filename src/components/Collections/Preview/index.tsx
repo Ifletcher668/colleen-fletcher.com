@@ -7,17 +7,17 @@
 import React from 'react';
 
 interface Props {
-    preview: StrapiPreview;
-    component: StrapiBlog | StrapiOffering;
+  preview: StrapiPreview;
+  component: StrapiBlog | StrapiOffering;
 }
 
 const Preview: React.FC<Props> = (props: Props) => {
-    return (
-        <>
-            {/*  */}
-            {/*  */}
-        </>
-    );
+  return (
+    <>
+      {/*  */}
+      {/*  */}
+    </>
+  );
 };
 
 export default Preview;

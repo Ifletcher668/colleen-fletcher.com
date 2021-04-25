@@ -1,296 +1,296 @@
 type ChildImageSharp = {
-    fluid: GatsbyImage.FluidObject;
+  fluid: GatsbyImage.FluidObject;
 };
 
 type FluidImage = {
-    childImageSharp: ChildImageSharp;
+  childImageSharp: ChildImageSharp;
 };
 
 // strapi types
 type Strapi = {
-    strapi: StrapiContent;
+  strapi: StrapiContent;
 };
 
 type StrapiContent = {
-    blog: StrapiBlog;
-    blogs: StrapiBlog[];
-    blogPosts: StrapiBlogPost[];
-    blogPost: StrapiBlogPost;
-    category: StrapiCategory;
-    categories: StrapiCategory[];
-    menuItems: StrapiMenuItem[];
-    pageSettings: GeneralSettings;
-    offering: StrapiOffering;
-    offerings: StrapiOffering[];
-    page: StrapiPage;
-    recentBlogPosts: StrapiBlogPost[];
-    service: StrapiService;
-    services: StrapiService[];
-    service: StrapiService;
-    services: StrapiService[];
-    tag: StrapiTag;
-    tags: StrapiTag[];
+  blog: StrapiBlog;
+  blogs: StrapiBlog[];
+  blogPosts: StrapiBlogPost[];
+  blogPost: StrapiBlogPost;
+  category: StrapiCategory;
+  categories: StrapiCategory[];
+  menuItems: StrapiMenuItem[];
+  pageSettings: GeneralSettings;
+  offering: StrapiOffering;
+  offerings: StrapiOffering[];
+  page: StrapiPage;
+  recentBlogPosts: StrapiBlogPost[];
+  service: StrapiService;
+  services: StrapiService[];
+  service: StrapiService;
+  services: StrapiService[];
+  tag: StrapiTag;
+  tags: StrapiTag[];
 };
 
 type StrapiPreview = {
-    heading: StrapiComponentTextHeading;
-    text: StrapiComponentTextParagraph;
-    image: StrapiComponentMediaSingleImage;
-    button: StrapiComponentWidgetButton;
+  heading: StrapiComponentTextHeading;
+  text: StrapiComponentTextParagraph;
+  image: StrapiComponentMediaSingleImage;
+  button: StrapiComponentWidgetButton;
 };
 
 // strapi components
 
 type StrapiDynamicZone = {
-    id: string;
-    __typename:
-        | 'STRAPI_ComponentMediaSingleImage'
-        | 'STRAPI_ComponentMediaImages'
-        | 'STRAPI_ComponentMediaSingleFile'
-        | 'STRAPI_ComponentMediaFiles'
-        | 'STRAPI_ComponentMediaSingleVideo'
-        | 'STRAPI_ComponentMediaVideos'
-        | 'STRAPI_ComponentTextHeading'
-        | 'STRAPI_ComponentTextParagraph'
-        | 'STRAPI_ComponentTextQuote'
-        | 'STRAPI_ComponentSectionTextRightImageLeft'
-        | 'STRAPI_ComponentSectionImageRightTextLeft'
-        | 'STRAPI_ComponentSectionHeadingLeftImageRight'
-        | 'STRAPI_ComponentSectionHeadingRightImageLeft'
-        | 'STRAPI_ComponentSectionTextCenterImageEitherSide'
-        | 'STRAPI_ComponentSectionImageCenterTextEitherSide'
-        | 'STRAPI_ComponentWidgetDivider'
-        | 'STRAPI_ComponentWidgetButton'
-        | 'STRAPI_ComponentCollectionsOfferings'
-        | 'STRAPI_ComponentCollectionsBlogs'
-        | 'STRAPI_ComponentCollectionsBlogPosts'
-        | 'STRAPI_ComponentCollectionsServices';
-    body: string;
-    // base 'paragraph' props
-    text: StrapiComponentTextParagraph;
-    justifyParagraph: JustifyValues;
-    alignParagraph: AlignValues;
-    text_left: StrapiComponentTextParagraph;
-    text_right: StrapiComponentTextParagraph;
-    // base 'heading' props
-    headingText: string; // alias for 'text' in db
-    level: 'one' | 'two' | 'three' | 'four' | 'five' | 'six';
-    tilt: 'down' | 'even' | 'up';
-    justifyHeading: JustifyValues;
-    alignHeading: AlignValues;
-    // ========================
-    heading: StrapiComponentTextHeading;
-    style: ImageStyle | DividerStyle;
-    // base 'button' props
-    buttonText: string;
-    variant: 'primary' | 'secondary' | 'tertiary';
-    action: string;
-    // ========================
-    image: StrapiComponentMediaSingleImage; // image inside section with text or header
-    isCircle: boolean;
-    hasBorder: boolean;
-    // =========================
-    file: StrapiUploadFile; // single image , video or file
-    files: StrapiUploadFile[]; // image files, videos, or files
-    image_left: StrapiComponentMediaSingleImage;
-    image_right: StrapiComponentMediaSingleImage;
-    blogs: StrapiBlog[];
-    blog_posts: StrapiBlogPost[];
-    offerings: StrapiOffering[];
-    services: StrapiService[];
-    show_services: boolean;
-    show_blog_posts: boolean;
+  id: string;
+  __typename:
+    | 'STRAPI_ComponentMediaSingleImage'
+    | 'STRAPI_ComponentMediaImages'
+    | 'STRAPI_ComponentMediaSingleFile'
+    | 'STRAPI_ComponentMediaFiles'
+    | 'STRAPI_ComponentMediaSingleVideo'
+    | 'STRAPI_ComponentMediaVideos'
+    | 'STRAPI_ComponentTextHeading'
+    | 'STRAPI_ComponentTextParagraph'
+    | 'STRAPI_ComponentTextQuote'
+    | 'STRAPI_ComponentSectionTextRightImageLeft'
+    | 'STRAPI_ComponentSectionImageRightTextLeft'
+    | 'STRAPI_ComponentSectionHeadingLeftImageRight'
+    | 'STRAPI_ComponentSectionHeadingRightImageLeft'
+    | 'STRAPI_ComponentSectionTextCenterImageEitherSide'
+    | 'STRAPI_ComponentSectionImageCenterTextEitherSide'
+    | 'STRAPI_ComponentWidgetDivider'
+    | 'STRAPI_ComponentWidgetButton'
+    | 'STRAPI_ComponentCollectionsOfferings'
+    | 'STRAPI_ComponentCollectionsBlogs'
+    | 'STRAPI_ComponentCollectionsBlogPosts'
+    | 'STRAPI_ComponentCollectionsServices';
+  body: string;
+  // base 'paragraph' props
+  text: StrapiComponentTextParagraph;
+  justifyParagraph: JustifyValues;
+  alignParagraph: AlignValues;
+  text_left: StrapiComponentTextParagraph;
+  text_right: StrapiComponentTextParagraph;
+  // base 'heading' props
+  headingText: string; // alias for 'text' in db
+  level: 'one' | 'two' | 'three' | 'four' | 'five' | 'six';
+  tilt: 'down' | 'even' | 'up';
+  justifyHeading: JustifyValues;
+  alignHeading: AlignValues;
+  // ========================
+  heading: StrapiComponentTextHeading;
+  style: ImageStyle | DividerStyle;
+  // base 'button' props
+  buttonText: string;
+  variant: 'primary' | 'secondary' | 'tertiary';
+  action: string;
+  // ========================
+  image: StrapiComponentMediaSingleImage; // image inside section with text or header
+  isCircle: boolean;
+  hasBorder: boolean;
+  // =========================
+  file: StrapiUploadFile; // single image , video or file
+  files: StrapiUploadFile[]; // image files, videos, or files
+  image_left: StrapiComponentMediaSingleImage;
+  image_right: StrapiComponentMediaSingleImage;
+  blogs: StrapiBlog[];
+  blog_posts: StrapiBlogPost[];
+  offerings: StrapiOffering[];
+  services: StrapiService[];
+  show_services: boolean;
+  show_blog_posts: boolean;
 };
 
 // Strapi Collections Component Types
 
 type StrapiComponentCollectionsBlogs = {
-    blogs: StrapiBlog[];
+  blogs: StrapiBlog[];
 };
 type StrapiComponentCollectionsBlogPosts = {
-    blog_posts: StrapiBlogPost[];
+  blog_posts: StrapiBlogPost[];
 };
 type StrapiComponentCollectionsOfferings = {
-    offerings: StrapiOffering[];
+  offerings: StrapiOffering[];
 };
 type StrapiComponentCollectionsServices = {
-    services: StrapiService[];
+  services: StrapiService[];
 };
 
 // Strapi Media Component Types
 
 type StrapiUploadFile = {
-    id: number;
-    url: string;
-    caption: string;
-    alternativeText: string;
-    imageFile: FluidImage;
+  id: number;
+  url: string;
+  caption: string;
+  alternativeText: string;
+  imageFile: FluidImage;
 };
 
 // Strapi Section Component Types
 type StrapiComponentSectionTextCenterImageEitherSide = {
-    image_left: StrapiComponentMediaSingleImage;
-    text: StrapiComponentTextParagraph;
-    image_right: StrapiComponentMediaSingleImage;
+  image_left: StrapiComponentMediaSingleImage;
+  text: StrapiComponentTextParagraph;
+  image_right: StrapiComponentMediaSingleImage;
 };
 type StrapiComponentSectionImageCenterTextEitherSide = {
-    text_left: StrapiComponentMediaSingleImage;
-    image: StrapiComponentTextParagraph;
-    text_right: StrapiComponentMediaSingleImage;
+  text_left: StrapiComponentMediaSingleImage;
+  image: StrapiComponentTextParagraph;
+  text_right: StrapiComponentMediaSingleImage;
 };
 
 type StrapiComponentSectionHeadingRightImageLeft = {
-    heading: StrapiComponentTextHeading;
-    image: StrapiComponentMediaSingleImage;
+  heading: StrapiComponentTextHeading;
+  image: StrapiComponentMediaSingleImage;
 };
 
 type StrapiComponentSectionHeadingLeftImageRight = {
-    heading: StrapiComponentTextHeading;
-    image: StrapiComponentMediaSingleImage;
+  heading: StrapiComponentTextHeading;
+  image: StrapiComponentMediaSingleImage;
 };
 
 type StrapiComponentSectionImageRightTextLeft = {
-    text: StrapiComponentTextParagraph;
-    image: StrapiComponentMediaSingleImage;
+  text: StrapiComponentTextParagraph;
+  image: StrapiComponentMediaSingleImage;
 };
 
 type StrapiComponentSectionTextRightImageLeft = {
-    text: StrapiComponentTextParagraph;
-    image: StrapiComponentMediaSingleImage;
+  text: StrapiComponentTextParagraph;
+  image: StrapiComponentMediaSingleImage;
 };
 
 // Strapi Text Component Types
 type StrapiComponentTextParagraph = {
-    body: string;
-    justifyParagraph: JustifyValues; // Alias for 'justify' enum
-    alignParagraph: AlignValues; // Alias for 'align' enum
+  body: string;
+  justifyParagraph: JustifyValues; // Alias for 'justify' enum
+  alignParagraph: AlignValues; // Alias for 'align' enum
 };
 
 type StrapiComponentTextHeading = {
-    headingText: string; // alias for 'text' in db
-    level: 'one' | 'two' | 'three' | 'four' | 'five' | 'six';
-    tilt: 'down' | 'even' | 'up';
-    justifyHeading: JustifyValues; // Alias for 'justify' enum
-    alignHeading: AlignValues; // Alias for 'align' enum
+  headingText: string; // alias for 'text' in db
+  level: 'one' | 'two' | 'three' | 'four' | 'five' | 'six';
+  tilt: 'down' | 'even' | 'up';
+  justifyHeading: JustifyValues; // Alias for 'justify' enum
+  alignHeading: AlignValues; // Alias for 'align' enum
 };
 
 type StrapiComponentTextQuote = {
-    text: StrapiComponentTextParagraph;
+  text: StrapiComponentTextParagraph;
 };
 
 // Strapi Media Types
 type StrapiComponentMediaSingleImage = {
-    file: StrapiUploadFile;
-    isCircle: boolean;
-    hasBorder: boolean;
+  file: StrapiUploadFile;
+  isCircle: boolean;
+  hasBorder: boolean;
 };
 type StrapiComponentMediaImages = {
-    files: StrapiUploadFile[];
-    style: Omit<ImageStyle, 'standard' | 'fancy'>;
-    isCircle: boolean;
-    hasBorder: boolean;
+  files: StrapiUploadFile[];
+  style: Omit<ImageStyle, 'standard' | 'fancy'>;
+  isCircle: boolean;
+  hasBorder: boolean;
 };
 
 // Strapi Widget Types
 type StrapiComponentWidgetButton = {
-    buttonText: string;
-    variant: 'primary' | 'secondary' | 'tertiary';
-    action: string;
+  buttonText: string;
+  variant: 'primary' | 'secondary' | 'tertiary';
+  action: string;
 };
 type StrapiComponentWidgetDivider = {
-    style: Pick<ImageStyle, 'standard' | 'fancy'>;
+  style: Pick<ImageStyle, 'standard' | 'fancy'>;
 };
 
 // ===========================================
 
 // strapi collection types //
 type StrapiMenuItem = {
-    text: string;
-    is_external_link: boolean;
-    slug: string;
-    page: StrapiPage['id'];
-    content: StrapiDynamicZone[];
+  text: string;
+  is_external_link: boolean;
+  slug: string;
+  page: StrapiPage['id'];
+  content: StrapiDynamicZone[];
 };
 
 type StrapiPage = {
-    id: string;
-    title: string;
-    slug: string;
-    meta_description: string;
-    menuItem: StrapiMenuItem;
-    banner_background_image: StrapiUploadFile;
-    banner: StrapiDynamicZone[];
-    body: StrapiDynamicZone[];
-    blogs: StrapiBlog[];
-    offerings: StrapiOffering[];
+  id: string;
+  title: string;
+  slug: string;
+  meta_description: string;
+  menuItem: StrapiMenuItem;
+  banner_background_image: StrapiUploadFile;
+  banner: StrapiDynamicZone[];
+  body: StrapiDynamicZone[];
+  blogs: StrapiBlog[];
+  offerings: StrapiOffering[];
 };
 
 type StrapiBlog = {
-    id: string;
-    name: string;
-    slug: string;
-    meta_description: string;
-    preview: StrapiPreview;
-    fullUrlPath: string;
-    blog_posts: StrapiBlogPost[];
-    is_blog: boolean;
+  id: string;
+  name: string;
+  slug: string;
+  meta_description: string;
+  preview: StrapiPreview;
+  fullUrlPath: string;
+  blog_posts: StrapiBlogPost[];
+  is_blog: boolean;
 };
 
 type StrapiBlogPost = {
-    id: string;
-    title: string;
-    slug: string;
-    meta_description: string;
-    preview: StrapiPreview;
-    blog: StrapiBlog;
-    fullUrlPath: string;
-    category?: StrapiCategory;
-    tags?: StrapiTag[];
-    cover_image?: StrapiUploadFile;
-    published: string;
-    body: StrapiBodyContent[];
-    is_blog_post: boolean;
+  id: string;
+  title: string;
+  slug: string;
+  meta_description: string;
+  preview: StrapiPreview;
+  blog: StrapiBlog;
+  fullUrlPath: string;
+  category?: StrapiCategory;
+  tags?: StrapiTag[];
+  cover_image?: StrapiUploadFile;
+  published: string;
+  body: StrapiBodyContent[];
+  is_blog_post: boolean;
 };
 
 type StrapiOffering = {
-    id: string;
-    title: string;
-    slug: string;
-    meta_description: string;
-    preview: StrapiPreview;
-    image: StrapiComponentMediaSingleImage;
-    fullUrlPath: string;
-    services: StrapiService[];
-    is_offering: boolean;
+  id: string;
+  title: string;
+  slug: string;
+  meta_description: string;
+  preview: StrapiPreview;
+  image: StrapiComponentMediaSingleImage;
+  fullUrlPath: string;
+  services: StrapiService[];
+  is_offering: boolean;
 };
 
 type StrapiService = {
-    id: string;
-    title: string;
-    slug: string;
-    meta_description: string;
-    fullUrlPath: string;
-    preview: StrapiPreview;
-    banner_background_image: StrapiUploadFile;
-    banner: StrapiDynamicZone[];
-    sales_page: StrapiDynamicZone[];
-    offerings: StrapiOffering[];
-    is_service: boolean;
+  id: string;
+  title: string;
+  slug: string;
+  meta_description: string;
+  fullUrlPath: string;
+  preview: StrapiPreview;
+  banner_background_image: StrapiUploadFile;
+  banner: StrapiDynamicZone[];
+  sales_page: StrapiDynamicZone[];
+  offerings: StrapiOffering[];
+  is_service: boolean;
 };
 
 type StrapiCategory = {
-    id: string;
-    name: string;
-    slug: string;
-    blog_posts?: StrapiBlogPost[];
-    is_category: boolean;
+  id: string;
+  name: string;
+  slug: string;
+  blog_posts?: StrapiBlogPost[];
+  is_category: boolean;
 };
 type StrapiTag = {
-    id: string;
-    name: string;
-    slug: string;
-    blog_posts?: StrapiBlogPost[];
-    is_tag: boolean;
+  id: string;
+  name: string;
+  slug: string;
+  blog_posts?: StrapiBlogPost[];
+  is_tag: boolean;
 };
 
 // ===================
@@ -298,15 +298,15 @@ type StrapiTag = {
 // strapi single types
 
 type GeneralSettings = {
-    home_page: {
-        id: string;
-    };
-    blogs_page: {
-        id: string;
-    };
-    offerings_page: {
-        id: string;
-    };
+  home_page: {
+    id: string;
+  };
+  blogs_page: {
+    id: string;
+  };
+  offerings_page: {
+    id: string;
+  };
 };
 
 // Random Strapi types
@@ -315,10 +315,10 @@ type JustifyValues = 'left' | 'center' | 'right';
 type AlignValues = 'top' | 'center' | 'bottom';
 
 type ImageStyle =
-    | 'straight_line'
-    | 'stagger'
-    | 'triangle'
-    | 'inverted_triangle';
+  | 'straight_line'
+  | 'stagger'
+  | 'triangle'
+  | 'inverted_triangle';
 
 type DividerStyle = 'standard' | 'fancy';
 
@@ -327,10 +327,10 @@ type DividerStyle = 'standard' | 'fancy';
 // Config and Site Data
 
 type Social = {
-    instagram: string;
-    facebook: string;
-    discord: string;
-    pinterest: string;
+  instagram: string;
+  facebook: string;
+  discord: string;
+  pinterest: string;
 };
 
 // type SEO = {
@@ -342,7 +342,7 @@ type Social = {
 // };
 
 type Config = {
-    socials: Social;
+  socials: Social;
 };
 
 // Components
@@ -351,31 +351,31 @@ type Config = {
 type ContainerType = 'div' | 'article' | 'section' | 'aside' | 'ul' | 'ol';
 
 type BreakpointObject = {
-    xlarge?: string;
-    large?: string;
-    medium?: string;
-    small?: string;
-    xsmall?: string;
+  xlarge?: string;
+  large?: string;
+  medium?: string;
+  small?: string;
+  xsmall?: string;
 };
 
 type Grid = {
-    gap?: string | number; // grid-gap
-    /**
-     * @param columns
-     * Each subsequent index in the array maps to
-     * a breakpoint. From left to right,
-     * the breakpoints get smaller.
-     */
-    columns?: [string, string?, string?, string?, string?]; // grid-template-columns
-    /**
-     * @param rows
-     * Each subsequent index in the array maps to
-     * a breakpoint. From left to right,
-     * the breakpoints get smaller.
-     */
-    rows?: [string, string?, string?, string?, string?]; // grid-template-rows
-    containerType?: 'article' | 'section' | 'div' | 'aside';
-    autoCols?: string;
+  gap?: string | number; // grid-gap
+  /**
+   * @param columns
+   * Each subsequent index in the array maps to
+   * a breakpoint. From left to right,
+   * the breakpoints get smaller.
+   */
+  columns?: [string, string?, string?, string?, string?]; // grid-template-columns
+  /**
+   * @param rows
+   * Each subsequent index in the array maps to
+   * a breakpoint. From left to right,
+   * the breakpoints get smaller.
+   */
+  rows?: [string, string?, string?, string?, string?]; // grid-template-rows
+  containerType?: 'article' | 'section' | 'div' | 'aside';
+  autoCols?: string;
 };
 
 // Search

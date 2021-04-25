@@ -3,18 +3,18 @@ import { below, size } from '../../../StyledComponents/_mixins';
 
 // TODO: Update with theme variables
 const PageContainer = styled.section`
-    display: grid;
-    gap: 4em 0;
-    grid-template-columns:
-        [full-start] minmax(2em, 3em)
-        [content-start] minmax(0, 60em) [content-end]
-        minmax(2em, 3em) [full-end];
+  display: grid;
+  gap: 4em 0;
+  grid-template-columns:
+    [full-start] minmax(2em, 3em)
+    [content-start] minmax(0, 60em) [content-end]
+    minmax(2em, 3em) [full-end];
 
-    & > * {
-        grid-column: content;
-    }
+  & > * {
+    grid-column: content;
+  }
 
-    ${below.small`
+  ${below.small`
             place-items:center;
             grid-template-columns: 
                 [full-start] 4%
@@ -27,6 +27,6 @@ const PageContainer = styled.section`
                 }
         `};
 
-    margin: ${size('margin', 'large')} 0;
+  margin: ${size('margin', 'large')} 0;
 `;
 export default PageContainer;

@@ -4,31 +4,28 @@ import StrapiDynamicZone from '../StrapiDynamicZone';
 import styled from 'styled-components';
 import { below, size } from '../../StyledComponents/_mixins';
 interface Props {
-    image: StrapiUploadFile | null;
-    banner: StrapiDynamicZone[];
+  image: StrapiUploadFile | null;
+  banner: StrapiDynamicZone[];
 }
 
 const BannerBackgroundImage: React.FC<Props> = ({
-    image,
-    banner,
+  image,
+  banner,
 }: Props): JSX.Element => {
-    if (image === null) return <> </>;
-    if (image?.imageFile === null) return <> </>;
+  if (image === null) return <> </>;
+  if (image?.imageFile === null) return <> </>;
 
-    return (
-        <BannerWrapper
-            Tag="section"
-            fluid={image.imageFile.childImageSharp.fluid}
-        >
-            <StrapiDynamicZone components={banner} />
-        </BannerWrapper>
-    );
+  return (
+    <BannerWrapper Tag="section" fluid={image.imageFile.childImageSharp.fluid}>
+      <StrapiDynamicZone components={banner} />
+    </BannerWrapper>
+  );
 };
 
 const BannerWrapper = styled(BannerBackground)`
-    display: flex;
-    padding: ${size('padding', 'xsmall')};
-    ${below.small`
+  display: flex;
+  padding: ${size('padding', 'xsmall')};
+  ${below.small`
         flex-flow: column nowrap;
     `}
 `;

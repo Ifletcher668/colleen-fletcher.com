@@ -1,46 +1,73 @@
 root: true
-env:
-    browser: true
 
 parser: '@typescript-eslint/parser'
-parserOptions:
-    project: './tsconfig.json'
+
+settings:
+  react:
+    version: 'detect'
 
 plugins:
-    - '@typescript-eslint'
+  # - 'react'
+  - 'prettier'
+  - '@typescript-eslint/eslint-plugin'
 
 extends:
-    - 'plugin:@typescript-eslint/eslint-recommended'
-    - 'plugin:@typescript-eslint/recommended'
-    _ 'prettier'
-    _ 'prettier/react'
-    _ 'prettier/@typescript-eslint'
+  # - 'react'
+  - 'eslint:recommended'
+  - 'prettier'
+  # - 'plugin:react/recommended'
+  - 'plugin:prettier/recommended'
+  # - 'plugin:@typescript-eslint/recommended'
+
+parserOptions:
+  ecmaVersion: 2017
+  sourceType: 'module'
+  allowImportExportEverywhere: false
+  ecmaFeatures:
+    experimentalObjectRestSpread: true
+    arrowFunctions: true
+    binaryLiterals: true
+    blockBindings: true
+    classes: true
+    defaultParams: true
+    destructuring: true
+    forOf: true
+    generators: true
+    modules: true
+    objectLiteralComputedProperties: true
+    objectLiteralDuplicateProperties: true
+    objectLiteralShorthandMethods: true
+    objectLiteralShorthandProperties: true
+    octalLiterals: true
+    regexUFlag: true
+    regexYFlag: true
+    spread: true
+    superInFunctions: true
+    templateStrings: true
+    unicodeCodePointEscapes: true
+    globalReturn: true
+    jsx: true
+
+env:
+  browser: true
+  commonjs: true
+  es6: true
+  node: true
+
+globals:
+  strapi: true
 
 rules:
-    import/no-unresolved: off
-    no-unused-vars:
-        - error
-        - 
-            vars: 'all'
-            args: 'after-used'
-            ignoreRestSiblings: 'false'
-    react/prop-types: off
-    react/jsx-pascal-case: off
-    import/order: off
-    babel/camelcase: off
-    jsx-a11y/label-has-for: off
-    max-lines-per-function: off
-    babel/quotes: off
-    consistent-return: off
-    no-console: 1
-    prettier/prettier: 'warn'
-    space-in-brackets:
-        - 'always'
-     @typescript-eslint/explicit-function-return-type:
-        - 'error'
-            allowExpressions: true,
-            allowTypedFunctionExpressions: true,
-overrides:
-    - files:
-          - 'src/**/*.ts'
-          - 'src/**/*.tsx'
+  no-undef: 0
+  prettier/prettier: 2
+  no-console: 1
+  no-unused-vars: 1
+  linebreak-style:
+    - 'error'
+    - 'unix'
+  quotes:
+    - 'error'
+    - 'single'
+  semi:
+    - 'error'
+    - 'always'

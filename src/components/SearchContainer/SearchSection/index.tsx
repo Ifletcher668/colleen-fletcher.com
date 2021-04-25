@@ -2,16 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface Props extends Pick<DefaultProps, 'children'> {
-    hideElement: boolean;
+  hideElement: boolean;
 }
 
 const ListItem = styled.li``;
 
 const SearchSection: React.FC<Props> = ({
-    hideElement,
-    children,
+  hideElement,
+  children,
 }: Props): JSX.Element => {
-    return !hideElement ? <></> : <ListItem>{children}</ListItem>;
+  return !hideElement ? <></> : <ListItem>{children}</ListItem>;
 };
 
 export default SearchSection;

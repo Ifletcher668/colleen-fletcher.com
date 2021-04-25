@@ -5,3 +5,4 @@ export { default as Heading } from './Heading';
 export { default as Nav } from './Nav';
 export { default as Paragraph } from './Paragraph';
 export { default as Span } from './Span';
+export { default as Header } from './Header';

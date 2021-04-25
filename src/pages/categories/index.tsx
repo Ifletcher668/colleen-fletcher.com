@@ -3,10 +3,10 @@ import { PageProps } from 'gatsby';
 import Layout from '../../components/Layout';
 
 export default (props: PageProps) => {
-    return (
-        <Layout location={props.location}>
-            All Categories
-            {/*  */}
-        </Layout>
-    );
+  return (
+    <Layout location={props.location}>
+      All Categories
+      {/*  */}
+    </Layout>
+  );
 };

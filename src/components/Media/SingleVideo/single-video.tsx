@@ -1,11 +1,11 @@
 import React from 'react';
 
 export interface Props {
-    data: any;
+  data: any;
 }
 
 const TextWithImageField: React.FC<Props> = ({ data }: Props) => {
-    return <>{/* todo */}</>;
+  return <>{/* todo */}</>;
 };
 
 export default TextWithImageField;
