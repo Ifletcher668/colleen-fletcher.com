@@ -13,6 +13,7 @@ const Divider = ({ type }: Props): JSX.Element =>
   ) : (
     <Flexbox
       center
+      middle
       styling={{
         gap: '2em',
       }}

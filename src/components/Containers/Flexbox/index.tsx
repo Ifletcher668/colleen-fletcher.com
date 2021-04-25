@@ -94,9 +94,11 @@ const Wrapper = styled.div<Props>`
   flex-direction: ${({ vertical }) => (vertical ? 'column' : 'row')};
   flex-wrap: ${({ wrap }) => (wrap ? 'wrap' : 'nowrap')};
   flex: ${({ flex }) => (flex ? flex : '1 1 auto')};
+
   ${props => getFlexboxProps(props)};
   ${props => props.styling};
 `;
+
 const Flexbox: React.FC<Props> = forwardRef((props: Props, ref) => {
   const {
     className,
@@ -106,6 +108,15 @@ const Flexbox: React.FC<Props> = forwardRef((props: Props, ref) => {
     wrap,
     flex,
     styling,
+    top,
+    middle,
+    bottom,
+    left,
+    center,
+    right,
+    between,
+    around,
+    gap,
     containerType = 'div',
   } = props;
 
@@ -118,14 +129,23 @@ const Flexbox: React.FC<Props> = forwardRef((props: Props, ref) => {
   return (
     <Wrapper
       as={containerType}
+      ref={ref}
       wrap={wrap}
       flex={flex}
       inline={inline}
       onClick={onClick}
       styling={styling}
-      vertical={vertical}
       className={cn}
-      ref={ref}
+      top={top}
+      vertical={vertical}
+      middle={middle}
+      bottom={bottom}
+      left={left}
+      center={center}
+      right={right}
+      between={between}
+      around={around}
+      gap={gap}
     >
       {props.children}
     </Wrapper>
