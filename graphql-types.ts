@@ -5554,6 +5554,463 @@ export type WebPOptions = {
   quality?: Maybe<Scalars['Int']>;
 };
 
+export type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Unnamed_1_Query = { strapi: { blogPosts?: Maybe<Array<Maybe<(
+      Pick<Strapi_BlogPost, 'title'>
+      & { blog?: Maybe<Pick<Strapi_Blog, 'name'>> }
+      & StrapiBlogPostFullUrlPathFragment
+    )>>> } };
+
+export type Unnamed_2_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Unnamed_2_Query = { strapi: { blogs?: Maybe<Array<Maybe<(
+      Pick<Strapi_Blog, 'name' | 'slug'>
+      & { blog_posts?: Maybe<Array<Maybe<Pick<Strapi_BlogPost, 'title' | 'slug'>>>> }
+    )>>> } };
+
+export type Unnamed_3_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Unnamed_3_Query = { strapi: { offerings?: Maybe<Array<Maybe<Pick<Strapi_Offering, 'title' | 'slug'>>>> } };
+
+export type Unnamed_4_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Unnamed_4_Query = { strapi: { services?: Maybe<Array<Maybe<(
+      Pick<Strapi_Service, 'title' | 'slug'>
+      & { offerings?: Maybe<Array<Maybe<Pick<Strapi_Offering, 'title' | 'slug'>>>> }
+    )>>> } };
+
+export type Unnamed_5_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Unnamed_5_Query = { site?: Maybe<{ siteMetadata?: Maybe<(
+      Pick<SiteSiteMetadata, 'title' | 'description'>
+      & { author?: Maybe<Pick<SiteSiteMetadataAuthor, 'name' | 'bio'>> }
+    )> }> };
+
+export type StrapiMenuItemFragment = (
+  Pick<Strapi_MenuItem, 'text' | 'slug' | 'is_external_link'>
+  & { page?: Maybe<Pick<Strapi_Page, 'id'>>, content?: Maybe<Array<Maybe<(
+    { __typename: 'STRAPI_ComponentCollectionsBlogPosts' }
+    & { blog_posts?: Maybe<Array<Maybe<(
+      Pick<Strapi_BlogPost, 'title'>
+      & StrapiBlogPostFullUrlPathFragment
+    )>>> }
+  ) | (
+    { __typename: 'STRAPI_ComponentCollectionsOfferings' }
+    & Pick<Strapi_ComponentCollectionsOfferings, 'show_services'>
+    & { offerings?: Maybe<Array<Maybe<Pick<Strapi_Offering, 'title' | 'slug' | 'fullUrlPath'>>>> }
+  ) | (
+    { __typename: 'STRAPI_ComponentCollectionsBlogs' }
+    & Pick<Strapi_ComponentCollectionsBlogs, 'show_blog_posts'>
+    & { blogs?: Maybe<Array<Maybe<Pick<Strapi_Blog, 'name' | 'slug' | 'fullUrlPath'>>>> }
+  ) | (
+    { __typename: 'STRAPI_ComponentCollectionsServices' }
+    & { services?: Maybe<Array<Maybe<Pick<Strapi_Service, 'title' | 'slug'>>>> }
+  )>>> }
+);
+
+export type StrapiBlogFragment = (
+  Pick<Strapi_Blog, 'name' | 'slug' | 'fullUrlPath' | 'meta_description' | 'is_blog'>
+  & { preview?: Maybe<StrapiComponentGeneralPreviewFragment>, blog_posts?: Maybe<Array<Maybe<StrapiBlogPostFragment>>> }
+);
+
+export type StrapiBlogPostFullUrlPathFragment = (
+  Pick<Strapi_BlogPost, 'slug' | 'fullUrlPath' | 'published'>
+  & { blog?: Maybe<Pick<Strapi_Blog, 'name' | 'slug'>>, category?: Maybe<Pick<Strapi_Category, 'name' | 'slug'>> }
+);
+
+export type StrapiBlogPostFragment = (
+  Pick<Strapi_BlogPost, 'title' | 'slug' | 'published' | 'fullUrlPath' | 'is_blog_post'>
+  & { preview?: Maybe<StrapiComponentGeneralPreviewFragment>, cover_image?: Maybe<StrapiUploadFileFragment>, blog?: Maybe<Pick<Strapi_Blog, 'name' | 'slug'>>, category?: Maybe<Pick<Strapi_Category, 'name' | 'slug'>>, tags?: Maybe<Array<Maybe<Pick<Strapi_Tag, 'name'>>>> }
+);
+
+export type StrapiOfferingFragment = (
+  Pick<Strapi_Offering, 'id' | 'title' | 'slug' | 'meta_description' | 'fullUrlPath' | 'is_offering'>
+  & { preview?: Maybe<StrapiComponentGeneralPreviewFragment>, services?: Maybe<Array<Maybe<StrapiServiceFragment>>> }
+);
+
+export type StrapiServiceFragment = (
+  Pick<Strapi_Service, 'id' | 'title' | 'slug' | 'is_service'>
+  & { preview?: Maybe<StrapiComponentGeneralPreviewFragment>, banner_background_image?: Maybe<StrapiUploadFileFragment>, offerings?: Maybe<Array<Maybe<Pick<Strapi_Offering, 'id' | 'slug'>>>> }
+);
+
+export type StrapiCategoryFragment = (
+  Pick<Strapi_Category, 'name' | 'is_category'>
+  & { blog_posts?: Maybe<Array<Maybe<Pick<Strapi_BlogPost, 'title' | 'slug'>>>> }
+);
+
+export type StrapiTagFragment = (
+  Pick<Strapi_Tag, 'name' | 'is_tag'>
+  & { blog_posts?: Maybe<Array<Maybe<Pick<Strapi_BlogPost, 'title' | 'slug'>>>> }
+);
+
+export type FluidImageFragment = { childImageSharp?: Maybe<{ fluid?: Maybe<GatsbyImageSharpFluid_NoBase64Fragment> }> };
+
+export type StrapiUploadFileFragment = (
+  Pick<Strapi_UploadFile, 'id' | 'url' | 'caption' | 'alternativeText'>
+  & { imageFile?: Maybe<FluidImageFragment> }
+);
+
+export type StrapiComponentMediaSingleImageFragment = (
+  Pick<Strapi_ComponentMediaSingleImage, 'id'>
+  & { isCircle: Strapi_ComponentMediaSingleImage['is_circle'], hasBorder: Strapi_ComponentMediaSingleImage['has_border'] }
+  & { file?: Maybe<StrapiUploadFileFragment> }
+);
+
+export type StrapiComponentMediaImagesFragment = (
+  Pick<Strapi_ComponentMediaImages, 'id'>
+  & { imageLayout: Strapi_ComponentMediaImages['style'], isCircle: Strapi_ComponentMediaImages['is_circle'], hasBorder: Strapi_ComponentMediaImages['has_border'] }
+  & { files?: Maybe<Array<Maybe<StrapiUploadFileFragment>>> }
+);
+
+export type StrapiComponentTextParagraphFragment = (
+  Pick<Strapi_ComponentTextParagraph, 'id' | 'body'>
+  & { justifyParagraph: Strapi_ComponentTextParagraph['justify'], alignParagraph: Strapi_ComponentTextParagraph['align'] }
+);
+
+export type StrapiComponentTextHeadingFragment = (
+  Pick<Strapi_ComponentTextHeading, 'id' | 'level' | 'tilt'>
+  & { headingText: Strapi_ComponentTextHeading['text'], justifyHeading: Strapi_ComponentTextHeading['justify'], alignHeading: Strapi_ComponentTextHeading['align'] }
+);
+
+export type StrapiComponentTextQuoteFragment = (
+  Pick<Strapi_ComponentTextQuote, 'id'>
+  & { text?: Maybe<StrapiComponentTextParagraphFragment> }
+);
+
+export type StrapiComponentWidgetDividerFragment = Pick<Strapi_ComponentWidgetDivider, 'id' | 'style'>;
+
+export type StrapiComponentWidgetButtonFragment = (
+  Pick<Strapi_ComponentWidgetButton, 'id' | 'variant' | 'action'>
+  & { buttonText: Strapi_ComponentWidgetButton['text'] }
+);
+
+export type StrapiComponentSectionHeadingRightImageLeftFragment = (
+  Pick<Strapi_ComponentSectionHeadingRightImageLeft, 'id'>
+  & { heading?: Maybe<StrapiComponentTextHeadingFragment>, image?: Maybe<StrapiComponentMediaSingleImageFragment> }
+);
+
+export type StrapiComponentSectionHeadingLeftImageRightFragment = (
+  Pick<Strapi_ComponentSectionHeadingLeftImageRight, 'id'>
+  & { image?: Maybe<StrapiComponentMediaSingleImageFragment>, heading?: Maybe<StrapiComponentTextHeadingFragment> }
+);
+
+export type StrapiComponentSectionImageRightTextLeftFragment = (
+  Pick<Strapi_ComponentSectionImageRightTextLeft, 'id'>
+  & { image?: Maybe<StrapiComponentMediaSingleImageFragment>, text?: Maybe<StrapiComponentTextParagraphFragment> }
+);
+
+export type StrapiComponentSectionTextRightImageLeftFragment = (
+  Pick<Strapi_ComponentSectionTextRightImageLeft, 'id'>
+  & { text?: Maybe<StrapiComponentTextParagraphFragment>, image?: Maybe<StrapiComponentMediaSingleImageFragment> }
+);
+
+export type StrapiComponentSectionTextCenterImageEitherSideFragment = (
+  Pick<Strapi_ComponentSectionTextCenterImageEitherSide, 'id'>
+  & { image_left?: Maybe<StrapiComponentMediaSingleImageFragment>, text?: Maybe<StrapiComponentTextParagraphFragment>, image_right?: Maybe<StrapiComponentMediaSingleImageFragment> }
+);
+
+export type StrapiComponentSectionImageCenterTextEitherSideFragment = (
+  Pick<Strapi_ComponentSectionImageCenterTextEitherSide, 'id'>
+  & { text_left?: Maybe<StrapiComponentTextParagraphFragment>, image?: Maybe<StrapiComponentMediaSingleImageFragment>, text_right?: Maybe<StrapiComponentTextParagraphFragment> }
+);
+
+export type StrapiComponentCollectionsBlogsFragment = { blogs?: Maybe<Array<Maybe<Pick<Strapi_Blog, 'id' | 'name' | 'slug' | 'fullUrlPath'>>>> };
+
+export type StrapiComponentCollectionsBlogPostsFragment = { blog_posts?: Maybe<Array<Maybe<{ preview?: Maybe<StrapiComponentGeneralPreviewFragment> }>>> };
+
+export type StrapiComponentCollectionsOfferingsFragment = { offerings?: Maybe<Array<Maybe<Pick<Strapi_Offering, 'id' | 'title' | 'slug' | 'fullUrlPath'>>>> };
+
+export type StrapiComponentCollectionsServicesFragment = { services?: Maybe<Array<Maybe<StrapiServiceFragment>>> };
+
+export type StrapiComponentGeneralPreviewFragment = { heading?: Maybe<StrapiComponentTextHeadingFragment>, text?: Maybe<StrapiComponentTextParagraphFragment>, image?: Maybe<StrapiComponentMediaSingleImageFragment>, button?: Maybe<StrapiComponentWidgetButtonFragment> };
+
+export type Unnamed_6_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Unnamed_6_Query = { frangipaniImg?: Maybe<FluidImageFragment> };
+
+export type Get_Strapi_Menu_ItemsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Get_Strapi_Menu_ItemsQuery = { strapi: { menuItems?: Maybe<Array<Maybe<StrapiMenuItemFragment>>> } };
+
+export type Get_Blog_PostQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type Get_Blog_PostQuery = { strapi: { blogPost?: Maybe<(
+      Pick<Strapi_BlogPost, 'title' | 'meta_description'>
+      & { tags?: Maybe<Array<Maybe<Pick<Strapi_Tag, 'name'>>>>, body: Array<Maybe<{ __typename: 'STRAPI_ComponentMediaSingleVideo' } | (
+        { __typename: 'STRAPI_ComponentMediaSingleImage' }
+        & StrapiComponentMediaSingleImageFragment
+      ) | { __typename: 'STRAPI_ComponentMediaVideos' } | (
+        { __typename: 'STRAPI_ComponentMediaImages' }
+        & StrapiComponentMediaImagesFragment
+      ) | { __typename: 'STRAPI_ComponentMediaFiles' } | { __typename: 'STRAPI_ComponentMediaSingleFile' } | (
+        { __typename: 'STRAPI_ComponentTextHeading' }
+        & StrapiComponentTextHeadingFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentTextParagraph' }
+        & StrapiComponentTextParagraphFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentTextQuote' }
+        & StrapiComponentTextQuoteFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentSectionTextRightImageLeft' }
+        & StrapiComponentSectionTextRightImageLeftFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentSectionTextCenterImageEitherSide' }
+        & StrapiComponentSectionTextCenterImageEitherSideFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentSectionHeadingLeftImageRight' }
+        & StrapiComponentSectionHeadingLeftImageRightFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentSectionImageRightTextLeft' }
+        & StrapiComponentSectionImageRightTextLeftFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentSectionImageCenterTextEitherSide' }
+        & StrapiComponentSectionImageCenterTextEitherSideFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentSectionHeadingRightImageLeft' }
+        & StrapiComponentSectionHeadingRightImageLeftFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentWidgetDivider' }
+        & StrapiComponentWidgetDividerFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentWidgetButton' }
+        & StrapiComponentWidgetButtonFragment
+      )>> }
+    )> } };
+
+export type Get_Blog_PageQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type Get_Blog_PageQuery = { strapi: { blog?: Maybe<StrapiBlogFragment> } };
+
+export type Get_Strapi_CategoryQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type Get_Strapi_CategoryQuery = { strapi: { category?: Maybe<StrapiCategoryFragment> } };
+
+export type Get_Offering_PageQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type Get_Offering_PageQuery = { strapi: { offering?: Maybe<StrapiOfferingFragment> } };
+
+export type Get_PageQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type Get_PageQuery = { strapi: { page?: Maybe<(
+      Pick<Strapi_Page, 'title' | 'meta_description'>
+      & { banner_background_image?: Maybe<StrapiUploadFileFragment>, banner?: Maybe<Array<Maybe<{ __typename: 'STRAPI_ComponentMediaSingleVideo' } | (
+        { __typename: 'STRAPI_ComponentMediaSingleImage' }
+        & StrapiComponentMediaSingleImageFragment
+      ) | { __typename: 'STRAPI_ComponentMediaVideos' } | (
+        { __typename: 'STRAPI_ComponentMediaImages' }
+        & StrapiComponentMediaImagesFragment
+      ) | { __typename: 'STRAPI_ComponentMediaFiles' } | { __typename: 'STRAPI_ComponentMediaSingleFile' } | (
+        { __typename: 'STRAPI_ComponentTextHeading' }
+        & StrapiComponentTextHeadingFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentTextParagraph' }
+        & StrapiComponentTextParagraphFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentTextQuote' }
+        & StrapiComponentTextQuoteFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentSectionTextRightImageLeft' }
+        & StrapiComponentSectionTextRightImageLeftFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentSectionTextCenterImageEitherSide' }
+        & StrapiComponentSectionTextCenterImageEitherSideFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentSectionHeadingLeftImageRight' }
+        & StrapiComponentSectionHeadingLeftImageRightFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentSectionImageRightTextLeft' }
+        & StrapiComponentSectionImageRightTextLeftFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentSectionImageCenterTextEitherSide' }
+        & StrapiComponentSectionImageCenterTextEitherSideFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentSectionHeadingRightImageLeft' }
+        & StrapiComponentSectionHeadingRightImageLeftFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentWidgetDivider' }
+        & StrapiComponentWidgetDividerFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentWidgetButton' }
+        & StrapiComponentWidgetButtonFragment
+      )>>>, body: Array<Maybe<{ __typename: 'STRAPI_ComponentMediaSingleVideo' } | (
+        { __typename: 'STRAPI_ComponentMediaSingleImage' }
+        & StrapiComponentMediaSingleImageFragment
+      ) | { __typename: 'STRAPI_ComponentMediaVideos' } | (
+        { __typename: 'STRAPI_ComponentMediaImages' }
+        & StrapiComponentMediaImagesFragment
+      ) | { __typename: 'STRAPI_ComponentMediaFiles' } | { __typename: 'STRAPI_ComponentMediaSingleFile' } | (
+        { __typename: 'STRAPI_ComponentTextHeading' }
+        & StrapiComponentTextHeadingFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentTextParagraph' }
+        & StrapiComponentTextParagraphFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentTextQuote' }
+        & StrapiComponentTextQuoteFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentSectionTextRightImageLeft' }
+        & StrapiComponentSectionTextRightImageLeftFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentSectionTextCenterImageEitherSide' }
+        & StrapiComponentSectionTextCenterImageEitherSideFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentSectionHeadingLeftImageRight' }
+        & StrapiComponentSectionHeadingLeftImageRightFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentSectionImageRightTextLeft' }
+        & StrapiComponentSectionImageRightTextLeftFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentSectionImageCenterTextEitherSide' }
+        & StrapiComponentSectionImageCenterTextEitherSideFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentSectionHeadingRightImageLeft' }
+        & StrapiComponentSectionHeadingRightImageLeftFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentWidgetDivider' }
+        & StrapiComponentWidgetDividerFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentWidgetButton' }
+        & StrapiComponentWidgetButtonFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentCollectionsBlogPosts' }
+        & StrapiComponentCollectionsBlogPostsFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentCollectionsOfferings' }
+        & StrapiComponentCollectionsOfferingsFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentCollectionsBlogs' }
+        & StrapiComponentCollectionsBlogsFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentCollectionsServices' }
+        & StrapiComponentCollectionsServicesFragment
+      )>> }
+    )>, blogs?: Maybe<Array<Maybe<(
+      Pick<Strapi_Blog, 'id'>
+      & { preview?: Maybe<StrapiComponentGeneralPreviewFragment> }
+    )>>>, offerings?: Maybe<Array<Maybe<(
+      Pick<Strapi_Offering, 'id'>
+      & { preview?: Maybe<StrapiComponentGeneralPreviewFragment> }
+    )>>> } };
+
+export type Get_Sales_PageQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type Get_Sales_PageQuery = { strapi: { service?: Maybe<(
+      Pick<Strapi_Service, 'title' | 'meta_description'>
+      & { banner_background_image?: Maybe<StrapiUploadFileFragment>, banner?: Maybe<Array<Maybe<{ __typename: 'STRAPI_ComponentMediaSingleVideo' } | (
+        { __typename: 'STRAPI_ComponentMediaSingleImage' }
+        & StrapiComponentMediaSingleImageFragment
+      ) | { __typename: 'STRAPI_ComponentMediaVideos' } | (
+        { __typename: 'STRAPI_ComponentMediaImages' }
+        & StrapiComponentMediaImagesFragment
+      ) | { __typename: 'STRAPI_ComponentMediaFiles' } | { __typename: 'STRAPI_ComponentMediaSingleFile' } | (
+        { __typename: 'STRAPI_ComponentTextHeading' }
+        & StrapiComponentTextHeadingFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentTextParagraph' }
+        & StrapiComponentTextParagraphFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentTextQuote' }
+        & StrapiComponentTextQuoteFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentSectionTextRightImageLeft' }
+        & StrapiComponentSectionTextRightImageLeftFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentSectionTextCenterImageEitherSide' }
+        & StrapiComponentSectionTextCenterImageEitherSideFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentSectionHeadingLeftImageRight' }
+        & StrapiComponentSectionHeadingLeftImageRightFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentSectionImageRightTextLeft' }
+        & StrapiComponentSectionImageRightTextLeftFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentSectionImageCenterTextEitherSide' }
+        & StrapiComponentSectionImageCenterTextEitherSideFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentSectionHeadingRightImageLeft' }
+        & StrapiComponentSectionHeadingRightImageLeftFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentWidgetDivider' }
+        & StrapiComponentWidgetDividerFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentWidgetButton' }
+        & StrapiComponentWidgetButtonFragment
+      )>>>, sales_page: Array<Maybe<{ __typename: 'STRAPI_ComponentMediaSingleVideo' } | (
+        { __typename: 'STRAPI_ComponentMediaSingleImage' }
+        & StrapiComponentMediaSingleImageFragment
+      ) | { __typename: 'STRAPI_ComponentMediaVideos' } | (
+        { __typename: 'STRAPI_ComponentMediaImages' }
+        & StrapiComponentMediaImagesFragment
+      ) | { __typename: 'STRAPI_ComponentMediaFiles' } | { __typename: 'STRAPI_ComponentMediaSingleFile' } | (
+        { __typename: 'STRAPI_ComponentTextHeading' }
+        & StrapiComponentTextHeadingFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentTextParagraph' }
+        & StrapiComponentTextParagraphFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentTextQuote' }
+        & StrapiComponentTextQuoteFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentSectionTextRightImageLeft' }
+        & StrapiComponentSectionTextRightImageLeftFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentSectionTextCenterImageEitherSide' }
+        & StrapiComponentSectionTextCenterImageEitherSideFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentSectionHeadingLeftImageRight' }
+        & StrapiComponentSectionHeadingLeftImageRightFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentSectionImageRightTextLeft' }
+        & StrapiComponentSectionImageRightTextLeftFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentSectionImageCenterTextEitherSide' }
+        & StrapiComponentSectionImageCenterTextEitherSideFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentSectionHeadingRightImageLeft' }
+        & StrapiComponentSectionHeadingRightImageLeftFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentWidgetDivider' }
+        & StrapiComponentWidgetDividerFragment
+      ) | (
+        { __typename: 'STRAPI_ComponentWidgetButton' }
+        & StrapiComponentWidgetButtonFragment
+      )>> }
+    )> } };
+
+export type Get_Strapi_TagQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type Get_Strapi_TagQuery = { strapi: { tag?: Maybe<StrapiTagFragment> } };
+
 export type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
 export type GatsbyImageSharpFixed_TracedSvgFragment = Pick<ImageSharpFixed, 'tracedSVG' | 'width' | 'height' | 'src' | 'srcSet'>;

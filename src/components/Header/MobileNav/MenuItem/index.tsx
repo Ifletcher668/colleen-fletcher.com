@@ -25,7 +25,7 @@ const MenuItem: React.FC<Props> = ({
 }: Props) => {
   const [showSubMenu, setShowSubMenu] = useState(false);
   const [clickedBlogName, setClickedBlogName] = useState('');
-  const [clickedOfferingTitle, setClickedOfferingTitle] = useState<Offering>(
+  const [clickedOffering, setClickedOffering] = useState<Offering>(
     {} as Offering,
   );
   const [showBlogPosts, setShowBlogPosts] = useState<boolean>(false);
@@ -103,25 +103,25 @@ const MenuItem: React.FC<Props> = ({
                         <ChevronDown
                           onClick={() => {
                             setShowServices(!showServices);
-                            setClickedOfferingTitle({
+                            setClickedOffering({
                               title: offering.title,
                               url: offering.fullUrlPath,
                             });
                           }}
                           onKeyPress={() => {
                             setShowServices(!showServices);
-                            setClickedOfferingTitle({
+                            setClickedOffering({
                               title: offering.title,
                               url: offering.fullUrlPath,
                             });
                           }}
                         />
-
-                        {showServices && && offering.title === clickedOfferingTitle (
-                          <Flexbox containerType="ul" vertical>
-                            <Services offering={clickedOfferingTitle} />
-                          </Flexbox>
-                        )}
+                        {showServices &&
+                          offering.title === clickedOffering.title && (
+                            <Flexbox containerType="ul" vertical>
+                              <Services offering={clickedOffering} />
+                            </Flexbox>
+                          )}
                       </Flexbox>
                     );
                   })}
