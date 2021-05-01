@@ -1,8 +1,12 @@
 import React from 'react';
-import { Grid } from '../../Containers';
 import { SingleImageField } from '../../Media';
 import { Paragraph } from '../../Text';
-import { GridArea } from '../../../StyledComponents/helpers';
+import {
+  TextCenterImageEitherSide,
+  GridAreaImageLeft,
+  GridAreaText,
+  GridAreaImageRight,
+} from './styles';
 
 export interface Props {
   data: {
@@ -12,27 +16,23 @@ export interface Props {
   };
 }
 
-const TextCenterImageEitherSideField: React.FC<Props> = ({ data }: Props) => {
+const TextCenterImageEitherSideField = ({ data }: Props): JSX.Element => {
   const { text, image_right, image_left } = data;
+
   return (
-    <Grid
-      containerType="section"
-      columns={{
-        xlarge:
-          '[image-left] 1.5fr [spacer] 0.5fr [text] 3fr [spacer] 0.5fr [image-right] 1.5fr',
-        medium: '1fr',
-      }}
-    >
-      <GridArea column="image-left">
+    <TextCenterImageEitherSide>
+      <GridAreaImageLeft>
         <SingleImageField data={image_left} />
-      </GridArea>
-      <GridArea column="text">
+      </GridAreaImageLeft>
+
+      <GridAreaText>
         <Paragraph data={text} />
-      </GridArea>
-      <GridArea column="image-right">
+      </GridAreaText>
+
+      <GridAreaImageRight>
         <SingleImageField data={image_right} />
-      </GridArea>
-    </Grid>
+      </GridAreaImageRight>
+    </TextCenterImageEitherSide>
   );
 };
 

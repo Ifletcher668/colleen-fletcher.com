@@ -13,7 +13,7 @@ import {
   ImageCenterTextEitherSideField,
   TextCenterImageEitherSideField,
   HeadingWithImageLeftSideField,
-  HeaderWithImageRightSideField,
+  HeadingWithImageRightSideField,
   TextWithImageLeftSideField,
   TextWithImageRightSideField,
 } from '../Sections';
@@ -142,7 +142,7 @@ const StrapiDynamicZone: React.FC<Props> = ({
             };
 
             return (
-              <HeaderWithImageRightSideField
+              <HeadingWithImageRightSideField
                 data={headerWithImageRightSideData}
                 key={`${idx}${component.__typename}`}
               />

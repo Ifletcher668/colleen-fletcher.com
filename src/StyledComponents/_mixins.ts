@@ -2,6 +2,7 @@ import { css, DefaultTheme, ThemeProps } from 'styled-components';
 import { theme } from './defaultTheme';
 
 type CSSParams = Parameters<typeof css>;
+
 type StyleFnMap = Record<
   keyof DefaultTheme['breakpoints'],
   (...args: CSSParams) => any
@@ -58,3 +59,14 @@ export const size = <
   variant: Variant,
   label: Label,
 ) => (props: ThemeProps<DefaultTheme>) => props.theme.size[variant][label];
+
+export const gridContainer = css`
+  display: grid;
+`;
+
+export const mobileGridTemplateLayout = css`
+  grid-template-columns: 1fr;
+  grid-template-rows:
+    [content-start] auto
+    [content-end] auto;
+`;
