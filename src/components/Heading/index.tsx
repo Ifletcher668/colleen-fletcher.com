@@ -21,11 +21,15 @@ const HeadingWrapper = styled(HeadingAtom)<WrapperProps>`
     switch (props.tilt) {
       case 'up':
         return 'rotate(1deg)';
+
       case 'down':
         return 'rotate(-1deg)';
-      default:
-        // even
+
+      case 'even':
         return 'rotate(0deg)';
+
+      default:
+        return 'unset';
     }
   }};
 
@@ -33,11 +37,15 @@ const HeadingWrapper = styled(HeadingAtom)<WrapperProps>`
     switch (props.alignHeading) {
       case 'top':
         return 'start';
+
       case 'bottom':
         return 'end';
-      default:
-        // end
+
+      case 'center':
         return 'center';
+
+      default:
+        return 'unset';
     }
   }};
 
@@ -45,11 +53,15 @@ const HeadingWrapper = styled(HeadingAtom)<WrapperProps>`
     switch (props.justifyHeading) {
       case 'right':
         return 'end';
+
       case 'center':
         return 'center';
-      default:
-        // right
+
+      case 'left':
         return 'start';
+
+      default:
+        return 'unset';
     }
   }};
 
@@ -57,11 +69,15 @@ const HeadingWrapper = styled(HeadingAtom)<WrapperProps>`
     switch (props.justifyHeading) {
       case 'right':
         return 'right';
+
       case 'center':
         return 'center';
-      default:
-        // right
+
+      case 'left':
         return 'left';
+
+      default:
+        return 'unset';
     }
   }};
 `;

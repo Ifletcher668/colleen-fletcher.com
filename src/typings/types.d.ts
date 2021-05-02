@@ -40,31 +40,32 @@ type StrapiPreview = {
 };
 
 // strapi components
+type StrapiDynamicZoneTypeNames =
+  | 'STRAPI_ComponentMediaSingleImage'
+  | 'STRAPI_ComponentMediaImages'
+  // | 'STRAPI_ComponentMediaSingleFile'  not yet supported
+  // | 'STRAPI_ComponentMediaFiles' not yet supported
+  | 'STRAPI_ComponentMediaSingleVideo'
+  // | 'STRAPI_ComponentMediaVideos' not yet supported
+  | 'STRAPI_ComponentTextHeading'
+  | 'STRAPI_ComponentTextParagraph'
+  | 'STRAPI_ComponentTextQuote'
+  | 'STRAPI_ComponentSectionTextRightImageLeft'
+  | 'STRAPI_ComponentSectionImageRightTextLeft'
+  | 'STRAPI_ComponentSectionHeadingLeftImageRight'
+  | 'STRAPI_ComponentSectionHeadingRightImageLeft'
+  | 'STRAPI_ComponentSectionTextCenterImageEitherSide'
+  | 'STRAPI_ComponentSectionImageCenterTextEitherSide'
+  | 'STRAPI_ComponentWidgetDivider'
+  | 'STRAPI_ComponentWidgetButton'
+  | 'STRAPI_ComponentCollectionsOfferings'
+  | 'STRAPI_ComponentCollectionsBlogs'
+  | 'STRAPI_ComponentCollectionsBlogPosts'
+  | 'STRAPI_ComponentCollectionsServices';
 
 type StrapiDynamicZone = {
+  readonly __typename: StrapiDynamicZoneTypeNames;
   id: string;
-  __typename:
-    | 'STRAPI_ComponentMediaSingleImage'
-    | 'STRAPI_ComponentMediaImages'
-    | 'STRAPI_ComponentMediaSingleFile'
-    | 'STRAPI_ComponentMediaFiles'
-    | 'STRAPI_ComponentMediaSingleVideo'
-    | 'STRAPI_ComponentMediaVideos'
-    | 'STRAPI_ComponentTextHeading'
-    | 'STRAPI_ComponentTextParagraph'
-    | 'STRAPI_ComponentTextQuote'
-    | 'STRAPI_ComponentSectionTextRightImageLeft'
-    | 'STRAPI_ComponentSectionImageRightTextLeft'
-    | 'STRAPI_ComponentSectionHeadingLeftImageRight'
-    | 'STRAPI_ComponentSectionHeadingRightImageLeft'
-    | 'STRAPI_ComponentSectionTextCenterImageEitherSide'
-    | 'STRAPI_ComponentSectionImageCenterTextEitherSide'
-    | 'STRAPI_ComponentWidgetDivider'
-    | 'STRAPI_ComponentWidgetButton'
-    | 'STRAPI_ComponentCollectionsOfferings'
-    | 'STRAPI_ComponentCollectionsBlogs'
-    | 'STRAPI_ComponentCollectionsBlogPosts'
-    | 'STRAPI_ComponentCollectionsServices';
   body: string;
   // base 'paragraph' props
   text: StrapiComponentTextParagraph;
@@ -91,17 +92,25 @@ type StrapiDynamicZone = {
   hasBorder: boolean;
   // =========================
   file: StrapiUploadFile; // single image , video or file
-  files: StrapiUploadFile[]; // image files, videos, or files
+  files: Array<StrapiUploadFile>; // image files, videos, or files
   image_left: StrapiComponentMediaSingleImage;
   image_right: StrapiComponentMediaSingleImage;
-  blogs: StrapiBlog[];
-  blog_posts: StrapiBlogPost[];
-  offerings: StrapiOffering[];
-  services: StrapiService[];
+  blogs: Array<StrapiBlog>;
+  blog_posts: Array<StrapiBlogPost>;
+  offerings: Array<StrapiOffering>;
+  services: Array<StrapiService>;
   show_services: boolean;
   show_blog_posts: boolean;
+  // single video data
+  srcURL: string;
+  title: string;
 };
 
+type StrapiComponentSingleVideo = {
+  // readonly __typename: 'STRAPI_ComponentMediaSingleVideo';
+  srcURL: string;
+  title: string;
+};
 // Strapi Collections Component Types
 
 type StrapiComponentCollectionsBlogs = {

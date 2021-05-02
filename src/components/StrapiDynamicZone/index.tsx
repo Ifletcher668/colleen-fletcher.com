@@ -6,7 +6,7 @@ import {
   OfferingsField,
   ServicesField,
 } from '../Collections';
-import { SingleImageField, ImagesField } from '../Media';
+import { SingleImageField, ImagesField, SingleVideoField } from '../Media';
 import { Paragraph, HeadingField, QuoteField } from '../Text';
 import { DividerField, ButtonField } from '../Widgets';
 import {
@@ -33,71 +33,72 @@ interface Props {
   previews?: Previews;
 }
 
-const StrapiDynamicZone: React.FC<Props> = ({
-  components,
-  previews,
-}: Props): JSX.Element => {
+const StrapiDynamicZone = ({ components, previews }: Props): JSX.Element => {
   return (
     <>
       {components.map((component, idx) => {
         switch (component.__typename) {
           case 'STRAPI_ComponentMediaSingleImage':
-            const singleImageData = {
-              file: component.file,
-              isCircle: component.isCircle,
-              hasBorder: component.hasBorder,
-            };
-
             return (
               <SingleImageField
-                data={singleImageData}
                 key={`${idx}${component.__typename}`}
+                data={{
+                  file: component.file,
+                  isCircle: component.isCircle,
+                  hasBorder: component.hasBorder,
+                }}
               />
             );
 
           case 'STRAPI_ComponentMediaImages':
-            const imagesData: StrapiComponentMediaImages = {
-              style: component.style,
-              files: component.files,
-              isCircle: component.isCircle,
-              hasBorder: component.hasBorder,
-            };
-
             return (
               <ImagesField
-                data={imagesData}
                 key={`${idx}${component.__typename}`}
+                data={{
+                  style: component.style,
+                  files: component.files,
+                  isCircle: component.isCircle,
+                  hasBorder: component.hasBorder,
+                }}
               />
             );
 
-          // TODO: Add file and video support
+          // TODO: Add file support
+
+          case 'STRAPI_ComponentMediaSingleVideo':
+            return (
+              <SingleVideoField
+                key={`${idx}${component.__typename}`}
+                data={{
+                  title: component.title,
+                  srcURL: component.srcURL,
+                }}
+              />
+            );
 
           case 'STRAPI_ComponentTextHeading':
-            const headingData = {
-              headingText: component.headingText,
-              level: component.level,
-              tilt: component.tilt,
-              justifyHeading: component.justifyHeading,
-              alignHeading: component.alignHeading,
-            };
-
             return (
               <HeadingField
                 key={`${idx}${component.__typename}`}
-                data={headingData}
+                data={{
+                  headingText: component.headingText,
+                  level: component.level,
+                  tilt: component.tilt,
+                  justifyHeading: component.justifyHeading,
+                  alignHeading: component.alignHeading,
+                }}
               />
             );
 
           case 'STRAPI_ComponentTextParagraph':
-            const bodyData = {
-              body: component.body,
-              justifyParagraph: component.justifyParagraph,
-              alignParagraph: component.alignParagraph,
-            };
             return (
               <Paragraph
                 key={`${idx}${component.__typename}`}
-                data={bodyData}
+                data={{
+                  body: component.body,
+                  justifyParagraph: component.justifyParagraph,
+                  alignParagraph: component.alignParagraph,
+                }}
               />
             );
 
@@ -110,82 +111,70 @@ const StrapiDynamicZone: React.FC<Props> = ({
             );
 
           case 'STRAPI_ComponentSectionTextRightImageLeft':
-            const textWithImageLeftSideData = {
-              image: component.image,
-              text: component.text,
-            };
-
             return (
               <TextWithImageLeftSideField
                 key={`${idx}${component.__typename}`}
-                data={textWithImageLeftSideData}
+                data={{
+                  image: component.image,
+                  text: component.text,
+                }}
               />
             );
 
           case 'STRAPI_ComponentSectionImageRightTextLeft':
-            const textWithImageRightSideData = {
-              image: component.image,
-              text: component.text,
-            };
-
             return (
               <TextWithImageRightSideField
                 key={`${idx}${component.__typename}`}
-                data={textWithImageRightSideData}
+                data={{
+                  image: component.image,
+                  text: component.text,
+                }}
               />
             );
 
           case 'STRAPI_ComponentSectionHeadingLeftImageRight':
-            const headerWithImageRightSideData = {
-              heading: component.heading,
-              image: component.image,
-            };
-
             return (
               <HeadingWithImageRightSideField
-                data={headerWithImageRightSideData}
                 key={`${idx}${component.__typename}`}
+                data={{
+                  heading: component.heading,
+                  image: component.image,
+                }}
               />
             );
 
           case 'STRAPI_ComponentSectionHeadingRightImageLeft':
-            const headerWithImageLeftSideData = {
-              heading: component.heading,
-              image: component.image,
-            };
-
             return (
               <HeadingWithImageLeftSideField
-                data={headerWithImageLeftSideData}
                 key={`${idx}${component.__typename}`}
+                data={{
+                  heading: component.heading,
+                  image: component.image,
+                }}
               />
             );
 
           case 'STRAPI_ComponentSectionTextCenterImageEitherSide':
-            const textCenterImageEitherSideFieldData = {
-              image_left: component.image_left,
-              text: component.text,
-              image_right: component.image_right,
-            };
-
             return (
               <TextCenterImageEitherSideField
-                data={textCenterImageEitherSideFieldData}
                 key={`${idx}${component.__typename}`}
+                data={{
+                  image_left: component.image_left,
+                  text: component.text,
+                  image_right: component.image_right,
+                }}
               />
             );
 
           case 'STRAPI_ComponentSectionImageCenterTextEitherSide':
-            const imageCenterTextEitherSideFieldData = {
-              text_left: component.text_left,
-              image: component.image,
-              text_right: component.text_right,
-            };
-
             return (
               <ImageCenterTextEitherSideField
-                data={imageCenterTextEitherSideFieldData}
                 key={`${idx}${component.__typename}`}
+                data={{
+                  text_left: component.text_left,
+                  image: component.image,
+                  text_right: component.text_right,
+                }}
               />
             );
 
@@ -205,16 +194,14 @@ const StrapiDynamicZone: React.FC<Props> = ({
             );
 
           case 'STRAPI_ComponentWidgetButton':
-            const buttonData: StrapiComponentWidgetButton = {
-              buttonText: component.buttonText,
-              variant: component.variant,
-              action: component.action,
-            };
-
             return (
               <ButtonField
                 key={`${idx}${component.__typename}`}
-                data={buttonData}
+                data={{
+                  buttonText: component.buttonText,
+                  variant: component.variant,
+                  action: component.action,
+                }}
               />
             );
 

@@ -1,11 +1,18 @@
 import React from 'react';
+import Heading from '../../Heading';
+import { VideoWrapper } from './styles';
 
-export interface Props {
-  data: any;
+interface Props {
+  data: StrapiComponentSingleVideo;
 }
 
-const TextWithImageField: React.FC<Props> = ({ data }: Props) => {
-  return <>{/* todo */}</>;
+const VideoField = ({ data }: Props): JSX.Element => {
+  return (
+    <VideoWrapper>
+      <Heading level={3}>{data.title}</Heading>
+      <div dangerouslySetInnerHTML={{ __html: data.srcURL }} />
+    </VideoWrapper>
+  );
 };
 
-export default TextWithImageField;
+export default VideoField;

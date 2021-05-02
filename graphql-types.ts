@@ -3376,7 +3376,7 @@ export type Strapi_BlogPostAggregator = {
   totalCount?: Maybe<Scalars['Int']>;
 };
 
-export type Strapi_BlogPostBodyDynamicZone = Strapi_ComponentMediaSingleVideo | Strapi_ComponentMediaSingleImage | Strapi_ComponentMediaVideos | Strapi_ComponentMediaImages | Strapi_ComponentMediaFiles | Strapi_ComponentMediaSingleFile | Strapi_ComponentTextHeading | Strapi_ComponentTextParagraph | Strapi_ComponentTextQuote | Strapi_ComponentSectionTextRightImageLeft | Strapi_ComponentSectionTextCenterImageEitherSide | Strapi_ComponentSectionHeadingLeftImageRight | Strapi_ComponentSectionImageRightTextLeft | Strapi_ComponentSectionImageCenterTextEitherSide | Strapi_ComponentSectionHeadingRightImageLeft | Strapi_ComponentWidgetDivider | Strapi_ComponentWidgetButton;
+export type Strapi_BlogPostBodyDynamicZone = Strapi_ComponentMediaSingleVideo | Strapi_ComponentMediaSingleImage | Strapi_ComponentMediaImages | Strapi_ComponentMediaFiles | Strapi_ComponentMediaSingleFile | Strapi_ComponentTextHeading | Strapi_ComponentTextParagraph | Strapi_ComponentTextQuote | Strapi_ComponentSectionTextRightImageLeft | Strapi_ComponentSectionTextCenterImageEitherSide | Strapi_ComponentSectionHeadingLeftImageRight | Strapi_ComponentSectionImageRightTextLeft | Strapi_ComponentSectionImageCenterTextEitherSide | Strapi_ComponentSectionHeadingRightImageLeft | Strapi_ComponentWidgetDivider | Strapi_ComponentWidgetButton;
 
 
 export type Strapi_BlogPostConnection = {
@@ -3783,13 +3783,16 @@ export type Strapi_ComponentMediaSingleImageInput = {
   align?: Maybe<Strapi_Enum_Componentmediasingleimage_Align>;
 };
 
+/** Upload a url and title to a YouTube video */
 export type Strapi_ComponentMediaSingleVideo = {
   id: Scalars['ID'];
-  file?: Maybe<Strapi_UploadFile>;
+  srcURL: Scalars['String'];
+  title: Scalars['String'];
 };
 
 export type Strapi_ComponentMediaSingleVideoInput = {
-  file?: Maybe<Scalars['ID']>;
+  srcURL: Scalars['String'];
+  title: Scalars['String'];
 };
 
 export type Strapi_ComponentMediaVideoInput = {
@@ -4226,7 +4229,8 @@ export type Strapi_EditComponentMediaSingleImageInput = {
 
 export type Strapi_EditComponentMediaSingleVideoInput = {
   id?: Maybe<Scalars['ID']>;
-  file?: Maybe<Scalars['ID']>;
+  srcURL?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
 };
 
 export type Strapi_EditComponentMediaVideoInput = {
@@ -4753,10 +4757,10 @@ export type Strapi_PageAggregator = {
   totalCount?: Maybe<Scalars['Int']>;
 };
 
-export type Strapi_PageBannerDynamicZone = Strapi_ComponentMediaSingleVideo | Strapi_ComponentMediaSingleImage | Strapi_ComponentMediaVideos | Strapi_ComponentMediaImages | Strapi_ComponentMediaFiles | Strapi_ComponentMediaSingleFile | Strapi_ComponentTextHeading | Strapi_ComponentTextParagraph | Strapi_ComponentTextQuote | Strapi_ComponentSectionTextRightImageLeft | Strapi_ComponentSectionTextCenterImageEitherSide | Strapi_ComponentSectionHeadingLeftImageRight | Strapi_ComponentSectionImageRightTextLeft | Strapi_ComponentSectionImageCenterTextEitherSide | Strapi_ComponentSectionHeadingRightImageLeft | Strapi_ComponentWidgetDivider | Strapi_ComponentWidgetButton;
+export type Strapi_PageBannerDynamicZone = Strapi_ComponentMediaSingleVideo | Strapi_ComponentMediaSingleImage | Strapi_ComponentMediaImages | Strapi_ComponentMediaFiles | Strapi_ComponentMediaSingleFile | Strapi_ComponentTextHeading | Strapi_ComponentTextParagraph | Strapi_ComponentTextQuote | Strapi_ComponentSectionTextRightImageLeft | Strapi_ComponentSectionTextCenterImageEitherSide | Strapi_ComponentSectionHeadingLeftImageRight | Strapi_ComponentSectionImageRightTextLeft | Strapi_ComponentSectionImageCenterTextEitherSide | Strapi_ComponentSectionHeadingRightImageLeft | Strapi_ComponentWidgetDivider | Strapi_ComponentWidgetButton;
 
 
-export type Strapi_PageBodyDynamicZone = Strapi_ComponentMediaSingleVideo | Strapi_ComponentMediaSingleImage | Strapi_ComponentMediaVideos | Strapi_ComponentMediaImages | Strapi_ComponentMediaFiles | Strapi_ComponentMediaSingleFile | Strapi_ComponentTextHeading | Strapi_ComponentTextParagraph | Strapi_ComponentTextQuote | Strapi_ComponentSectionTextRightImageLeft | Strapi_ComponentSectionTextCenterImageEitherSide | Strapi_ComponentSectionHeadingLeftImageRight | Strapi_ComponentSectionImageRightTextLeft | Strapi_ComponentSectionImageCenterTextEitherSide | Strapi_ComponentSectionHeadingRightImageLeft | Strapi_ComponentWidgetDivider | Strapi_ComponentWidgetButton | Strapi_ComponentCollectionsBlogPosts | Strapi_ComponentCollectionsOfferings | Strapi_ComponentCollectionsBlogs | Strapi_ComponentCollectionsServices;
+export type Strapi_PageBodyDynamicZone = Strapi_ComponentMediaSingleVideo | Strapi_ComponentMediaSingleImage | Strapi_ComponentMediaImages | Strapi_ComponentMediaFiles | Strapi_ComponentMediaSingleFile | Strapi_ComponentTextHeading | Strapi_ComponentTextParagraph | Strapi_ComponentTextQuote | Strapi_ComponentSectionTextRightImageLeft | Strapi_ComponentSectionTextCenterImageEitherSide | Strapi_ComponentSectionHeadingLeftImageRight | Strapi_ComponentSectionImageRightTextLeft | Strapi_ComponentSectionImageCenterTextEitherSide | Strapi_ComponentSectionHeadingRightImageLeft | Strapi_ComponentWidgetDivider | Strapi_ComponentWidgetButton | Strapi_ComponentCollectionsBlogPosts | Strapi_ComponentCollectionsOfferings | Strapi_ComponentCollectionsBlogs | Strapi_ComponentCollectionsServices;
 
 
 export type Strapi_PageConnection = {
@@ -4887,7 +4891,7 @@ export type Strapi_ServiceAggregator = {
   totalCount?: Maybe<Scalars['Int']>;
 };
 
-export type Strapi_ServiceBannerDynamicZone = Strapi_ComponentMediaSingleVideo | Strapi_ComponentMediaSingleImage | Strapi_ComponentMediaVideos | Strapi_ComponentMediaImages | Strapi_ComponentMediaFiles | Strapi_ComponentMediaSingleFile | Strapi_ComponentTextHeading | Strapi_ComponentTextParagraph | Strapi_ComponentTextQuote | Strapi_ComponentSectionTextRightImageLeft | Strapi_ComponentSectionTextCenterImageEitherSide | Strapi_ComponentSectionHeadingLeftImageRight | Strapi_ComponentSectionImageRightTextLeft | Strapi_ComponentSectionImageCenterTextEitherSide | Strapi_ComponentSectionHeadingRightImageLeft | Strapi_ComponentWidgetDivider | Strapi_ComponentWidgetButton;
+export type Strapi_ServiceBannerDynamicZone = Strapi_ComponentMediaSingleVideo | Strapi_ComponentMediaSingleImage | Strapi_ComponentMediaImages | Strapi_ComponentMediaFiles | Strapi_ComponentMediaSingleFile | Strapi_ComponentTextHeading | Strapi_ComponentTextParagraph | Strapi_ComponentTextQuote | Strapi_ComponentSectionTextRightImageLeft | Strapi_ComponentSectionTextCenterImageEitherSide | Strapi_ComponentSectionHeadingLeftImageRight | Strapi_ComponentSectionImageRightTextLeft | Strapi_ComponentSectionImageCenterTextEitherSide | Strapi_ComponentSectionHeadingRightImageLeft | Strapi_ComponentWidgetDivider | Strapi_ComponentWidgetButton;
 
 
 export type Strapi_ServiceConnection = {
@@ -5660,6 +5664,8 @@ export type StrapiComponentMediaImagesFragment = (
   & { files?: Maybe<Array<Maybe<StrapiUploadFileFragment>>> }
 );
 
+export type StrapiComponentMediaSingleVideoFragment = Pick<Strapi_ComponentMediaSingleVideo, 'id' | 'title' | 'srcURL'>;
+
 export type StrapiComponentTextParagraphFragment = (
   Pick<Strapi_ComponentTextParagraph, 'id' | 'body'>
   & { justifyParagraph: Strapi_ComponentTextParagraph['justify'], alignParagraph: Strapi_ComponentTextParagraph['align'] }
@@ -5739,10 +5745,13 @@ export type Get_Blog_PostQueryVariables = Exact<{
 
 export type Get_Blog_PostQuery = { strapi: { blogPost?: Maybe<(
       Pick<Strapi_BlogPost, 'title' | 'meta_description'>
-      & { tags?: Maybe<Array<Maybe<Pick<Strapi_Tag, 'name'>>>>, body: Array<Maybe<{ __typename: 'STRAPI_ComponentMediaSingleVideo' } | (
+      & { tags?: Maybe<Array<Maybe<Pick<Strapi_Tag, 'name'>>>>, body: Array<Maybe<(
+        { __typename: 'STRAPI_ComponentMediaSingleVideo' }
+        & StrapiComponentMediaSingleVideoFragment
+      ) | (
         { __typename: 'STRAPI_ComponentMediaSingleImage' }
         & StrapiComponentMediaSingleImageFragment
-      ) | { __typename: 'STRAPI_ComponentMediaVideos' } | (
+      ) | (
         { __typename: 'STRAPI_ComponentMediaImages' }
         & StrapiComponentMediaImagesFragment
       ) | { __typename: 'STRAPI_ComponentMediaFiles' } | { __typename: 'STRAPI_ComponentMediaSingleFile' } | (
@@ -5809,10 +5818,13 @@ export type Get_PageQueryVariables = Exact<{
 
 export type Get_PageQuery = { strapi: { page?: Maybe<(
       Pick<Strapi_Page, 'title' | 'meta_description'>
-      & { banner_background_image?: Maybe<StrapiUploadFileFragment>, banner?: Maybe<Array<Maybe<{ __typename: 'STRAPI_ComponentMediaSingleVideo' } | (
+      & { banner_background_image?: Maybe<StrapiUploadFileFragment>, banner?: Maybe<Array<Maybe<(
+        { __typename: 'STRAPI_ComponentMediaSingleVideo' }
+        & StrapiComponentMediaSingleVideoFragment
+      ) | (
         { __typename: 'STRAPI_ComponentMediaSingleImage' }
         & StrapiComponentMediaSingleImageFragment
-      ) | { __typename: 'STRAPI_ComponentMediaVideos' } | (
+      ) | (
         { __typename: 'STRAPI_ComponentMediaImages' }
         & StrapiComponentMediaImagesFragment
       ) | { __typename: 'STRAPI_ComponentMediaFiles' } | { __typename: 'STRAPI_ComponentMediaSingleFile' } | (
@@ -5848,10 +5860,13 @@ export type Get_PageQuery = { strapi: { page?: Maybe<(
       ) | (
         { __typename: 'STRAPI_ComponentWidgetButton' }
         & StrapiComponentWidgetButtonFragment
-      )>>>, body: Array<Maybe<{ __typename: 'STRAPI_ComponentMediaSingleVideo' } | (
+      )>>>, body: Array<Maybe<(
+        { __typename: 'STRAPI_ComponentMediaSingleVideo' }
+        & StrapiComponentMediaSingleVideoFragment
+      ) | (
         { __typename: 'STRAPI_ComponentMediaSingleImage' }
         & StrapiComponentMediaSingleImageFragment
-      ) | { __typename: 'STRAPI_ComponentMediaVideos' } | (
+      ) | (
         { __typename: 'STRAPI_ComponentMediaImages' }
         & StrapiComponentMediaImagesFragment
       ) | { __typename: 'STRAPI_ComponentMediaFiles' } | { __typename: 'STRAPI_ComponentMediaSingleFile' } | (
@@ -5915,10 +5930,13 @@ export type Get_Sales_PageQueryVariables = Exact<{
 
 export type Get_Sales_PageQuery = { strapi: { service?: Maybe<(
       Pick<Strapi_Service, 'title' | 'meta_description'>
-      & { banner_background_image?: Maybe<StrapiUploadFileFragment>, banner?: Maybe<Array<Maybe<{ __typename: 'STRAPI_ComponentMediaSingleVideo' } | (
+      & { banner_background_image?: Maybe<StrapiUploadFileFragment>, banner?: Maybe<Array<Maybe<(
+        { __typename: 'STRAPI_ComponentMediaSingleVideo' }
+        & StrapiComponentMediaSingleVideoFragment
+      ) | (
         { __typename: 'STRAPI_ComponentMediaSingleImage' }
         & StrapiComponentMediaSingleImageFragment
-      ) | { __typename: 'STRAPI_ComponentMediaVideos' } | (
+      ) | (
         { __typename: 'STRAPI_ComponentMediaImages' }
         & StrapiComponentMediaImagesFragment
       ) | { __typename: 'STRAPI_ComponentMediaFiles' } | { __typename: 'STRAPI_ComponentMediaSingleFile' } | (

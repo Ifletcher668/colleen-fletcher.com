@@ -208,6 +208,14 @@ export const StrapiComponentMediaImages = graphql`
   }
 `;
 
+export const StrapiComponentMediaSingleVideo = graphql`
+  fragment StrapiComponentMediaSingleVideo on STRAPI_ComponentMediaSingleVideo {
+    id
+    title
+    srcURL
+  }
+`;
+
 export const StrapiComponentTextParagraph = graphql`
   fragment StrapiComponentTextParagraph on STRAPI_ComponentTextParagraph {
     id

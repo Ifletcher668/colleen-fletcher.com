@@ -42,6 +42,9 @@ export const query = graphql`
           ... on STRAPI_ComponentMediaImages {
             ...StrapiComponentMediaImages
           }
+          ... on STRAPI_ComponentMediaSingleVideo {
+            ...StrapiComponentMediaSingleVideo
+          }
           ... on STRAPI_ComponentTextParagraph {
             ...StrapiComponentTextParagraph
           }
