@@ -41,7 +41,11 @@ const BlogsField: React.FC<Props> = ({ data, previews }: Props) => {
             }}
           >
             <HeadingField data={heading} />
-            <ImageWithCaption data={image} />
+            <ImageWithCaption
+              data={image}
+              containerType="div"
+              styling={{ width: '100%', height: '100%' }} // ensures image doesn't collapse
+            />
             <Paragraph data={text} />
             <ButtonField data={button} />
           </Grid>
