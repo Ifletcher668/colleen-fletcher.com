@@ -81,7 +81,9 @@ const Paragraph: React.FC<Props> = ({ data }: Props) => {
             {domToReact(children, options)}
           </Anchor>
         ) : (
-          <Link to={attribs.href}>{domToReact(children, options)}</Link>
+          <Link as={Anchor} to={attribs.href}>
+            {domToReact(children, options)}
+          </Link>
         );
       }
 
