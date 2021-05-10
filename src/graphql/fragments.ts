@@ -252,6 +252,13 @@ export const StrapiComponentWidgetDivider = graphql`
   }
 `;
 
+export const StrapiComponentWidgetEmbeddedForm = graphql`
+  fragment StrapiComponentWidgetEmbeddedForm on STRAPI_ComponentWidgetEmbeddedForm {
+    id
+    code_snippet
+  }
+`;
+
 export const StrapiComponentWidgetButton = graphql`
   fragment StrapiComponentWidgetButton on STRAPI_ComponentWidgetButton {
     id
@@ -353,6 +360,9 @@ export const StrapiComponentCollectionsBlogs = graphql`
       name
       slug
       fullUrlPath
+      preview {
+        ...StrapiComponentGeneralPreview
+      }
     }
   }
 `;
@@ -382,6 +392,9 @@ export const StrapiComponentCollectionsOfferings = graphql`
       title
       slug
       fullUrlPath
+      preview {
+        ...StrapiComponentGeneralPreview
+      }
     }
   }
 `;
