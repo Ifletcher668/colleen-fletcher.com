@@ -7,8 +7,6 @@ export interface Props {
 }
 
 const EmbeddedForm: React.FC<Props> = ({ data }: Props) => {
-  console.log(data.code_snippet);
-
   return (
     <div
       className="embedded-form"

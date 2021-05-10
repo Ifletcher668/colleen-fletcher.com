@@ -9,21 +9,14 @@ import Divider from '../../Divider';
 
 export interface Props {
   data: StrapiService[];
-  previews?: StrapiService[];
 }
 
-const ServicesField: React.FC<Props> = ({
-  data,
-  previews,
-}: Props): JSX.Element => {
+const ServicesField: React.FC<Props> = ({ data }: Props): JSX.Element => {
   return (
     <Grid containerType="section" gap="2em 0">
       {data.map((service, idx) => {
-        // const [{ preview }] = previews.filter(
-        //     p => p.id === service.id,
-        // );
-
         const { text, heading, image, button } = service.preview;
+
         if (
           button.action === '' ||
           button.action === '/' ||
@@ -38,21 +31,63 @@ const ServicesField: React.FC<Props> = ({
             key={idx}
             containerType="article"
             columns={zigZagColumLayout} // col names === 'image' and 'content'
-            rows={{ xlarge: '[content] 1fr [divider] 0.01fr' }}
+            rows={{
+              xlarge:
+                '[content-start] 1fr [content-middle] auto [content-end] 0.02fr',
+              large:
+                '[content-start] 1fr [content-middle] auto [content-end] 0.02fr',
+              medium:
+                '[content-start] auto [content-middle] auto [content-end] auto',
+            }}
             styling={{
               margin: '2em 0em',
               gap: '1em 0',
             }}
           >
-            <GridArea column="image" row="content">
+            <GridArea
+              col-xl="image"
+              col-lg="image"
+              col-md="image"
+              col-sm="1fr"
+              row-xl="content-start"
+              row-lg="content-start"
+              row-md="content-start"
+              row-sm="content-start"
+              row-xs="content-start"
+            >
               <ImageWithCaption data={image} />
             </GridArea>
-            <GridArea column="text" row="content">
-              <HeadingField data={heading} />
-              <Paragraph data={text} />
-              <ButtonField data={button} />
+
+            <GridArea
+              col-xl="text"
+              col-lg="text"
+              col-md="text"
+              col-sm="1fr"
+              row-xl="content-start / content-end"
+              row-lg="content-start / content-end"
+              row-md="content-start / content-end"
+              row-sm="content-middle"
+              row-xs="content-middle"
+            >
+              <Grid>
+                <HeadingField data={heading} />
+
+                <Paragraph data={text} />
+
+                <ButtonField data={button} />
+              </Grid>
             </GridArea>
-            <GridArea column="full" row="divider">
+
+            <GridArea
+              col-xl="1 / span 3"
+              col-lg="1 / span 3"
+              col-md="1 / span 3"
+              row-xl="content-end"
+              row-lg="content-end"
+              row-md="content-end"
+              row-sm="content-end"
+              row-xs="content-end"
+            >
               <Divider type="standard" />
             </GridArea>
           </Grid>

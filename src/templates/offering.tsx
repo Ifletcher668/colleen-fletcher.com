@@ -23,20 +23,23 @@ export default (props: TemplateProps): JSX.Element => {
   return (
     <Layout location={props.location}>
       <SEO title={offering.title} description={offering.meta_description} />
+
       <PageContainer>
         <Heading level={1} justifyHeading="center" alignHeading="center">
           {offering.title}
         </Heading>
+
         {offering.preview && (
           <ImageWithCaption
             data={offering.preview.image}
             styling={{
               margin: 'auto',
+              width: '50%', // needed for flexbox to not collapse
             }}
           />
         )}
 
-        {offering.services && offering.services.length > 0 && (
+        {offering.services?.length > 0 && (
           <Grid containerType="section">
             {offering.services.map((service, idx) => {
               const zigZagColumnLayout = zigZagGridColumns(idx);
@@ -47,6 +50,7 @@ export default (props: TemplateProps): JSX.Element => {
                 buttonText: service.preview.button.buttonText,
                 variant: service.preview.button.variant,
               };
+
               return (
                 <Grid
                   key={idx}

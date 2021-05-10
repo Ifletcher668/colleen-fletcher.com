@@ -26,6 +26,7 @@ export default (props: TemplateProps): JSX.Element => {
   return (
     <Layout location={props.location}>
       <SEO title={title} description={meta_description} />
+
       <Grid containerType="section">
         {banner_background_image && banner && (
           <BannerBackgroundImage
@@ -33,6 +34,7 @@ export default (props: TemplateProps): JSX.Element => {
             banner={banner}
           />
         )}
+
         <PageContainer>
           <StrapiDynamicZone components={sales_page} />
         </PageContainer>
