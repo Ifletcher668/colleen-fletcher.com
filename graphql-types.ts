@@ -5742,7 +5742,10 @@ export type StrapiComponentSectionImageCenterTextEitherSideFragment = (
   & { text_left?: Maybe<StrapiComponentTextParagraphFragment>, image?: Maybe<StrapiComponentMediaSingleImageFragment>, text_right?: Maybe<StrapiComponentTextParagraphFragment> }
 );
 
-export type StrapiComponentCollectionsBlogsFragment = { blogs?: Maybe<Array<Maybe<Pick<Strapi_Blog, 'id' | 'name' | 'slug' | 'fullUrlPath'>>>> };
+export type StrapiComponentCollectionsBlogsFragment = { blogs?: Maybe<Array<Maybe<(
+    Pick<Strapi_Blog, 'id' | 'name' | 'slug' | 'fullUrlPath'>
+    & { preview?: Maybe<StrapiComponentGeneralPreviewFragment> }
+  )>>> };
 
 export type StrapiComponentCollectionsBlogPostsFragment = { blog_posts?: Maybe<Array<Maybe<{ preview?: Maybe<StrapiComponentGeneralPreviewFragment> }>>> };
 
@@ -5948,13 +5951,7 @@ export type Get_PageQuery = { strapi: { page?: Maybe<(
         { __typename: 'STRAPI_ComponentWidgetButton' }
         & StrapiComponentWidgetButtonFragment
       )>> }
-    )>, blogs?: Maybe<Array<Maybe<(
-      Pick<Strapi_Blog, 'id'>
-      & { preview?: Maybe<StrapiComponentGeneralPreviewFragment> }
-    )>>>, offerings?: Maybe<Array<Maybe<(
-      Pick<Strapi_Offering, 'id'>
-      & { preview?: Maybe<StrapiComponentGeneralPreviewFragment> }
-    )>>> } };
+    )> } };
 
 export type Get_Sales_PageQueryVariables = Exact<{
   id: Scalars['ID'];

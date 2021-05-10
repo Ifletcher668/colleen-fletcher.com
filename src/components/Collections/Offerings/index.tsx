@@ -8,25 +8,22 @@ import { GridArea } from '../../../StyledComponents/helpers';
 import Divider from '../../Divider';
 
 export interface Props {
-  data: Array<Pick<StrapiOffering, 'id' | 'slug' | 'fullUrlPath'>>;
-  previews: StrapiOffering[];
+  data: Array<Pick<StrapiOffering, 'id' | 'slug' | 'fullUrlPath' | 'preview'>>;
 }
 
 // Component only used in StrapiDynamicZone
-const OfferingsField: React.FC<Props> = ({ data, previews }: Props) => {
+const OfferingsField: React.FC<Props> = ({ data }: Props) => {
   return (
     <Grid containerType="section" gap="2em 0">
       {data.map((offering, idx) => {
-        // TODO: Refactor when Strapi nested component issue fixed
-        const [{ preview }] = previews.filter(p => p.id === offering.id);
-        const { text, heading, image, button } = preview;
+        const { preview } = offering;
 
         if (
-          button.action === '/' ||
-          button.action === '' ||
-          button.action === offering.slug // mutate data based on input in strapi
+          preview.button.action === '/' ||
+          preview.button.action === '' ||
+          preview.button.action === offering.slug // mutate data based on input in strapi
         ) {
-          button.action = offering.fullUrlPath;
+          preview.button.action = offering.fullUrlPath;
         }
 
         const zigZagColumnLayout = zigZagGridColumns(idx);
@@ -60,7 +57,7 @@ const OfferingsField: React.FC<Props> = ({ data, previews }: Props) => {
               row-sm="content-start"
               row-xs="content-start"
             >
-              <ImageWithCaption data={image} />
+              <ImageWithCaption data={offering.preview.image} />
             </GridArea>
 
             <GridArea
@@ -75,11 +72,11 @@ const OfferingsField: React.FC<Props> = ({ data, previews }: Props) => {
               row-xs="content-middle"
             >
               <Grid>
-                <HeadingField data={heading} />
+                <HeadingField data={offering.preview.heading} />
 
-                <Paragraph data={text} />
+                <Paragraph data={offering.preview.text} />
 
-                <ButtonField data={button} />
+                <ButtonField data={offering.preview.button} />
               </Grid>
             </GridArea>
 

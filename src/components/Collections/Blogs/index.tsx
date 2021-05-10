@@ -6,17 +6,17 @@ import { ButtonField } from '../../Widgets';
 import { Paragraph } from '../../Text';
 
 export interface Props {
-  data: Array<Pick<StrapiBlog, 'id' | 'slug' | 'fullUrlPath'>>;
-  previews: StrapiBlog[];
+  data: Array<Pick<StrapiBlog, 'id' | 'slug' | 'fullUrlPath' | 'preview'>>;
 }
 
-const BlogsField: React.FC<Props> = ({ data, previews }: Props) => {
+const BlogsField: React.FC<Props> = ({ data }: Props) => {
   return (
     <>
       {data.map((blog, idx) => {
-        // TODO: Refactor when Strapi issue fixed
-        const [{ preview }] = previews.filter(p => p.id === blog.id);
-        const { text, heading, image, button } = preview;
+        const {
+          preview: { text, heading, image, button },
+        } = blog;
+
         // TODO: Refactor when handling routes better
         if (
           button.action === '/' ||

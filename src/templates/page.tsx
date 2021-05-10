@@ -7,22 +7,13 @@ import BannerBackgroundImage from '../components/Banner';
 import Layout from '../components/Layout';
 import { TemplateProps } from './types';
 
-type Previews = {
-  blogPreviews: StrapiBlog[];
-  offeringPreviews: StrapiOffering[];
-};
-
 export default (props: TemplateProps): JSX.Element => {
   const {
     data: {
-      strapi: { page, blogs: blogPreviews, offerings: offeringPreviews },
+      strapi: { page },
     },
   } = props;
 
-  const previews: Previews = {
-    blogPreviews,
-    offeringPreviews,
-  };
   return (
     <Layout location={props.location}>
       <SEO title={page.title} description={page.meta_description} />
@@ -35,7 +26,7 @@ export default (props: TemplateProps): JSX.Element => {
       )}
 
       <PageContainer>
-        <StrapiDynamicZone components={page.body} previews={previews} />
+        <StrapiDynamicZone components={page.body} />
       </PageContainer>
     </Layout>
   );
@@ -154,18 +145,6 @@ export const query = graphql`
           ... on STRAPI_ComponentCollectionsServices {
             ...StrapiComponentCollectionsServices
           }
-        }
-      }
-      blogs {
-        id
-        preview {
-          ...StrapiComponentGeneralPreview
-        }
-      }
-      offerings {
-        id
-        preview {
-          ...StrapiComponentGeneralPreview
         }
       }
     }

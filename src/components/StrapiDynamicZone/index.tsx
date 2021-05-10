@@ -17,23 +17,13 @@ import {
   TextWithImageLeftSideField,
   TextWithImageRightSideField,
 } from '../Sections';
-
-/**
- * Necessary secondary query until
- * Strapi is able to fix querying
- * for components inside a Dynamic zone
- */
-type Previews = {
-  blogPreviews: StrapiBlog[];
-  offeringPreviews: StrapiOffering[];
-};
+import EmbeddedForm from '../Widgets/EmbeddedForm';
 
 interface Props {
   components: NonNullable<Array<StrapiDynamicZone>>;
-  previews?: Previews;
 }
 
-const StrapiDynamicZone = ({ components, previews }: Props): JSX.Element => {
+const StrapiDynamicZone = ({ components }: Props): JSX.Element => {
   return (
     <>
       {components.map((component, idx) => {
@@ -193,6 +183,14 @@ const StrapiDynamicZone = ({ components, previews }: Props): JSX.Element => {
               />
             );
 
+          case 'STRAPI_ComponentWidgetEmbeddedForm':
+            return (
+              <EmbeddedForm
+                key={`${idx}${component.__typename}`}
+                data={{ code_snippet: component.code_snippet }}
+              />
+            );
+
           case 'STRAPI_ComponentWidgetButton':
             return (
               <ButtonField
@@ -210,7 +208,6 @@ const StrapiDynamicZone = ({ components, previews }: Props): JSX.Element => {
               <OfferingsField
                 key={`${idx}${component.__typename}`}
                 data={component.offerings}
-                previews={previews!.offeringPreviews}
               />
             );
 
@@ -225,10 +222,7 @@ const StrapiDynamicZone = ({ components, previews }: Props): JSX.Element => {
                 }}
                 styling={{ gap: '5em' }}
               >
-                <BlogsField
-                  data={component.blogs}
-                  previews={previews!.blogPreviews}
-                />
+                <BlogsField data={component.blogs} />
               </Grid>
             );
 
