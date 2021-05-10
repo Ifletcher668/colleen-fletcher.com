@@ -115,6 +115,9 @@ export const query = graphql`
           ... on STRAPI_ComponentWidgetDivider {
             ...StrapiComponentWidgetDivider
           }
+          ... on STRAPI_ComponentWidgetEmbeddedForm {
+            ...StrapiComponentWidgetEmbeddedForm
+          }
           ... on STRAPI_ComponentWidgetButton {
             ...StrapiComponentWidgetButton
           }

@@ -26,12 +26,14 @@ export default (props: TemplateProps): JSX.Element => {
   return (
     <Layout location={props.location}>
       <SEO title={page.title} description={page.meta_description} />
+
       {page.banner_background_image && (
         <BannerBackgroundImage
           image={page.banner_background_image}
           banner={page.banner}
         />
       )}
+
       <PageContainer>
         <StrapiDynamicZone components={page.body} previews={previews} />
       </PageContainer>
@@ -115,6 +117,9 @@ export const query = graphql`
           }
           ... on STRAPI_ComponentWidgetDivider {
             ...StrapiComponentWidgetDivider
+          }
+          ... on STRAPI_ComponentWidgetEmbeddedForm {
+            ...StrapiComponentWidgetEmbeddedForm
           }
           ... on STRAPI_ComponentWidgetButton {
             ...StrapiComponentWidgetButton

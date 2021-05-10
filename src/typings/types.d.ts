@@ -57,6 +57,7 @@ type StrapiDynamicZoneTypeNames =
   | 'STRAPI_ComponentSectionTextCenterImageEitherSide'
   | 'STRAPI_ComponentSectionImageCenterTextEitherSide'
   | 'STRAPI_ComponentWidgetDivider'
+  | 'STRAPI_ComponentWidgetEmbeddedForm'
   | 'STRAPI_ComponentWidgetButton'
   | 'STRAPI_ComponentCollectionsOfferings'
   | 'STRAPI_ComponentCollectionsBlogs'
@@ -104,6 +105,8 @@ type StrapiDynamicZone = {
   // single video data
   srcURL: string;
   title: string;
+  // embedded forms
+  code_snippet: string;
 };
 
 type StrapiComponentSingleVideo = {
