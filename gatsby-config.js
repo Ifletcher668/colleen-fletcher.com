@@ -22,6 +22,7 @@ module.exports = {
     `gatsby-plugin-sass`,
     `gatsby-plugin-postcss`,
     `gatsby-plugin-catch-links`,
+
     {
       resolve: `gatsby-plugin-styled-components`,
       options: {
@@ -30,6 +31,7 @@ module.exports = {
         namespace: 'cf',
       },
     },
+
     {
       resolve: 'gatsby-plugin-react-svg',
       options: {
