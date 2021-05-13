@@ -1,62 +1,13 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Anchor, Link, Heading, Paragraph as P, Span } from '../../Atoms';
+import { Anchor, Link, Span } from '../../Atoms';
+import { TextWrapper, H1, H2, H3 } from './styles';
+import { Grid } from '../../Containers';
 import parse, { domToReact, HTMLReactParserOptions } from 'html-react-parser';
 import { Element } from 'domhandler/lib/node';
-import { Grid } from '../../Containers';
 
 export interface Props {
   data: StrapiComponentTextParagraph;
 }
-
-interface WrapperProps {
-  alignParagraph: AlignValues;
-  justifyParagraph: JustifyValues;
-}
-
-const TextWrapper = styled(P)<WrapperProps>`
-  align-self: ${props => {
-    switch (props.alignParagraph) {
-      case 'top':
-        return 'start';
-      case 'center':
-        return 'center';
-      default:
-        // end
-        return 'end';
-    }
-  }};
-
-  text-align: ${props => {
-    switch (props.justifyParagraph) {
-      case 'left':
-        return 'left';
-      case 'center':
-        return 'center';
-      default:
-        // right
-        return 'right';
-    }
-  }};
-
-  justify-self: ${props => {
-    switch (props.justifyParagraph) {
-      case 'right':
-        return 'end';
-      case 'center':
-        return 'center';
-      default:
-        // left
-        return 'start';
-    }
-  }};
-`;
-
-const H1 = styled(Heading).attrs({ as: 'h1' })``;
-
-const H2 = styled(Heading).attrs({ as: 'h2' })``;
-
-const H3 = styled(Heading).attrs({ as: 'h3' })``;
 
 const Paragraph: React.FC<Props> = ({ data }: Props) => {
   const { body, alignParagraph, justifyParagraph } = data;
@@ -65,13 +16,14 @@ const Paragraph: React.FC<Props> = ({ data }: Props) => {
   const options: HTMLReactParserOptions = {
     replace: domNode => {
       if (!(domNode instanceof Element)) return null;
-
       const { name, children, attribs } = domNode;
 
       if (name === 'a') {
         // TODO: Every link in production starts with https... Fix
         const isExternalLink = attribs.href.match('^(http|https)://');
         return isExternalLink ? (
+          <Link to={attribs.href}>{domToReact(children, options)}</Link>
+        ) : (
           <Anchor
             color={'earth'}
             href={attribs.href}
@@ -80,14 +32,10 @@ const Paragraph: React.FC<Props> = ({ data }: Props) => {
           >
             {domToReact(children, options)}
           </Anchor>
-        ) : (
-          <Link as={Anchor} to={attribs.href}>
-            {domToReact(children, options)}
-          </Link>
         );
       }
 
-      if (name === 'h1')
+      if (name === 'h1') {
         return (
           <TextWrapper
             as={H1}
@@ -97,6 +45,7 @@ const Paragraph: React.FC<Props> = ({ data }: Props) => {
             {domToReact(children, options)}
           </TextWrapper>
         );
+      }
 
       if (name === 'h2')
         return (
@@ -170,6 +119,7 @@ const Paragraph: React.FC<Props> = ({ data }: Props) => {
         return <Span size="small">{domToReact(children, options)}</Span>;
     },
   };
+
   return (
     <Grid containerType="section" styling={{ height: '100%', width: '100%' }}>
       {parse(body, options)}
