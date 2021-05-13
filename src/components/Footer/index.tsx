@@ -60,7 +60,7 @@ const Footer: React.FC = () => {
             </Anchor>
           </h5>
 
-          <Divider color="aterrima" type="standard" />
+          <Divider lineColor="aterrima" type="standard" />
 
           <h4>Designed by Colleen and her son, Isiah</h4>
 
