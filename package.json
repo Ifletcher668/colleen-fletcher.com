@@ -2,7 +2,7 @@
   "name": "colleen-fletcher.com",
   "private": true,
   "description": "Colleen's personal website",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop -p 3000",
@@ -41,7 +41,6 @@
     "gatsby-source-graphql": "^2.9.0",
     "gatsby-transformer-sharp": "^2.7.0",
     "global": "^4.4.0",
-    "gsap": "^3.5.1",
     "html-react-parser": "^1.2.4",
     "js-search": "^2.0.0",
     "moment": "^2.29.1",
