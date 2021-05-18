@@ -27,11 +27,7 @@ export default (props: TemplateProps): JSX.Element => {
           {blog.name}
         </Heading>
 
-        <MarkdownField
-          source={blog.meta_description}
-          allowDangerousHtml
-          className="paragraph"
-        />
+        <MarkdownField children={blog.meta_description} className="paragraph" />
 
         <Grid containerType="section" gap={'2em 0'}>
           {blog.blog_posts.map((post, idx) => {
