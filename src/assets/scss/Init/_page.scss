@@ -2,46 +2,62 @@
 
 // MSIE: Required for IEMobile.
 @-ms-viewport {
-    width: device-width;
+  width: device-width;
 }
 
 body {
-    background: linear-gradient(
-            to bottom,
-            transparentize(#000, 0.8),
-            transparentize(#fff, 1),
-            transparentize(#fff, 0.7),
-            transparentize(#fff, 1),
-            transparentize(#000, 0.8)
-        ),
-        url('../images/background-milky-way.png') no-repeat center center fixed;
-    @include clearfix();
-    min-height: 100vh;
-    scroll-behavior: smooth;
+  background: linear-gradient(
+      to bottom,
+      transparentize(#000, 0.8),
+      transparentize(#fff, 1),
+      transparentize(#fff, 0.7),
+      transparentize(#fff, 1),
+      transparentize(#000, 0.8)
+    ),
+    url('../images/background-milky-way.png') no-repeat center center fixed;
+  @include clearfix();
+  min-height: 100vh;
+  scroll-behavior: smooth;
 }
 
 @include global-box-sizing();
 
 // Ensures page width is always >=320px.
 @include below('xsmall') {
-    html,
-    body {
-        min-width: 320px;
-    }
+  html,
+  body {
+    min-width: 320px;
+  }
 }
 
 // gatsby-added divs passthrough
 #___gatsby,
 #gatsby-focus-wrapper {
-    min-height: inherit;
+  min-height: inherit;
 }
 
 // TODO: Use styled components for this.
 .circle {
-    border-radius: 1000px;
+  border-radius: 1000px;
 }
 
 .gatsby-image-wrapper {
-    border-radius: 2px;
-    // border: 1.5px color(aterrima) solid;
+  border-radius: 2px;
+  // border: 1.5px color(aterrima) solid;
+}
+
+.embedded-form {
+  display: flex;
+
+  &.left {
+    justify-content: flex-start;
+  }
+
+  &.center {
+    justify-content: center;
+  }
+
+  &.right {
+    justify-content: flex-end;
+  }
 }

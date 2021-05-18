@@ -103,15 +103,16 @@ type StrapiDynamicZone = {
   show_services: boolean;
   show_blog_posts: boolean;
   // single video data
-  srcURL: string;
+  code_snippet: string;
   title: string;
   // embedded forms
   code_snippet: string;
+  justifyEmbeddedForm: JustifyValues;
 };
 
 type StrapiComponentSingleVideo = {
   // readonly __typename: 'STRAPI_ComponentMediaSingleVideo';
-  srcURL: string;
+  code_snippet: string;
   title: string;
 };
 // Strapi Collections Component Types

@@ -10,7 +10,7 @@ const VideoField = ({ data }: Props): JSX.Element => {
   return (
     <VideoWrapper>
       <Heading level={3}>{data.title}</Heading>
-      <div dangerouslySetInnerHTML={{ __html: data.srcURL }} />
+      <div dangerouslySetInnerHTML={{ __html: data.code_snippet }} />
     </VideoWrapper>
   );
 };

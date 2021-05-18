@@ -59,7 +59,7 @@ export const parseDynamicZoneContent = (
                 key={`${idx}${component.__typename}`}
                 data={{
                   title: component.title,
-                  srcURL: component.srcURL,
+                  code_snippet: component.code_snippet,
                 }}
               />
             );
@@ -185,7 +185,10 @@ export const parseDynamicZoneContent = (
             return (
               <EmbeddedForm
                 key={`${idx}${component.__typename}`}
-                data={{ code_snippet: component.code_snippet }}
+                data={{
+                  code_snippet: component.code_snippet,
+                  justify: component.justifyEmbeddedForm,
+                }}
               />
             );
 

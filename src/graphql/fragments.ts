@@ -212,7 +212,7 @@ export const StrapiComponentMediaSingleVideo = graphql`
   fragment StrapiComponentMediaSingleVideo on STRAPI_ComponentMediaSingleVideo {
     id
     title
-    srcURL
+    code_snippet
   }
 `;
 
@@ -256,6 +256,7 @@ export const StrapiComponentWidgetEmbeddedForm = graphql`
   fragment StrapiComponentWidgetEmbeddedForm on STRAPI_ComponentWidgetEmbeddedForm {
     id
     code_snippet
+    justifyEmbeddedForm: justify
   }
 `;
 
