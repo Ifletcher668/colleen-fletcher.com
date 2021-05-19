@@ -2962,6 +2962,7 @@ export type Strapi_Enum_Componentwidgetembeddedform_Justify =
   | 'center'
   | 'right';
 
+/** Enter a form code snippet and assign it's left, right, or center positioning */
 export type Strapi_ComponentWidgetEmbeddedForm = {
   id: Scalars['ID'];
   code_snippet: Scalars['String'];
