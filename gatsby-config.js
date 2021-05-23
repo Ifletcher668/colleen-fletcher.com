@@ -63,12 +63,7 @@ module.exports = {
       options: {
         typeName: 'STRAPI',
         fieldName: 'strapi',
-        url: `${
-          process.env.NODE_ENV === 'development' ||
-          process.env.NODE_ENV === 'staging'
-            ? process.env.LOCAL_GRAPHQL_ENDPOINT
-            : process.env.HEROKU_GRAPHQL_ENDPOINT
-        }`,
+        url: `${process.env.GRAPHQL_ENDPOINT}`,
       },
     },
   ],
