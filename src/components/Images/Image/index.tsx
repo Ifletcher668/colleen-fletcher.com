@@ -1,12 +1,12 @@
 import React from 'react';
-import GatsbyImage, { GatsbyImageFluidProps } from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
 import { color } from '../../../StyledComponents/_mixins';
 interface Props {
   data: StrapiComponentMediaSingleImage;
 }
 
-interface WrapperProps extends Pick<GatsbyImageFluidProps, 'fluid'> {
+interface WrapperProps {
   hasBorder: boolean;
   isCircle: boolean;
 }
@@ -34,13 +34,12 @@ const Image: React.FC<Props> = ({ data }: Props) => {
 
     return <></>;
   }
+
   return (
     <ImageWrapper
       alt={alternativeText ? alternativeText : ''}
       title={caption ? caption : ''}
-      fluid={
-        imageFile.childImageSharp.fluid ? imageFile.childImageSharp.fluid : ''
-      }
+      image={imageFile.childImageSharp.gatsbyImageData}
       hasBorder={hasBorder}
       isCircle={isCircle}
     />

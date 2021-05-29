@@ -1,33 +1,32 @@
 import React from 'react';
-import BannerBackground from 'gatsby-background-image';
+// import BannerBackground from 'gatsby-background-image';
 import StrapiDynamicZone from '../StrapiDynamicZone';
-import styled from 'styled-components';
-import { below, size } from '../../StyledComponents/_mixins';
+// import styled from 'styled-components';
+// import { below, size } from '../../StyledComponents/_mixins';
 interface Props {
   image: StrapiUploadFile | null;
   banner: StrapiDynamicZone[];
 }
 
+// const BannerWrapper = styled(BannerBackground)`
+//   display: flex;
+//   padding: ${size('padding', 'xsmall')};
+//   ${below.small`
+//         flex-flow: column nowrap;
+//     `}
+// `;
+
 const BannerBackgroundImage: React.FC<Props> = ({
   image,
   banner,
 }: Props): JSX.Element => {
-  if (image === null) return <> </>;
   if (image?.imageFile === null) return <> </>;
 
   return (
-    <BannerWrapper Tag="section" fluid={image.imageFile.childImageSharp.fluid}>
-      <StrapiDynamicZone components={banner} />
-    </BannerWrapper>
+    <StrapiDynamicZone components={banner} />
+    // <BannerWrapper Tag="section">
+    // </BannerWrapper>
   );
 };
-
-const BannerWrapper = styled(BannerBackground)`
-  display: flex;
-  padding: ${size('padding', 'xsmall')};
-  ${below.small`
-        flex-flow: column nowrap;
-    `}
-`;
 
 export default BannerBackgroundImage;

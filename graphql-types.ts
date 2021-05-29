@@ -309,8 +309,10 @@ export type SiteSiteMetadataAuthor = {
 };
 
 export type SiteFunction = Node & {
-  apiRoute: Scalars['String'];
-  originalFilePath: Scalars['String'];
+  functionRoute: Scalars['String'];
+  pluginName: Scalars['String'];
+  originalAbsoluteFilePath: Scalars['String'];
+  originalRelativeFilePath: Scalars['String'];
   relativeCompiledFilePath: Scalars['String'];
   absoluteCompiledFilePath: Scalars['String'];
   matchPath?: Maybe<Scalars['String']>;
@@ -632,14 +634,15 @@ export type SitePlugin = Node & {
 };
 
 export type SitePluginPluginOptions = {
-  base64Width?: Maybe<Scalars['Int']>;
-  stripMetadata?: Maybe<Scalars['Boolean']>;
-  defaultQuality?: Maybe<Scalars['Int']>;
-  failOnError?: Maybe<Scalars['Boolean']>;
   output?: Maybe<Scalars['String']>;
   createLinkInHead?: Maybe<Scalars['Boolean']>;
   entryLimit?: Maybe<Scalars['Int']>;
   query?: Maybe<Scalars['String']>;
+  defaults?: Maybe<SitePluginPluginOptionsDefaults>;
+  base64Width?: Maybe<Scalars['Int']>;
+  stripMetadata?: Maybe<Scalars['Boolean']>;
+  defaultQuality?: Maybe<Scalars['Int']>;
+  failOnError?: Maybe<Scalars['Boolean']>;
   displayName?: Maybe<Scalars['Boolean']>;
   fileName?: Maybe<Scalars['Boolean']>;
   namespace?: Maybe<Scalars['String']>;
@@ -665,6 +668,13 @@ export type SitePluginPluginOptions = {
   allExtensions?: Maybe<Scalars['Boolean']>;
   isTSX?: Maybe<Scalars['Boolean']>;
   jsxPragma?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsDefaults = {
+  formats?: Maybe<Array<Maybe<Scalars['String']>>>;
+  quality?: Maybe<Scalars['Int']>;
+  breakpoints?: Maybe<Array<Maybe<Scalars['Int']>>>;
+  backgroundColor?: Maybe<Scalars['String']>;
 };
 
 export type SitePluginPluginOptionsRule = {
@@ -3434,8 +3444,10 @@ export type QueryAllSiteArgs = {
 
 
 export type QuerySiteFunctionArgs = {
-  apiRoute?: Maybe<StringQueryOperatorInput>;
-  originalFilePath?: Maybe<StringQueryOperatorInput>;
+  functionRoute?: Maybe<StringQueryOperatorInput>;
+  pluginName?: Maybe<StringQueryOperatorInput>;
+  originalAbsoluteFilePath?: Maybe<StringQueryOperatorInput>;
+  originalRelativeFilePath?: Maybe<StringQueryOperatorInput>;
   relativeCompiledFilePath?: Maybe<StringQueryOperatorInput>;
   absoluteCompiledFilePath?: Maybe<StringQueryOperatorInput>;
   matchPath?: Maybe<StringQueryOperatorInput>;
@@ -4525,8 +4537,10 @@ export type SiteFunctionEdge = {
 };
 
 export type SiteFunctionFieldsEnum =
-  | 'apiRoute'
-  | 'originalFilePath'
+  | 'functionRoute'
+  | 'pluginName'
+  | 'originalAbsoluteFilePath'
+  | 'originalRelativeFilePath'
   | 'relativeCompiledFilePath'
   | 'absoluteCompiledFilePath'
   | 'matchPath'
@@ -4627,8 +4641,10 @@ export type SiteFunctionGroupConnection = {
 };
 
 export type SiteFunctionFilterInput = {
-  apiRoute?: Maybe<StringQueryOperatorInput>;
-  originalFilePath?: Maybe<StringQueryOperatorInput>;
+  functionRoute?: Maybe<StringQueryOperatorInput>;
+  pluginName?: Maybe<StringQueryOperatorInput>;
+  originalAbsoluteFilePath?: Maybe<StringQueryOperatorInput>;
+  originalRelativeFilePath?: Maybe<StringQueryOperatorInput>;
   relativeCompiledFilePath?: Maybe<StringQueryOperatorInput>;
   absoluteCompiledFilePath?: Maybe<StringQueryOperatorInput>;
   matchPath?: Maybe<StringQueryOperatorInput>;
@@ -4664,14 +4680,15 @@ export type SitePluginFilterInput = {
 };
 
 export type SitePluginPluginOptionsFilterInput = {
-  base64Width?: Maybe<IntQueryOperatorInput>;
-  stripMetadata?: Maybe<BooleanQueryOperatorInput>;
-  defaultQuality?: Maybe<IntQueryOperatorInput>;
-  failOnError?: Maybe<BooleanQueryOperatorInput>;
   output?: Maybe<StringQueryOperatorInput>;
   createLinkInHead?: Maybe<BooleanQueryOperatorInput>;
   entryLimit?: Maybe<IntQueryOperatorInput>;
   query?: Maybe<StringQueryOperatorInput>;
+  defaults?: Maybe<SitePluginPluginOptionsDefaultsFilterInput>;
+  base64Width?: Maybe<IntQueryOperatorInput>;
+  stripMetadata?: Maybe<BooleanQueryOperatorInput>;
+  defaultQuality?: Maybe<IntQueryOperatorInput>;
+  failOnError?: Maybe<BooleanQueryOperatorInput>;
   displayName?: Maybe<BooleanQueryOperatorInput>;
   fileName?: Maybe<BooleanQueryOperatorInput>;
   namespace?: Maybe<StringQueryOperatorInput>;
@@ -4697,6 +4714,13 @@ export type SitePluginPluginOptionsFilterInput = {
   allExtensions?: Maybe<BooleanQueryOperatorInput>;
   isTSX?: Maybe<BooleanQueryOperatorInput>;
   jsxPragma?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsDefaultsFilterInput = {
+  formats?: Maybe<StringQueryOperatorInput>;
+  quality?: Maybe<IntQueryOperatorInput>;
+  breakpoints?: Maybe<IntQueryOperatorInput>;
+  backgroundColor?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePluginPluginOptionsRuleFilterInput = {
@@ -4923,14 +4947,18 @@ export type SitePageFieldsEnum =
   | 'pluginCreator___resolve'
   | 'pluginCreator___name'
   | 'pluginCreator___version'
-  | 'pluginCreator___pluginOptions___base64Width'
-  | 'pluginCreator___pluginOptions___stripMetadata'
-  | 'pluginCreator___pluginOptions___defaultQuality'
-  | 'pluginCreator___pluginOptions___failOnError'
   | 'pluginCreator___pluginOptions___output'
   | 'pluginCreator___pluginOptions___createLinkInHead'
   | 'pluginCreator___pluginOptions___entryLimit'
   | 'pluginCreator___pluginOptions___query'
+  | 'pluginCreator___pluginOptions___defaults___formats'
+  | 'pluginCreator___pluginOptions___defaults___quality'
+  | 'pluginCreator___pluginOptions___defaults___breakpoints'
+  | 'pluginCreator___pluginOptions___defaults___backgroundColor'
+  | 'pluginCreator___pluginOptions___base64Width'
+  | 'pluginCreator___pluginOptions___stripMetadata'
+  | 'pluginCreator___pluginOptions___defaultQuality'
+  | 'pluginCreator___pluginOptions___failOnError'
   | 'pluginCreator___pluginOptions___displayName'
   | 'pluginCreator___pluginOptions___fileName'
   | 'pluginCreator___pluginOptions___namespace'
@@ -5636,14 +5664,18 @@ export type SitePluginFieldsEnum =
   | 'resolve'
   | 'name'
   | 'version'
-  | 'pluginOptions___base64Width'
-  | 'pluginOptions___stripMetadata'
-  | 'pluginOptions___defaultQuality'
-  | 'pluginOptions___failOnError'
   | 'pluginOptions___output'
   | 'pluginOptions___createLinkInHead'
   | 'pluginOptions___entryLimit'
   | 'pluginOptions___query'
+  | 'pluginOptions___defaults___formats'
+  | 'pluginOptions___defaults___quality'
+  | 'pluginOptions___defaults___breakpoints'
+  | 'pluginOptions___defaults___backgroundColor'
+  | 'pluginOptions___base64Width'
+  | 'pluginOptions___stripMetadata'
+  | 'pluginOptions___defaultQuality'
+  | 'pluginOptions___failOnError'
   | 'pluginOptions___displayName'
   | 'pluginOptions___fileName'
   | 'pluginOptions___namespace'
@@ -5799,11 +5831,11 @@ export type StrapiTagFragment = (
   & { blog_posts?: Maybe<Array<Maybe<Pick<Strapi_BlogPost, 'title' | 'slug'>>>> }
 );
 
-export type FluidImageFragment = { childImageSharp?: Maybe<{ fluid?: Maybe<GatsbyImageSharpFluid_NoBase64Fragment> }> };
+export type ConstrainedImageFragment = { childImageSharp?: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> };
 
 export type StrapiUploadFileFragment = (
   Pick<Strapi_UploadFile, 'id' | 'url' | 'caption' | 'alternativeText'>
-  & { imageFile?: Maybe<FluidImageFragment> }
+  & { imageFile?: Maybe<ConstrainedImageFragment> }
 );
 
 export type StrapiComponentMediaSingleImageFragment = (
@@ -5896,7 +5928,7 @@ export type StrapiComponentGeneralPreviewFragment = { heading?: Maybe<StrapiComp
 export type Unnamed_6_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_6_Query = { frangipaniImg?: Maybe<FluidImageFragment> };
+export type Unnamed_6_Query = { frangipaniImg?: Maybe<ConstrainedImageFragment> };
 
 export type Get_Strapi_Menu_ItemsQueryVariables = Exact<{ [key: string]: never; }>;
 

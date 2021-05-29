@@ -120,6 +120,7 @@ export const StrapiOffering = graphql`
     is_offering
   }
 `;
+
 export const StrapiService = graphql`
   fragment StrapiService on STRAPI_Service {
     id
@@ -149,6 +150,7 @@ export const StrapiCategory = graphql`
     is_category
   }
 `;
+
 export const StrapiTag = graphql`
   fragment StrapiTag on STRAPI_Tag {
     name
@@ -160,12 +162,10 @@ export const StrapiTag = graphql`
   }
 `;
 
-export const FluidImage = graphql`
-  fragment FluidImage on File {
+export const ConstrainedImage = graphql`
+  fragment ConstrainedImage on File {
     childImageSharp {
-      fluid(quality: 100, maxWidth: 600, maxHeight: 600) {
-        ...GatsbyImageSharpFluid_noBase64
-      }
+      gatsbyImageData(layout: CONSTRAINED, aspectRatio: 1)
     }
   }
 `;
@@ -177,7 +177,7 @@ export const StrapiUploadFile = graphql`
     caption
     alternativeText
     imageFile {
-      ...FluidImage
+      ...ConstrainedImage
     }
   }
 `;

@@ -14,20 +14,37 @@ module.exports = {
   },
 
   plugins: [
+    `gatsby-plugin-image`,
     `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-ts`,
     `gatsby-plugin-sass`,
     `gatsby-plugin-postcss`,
     `gatsby-plugin-catch-links`,
+    {
+      resolve: `gatsby-plugin-sharp`,
+      options: {
+        defaults: {
+          formats: [`auto`, `webp`],
+          quality: 80,
+          breakpoints: [768, 1080, 1366, 1920],
+          backgroundColor: `transparent`,
+          tracedSVGOptions: {},
+          blurredOptions: {},
+          jpgOptions: {},
+          pngOptions: {},
+          webpOptions: {},
+          avifOptions: {},
+        },
+      },
+    },
 
     {
       resolve: `gatsby-plugin-styled-components`,
       options: {
         displayName: true,
-        fileName: false, // only useDisplayName
+        fileName: false, // only use DisplayName
         namespace: 'cf',
       },
     },

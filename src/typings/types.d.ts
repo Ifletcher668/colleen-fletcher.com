@@ -1,9 +1,9 @@
-type ChildImageSharp = {
-  fluid: GatsbyImage.FluidObject;
+type GatsbyImageData = {
+  gatsbyImageData: GatsbyImageProps;
 };
-
-type FluidImage = {
-  childImageSharp: ChildImageSharp;
+// TODO: Refactor to use provided types from Gatsby
+type ChildImageSharp = {
+  childImageSharp: GatsbyImageData;
 };
 
 // strapi types
@@ -137,7 +137,7 @@ type StrapiUploadFile = {
   url: string;
   caption: string;
   alternativeText: string;
-  imageFile: FluidImage;
+  imageFile: ChildImageSharp;
 };
 
 // Strapi Section Component Types
