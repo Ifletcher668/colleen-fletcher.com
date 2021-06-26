@@ -59,6 +59,7 @@ module.exports = {
     },
 
     {
+      // browser tab thumbnail
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: 'colleen-fletcher.com',
@@ -75,6 +76,8 @@ module.exports = {
       },
     },
 
+    // TODO: Remove once gatsby-source-strapi is fixed
+    // https://forum.strapi.io/t/gatsby-source-strapi-plugin-not-processing-images-in-dynamic-zones/5838/5
     {
       resolve: 'gatsby-source-graphql',
       options: {

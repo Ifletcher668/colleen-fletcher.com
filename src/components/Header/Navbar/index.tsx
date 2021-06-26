@@ -1,20 +1,24 @@
-import React, { createContext, useState } from 'react';
+import React, {
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useState,
+} from 'react';
 import { useMenuItems } from '../../../graphql/queries/useMenuItems';
+import { Nav } from '../../Atoms';
 // import SearchContainer from '../../SearchContainer';
 import MenuItem from './MenuItem';
-import { Nav } from '../../Atoms';
 
 type NavCtx = {
   isActivePanel: boolean;
-  setIsActivePanel: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsActivePanel: Dispatch<SetStateAction<boolean>>;
   activePanelName: string;
-  setActivePanelName: React.Dispatch<React.SetStateAction<string>>;
+  setActivePanelName: Dispatch<SetStateAction<string>>;
 };
 
 export const NavbarContext = createContext<NavCtx>({} as NavCtx);
 
-const Navbar: React.FC<DefaultProps> = (props: DefaultProps) => {
-  // TODO: Remove
+const Navbar = (props: DefaultProps): JSX.Element => {
   const { className } = props;
 
   const [isActivePanel, setIsActivePanel] = useState<boolean>(false);
@@ -44,17 +48,13 @@ const Navbar: React.FC<DefaultProps> = (props: DefaultProps) => {
       <NavbarContext.Provider value={ctx}>
         <ul className="nav-list">
           {menuItems.map((menuItem, idx) => {
-            if (menuItem.content.length > 0) {
-              // show active panel
-              let cn = '';
-              if (menuItem.text === activePanelName) {
-                cn += 'active';
-              }
-              return <MenuItem key={idx} className={cn} {...menuItem} />;
-            } else {
-              // no data to show
-              return <MenuItem key={idx} {...menuItem} />;
-            }
+            return (
+              <MenuItem
+                key={idx}
+                className={menuItem.text === activePanelName ? 'active' : ''}
+                {...menuItem}
+              />
+            );
           })}
         </ul>
       </NavbarContext.Provider>

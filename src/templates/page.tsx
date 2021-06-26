@@ -1,32 +1,40 @@
-import React from 'react';
 import { graphql } from 'gatsby';
-import StrapiDynamicZone from '../components/StrapiDynamicZone';
-import { PageContainer } from '../components/Containers';
-import SEO from '../components/SEO';
+import React from 'react';
 import BannerBackgroundImage from '../components/Banner';
+import { PageContainer } from '../components/Containers';
 import Layout from '../components/Layout';
+import SEO from '../components/SEO';
+import StrapiDynamicZone from '../components/StrapiDynamicZone';
 import { TemplateProps } from './types';
 
 export default (props: TemplateProps): JSX.Element => {
   const {
     data: {
-      strapi: { page },
+      strapi: {
+        page: {
+          banner,
+          banner_background_image,
+          body,
+          meta_description,
+          title,
+        },
+      },
     },
   } = props;
 
   return (
     <Layout location={props.location}>
-      <SEO title={page.title} description={page.meta_description} />
+      <SEO title={title} description={meta_description} />
 
-      {page.banner_background_image && (
+      {banner_background_image && (
         <BannerBackgroundImage
-          image={page.banner_background_image}
-          banner={page.banner}
+          image={banner_background_image}
+          banner={banner}
         />
       )}
 
       <PageContainer>
-        <StrapiDynamicZone components={page.body} />
+        <StrapiDynamicZone components={body} />
       </PageContainer>
     </Layout>
   );

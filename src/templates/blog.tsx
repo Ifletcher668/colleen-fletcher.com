@@ -1,16 +1,15 @@
-import React from 'react';
 import { graphql } from 'gatsby';
-import Heading from '../components/Heading';
-import { Grid } from '../components/Containers';
-import { PageContainer } from '../components/Containers';
+import React from 'react';
 import MarkdownField from 'react-markdown';
-import { zigZagGridColumns } from '../utils/zigZagGridColumns';
-import { GridArea } from '../StyledComponents/helpers';
+import { Grid, PageContainer } from '../components/Containers';
+import Divider from '../components/Divider';
+import Heading from '../components/Heading';
 import { ImageWithCaption } from '../components/Images';
+import Layout from '../components/Layout';
 import { HeadingField, Paragraph } from '../components/Text';
 import { ButtonField } from '../components/Widgets';
-import Divider from '../components/Divider';
-import Layout from '../components/Layout';
+import { GridArea } from '../StyledComponents/helpers';
+import { zigZagGridColumns } from '../utils/zigZagGridColumns';
 import { TemplateProps } from './types';
 
 export default (props: TemplateProps): JSX.Element => {

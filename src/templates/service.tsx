@@ -1,11 +1,10 @@
-import React from 'react';
 import { graphql } from 'gatsby';
-import StrapiDynamicZone from '../components/StrapiDynamicZone';
-import { Grid } from '../components/Containers';
-import { PageContainer } from '../components/Containers';
+import React from 'react';
 import BannerBackgroundImage from '../components/Banner/';
-import SEO from '../components/SEO';
+import { Grid, PageContainer } from '../components/Containers';
 import Layout from '../components/Layout';
+import SEO from '../components/SEO';
+import StrapiDynamicZone from '../components/StrapiDynamicZone';
 import { TemplateProps } from './types';
 
 export default (props: TemplateProps): JSX.Element => {

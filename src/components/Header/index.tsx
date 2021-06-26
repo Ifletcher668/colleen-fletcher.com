@@ -2,6 +2,7 @@ import React, {
   createContext,
   createRef,
   RefObject,
+  useCallback,
   useEffect,
   useRef,
   useState,
@@ -40,25 +41,26 @@ const Header: React.FC<DefaultProps> = ({ className }: DefaultProps) => {
     current: { small },
   } = useBreakpoints();
 
-  const changeMenuListener = () => {
-    innerWidth >= small ? toggleIsFullMenu(true) : toggleIsFullMenu(false);
-  };
-
-  // verify which menu to use on first render
-  useEffect(() => {
-    changeMenuListener();
-  }, [small]); // initially returns 0 until theme vars are calculated
-
-  useEffect(() => {
-    window.addEventListener('resize', changeMenuListener);
-    return () => window.removeEventListener('resize', changeMenuListener);
-  }, [innerWidth]);
-
   useEffect(() => {
     const handleResize = () => setInnerWidth(window.innerWidth);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  const changeMenuListener = useCallback(() => {
+    innerWidth >= small ? toggleIsFullMenu(true) : toggleIsFullMenu(false);
+  }, [innerWidth, small]);
+
+  // verify which menu to use on first render
+  useEffect(() => {
+    changeMenuListener();
+  }, [changeMenuListener]);
+
+  // verify which menu to use on resize
+  useEffect(() => {
+    window.addEventListener('resize', changeMenuListener);
+    return () => window.removeEventListener('resize', changeMenuListener);
+  }, [changeMenuListener]);
 
   const target: RefObject<HTMLDivElement> = createRef();
 

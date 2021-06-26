@@ -1,17 +1,16 @@
 // Named "Work With Me on the page"
-import React from 'react';
 import { graphql } from 'gatsby';
-import Heading from '../components/Heading';
-import { Grid } from '../components/Containers';
-import { PageContainer } from '../components/Containers';
-import { ImageWithCaption } from '../components/Images';
-import { zigZagGridColumns } from '../utils/zigZagGridColumns';
-import { HeadingField, Paragraph } from '../components/Text';
-import { GridArea } from '../StyledComponents/helpers';
+import React from 'react';
+import { Grid, PageContainer } from '../components/Containers';
 import Divider from '../components/Divider';
-import { ButtonField } from '../components/Widgets';
-import SEO from '../components/SEO';
+import Heading from '../components/Heading';
+import { ImageWithCaption } from '../components/Images';
 import Layout from '../components/Layout';
+import SEO from '../components/SEO';
+import { HeadingField, Paragraph } from '../components/Text';
+import { ButtonField } from '../components/Widgets';
+import { GridArea } from '../StyledComponents/helpers';
+import { zigZagGridColumns } from '../utils/zigZagGridColumns';
 import { TemplateProps } from './types';
 
 export default (props: TemplateProps): JSX.Element => {

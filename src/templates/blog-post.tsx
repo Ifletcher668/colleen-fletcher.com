@@ -1,16 +1,16 @@
-import React from 'react';
 import { graphql } from 'gatsby';
-import StrapiDynamicZone from '../components/StrapiDynamicZone';
+import React from 'react';
 import { PageContainer } from '../components/Containers';
-import SEO from '../components/SEO';
 import Layout from '../components/Layout';
+import SEO from '../components/SEO';
+import StrapiDynamicZone from '../components/StrapiDynamicZone';
 import { TemplateProps } from './types';
 
 export default (props: TemplateProps): JSX.Element => {
   const {
     data: {
       strapi: {
-        blogPost: { title, body, meta_description },
+        blogPost: { body, meta_description, title },
       },
     },
   } = props;

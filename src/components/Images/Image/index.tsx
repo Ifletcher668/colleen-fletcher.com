@@ -37,8 +37,8 @@ const Image: React.FC<Props> = ({ data }: Props) => {
 
   return (
     <ImageWrapper
-      alt={alternativeText ? alternativeText : ''}
-      title={caption ? caption : ''}
+      alt={alternativeText || ''}
+      title={caption || ''}
       image={imageFile.childImageSharp.gatsbyImageData}
       hasBorder={hasBorder}
       isCircle={isCircle}
