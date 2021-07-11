@@ -34,7 +34,13 @@ export default (props: TemplateProps): JSX.Element => {
             data={offering.preview.image}
             styling={{
               justifySelf: 'center',
-              width: `${window.innerWidth > 768 ? '50%' : '100%;'}`, // needed for flexbox to not collapse. pls refactor
+              width: `${
+                typeof window !== 'undefined' // SSR
+                  ? window.innerWidth > 768
+                    ? '50%'
+                    : '100%;'
+                  : 'unset'
+              }`, // needed for flexbox to not collapse. pls refactor
             }}
           />
         )}
