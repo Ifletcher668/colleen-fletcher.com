@@ -10,14 +10,18 @@ export default (props: TemplateProps): JSX.Element => {
   const {
     data: {
       strapi: {
-        blogPost: { body, meta_description, title },
+        blogPost: { body, seo },
       },
     },
   } = props;
 
   return (
     <Layout location={props.location}>
-      <SEO title={title} description={meta_description} />
+      <SEO
+        title={seo.title}
+        description={seo.meta_description}
+        image={seo.image}
+      />
       <PageContainer>
         <StrapiDynamicZone components={body} />
       </PageContainer>
@@ -30,9 +34,11 @@ export const query = graphql`
     strapi {
       blogPost(id: $id) {
         title
-        meta_description
         tags {
           name
+        }
+        seo {
+          ...StrapiComponentGeneralSeo
         }
         body {
           __typename

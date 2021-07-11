@@ -1,38 +1,54 @@
 import { graphql } from 'gatsby';
 import React from 'react';
-import MarkdownField from 'react-markdown';
 import { Grid, PageContainer } from '../components/Containers';
 import Divider from '../components/Divider';
 import Heading from '../components/Heading';
 import { ImageWithCaption } from '../components/Images';
 import Layout from '../components/Layout';
+import SEO from '../components/SEO';
 import { HeadingField, Paragraph } from '../components/Text';
 import { ButtonField } from '../components/Widgets';
 import { GridArea } from '../StyledComponents/helpers';
+import { ComponentWidgetButton } from '../typings/strapi';
 import { zigZagGridColumns } from '../utils/zigZagGridColumns';
 import { TemplateProps } from './types';
 
 export default (props: TemplateProps): JSX.Element => {
   const {
     data: {
-      strapi: { blog },
+      strapi: {
+        blog: { seo, name, blog_posts },
+      },
     },
   } = props;
 
   return (
     <Layout location={props.location}>
+      <SEO
+        title={seo.title}
+        description={seo.meta_description}
+        image={seo.image}
+      />
+
       <PageContainer>
         <Heading alignHeading="center" justifyHeading="center" level={1}>
-          {blog.name}
+          {name}
         </Heading>
 
-        <MarkdownField children={blog.meta_description} className="paragraph" />
+        <Paragraph
+          data={{
+            body: seo.meta_description,
+            alignParagraph: 'center',
+            justifyParagraph: 'center',
+          }}
+          className="paragraph"
+        />
 
         <Grid containerType="section" gap={'2em 0'}>
-          {blog.blog_posts.map((post, idx) => {
+          {blog_posts.map((post, idx) => {
             const zigZagColumnLayout = zigZagGridColumns(idx);
 
-            const buttonData: StrapiComponentWidgetButton = {
+            const buttonData: ComponentWidgetButton = {
               action: `${post.fullUrlPath}`,
               buttonText:
                 post.preview && post.preview.button
