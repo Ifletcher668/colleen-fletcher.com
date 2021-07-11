@@ -1,9 +1,10 @@
 import { graphql } from 'gatsby';
 import React from 'react';
+import Strapi from '../typings/strapi';
 import Layout from '../components/Layout';
 
 interface Props {
-  data: Strapi;
+  data: Strapi.Strapi;
   location: Location;
 }
 export default (props: Props) => {

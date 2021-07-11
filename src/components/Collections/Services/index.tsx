@@ -6,9 +6,10 @@ import { ButtonField } from '../../Widgets';
 import { zigZagGridColumns } from '../../../utils/zigZagGridColumns';
 import { GridArea } from '../../../StyledComponents/helpers';
 import Divider from '../../Divider';
+import { Service } from '../../../typings/strapi';
 
 export interface Props {
-  data: StrapiService[];
+  data: Service[];
 }
 
 const ServicesField: React.FC<Props> = ({ data }: Props): JSX.Element => {

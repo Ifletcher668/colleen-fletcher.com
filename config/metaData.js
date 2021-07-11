@@ -3,7 +3,7 @@ module.exports = {
   siteTitle: 'Colleen-fletcher.com',
   siteDescription: 'yOUR™ body, mind, spirit, Sage',
   author: {
-    name: 'Isiah Fletcher',
-    bio: 'Isiah is a software engineer, musician, and writer.',
+    name: 'Colleen Fletcher',
+    bio: '',
   },
 };

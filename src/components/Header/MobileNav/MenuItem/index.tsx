@@ -7,6 +7,10 @@ import Services from '../../Collections/services';
 import BlogPosts from '../../Collections/blog-posts';
 import { MobileMenuContext } from '../..';
 import { Flexbox } from '../../../Containers';
+import {
+  DynamicZone,
+  MenuItem as StrapiMenuItem,
+} from '../../../../typings/strapi';
 
 type Props = Pick<DefaultProps, 'className'> & Omit<StrapiMenuItem, 'page'>;
 
@@ -43,7 +47,7 @@ const MenuItem: React.FC<Props> = ({
 
   const hasSubmenuContentToShow = () => (content.length > 0 ? true : false);
 
-  const handleSubMenuBehavior = (content: StrapiDynamicZone[]): JSX.Element => {
+  const handleSubMenuBehavior = (content: Array<DynamicZone>): JSX.Element => {
     return (
       <>
         {content.map((item, idx) => {

@@ -18,7 +18,7 @@ const data = graphql`
 `;
 
 const Blogs: React.FC = (): JSX.Element => {
-  const query: Strapi = useStaticQuery(data);
+  const query: Strapi.Strapi = useStaticQuery(data);
   return (
     <>
       {query.strapi.blogs.map((blog, idx) => {

@@ -1,10 +1,11 @@
 import React from 'react';
 import { CSSObject } from 'styled-components';
+import { ComponentMediaImages } from '../../../typings/strapi';
 import { Grid } from '../../Containers';
 import { ImageWithCaption } from '../../Images';
 
 interface Props {
-  data: StrapiComponentMediaImages;
+  data: ComponentMediaImages;
 }
 
 const ImagesField: React.FC<Props> = ({ data }: Props) => {

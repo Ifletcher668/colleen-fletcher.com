@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { NavbarContext } from '../index';
 import Panel from '../Panel';
 import { Anchor, Link } from '../../../Atoms';
+import { MenuItem as StrapiMenuItem } from '../../../../typings/strapi';
 
 // props matches type StrapiMenuItem
 interface Props extends DefaultProps, StrapiMenuItem {}

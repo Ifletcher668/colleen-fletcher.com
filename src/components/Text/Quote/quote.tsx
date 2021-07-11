@@ -2,9 +2,10 @@ import React from 'react';
 import { Paragraph } from '..';
 import YangQuotes from '../../../assets/images/svg/yang-quotation.svg';
 import YinQuotes from '../../../assets/images/svg/yin-quotation.svg';
+import { ComponentTextParagraph } from '../../../typings/strapi';
 import Flexbox from '../../Containers/Flexbox/';
 export interface Props {
-  data: StrapiComponentTextParagraph;
+  data: ComponentTextParagraph;
 }
 
 const QuoteField: React.FC<Props> = ({ data: body }: Props) => {

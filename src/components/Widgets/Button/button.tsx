@@ -1,9 +1,10 @@
 import React from 'react';
-import Button from '../../Button';
+import { ComponentWidgetButton } from '../../../typings/strapi';
 import { Link } from '../../Atoms';
+import Button from '../../Button';
 
 export interface Props {
-  data: StrapiComponentWidgetButton;
+  data: ComponentWidgetButton;
 }
 
 const ButtonField: React.FC<Props> = ({

@@ -1,26 +1,27 @@
 import React from 'react';
-import Grid from '../Containers/Grid';
-import EmbeddedForm from '../Widgets/EmbeddedForm';
+import { DynamicZone } from '../../typings/strapi';
 import {
   BlogPostsField,
   BlogsField,
   OfferingsField,
   ServicesField,
 } from '../Collections';
-import { SingleImageField, ImagesField, SingleVideoField } from '../Media';
-import { Paragraph, HeadingField, QuoteField } from '../Text';
-import { DividerField, ButtonField } from '../Widgets';
+import Grid from '../Containers/Grid';
+import { ImagesField, SingleImageField, SingleVideoField } from '../Media';
 import {
-  ImageCenterTextEitherSideField,
-  TextCenterImageEitherSideField,
   HeadingWithImageLeftSideField,
   HeadingWithImageRightSideField,
+  ImageCenterTextEitherSideField,
+  TextCenterImageEitherSideField,
   TextWithImageLeftSideField,
   TextWithImageRightSideField,
 } from '../Sections';
+import { HeadingField, Paragraph, QuoteField } from '../Text';
+import { ButtonField, DividerField } from '../Widgets';
+import EmbeddedForm from '../Widgets/EmbeddedForm';
 
 export const parseDynamicZoneContent = (
-  components: NonNullable<Array<StrapiDynamicZone>>,
+  components: NonNullable<Array<DynamicZone>>,
 ): JSX.Element => {
   return (
     <>

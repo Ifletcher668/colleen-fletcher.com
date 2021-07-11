@@ -1,4 +1,5 @@
 import { graphql, useStaticQuery } from 'gatsby';
+import { Strapi } from '../../typings/strapi';
 
 export const useMenuItems: () => Strapi = () =>
   useStaticQuery(graphql`

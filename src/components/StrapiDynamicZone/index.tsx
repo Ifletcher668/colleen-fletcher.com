@@ -1,7 +1,8 @@
+import { DynamicZone } from '../../typings/strapi';
 import { parseDynamicZoneContent } from './componentParser';
 
 interface Props {
-  components: NonNullable<Array<StrapiDynamicZone>>;
+  components: NonNullable<Array<DynamicZone>>;
 }
 
 const StrapiDynamicZone = ({ components }: Props): JSX.Element => {

@@ -1,4 +1,8 @@
 import React from 'react';
+import {
+  ComponentTextHeading,
+  ComponentMediaSingleImage,
+} from '../../../typings/strapi';
 import { SingleImageField } from '../../Media';
 import { HeadingField } from '../../Text';
 import {
@@ -9,8 +13,8 @@ import {
 
 export interface Props {
   data: {
-    heading: StrapiComponentTextHeading;
-    image: StrapiComponentMediaSingleImage;
+    heading: ComponentTextHeading;
+    image: ComponentMediaSingleImage;
   };
 }
 

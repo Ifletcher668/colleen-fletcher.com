@@ -1,11 +1,12 @@
 import React from 'react';
+import { DynamicZone, UploadFile } from '../../typings/strapi';
 // import BannerBackground from 'gatsby-background-image';
 import StrapiDynamicZone from '../StrapiDynamicZone';
 // import styled from 'styled-components';
 // import { below, size } from '../../StyledComponents/_mixins';
 interface Props {
-  image: StrapiUploadFile | null;
-  banner: StrapiDynamicZone[];
+  image: UploadFile | null;
+  banner: DynamicZone[];
 }
 
 // const BannerWrapper = styled(BannerBackground)`

@@ -1,8 +1,9 @@
 import React from 'react';
+import { BlogPost } from '../../../typings/strapi';
 // TODO:
 
 export interface Props {
-  data: StrapiBlogPost[];
+  data: BlogPost[];
 }
 const BlogPostsField: React.FC<Props> = ({ data }: Props) => {
   return (

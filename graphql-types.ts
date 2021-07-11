@@ -768,7 +768,7 @@ export type Strapi_BlogPost = {
   category?: Maybe<Strapi_Category>;
   is_blog_post?: Maybe<Scalars['Boolean']>;
   preview?: Maybe<Strapi_ComponentGeneralPreview>;
-  meta_description?: Maybe<Scalars['String']>;
+  seo?: Maybe<Strapi_ComponentGeneralSeo>;
   published_at?: Maybe<Scalars['STRAPI_DateTime']>;
   tags?: Maybe<Array<Maybe<Strapi_Tag>>>;
   fullUrlPath?: Maybe<Scalars['String']>;
@@ -805,7 +805,7 @@ export type Strapi_BlogPostGroupBy = {
   category?: Maybe<Array<Maybe<Strapi_BlogPostConnectionCategory>>>;
   is_blog_post?: Maybe<Array<Maybe<Strapi_BlogPostConnectionIs_Blog_Post>>>;
   preview?: Maybe<Array<Maybe<Strapi_BlogPostConnectionPreview>>>;
-  meta_description?: Maybe<Array<Maybe<Strapi_BlogPostConnectionMeta_Description>>>;
+  seo?: Maybe<Array<Maybe<Strapi_BlogPostConnectionSeo>>>;
   published_at?: Maybe<Array<Maybe<Strapi_BlogPostConnectionPublished_At>>>;
 };
 
@@ -864,8 +864,8 @@ export type Strapi_BlogPostConnectionPreview = {
   connection?: Maybe<Strapi_BlogPostConnection>;
 };
 
-export type Strapi_BlogPostConnectionMeta_Description = {
-  key?: Maybe<Scalars['String']>;
+export type Strapi_BlogPostConnectionSeo = {
+  key?: Maybe<Scalars['ID']>;
   connection?: Maybe<Strapi_BlogPostConnection>;
 };
 
@@ -885,7 +885,7 @@ export type Strapi_BlogPostInput = {
   tags?: Maybe<Array<Maybe<Scalars['ID']>>>;
   is_blog_post?: Maybe<Scalars['Boolean']>;
   preview?: Maybe<Strapi_ComponentGeneralPreviewInput>;
-  meta_description?: Maybe<Scalars['String']>;
+  seo?: Maybe<Strapi_ComponentGeneralSeoInput>;
   published_at?: Maybe<Scalars['STRAPI_DateTime']>;
   created_by?: Maybe<Scalars['ID']>;
   updated_by?: Maybe<Scalars['ID']>;
@@ -902,7 +902,7 @@ export type Strapi_EditBlogPostInput = {
   tags?: Maybe<Array<Maybe<Scalars['ID']>>>;
   is_blog_post?: Maybe<Scalars['Boolean']>;
   preview?: Maybe<Strapi_EditComponentGeneralPreviewInput>;
-  meta_description?: Maybe<Scalars['String']>;
+  seo?: Maybe<Strapi_EditComponentGeneralSeoInput>;
   published_at?: Maybe<Scalars['STRAPI_DateTime']>;
   created_by?: Maybe<Scalars['ID']>;
   updated_by?: Maybe<Scalars['ID']>;
@@ -941,7 +941,7 @@ export type Strapi_Blog = {
   slug: Scalars['String'];
   preview?: Maybe<Strapi_ComponentGeneralPreview>;
   is_blog?: Maybe<Scalars['Boolean']>;
-  meta_description?: Maybe<Scalars['String']>;
+  seo?: Maybe<Strapi_ComponentGeneralSeo>;
   blog_posts?: Maybe<Array<Maybe<Strapi_BlogPost>>>;
   fullUrlPath?: Maybe<Scalars['String']>;
 };
@@ -973,7 +973,7 @@ export type Strapi_BlogGroupBy = {
   slug?: Maybe<Array<Maybe<Strapi_BlogConnectionSlug>>>;
   preview?: Maybe<Array<Maybe<Strapi_BlogConnectionPreview>>>;
   is_blog?: Maybe<Array<Maybe<Strapi_BlogConnectionIs_Blog>>>;
-  meta_description?: Maybe<Array<Maybe<Strapi_BlogConnectionMeta_Description>>>;
+  seo?: Maybe<Array<Maybe<Strapi_BlogConnectionSeo>>>;
 };
 
 export type Strapi_BlogConnectionId = {
@@ -1011,8 +1011,8 @@ export type Strapi_BlogConnectionIs_Blog = {
   connection?: Maybe<Strapi_BlogConnection>;
 };
 
-export type Strapi_BlogConnectionMeta_Description = {
-  key?: Maybe<Scalars['String']>;
+export type Strapi_BlogConnectionSeo = {
+  key?: Maybe<Scalars['ID']>;
   connection?: Maybe<Strapi_BlogConnection>;
 };
 
@@ -1022,7 +1022,7 @@ export type Strapi_BlogInput = {
   preview?: Maybe<Strapi_ComponentGeneralPreviewInput>;
   blog_posts?: Maybe<Array<Maybe<Scalars['ID']>>>;
   is_blog?: Maybe<Scalars['Boolean']>;
-  meta_description?: Maybe<Scalars['String']>;
+  seo: Strapi_ComponentGeneralSeoInput;
   created_by?: Maybe<Scalars['ID']>;
   updated_by?: Maybe<Scalars['ID']>;
 };
@@ -1033,7 +1033,7 @@ export type Strapi_EditBlogInput = {
   preview?: Maybe<Strapi_EditComponentGeneralPreviewInput>;
   blog_posts?: Maybe<Array<Maybe<Scalars['ID']>>>;
   is_blog?: Maybe<Scalars['Boolean']>;
-  meta_description?: Maybe<Scalars['String']>;
+  seo?: Maybe<Strapi_EditComponentGeneralSeoInput>;
   created_by?: Maybe<Scalars['ID']>;
   updated_by?: Maybe<Scalars['ID']>;
 };
@@ -2574,6 +2574,26 @@ export type Strapi_EditComponentGeneralPreviewInput = {
   button?: Maybe<Strapi_EditComponentWidgetButtonInput>;
 };
 
+export type Strapi_ComponentGeneralSeo = {
+  id: Scalars['ID'];
+  meta_description: Scalars['String'];
+  image?: Maybe<Strapi_UploadFile>;
+  title?: Maybe<Scalars['String']>;
+};
+
+export type Strapi_ComponentGeneralSeoInput = {
+  meta_description: Scalars['String'];
+  image?: Maybe<Scalars['ID']>;
+  title?: Maybe<Scalars['String']>;
+};
+
+export type Strapi_EditComponentGeneralSeoInput = {
+  id?: Maybe<Scalars['ID']>;
+  meta_description?: Maybe<Scalars['String']>;
+  image?: Maybe<Scalars['ID']>;
+  title?: Maybe<Scalars['String']>;
+};
+
 export type Strapi_ComponentMediaFiles = {
   id: Scalars['ID'];
   files?: Maybe<Array<Maybe<Strapi_UploadFile>>>;
@@ -2990,7 +3010,7 @@ export type Strapi_EditComponentWidgetEmbeddedFormInput = {
   justify?: Maybe<Strapi_Enum_Componentwidgetembeddedform_Justify>;
 };
 
-export type Strapi_Morph = Strapi_UsersPermissionsMe | Strapi_UsersPermissionsMeRole | Strapi_UsersPermissionsLoginPayload | Strapi_UserPermissionsPasswordPayload | Strapi_BlogPost | Strapi_BlogPostConnection | Strapi_BlogPostAggregator | Strapi_BlogPostGroupBy | Strapi_BlogPostConnectionId | Strapi_BlogPostConnectionCreated_At | Strapi_BlogPostConnectionUpdated_At | Strapi_BlogPostConnectionTitle | Strapi_BlogPostConnectionSlug | Strapi_BlogPostConnectionPublished | Strapi_BlogPostConnectionCover_Image | Strapi_BlogPostConnectionBlog | Strapi_BlogPostConnectionCategory | Strapi_BlogPostConnectionIs_Blog_Post | Strapi_BlogPostConnectionPreview | Strapi_BlogPostConnectionMeta_Description | Strapi_BlogPostConnectionPublished_At | Strapi_CreateBlogPostPayload | Strapi_UpdateBlogPostPayload | Strapi_DeleteBlogPostPayload | Strapi_Blog | Strapi_BlogConnection | Strapi_BlogAggregator | Strapi_BlogGroupBy | Strapi_BlogConnectionId | Strapi_BlogConnectionCreated_At | Strapi_BlogConnectionUpdated_At | Strapi_BlogConnectionName | Strapi_BlogConnectionSlug | Strapi_BlogConnectionPreview | Strapi_BlogConnectionIs_Blog | Strapi_BlogConnectionMeta_Description | Strapi_CreateBlogPayload | Strapi_UpdateBlogPayload | Strapi_DeleteBlogPayload | Strapi_Category | Strapi_CategoryConnection | Strapi_CategoryAggregator | Strapi_CategoryGroupBy | Strapi_CategoryConnectionId | Strapi_CategoryConnectionCreated_At | Strapi_CategoryConnectionUpdated_At | Strapi_CategoryConnectionName | Strapi_CategoryConnectionSlug | Strapi_CategoryConnectionIs_Category | Strapi_CreateCategoryPayload | Strapi_UpdateCategoryPayload | Strapi_DeleteCategoryPayload | Strapi_MenuItem | Strapi_MenuItemConnection | Strapi_MenuItemAggregator | Strapi_MenuItemAggregatorSum | Strapi_MenuItemAggregatorAvg | Strapi_MenuItemAggregatorMin | Strapi_MenuItemAggregatorMax | Strapi_MenuItemGroupBy | Strapi_MenuItemConnectionId | Strapi_MenuItemConnectionCreated_At | Strapi_MenuItemConnectionUpdated_At | Strapi_MenuItemConnectionText | Strapi_MenuItemConnectionIs_External_Link | Strapi_MenuItemConnectionSlug | Strapi_MenuItemConnectionOrder | Strapi_MenuItemConnectionPage | Strapi_MenuItemConnectionPublished_At | Strapi_CreateMenuItemPayload | Strapi_UpdateMenuItemPayload | Strapi_DeleteMenuItemPayload | Strapi_Offering | Strapi_OfferingConnection | Strapi_OfferingAggregator | Strapi_OfferingGroupBy | Strapi_OfferingConnectionId | Strapi_OfferingConnectionCreated_At | Strapi_OfferingConnectionUpdated_At | Strapi_OfferingConnectionTitle | Strapi_OfferingConnectionSlug | Strapi_OfferingConnectionPreview | Strapi_OfferingConnectionIs_Offering | Strapi_OfferingConnectionMeta_Description | Strapi_OfferingConnectionPublished_At | Strapi_CreateOfferingPayload | Strapi_UpdateOfferingPayload | Strapi_DeleteOfferingPayload | Strapi_Page | Strapi_PageConnection | Strapi_PageAggregator | Strapi_PageGroupBy | Strapi_PageConnectionId | Strapi_PageConnectionCreated_At | Strapi_PageConnectionUpdated_At | Strapi_PageConnectionTitle | Strapi_PageConnectionSlug | Strapi_PageConnectionBanner_Background_Image | Strapi_PageConnectionMeta_Description | Strapi_PageConnectionMenu_Item | Strapi_PageConnectionPublished_At | Strapi_CreatePagePayload | Strapi_UpdatePagePayload | Strapi_DeletePagePayload | Strapi_Service | Strapi_ServiceConnection | Strapi_ServiceAggregator | Strapi_ServiceGroupBy | Strapi_ServiceConnectionId | Strapi_ServiceConnectionCreated_At | Strapi_ServiceConnectionUpdated_At | Strapi_ServiceConnectionTitle | Strapi_ServiceConnectionPreview | Strapi_ServiceConnectionBanner_Background_Image | Strapi_ServiceConnectionSlug | Strapi_ServiceConnectionIs_Service | Strapi_ServiceConnectionMeta_Description | Strapi_ServiceConnectionPublished_At | Strapi_CreateServicePayload | Strapi_UpdateServicePayload | Strapi_DeleteServicePayload | Strapi_Tag | Strapi_TagConnection | Strapi_TagAggregator | Strapi_TagGroupBy | Strapi_TagConnectionId | Strapi_TagConnectionCreated_At | Strapi_TagConnectionUpdated_At | Strapi_TagConnectionName | Strapi_TagConnectionSlug | Strapi_TagConnectionIs_Tag | Strapi_CreateTagPayload | Strapi_UpdateTagPayload | Strapi_DeleteTagPayload | Strapi_CommentsComment | Strapi_CommentsReport | Strapi_UploadFile | Strapi_UploadFileConnection | Strapi_UploadFileAggregator | Strapi_UploadFileAggregatorSum | Strapi_UploadFileAggregatorAvg | Strapi_UploadFileAggregatorMin | Strapi_UploadFileAggregatorMax | Strapi_UploadFileGroupBy | Strapi_UploadFileConnectionId | Strapi_UploadFileConnectionCreated_At | Strapi_UploadFileConnectionUpdated_At | Strapi_UploadFileConnectionName | Strapi_UploadFileConnectionAlternativeText | Strapi_UploadFileConnectionCaption | Strapi_UploadFileConnectionWidth | Strapi_UploadFileConnectionHeight | Strapi_UploadFileConnectionFormats | Strapi_UploadFileConnectionHash | Strapi_UploadFileConnectionExt | Strapi_UploadFileConnectionMime | Strapi_UploadFileConnectionSize | Strapi_UploadFileConnectionUrl | Strapi_UploadFileConnectionPreviewUrl | Strapi_UploadFileConnectionProvider | Strapi_UploadFileConnectionProvider_Metadata | Strapi_DeleteFilePayload | Strapi_UsersPermissionsPermission | Strapi_UsersPermissionsRole | Strapi_UsersPermissionsRoleConnection | Strapi_UsersPermissionsRoleAggregator | Strapi_UsersPermissionsRoleGroupBy | Strapi_UsersPermissionsRoleConnectionId | Strapi_UsersPermissionsRoleConnectionName | Strapi_UsersPermissionsRoleConnectionDescription | Strapi_UsersPermissionsRoleConnectionType | Strapi_CreateRolePayload | Strapi_UpdateRolePayload | Strapi_DeleteRolePayload | Strapi_UsersPermissionsUser | Strapi_UsersPermissionsUserConnection | Strapi_UsersPermissionsUserAggregator | Strapi_UsersPermissionsUserGroupBy | Strapi_UsersPermissionsUserConnectionId | Strapi_UsersPermissionsUserConnectionCreated_At | Strapi_UsersPermissionsUserConnectionUpdated_At | Strapi_UsersPermissionsUserConnectionUsername | Strapi_UsersPermissionsUserConnectionEmail | Strapi_UsersPermissionsUserConnectionProvider | Strapi_UsersPermissionsUserConnectionConfirmed | Strapi_UsersPermissionsUserConnectionBlocked | Strapi_UsersPermissionsUserConnectionRole | Strapi_CreateUserPayload | Strapi_UpdateUserPayload | Strapi_DeleteUserPayload | Strapi_ComponentCollectionsBlogPosts | Strapi_ComponentCollectionsBlogs | Strapi_ComponentCollectionsOfferings | Strapi_ComponentCollectionsServices | Strapi_ComponentGeneralPreview | Strapi_ComponentMediaFiles | Strapi_ComponentMediaImages | Strapi_ComponentMediaSingleFile | Strapi_ComponentMediaSingleImage | Strapi_ComponentMediaSingleVideo | Strapi_ComponentMediaVideos | Strapi_ComponentSectionHeadingLeftImageRight | Strapi_ComponentSectionHeadingRightImageLeft | Strapi_ComponentSectionImageCenterTextEitherSide | Strapi_ComponentSectionImageRightTextLeft | Strapi_ComponentSectionTextCenterImageEitherSide | Strapi_ComponentSectionTextRightImageLeft | Strapi_ComponentTextHeading | Strapi_ComponentTextParagraph | Strapi_ComponentTextQuote | Strapi_ComponentWidgetButton | Strapi_ComponentWidgetDivider | Strapi_ComponentWidgetEmbeddedForm;
+export type Strapi_Morph = Strapi_UsersPermissionsMe | Strapi_UsersPermissionsMeRole | Strapi_UsersPermissionsLoginPayload | Strapi_UserPermissionsPasswordPayload | Strapi_BlogPost | Strapi_BlogPostConnection | Strapi_BlogPostAggregator | Strapi_BlogPostGroupBy | Strapi_BlogPostConnectionId | Strapi_BlogPostConnectionCreated_At | Strapi_BlogPostConnectionUpdated_At | Strapi_BlogPostConnectionTitle | Strapi_BlogPostConnectionSlug | Strapi_BlogPostConnectionPublished | Strapi_BlogPostConnectionCover_Image | Strapi_BlogPostConnectionBlog | Strapi_BlogPostConnectionCategory | Strapi_BlogPostConnectionIs_Blog_Post | Strapi_BlogPostConnectionPreview | Strapi_BlogPostConnectionSeo | Strapi_BlogPostConnectionPublished_At | Strapi_CreateBlogPostPayload | Strapi_UpdateBlogPostPayload | Strapi_DeleteBlogPostPayload | Strapi_Blog | Strapi_BlogConnection | Strapi_BlogAggregator | Strapi_BlogGroupBy | Strapi_BlogConnectionId | Strapi_BlogConnectionCreated_At | Strapi_BlogConnectionUpdated_At | Strapi_BlogConnectionName | Strapi_BlogConnectionSlug | Strapi_BlogConnectionPreview | Strapi_BlogConnectionIs_Blog | Strapi_BlogConnectionSeo | Strapi_CreateBlogPayload | Strapi_UpdateBlogPayload | Strapi_DeleteBlogPayload | Strapi_Category | Strapi_CategoryConnection | Strapi_CategoryAggregator | Strapi_CategoryGroupBy | Strapi_CategoryConnectionId | Strapi_CategoryConnectionCreated_At | Strapi_CategoryConnectionUpdated_At | Strapi_CategoryConnectionName | Strapi_CategoryConnectionSlug | Strapi_CategoryConnectionIs_Category | Strapi_CreateCategoryPayload | Strapi_UpdateCategoryPayload | Strapi_DeleteCategoryPayload | Strapi_MenuItem | Strapi_MenuItemConnection | Strapi_MenuItemAggregator | Strapi_MenuItemAggregatorSum | Strapi_MenuItemAggregatorAvg | Strapi_MenuItemAggregatorMin | Strapi_MenuItemAggregatorMax | Strapi_MenuItemGroupBy | Strapi_MenuItemConnectionId | Strapi_MenuItemConnectionCreated_At | Strapi_MenuItemConnectionUpdated_At | Strapi_MenuItemConnectionText | Strapi_MenuItemConnectionIs_External_Link | Strapi_MenuItemConnectionSlug | Strapi_MenuItemConnectionOrder | Strapi_MenuItemConnectionPage | Strapi_MenuItemConnectionPublished_At | Strapi_CreateMenuItemPayload | Strapi_UpdateMenuItemPayload | Strapi_DeleteMenuItemPayload | Strapi_Offering | Strapi_OfferingConnection | Strapi_OfferingAggregator | Strapi_OfferingGroupBy | Strapi_OfferingConnectionId | Strapi_OfferingConnectionCreated_At | Strapi_OfferingConnectionUpdated_At | Strapi_OfferingConnectionTitle | Strapi_OfferingConnectionSlug | Strapi_OfferingConnectionPreview | Strapi_OfferingConnectionIs_Offering | Strapi_OfferingConnectionMeta_Description | Strapi_OfferingConnectionPublished_At | Strapi_CreateOfferingPayload | Strapi_UpdateOfferingPayload | Strapi_DeleteOfferingPayload | Strapi_Page | Strapi_PageConnection | Strapi_PageAggregator | Strapi_PageGroupBy | Strapi_PageConnectionId | Strapi_PageConnectionCreated_At | Strapi_PageConnectionUpdated_At | Strapi_PageConnectionTitle | Strapi_PageConnectionSlug | Strapi_PageConnectionBanner_Background_Image | Strapi_PageConnectionMeta_Description | Strapi_PageConnectionMenu_Item | Strapi_PageConnectionPublished_At | Strapi_CreatePagePayload | Strapi_UpdatePagePayload | Strapi_DeletePagePayload | Strapi_Service | Strapi_ServiceConnection | Strapi_ServiceAggregator | Strapi_ServiceGroupBy | Strapi_ServiceConnectionId | Strapi_ServiceConnectionCreated_At | Strapi_ServiceConnectionUpdated_At | Strapi_ServiceConnectionTitle | Strapi_ServiceConnectionPreview | Strapi_ServiceConnectionBanner_Background_Image | Strapi_ServiceConnectionSlug | Strapi_ServiceConnectionIs_Service | Strapi_ServiceConnectionMeta_Description | Strapi_ServiceConnectionPublished_At | Strapi_CreateServicePayload | Strapi_UpdateServicePayload | Strapi_DeleteServicePayload | Strapi_Tag | Strapi_TagConnection | Strapi_TagAggregator | Strapi_TagGroupBy | Strapi_TagConnectionId | Strapi_TagConnectionCreated_At | Strapi_TagConnectionUpdated_At | Strapi_TagConnectionName | Strapi_TagConnectionSlug | Strapi_TagConnectionIs_Tag | Strapi_CreateTagPayload | Strapi_UpdateTagPayload | Strapi_DeleteTagPayload | Strapi_CommentsComment | Strapi_CommentsReport | Strapi_UploadFile | Strapi_UploadFileConnection | Strapi_UploadFileAggregator | Strapi_UploadFileAggregatorSum | Strapi_UploadFileAggregatorAvg | Strapi_UploadFileAggregatorMin | Strapi_UploadFileAggregatorMax | Strapi_UploadFileGroupBy | Strapi_UploadFileConnectionId | Strapi_UploadFileConnectionCreated_At | Strapi_UploadFileConnectionUpdated_At | Strapi_UploadFileConnectionName | Strapi_UploadFileConnectionAlternativeText | Strapi_UploadFileConnectionCaption | Strapi_UploadFileConnectionWidth | Strapi_UploadFileConnectionHeight | Strapi_UploadFileConnectionFormats | Strapi_UploadFileConnectionHash | Strapi_UploadFileConnectionExt | Strapi_UploadFileConnectionMime | Strapi_UploadFileConnectionSize | Strapi_UploadFileConnectionUrl | Strapi_UploadFileConnectionPreviewUrl | Strapi_UploadFileConnectionProvider | Strapi_UploadFileConnectionProvider_Metadata | Strapi_DeleteFilePayload | Strapi_UsersPermissionsPermission | Strapi_UsersPermissionsRole | Strapi_UsersPermissionsRoleConnection | Strapi_UsersPermissionsRoleAggregator | Strapi_UsersPermissionsRoleGroupBy | Strapi_UsersPermissionsRoleConnectionId | Strapi_UsersPermissionsRoleConnectionName | Strapi_UsersPermissionsRoleConnectionDescription | Strapi_UsersPermissionsRoleConnectionType | Strapi_CreateRolePayload | Strapi_UpdateRolePayload | Strapi_DeleteRolePayload | Strapi_UsersPermissionsUser | Strapi_UsersPermissionsUserConnection | Strapi_UsersPermissionsUserAggregator | Strapi_UsersPermissionsUserGroupBy | Strapi_UsersPermissionsUserConnectionId | Strapi_UsersPermissionsUserConnectionCreated_At | Strapi_UsersPermissionsUserConnectionUpdated_At | Strapi_UsersPermissionsUserConnectionUsername | Strapi_UsersPermissionsUserConnectionEmail | Strapi_UsersPermissionsUserConnectionProvider | Strapi_UsersPermissionsUserConnectionConfirmed | Strapi_UsersPermissionsUserConnectionBlocked | Strapi_UsersPermissionsUserConnectionRole | Strapi_CreateUserPayload | Strapi_UpdateUserPayload | Strapi_DeleteUserPayload | Strapi_ComponentCollectionsBlogPosts | Strapi_ComponentCollectionsBlogs | Strapi_ComponentCollectionsOfferings | Strapi_ComponentCollectionsServices | Strapi_ComponentGeneralPreview | Strapi_ComponentGeneralSeo | Strapi_ComponentMediaFiles | Strapi_ComponentMediaImages | Strapi_ComponentMediaSingleFile | Strapi_ComponentMediaSingleImage | Strapi_ComponentMediaSingleVideo | Strapi_ComponentMediaVideos | Strapi_ComponentSectionHeadingLeftImageRight | Strapi_ComponentSectionHeadingRightImageLeft | Strapi_ComponentSectionImageCenterTextEitherSide | Strapi_ComponentSectionImageRightTextLeft | Strapi_ComponentSectionTextCenterImageEitherSide | Strapi_ComponentSectionTextRightImageLeft | Strapi_ComponentTextHeading | Strapi_ComponentTextParagraph | Strapi_ComponentTextQuote | Strapi_ComponentWidgetButton | Strapi_ComponentWidgetDivider | Strapi_ComponentWidgetEmbeddedForm;
 
 export type Strapi_InputId = {
   id: Scalars['ID'];
@@ -5797,8 +5817,8 @@ export type StrapiMenuItemFragment = (
 );
 
 export type StrapiBlogFragment = (
-  Pick<Strapi_Blog, 'name' | 'slug' | 'fullUrlPath' | 'meta_description' | 'is_blog'>
-  & { preview?: Maybe<StrapiComponentGeneralPreviewFragment>, blog_posts?: Maybe<Array<Maybe<StrapiBlogPostFragment>>> }
+  Pick<Strapi_Blog, 'name' | 'slug' | 'fullUrlPath' | 'is_blog'>
+  & { seo?: Maybe<StrapiComponentGeneralSeoFragment>, preview?: Maybe<StrapiComponentGeneralPreviewFragment>, blog_posts?: Maybe<Array<Maybe<StrapiBlogPostFragment>>> }
 );
 
 export type StrapiBlogPostFullUrlPathFragment = (
@@ -5808,7 +5828,7 @@ export type StrapiBlogPostFullUrlPathFragment = (
 
 export type StrapiBlogPostFragment = (
   Pick<Strapi_BlogPost, 'title' | 'slug' | 'published' | 'fullUrlPath' | 'is_blog_post'>
-  & { preview?: Maybe<StrapiComponentGeneralPreviewFragment>, cover_image?: Maybe<StrapiUploadFileFragment>, blog?: Maybe<Pick<Strapi_Blog, 'name' | 'slug'>>, category?: Maybe<Pick<Strapi_Category, 'name' | 'slug'>>, tags?: Maybe<Array<Maybe<Pick<Strapi_Tag, 'name'>>>> }
+  & { seo?: Maybe<StrapiComponentGeneralSeoFragment>, preview?: Maybe<StrapiComponentGeneralPreviewFragment>, cover_image?: Maybe<StrapiUploadFileFragment>, blog?: Maybe<Pick<Strapi_Blog, 'name' | 'slug'>>, category?: Maybe<Pick<Strapi_Category, 'name' | 'slug'>>, tags?: Maybe<Array<Maybe<Pick<Strapi_Tag, 'name'>>>> }
 );
 
 export type StrapiOfferingFragment = (
@@ -5925,6 +5945,11 @@ export type StrapiComponentCollectionsServicesFragment = { services?: Maybe<Arra
 
 export type StrapiComponentGeneralPreviewFragment = { heading?: Maybe<StrapiComponentTextHeadingFragment>, text?: Maybe<StrapiComponentTextParagraphFragment>, image?: Maybe<StrapiComponentMediaSingleImageFragment>, button?: Maybe<StrapiComponentWidgetButtonFragment> };
 
+export type StrapiComponentGeneralSeoFragment = (
+  Pick<Strapi_ComponentGeneralSeo, 'title' | 'meta_description'>
+  & { image?: Maybe<StrapiUploadFileFragment> }
+);
+
 export type Unnamed_6_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -5941,8 +5966,8 @@ export type Get_Blog_PostQueryVariables = Exact<{
 
 
 export type Get_Blog_PostQuery = { strapi: { blogPost?: Maybe<(
-      Pick<Strapi_BlogPost, 'title' | 'meta_description'>
-      & { tags?: Maybe<Array<Maybe<Pick<Strapi_Tag, 'name'>>>>, body: Array<Maybe<(
+      Pick<Strapi_BlogPost, 'title'>
+      & { tags?: Maybe<Array<Maybe<Pick<Strapi_Tag, 'name'>>>>, seo?: Maybe<StrapiComponentGeneralSeoFragment>, body: Array<Maybe<(
         { __typename: 'STRAPI_ComponentMediaSingleVideo' }
         & StrapiComponentMediaSingleVideoFragment
       ) | (

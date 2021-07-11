@@ -4,9 +4,10 @@ import { HeadingField } from '../../Text';
 import { ImageWithCaption } from '../../Images';
 import { ButtonField } from '../../Widgets';
 import { Paragraph } from '../../Text';
+import { Blog } from '../../../typings/strapi';
 
 export interface Props {
-  data: Array<Pick<StrapiBlog, 'id' | 'slug' | 'fullUrlPath' | 'preview'>>;
+  data: Array<Pick<Blog, 'id' | 'slug' | 'fullUrlPath' | 'preview'>>;
 }
 
 const BlogsField: React.FC<Props> = ({ data }: Props) => {

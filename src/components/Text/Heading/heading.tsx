@@ -1,8 +1,9 @@
 import React from 'react';
+import { ComponentTextHeading } from '../../../typings/strapi';
 import Heading from '../../Heading';
 
 interface Props {
-  data: StrapiComponentTextHeading;
+  data: ComponentTextHeading;
 }
 
 const HeadingField: React.FC<Props> = ({

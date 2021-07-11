@@ -1,12 +1,16 @@
 import React from 'react';
+import {
+  ComponentMediaSingleImage,
+  ComponentTextParagraph,
+} from '../../../typings/strapi';
 import { SingleImageField } from '../../Media';
 import { Paragraph } from '../../Text';
 import { TextWithImageLeftSide, GridAreaText, GridAreaImage } from './styles';
 
 export interface Props {
   data: {
-    image: StrapiComponentMediaSingleImage;
-    text: StrapiComponentTextParagraph;
+    image: ComponentMediaSingleImage;
+    text: ComponentTextParagraph;
   };
 }
 

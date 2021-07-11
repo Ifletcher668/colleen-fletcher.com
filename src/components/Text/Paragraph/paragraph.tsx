@@ -4,12 +4,14 @@ import { TextWrapper, H1, H2, H3 } from './styles';
 import { Grid } from '../../Containers';
 import parse, { domToReact, HTMLReactParserOptions } from 'html-react-parser';
 import { Element } from 'domhandler/lib/node';
+import { ComponentTextParagraph } from '../../../typings/strapi';
 
 export interface Props {
-  data: StrapiComponentTextParagraph;
+  data: ComponentTextParagraph;
+  className?: Array<string> | string;
 }
 
-const Paragraph: React.FC<Props> = ({ data }: Props) => {
+const Paragraph: React.FC<Props> = ({ data, className }: Props) => {
   const { body, alignParagraph, justifyParagraph } = data;
 
   // TODO: Add images to parser
@@ -121,7 +123,11 @@ const Paragraph: React.FC<Props> = ({ data }: Props) => {
   };
 
   return (
-    <Grid containerType="section" styling={{ height: '100%', width: '100%' }}>
+    <Grid
+      containerType="section"
+      className={Array.isArray(className) ? className.join(' ') : className}
+      styling={{ height: '100%', width: '100%' }}
+    >
       {parse(body, options)}
     </Grid>
   );

@@ -6,9 +6,10 @@ import { ButtonField } from '../../Widgets';
 import { zigZagGridColumns } from '../../../utils/zigZagGridColumns';
 import { GridArea } from '../../../StyledComponents/helpers';
 import Divider from '../../Divider';
+import { Offering } from '../../../typings/strapi';
 
 export interface Props {
-  data: Array<Pick<StrapiOffering, 'id' | 'slug' | 'fullUrlPath' | 'preview'>>;
+  data: Array<Pick<Offering, 'id' | 'slug' | 'fullUrlPath' | 'preview'>>;
 }
 
 // Component only used in StrapiDynamicZone

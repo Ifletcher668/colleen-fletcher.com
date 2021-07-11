@@ -5,9 +5,10 @@ import Services from '../../Collections/services';
 import BlogPosts from '../../Collections/blog-posts';
 import { Link } from '../../../Atoms';
 import BlueInfinitySymbol from '../../../../assets/images/svg/colleens-blue-infinity.svg';
+import { DynamicZone } from '../../../../typings/strapi';
 
 interface Props extends DefaultProps {
-  content: StrapiDynamicZone[];
+  content: Array<DynamicZone>;
 }
 
 const Panel: React.FC<Props> = ({ content, className }: Props) => {

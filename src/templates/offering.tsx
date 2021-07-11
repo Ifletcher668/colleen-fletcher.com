@@ -10,6 +10,7 @@ import SEO from '../components/SEO';
 import { HeadingField, Paragraph } from '../components/Text';
 import { ButtonField } from '../components/Widgets';
 import { GridArea } from '../StyledComponents/helpers';
+import { ComponentWidgetButton } from '../typings/strapi';
 import { zigZagGridColumns } from '../utils/zigZagGridColumns';
 import { TemplateProps } from './types';
 
@@ -32,8 +33,8 @@ export default (props: TemplateProps): JSX.Element => {
           <ImageWithCaption
             data={offering.preview.image}
             styling={{
-              margin: 'auto',
-              width: '50%', // needed for flexbox to not collapse
+              justifySelf: 'center',
+              width: `${window.innerWidth > 768 ? '50%' : '100%;'}`, // needed for flexbox to not collapse. pls refactor
             }}
           />
         )}
@@ -44,7 +45,7 @@ export default (props: TemplateProps): JSX.Element => {
               const zigZagColumnLayout = zigZagGridColumns(idx);
 
               // Mutating button data to append offering's url
-              const buttonData: StrapiComponentWidgetButton = {
+              const buttonData: ComponentWidgetButton = {
                 action: `${offering.fullUrlPath}${service.slug}`,
                 buttonText: service.preview.button.buttonText,
                 variant: service.preview.button.variant,

@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { Link } from '../../Atoms';
+import { BlogPost, Strapi } from '../../../typings/strapi';
 
 interface Props extends DefaultProps {
   blog: string;
@@ -24,8 +25,8 @@ const BlogPosts: React.FC<Props> = (props: Props) => {
   const query: Strapi = useStaticQuery(data);
 
   // TODO: A better way to handle limit?
-  const fivePosts: StrapiBlogPost[] = [];
-  const filteredPosts: StrapiBlogPost[] = query.strapi.blogPosts.filter(post =>
+  const fivePosts: BlogPost[] = [];
+  const filteredPosts: BlogPost[] = query.strapi.blogPosts.filter(post =>
     post.blog ? post.blog.name === props.blog : '',
   );
   for (let i = 0; i < filteredPosts.length; i++) {

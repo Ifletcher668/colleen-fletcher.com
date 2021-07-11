@@ -1,8 +1,9 @@
 import React from 'react';
+import { ComponentMediaSingleImage } from '../../../typings/strapi';
 import { Image, ImageWithCaption } from '../../Images';
 
 export interface Props {
-  data: StrapiComponentMediaSingleImage;
+  data: ComponentMediaSingleImage;
 }
 
 const SingleImageField: React.FC<Props> = ({ data }: Props) => {

@@ -5,10 +5,15 @@
 //  -> component <- this last one returns null
 
 import React from 'react';
+import {
+  Blog,
+  Offering,
+  Preview as StrapiPreview,
+} from '../../../typings/strapi';
 
 interface Props {
   preview: StrapiPreview;
-  component: StrapiBlog | StrapiOffering;
+  component: Blog | Offering;
 }
 
 const Preview: React.FC<Props> = (props: Props) => {

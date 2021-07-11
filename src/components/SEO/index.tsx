@@ -1,15 +1,18 @@
 import React from 'react';
+import { UploadFile } from '../../typings/strapi';
 import Helmet from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
 
+// TODO: Refactor to use eventual typescript type (strapi)
 export interface Props {
-  description: string;
-  lang: string;
-  meta: any[];
   title: string;
+  description: string;
+  image?: UploadFile;
+  lang?: string;
+  meta?: any[];
 }
 
-const SEO = (props: Props) => {
+const SEO = ({ title, description, image, lang, meta }: Props) => {
   const { site } = useStaticQuery(graphql`
     query {
       site {
@@ -24,15 +27,17 @@ const SEO = (props: Props) => {
       }
     }
   `);
+  // image?.imageFile.childImageSharp.gatsbyImageData.
+  const metaDescription = description || site.siteMetadata.description;
 
-  const metaDescription = props.description || site.siteMetadata.description;
+  const imageData = image?.imageFile.childImageSharp.gatsbyImageData;
 
   return (
     <Helmet
       htmlAttributes={{
-        lang: props.lang,
+        lang: lang,
       }}
-      title={props.title}
+      title={title}
       titleTemplate={`%s | ${site.siteMetadata.title}`}
       meta={[
         {
@@ -50,19 +55,33 @@ const SEO = (props: Props) => {
         },
         {
           property: 'og:title',
-          content: props.title,
+          content: title,
         },
         {
           property: 'og:description',
           content: metaDescription,
         },
         {
-          property: 'og:type',
-          content: 'website',
+          property: 'og:image',
+          content: image?.url,
         },
         {
-          name: 'twitter:card',
-          content: 'summary',
+          property: 'og:image:width',
+          content:
+            imageData !== undefined && imageData.width < 768
+              ? imageData.width
+              : 768,
+        },
+        {
+          property: 'og:image:height',
+          content:
+            imageData !== undefined && imageData.width < 768
+              ? imageData.height
+              : 768,
+        },
+        {
+          property: 'og:type',
+          content: 'website',
         },
         {
           name: 'twitter:creator',
@@ -70,21 +89,15 @@ const SEO = (props: Props) => {
         },
         {
           name: 'twitter:title',
-          content: props.title,
+          content: title,
         },
         {
           name: 'twitter:description',
           content: metaDescription,
         },
-      ].concat(props.meta)}
+      ].concat(meta || [])}
     />
   );
-};
-
-SEO.defaultProps = {
-  lang: 'en',
-  meta: [],
-  description: '',
 };
 
 export default SEO;

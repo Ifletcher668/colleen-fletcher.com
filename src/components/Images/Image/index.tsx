@@ -2,8 +2,9 @@ import React from 'react';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
 import { color } from '../../../StyledComponents/_mixins';
+import { ComponentMediaSingleImage } from '../../../typings/strapi';
 interface Props {
-  data: StrapiComponentMediaSingleImage;
+  data: ComponentMediaSingleImage;
 }
 
 interface WrapperProps {

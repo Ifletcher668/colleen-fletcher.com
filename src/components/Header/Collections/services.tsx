@@ -24,7 +24,7 @@ const data = graphql`
   }
 `;
 const Services: React.FC<Props> = (props: Props) => {
-  const query: Strapi = useStaticQuery(data);
+  const query: Strapi.Strapi = useStaticQuery(data);
   return (
     <>
       {query.strapi.services

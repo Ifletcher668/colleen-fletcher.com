@@ -3,9 +3,10 @@ import { Image } from '../index';
 import { Flexbox } from '../../Containers';
 import { CSSObject } from 'styled-components';
 import { FigCaption } from '../../Atoms';
+import { ComponentMediaSingleImage } from '../../../typings/strapi';
 
 interface Props extends FlexboxProps {
-  data: StrapiComponentMediaSingleImage;
+  data: ComponentMediaSingleImage;
   /**
    * @param styling
    * ImageWithCaption abstracts Gatsby's Image component
@@ -27,7 +28,12 @@ const ImageWithCaption: React.FC<Props> = (props: Props) => {
     );
 
   return (
-    <Flexbox containerType={containerType} vertical styling={styling}>
+    <Flexbox
+      containerType={containerType}
+      vertical
+      styling={styling}
+      {...props}
+    >
       <Image data={data} />
 
       {data.file?.caption && <FigCaption>{data.file.caption}</FigCaption>}

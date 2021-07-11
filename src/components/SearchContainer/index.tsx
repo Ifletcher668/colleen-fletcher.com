@@ -10,6 +10,14 @@ import OutsideClickContainer from '../OutsideClickContainer';
 import { formatDateOnSlug } from '../../utils/format-date';
 import styled from 'styled-components';
 import { Paragraph, Link } from '../Atoms';
+import {
+  Blog,
+  BlogPost,
+  Category,
+  Tag,
+  Offering,
+  Service,
+} from '../../typings/strapi';
 
 const Label = styled.label`
   align-self: center;
@@ -26,12 +34,7 @@ const Input = styled.input`
 `;
 
 type SearchResult = Array<
-  | StrapiBlog
-  | StrapiBlogPost
-  | StrapiCategory
-  | StrapiTag
-  | StrapiOffering
-  | StrapiService
+  Blog | BlogPost | Category | Tag | Offering | Service
 >;
 
 const SearchContainer = (): JSX.Element => {
@@ -41,12 +44,12 @@ const SearchContainer = (): JSX.Element => {
   const [searchResult, setSearchResult] = useState<SearchResult>([]);
 
   // the data
-  const [blogs, setBlogs] = useState<StrapiBlog[] | null>(null);
-  const [blogPosts, setBlogPosts] = useState<StrapiBlogPost[] | null>(null);
-  const [categories, setCategories] = useState<StrapiCategory[] | null>(null);
-  const [tags, setTags] = useState<StrapiTag[] | null>(null);
-  const [offerings, setOfferings] = useState<StrapiOffering[] | null>(null);
-  const [services, setServices] = useState<StrapiService[] | null>(null);
+  const [blogs, setBlogs] = useState<Blog[] | null>(null);
+  const [blogPosts, setBlogPosts] = useState<BlogPost[] | null>(null);
+  const [categories, setCategories] = useState<Category[] | null>(null);
+  const [tags, setTags] = useState<Tag[] | null>(null);
+  const [offerings, setOfferings] = useState<Offering[] | null>(null);
+  const [services, setServices] = useState<Service[] | null>(null);
 
   // behavior logic
   const [isLoading, setIsLoading] = useState(true);
@@ -58,28 +61,28 @@ const SearchContainer = (): JSX.Element => {
   const [showOfferingSearches, setShowOfferingSearches] = useState(false);
   const [showServiceSearches, setShowServiceSearches] = useState(false);
 
-  const isStrapiBlog = (sr: SearchResult): sr is StrapiBlog[] => {
-    return (sr as StrapiBlog[]) !== undefined;
+  const isBlog = (sr: SearchResult): sr is Blog[] => {
+    return (sr as Blog[]) !== undefined;
   };
 
-  const isStrapiBlogPost = (sr: SearchResult): sr is StrapiBlogPost[] => {
-    return (sr as StrapiBlogPost[]) !== undefined;
+  const isBlogPost = (sr: SearchResult): sr is BlogPost[] => {
+    return (sr as BlogPost[]) !== undefined;
   };
 
-  const isStrapiCategory = (sr: SearchResult): sr is StrapiCategory[] => {
-    return (sr as StrapiCategory[]) !== undefined;
+  const isCategory = (sr: SearchResult): sr is Category[] => {
+    return (sr as Category[]) !== undefined;
   };
 
-  const isStrapiTag = (sr: SearchResult): sr is StrapiTag[] => {
-    return (sr as StrapiTag[]) !== undefined;
+  const isTag = (sr: SearchResult): sr is Tag[] => {
+    return (sr as Tag[]) !== undefined;
   };
 
-  const isStrapiOffering = (sr: SearchResult): sr is StrapiOffering[] => {
-    return (sr as StrapiOffering[]) !== undefined;
+  const isOffering = (sr: SearchResult): sr is Offering[] => {
+    return (sr as Offering[]) !== undefined;
   };
 
-  const isStrapiService = (sr: SearchResult): sr is StrapiService[] => {
-    return (sr as StrapiService[]) !== undefined;
+  const isService = (sr: SearchResult): sr is Service[] => {
+    return (sr as Service[]) !== undefined;
   };
 
   useEffect(() => {
@@ -215,11 +218,11 @@ const SearchContainer = (): JSX.Element => {
     }
   };
 
-  const handleIsStrapiBlog = () => {
+  const handleIsBlog = () => {
     return (
       <SearchSection hideElement={showBlogSearches}>
         <Heading level={5}>Blogs</Heading>
-        {isStrapiBlog(searchResult) && (
+        {isBlog(searchResult) && (
           <ul>
             {searchResult
               .filter(data => (data.is_blog ? data : ''))
@@ -240,11 +243,11 @@ const SearchContainer = (): JSX.Element => {
     );
   };
 
-  const handleIsStrapiBlogPost = () => {
+  const handleIsBlogPost = () => {
     return (
       <SearchSection hideElement={showBlogPostSearches}>
         <Heading level={5}>Blog Posts</Heading>
-        {isStrapiBlogPost(searchResult) && (
+        {isBlogPost(searchResult) && (
           <ul>
             {searchResult
               .filter(data => (data.is_blog_post ? data : ''))
@@ -283,11 +286,11 @@ const SearchContainer = (): JSX.Element => {
     );
   };
 
-  const handleIsStrapiCategory = () => {
+  const handleIsCategory = () => {
     return (
       <SearchSection hideElement={showCategorySearches}>
         <Heading level={5}>Categories</Heading>
-        {isStrapiCategory(searchResult) && (
+        {isCategory(searchResult) && (
           <ul>
             {searchResult
               .filter(data => {
@@ -312,11 +315,11 @@ const SearchContainer = (): JSX.Element => {
     );
   };
 
-  const handleIsStrapiTag = () => {
+  const handleIsTag = () => {
     return (
       <SearchSection hideElement={showTagSearches}>
         <Heading level={5}>Tags</Heading>
-        {isStrapiTag(searchResult) && (
+        {isTag(searchResult) && (
           <ul>
             {searchResult
               .filter(data => {
@@ -339,11 +342,11 @@ const SearchContainer = (): JSX.Element => {
     );
   };
 
-  const handleIsStrapiOffering = () => {
+  const handleIsOffering = () => {
     return (
       <SearchSection hideElement={showOfferingSearches}>
         <Heading level={5}>Offerings</Heading>
-        {isStrapiOffering(searchResult) && (
+        {isOffering(searchResult) && (
           <ul>
             {searchResult
               .filter(data => {
@@ -368,11 +371,11 @@ const SearchContainer = (): JSX.Element => {
     );
   };
 
-  const handleIsStrapiService = () => {
+  const handleIsService = () => {
     return (
       <SearchSection hideElement={showServiceSearches}>
         <Heading level={5}>Services</Heading>
-        {isStrapiService(searchResult) && (
+        {isService(searchResult) && (
           <ul>
             {searchResult
               .filter(data => {
@@ -476,17 +479,17 @@ const SearchContainer = (): JSX.Element => {
               xsmall: '1fr',
             }}
           >
-            {!isLoading && handleIsStrapiBlog()}
+            {!isLoading && handleIsBlog()}
 
-            {!isLoading && handleIsStrapiBlogPost()}
+            {!isLoading && handleIsBlogPost()}
 
-            {!isLoading && handleIsStrapiCategory()}
+            {!isLoading && handleIsCategory()}
 
-            {!isLoading && handleIsStrapiTag()}
+            {!isLoading && handleIsTag()}
 
-            {!isLoading && handleIsStrapiOffering()}
+            {!isLoading && handleIsOffering()}
 
-            {!isLoading && handleIsStrapiService()}
+            {!isLoading && handleIsService()}
           </Grid>
         )}
       </OutsideClickContainer>

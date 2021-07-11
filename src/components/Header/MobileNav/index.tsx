@@ -8,6 +8,7 @@ import { Flexbox } from '../../Containers/';
 import Heading from '../../Heading';
 import { MobileMenuContext } from '../index';
 import MenuItem from './MenuItem';
+import { MenuItem as StrapiMenuItem } from '../../../typings/strapi';
 
 interface Props extends DefaultProps {
   items: StrapiMenuItem[];

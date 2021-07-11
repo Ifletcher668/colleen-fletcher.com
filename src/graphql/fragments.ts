@@ -49,7 +49,9 @@ export const StrapiBlog = graphql`
     name
     slug
     fullUrlPath
-    meta_description
+    seo {
+      ...StrapiComponentGeneralSeo
+    }
     preview {
       ...StrapiComponentGeneralPreview
     }
@@ -82,6 +84,9 @@ export const StrapiBlogPost = graphql`
     title
     slug
     published
+    seo {
+      ...StrapiComponentGeneralSeo
+    }
     preview {
       ...StrapiComponentGeneralPreview
     }
@@ -423,5 +428,15 @@ export const StrapiComponentGeneralPreview = graphql`
     button {
       ...StrapiComponentWidgetButton
     }
+  }
+`;
+
+export const StrapiComponentGeneralSeo = graphql`
+  fragment StrapiComponentGeneralSeo on STRAPI_ComponentGeneralSeo {
+    title
+    image {
+      ...StrapiUploadFile
+    }
+    meta_description
   }
 `;

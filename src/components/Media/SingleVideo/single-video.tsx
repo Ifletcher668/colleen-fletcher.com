@@ -1,9 +1,10 @@
 import React from 'react';
+import { ComponentSingleVideo } from '../../../typings/strapi';
 import Heading from '../../Heading';
 import { VideoWrapper } from './styles';
 
 interface Props {
-  data: StrapiComponentSingleVideo;
+  data: ComponentSingleVideo;
 }
 
 const VideoField = ({ data }: Props): JSX.Element => {
