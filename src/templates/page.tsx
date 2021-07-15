@@ -46,7 +46,9 @@ export const query = graphql`
         banner_background_image {
           ...StrapiUploadFile
         }
-        meta_description
+        seo {
+          ...StrapiComponentGeneralSeo
+        }
         banner {
           __typename
           ... on STRAPI_ComponentMediaSingleImage {
