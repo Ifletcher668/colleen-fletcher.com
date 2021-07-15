@@ -158,7 +158,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 exports.createResolvers = async ({
   actions,
   cache,
-  getCache,
   createNodeId,
   createResolvers,
   store,
@@ -175,7 +174,6 @@ exports.createResolvers = async ({
             url: source.url,
             store,
             cache,
-            getCache,
             createNode,
             createNodeId,
             reporter,

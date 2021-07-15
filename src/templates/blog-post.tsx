@@ -41,6 +41,14 @@ export const query = graphql`
         seo {
           ...StrapiComponentGeneralSeo
         }
+        preview {
+          text {
+            ...StrapiComponentTextParagraph
+          }
+          image {
+            ...StrapiComponentMediaSingleImage
+          }
+        }
         body {
           __typename
           ... on STRAPI_ComponentMediaSingleImage {
