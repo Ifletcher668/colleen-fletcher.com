@@ -18,10 +18,10 @@ export default (props: TemplateProps): JSX.Element => {
 
   return (
     <Layout location={props.location}>
-      <SEO
-        title={seo.title ?? title}
-        description={seo.meta_description}
-        image={seo.image}
+      <SEO // Make SEO required eventually
+        title={seo?.title ?? title}
+        description={seo?.meta_description}
+        image={seo?.image}
       />
 
       {banner_background_image && (

@@ -17,10 +17,10 @@ export default (props: TemplateProps): JSX.Element => {
 
   return (
     <Layout location={props.location}>
-      <SEO
-        title={seo.title ?? title}
-        description={seo.meta_description ?? preview.text}
-        image={seo.image ?? preview.image.file.url}
+      <SEO // Make SEO Required
+        title={seo?.title ?? title}
+        description={seo?.meta_description ?? preview.text}
+        image={seo?.image ?? preview.image.file.url}
       />
 
       <PageContainer>
