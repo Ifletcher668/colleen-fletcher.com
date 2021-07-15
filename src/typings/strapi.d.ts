@@ -222,7 +222,7 @@ declare namespace Strapi {
     id: string;
     title: string;
     slug: string;
-    meta_description: string;
+    seo: SEO;
     menuItem: MenuItem;
     banner_background_image: UploadFile;
     banner: Array<DynamicZone>;

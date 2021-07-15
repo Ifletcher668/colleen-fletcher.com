@@ -10,7 +10,7 @@ export default (props: TemplateProps): JSX.Element => {
   const {
     data: {
       strapi: {
-        blogPost: { body, seo },
+        blogPost: { body, seo, preview, title },
       },
     },
   } = props;
@@ -18,10 +18,11 @@ export default (props: TemplateProps): JSX.Element => {
   return (
     <Layout location={props.location}>
       <SEO
-        title={seo.title}
-        description={seo.meta_description}
-        image={seo.image}
+        title={seo.title ?? title}
+        description={seo.meta_description ?? preview.text}
+        image={seo.image ?? preview.image.file.url}
       />
+
       <PageContainer>
         <StrapiDynamicZone components={body} />
       </PageContainer>

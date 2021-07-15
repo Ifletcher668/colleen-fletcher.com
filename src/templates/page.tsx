@@ -11,20 +11,18 @@ export default (props: TemplateProps): JSX.Element => {
   const {
     data: {
       strapi: {
-        page: {
-          banner,
-          banner_background_image,
-          body,
-          meta_description,
-          title,
-        },
+        page: { banner, banner_background_image, body, seo, title },
       },
     },
   } = props;
 
   return (
     <Layout location={props.location}>
-      <SEO title={title} description={meta_description} />
+      <SEO
+        title={seo.title ?? title}
+        description={seo.meta_description}
+        image={seo.image}
+      />
 
       {banner_background_image && (
         <BannerBackgroundImage
