@@ -20,7 +20,7 @@ export default (props: TemplateProps): JSX.Element => {
     <Layout location={props.location}>
       <SEO // Make SEO required eventually
         title={seo?.title ?? title}
-        description={seo?.meta_description}
+        description={seo?.meta_description ?? ''} //TODO: remove nullish operator
         image={seo?.image}
       />
 
@@ -40,6 +40,11 @@ export default (props: TemplateProps): JSX.Element => {
 
 export const query = graphql`
   query GET_PAGE($id: ID!) {
+    site {
+      siteMetadata {
+        description
+      }
+    }
     strapi {
       page(id: $id) {
         title

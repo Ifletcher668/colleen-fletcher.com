@@ -12,24 +12,26 @@ export interface Props {
   meta?: any[];
 }
 
-const SEO = ({ title, description, image, lang, meta }: Props) => {
-  const { site } = useStaticQuery(graphql`
-    query {
-      site {
-        siteMetadata {
-          title
-          description
-          author {
-            name
-            bio
-          }
+const siteDataQuery = graphql`
+  query {
+    site {
+      siteMetadata {
+        title
+        description
+        author {
+          name
+          bio
         }
       }
     }
-  `);
-  // image?.imageFile.childImageSharp.gatsbyImageData.
-  const metaDescription = description || site.siteMetadata.description;
+  }
+`;
 
+const SEO = ({ title, description, image, lang, meta }: Props) => {
+  // TODO: add SiteData to useStaticQuery for type safety
+  const { site } = useStaticQuery(siteDataQuery);
+
+  const metaDescription = description || site.siteMetadata.description;
   const imageData = image?.imageFile.childImageSharp.gatsbyImageData;
 
   return (

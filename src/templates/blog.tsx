@@ -26,8 +26,8 @@ export default (props: TemplateProps): JSX.Element => {
     <Layout location={props.location}>
       <SEO // Make SEO required eventually
         title={seo?.title ?? name}
-        description={seo?.meta_description ?? preview.text}
-        image={seo?.image ?? preview.image.file.url}
+        description={seo?.meta_description ?? preview.text.body}
+        image={seo?.image ?? preview.image.file}
       />
 
       <PageContainer>
@@ -37,7 +37,7 @@ export default (props: TemplateProps): JSX.Element => {
 
         <Paragraph
           data={{
-            body: seo.meta_description,
+            body: seo?.meta_description ?? '',
             alignParagraph: 'center',
             justifyParagraph: 'center',
           }}

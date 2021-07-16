@@ -222,7 +222,7 @@ declare namespace Strapi {
     id: string;
     title: string;
     slug: string;
-    seo: SEO;
+    seo?: SEO;
     menuItem: MenuItem;
     banner_background_image: UploadFile;
     banner: Array<DynamicZone>;
@@ -235,7 +235,7 @@ declare namespace Strapi {
     id: string;
     name: string;
     slug: string;
-    seo: SEO;
+    seo?: SEO;
     preview: Preview;
     fullUrlPath: string;
     blog_posts: Array<BlogPost>;
@@ -246,7 +246,7 @@ declare namespace Strapi {
     id: string;
     title: string;
     slug: string;
-    seo: SEO;
+    seo?: SEO;
     preview: Preview;
     blog: Blog;
     fullUrlPath: string;
@@ -303,9 +303,9 @@ declare namespace Strapi {
   // ===================
 
   type SEO = {
-    title: string;
-    meta_description: string;
-    image: UploadFile;
+    title?: string;
+    meta_description?: string;
+    image?: UploadFile;
   };
 
   type UploadFile = {
