@@ -17,21 +17,27 @@ import { TemplateProps } from './types';
 export default (props: TemplateProps): JSX.Element => {
   const {
     data: {
-      strapi: { offering },
+      strapi: {
+        offering: { title, seo, preview, services, fullUrlPath },
+      },
     },
   } = props;
   return (
     <Layout location={props.location}>
-      <SEO title={offering.title} description={offering.meta_description} />
+      <SEO // Make SEO required eventually
+        title={seo?.title ?? title}
+        description={seo?.meta_description ?? preview?.text.body}
+        image={seo?.image ?? preview?.image.file}
+      />
 
       <PageContainer>
         <Heading level={1} justifyHeading="center" alignHeading="center">
-          {offering.title}
+          {title}
         </Heading>
 
-        {offering.preview && (
+        {preview && (
           <ImageWithCaption
-            data={offering.preview.image}
+            data={preview.image}
             styling={{
               justifySelf: 'center',
               width: `${
@@ -45,14 +51,14 @@ export default (props: TemplateProps): JSX.Element => {
           />
         )}
 
-        {offering.services?.length > 0 && (
+        {services?.length > 0 && (
           <Grid containerType="section">
-            {offering.services.map((service, idx) => {
+            {services.map((service, idx) => {
               const zigZagColumnLayout = zigZagGridColumns(idx);
 
               // Mutating button data to append offering's url
               const buttonData: ComponentWidgetButton = {
-                action: `${offering.fullUrlPath}${service.slug}`,
+                action: `${fullUrlPath}${service.slug}`,
                 buttonText: service.preview.button.buttonText,
                 variant: service.preview.button.variant,
               };

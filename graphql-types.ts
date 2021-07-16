@@ -278,6 +278,8 @@ export type DirectoryCtimeArgs = {
 export type Site = Node & {
   buildTime?: Maybe<Scalars['Date']>;
   siteMetadata?: Maybe<SiteSiteMetadata>;
+  port?: Maybe<Scalars['Int']>;
+  host?: Maybe<Scalars['String']>;
   polyfill?: Maybe<Scalars['Boolean']>;
   pathPrefix?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
@@ -611,11 +613,10 @@ export type SitePluginPluginOptions = {
   createLinkInHead?: Maybe<Scalars['Boolean']>;
   entryLimit?: Maybe<Scalars['Int']>;
   query?: Maybe<Scalars['String']>;
-  failOnError?: Maybe<Scalars['Boolean']>;
-  defaults?: Maybe<SitePluginPluginOptionsDefaults>;
   base64Width?: Maybe<Scalars['Int']>;
   stripMetadata?: Maybe<Scalars['Boolean']>;
   defaultQuality?: Maybe<Scalars['Int']>;
+  failOnError?: Maybe<Scalars['Boolean']>;
   displayName?: Maybe<Scalars['Boolean']>;
   fileName?: Maybe<Scalars['Boolean']>;
   namespace?: Maybe<Scalars['String']>;
@@ -634,20 +635,13 @@ export type SitePluginPluginOptions = {
   include_favicon?: Maybe<Scalars['Boolean']>;
   cacheDigest?: Maybe<Scalars['String']>;
   path?: Maybe<Scalars['String']>;
+  typeName?: Maybe<Scalars['String']>;
+  fieldName?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
   pathCheck?: Maybe<Scalars['Boolean']>;
   allExtensions?: Maybe<Scalars['Boolean']>;
   isTSX?: Maybe<Scalars['Boolean']>;
   jsxPragma?: Maybe<Scalars['String']>;
-  typeName?: Maybe<Scalars['String']>;
-  fieldName?: Maybe<Scalars['String']>;
-  url?: Maybe<Scalars['String']>;
-};
-
-export type SitePluginPluginOptionsDefaults = {
-  formats?: Maybe<Array<Maybe<Scalars['String']>>>;
-  quality?: Maybe<Scalars['Int']>;
-  breakpoints?: Maybe<Array<Maybe<Scalars['Int']>>>;
-  backgroundColor?: Maybe<Scalars['String']>;
 };
 
 export type SitePluginPluginOptionsRule = {
@@ -1333,7 +1327,7 @@ export type Strapi_Offering = {
   slug: Scalars['String'];
   preview?: Maybe<Strapi_ComponentGeneralPreview>;
   is_offering?: Maybe<Scalars['Boolean']>;
-  meta_description?: Maybe<Scalars['String']>;
+  seo?: Maybe<Strapi_ComponentGeneralSeo>;
   published_at?: Maybe<Scalars['STRAPI_DateTime']>;
   services?: Maybe<Array<Maybe<Strapi_Service>>>;
   fullUrlPath?: Maybe<Scalars['String']>;
@@ -1366,7 +1360,7 @@ export type Strapi_OfferingGroupBy = {
   slug?: Maybe<Array<Maybe<Strapi_OfferingConnectionSlug>>>;
   preview?: Maybe<Array<Maybe<Strapi_OfferingConnectionPreview>>>;
   is_offering?: Maybe<Array<Maybe<Strapi_OfferingConnectionIs_Offering>>>;
-  meta_description?: Maybe<Array<Maybe<Strapi_OfferingConnectionMeta_Description>>>;
+  seo?: Maybe<Array<Maybe<Strapi_OfferingConnectionSeo>>>;
   published_at?: Maybe<Array<Maybe<Strapi_OfferingConnectionPublished_At>>>;
 };
 
@@ -1405,8 +1399,8 @@ export type Strapi_OfferingConnectionIs_Offering = {
   connection?: Maybe<Strapi_OfferingConnection>;
 };
 
-export type Strapi_OfferingConnectionMeta_Description = {
-  key?: Maybe<Scalars['String']>;
+export type Strapi_OfferingConnectionSeo = {
+  key?: Maybe<Scalars['ID']>;
   connection?: Maybe<Strapi_OfferingConnection>;
 };
 
@@ -1421,7 +1415,7 @@ export type Strapi_OfferingInput = {
   preview?: Maybe<Strapi_ComponentGeneralPreviewInput>;
   services?: Maybe<Array<Maybe<Scalars['ID']>>>;
   is_offering?: Maybe<Scalars['Boolean']>;
-  meta_description?: Maybe<Scalars['String']>;
+  seo?: Maybe<Strapi_ComponentGeneralSeoInput>;
   published_at?: Maybe<Scalars['STRAPI_DateTime']>;
   created_by?: Maybe<Scalars['ID']>;
   updated_by?: Maybe<Scalars['ID']>;
@@ -1433,7 +1427,7 @@ export type Strapi_EditOfferingInput = {
   preview?: Maybe<Strapi_EditComponentGeneralPreviewInput>;
   services?: Maybe<Array<Maybe<Scalars['ID']>>>;
   is_offering?: Maybe<Scalars['Boolean']>;
-  meta_description?: Maybe<Scalars['String']>;
+  seo?: Maybe<Strapi_EditComponentGeneralSeoInput>;
   published_at?: Maybe<Scalars['STRAPI_DateTime']>;
   created_by?: Maybe<Scalars['ID']>;
   updated_by?: Maybe<Scalars['ID']>;
@@ -1620,7 +1614,7 @@ export type Strapi_Service = {
   slug: Scalars['String'];
   sales_page: Array<Maybe<Strapi_ServiceSalesPageDynamicZone>>;
   is_service?: Maybe<Scalars['Boolean']>;
-  meta_description?: Maybe<Scalars['String']>;
+  seo?: Maybe<Strapi_ComponentGeneralSeo>;
   published_at?: Maybe<Scalars['STRAPI_DateTime']>;
   offerings?: Maybe<Array<Maybe<Strapi_Offering>>>;
 };
@@ -1653,7 +1647,7 @@ export type Strapi_ServiceGroupBy = {
   banner_background_image?: Maybe<Array<Maybe<Strapi_ServiceConnectionBanner_Background_Image>>>;
   slug?: Maybe<Array<Maybe<Strapi_ServiceConnectionSlug>>>;
   is_service?: Maybe<Array<Maybe<Strapi_ServiceConnectionIs_Service>>>;
-  meta_description?: Maybe<Array<Maybe<Strapi_ServiceConnectionMeta_Description>>>;
+  seo?: Maybe<Array<Maybe<Strapi_ServiceConnectionSeo>>>;
   published_at?: Maybe<Array<Maybe<Strapi_ServiceConnectionPublished_At>>>;
 };
 
@@ -1697,8 +1691,8 @@ export type Strapi_ServiceConnectionIs_Service = {
   connection?: Maybe<Strapi_ServiceConnection>;
 };
 
-export type Strapi_ServiceConnectionMeta_Description = {
-  key?: Maybe<Scalars['String']>;
+export type Strapi_ServiceConnectionSeo = {
+  key?: Maybe<Scalars['ID']>;
   connection?: Maybe<Strapi_ServiceConnection>;
 };
 
@@ -1716,7 +1710,7 @@ export type Strapi_ServiceInput = {
   sales_page: Array<Scalars['STRAPI_ServiceSalesPageDynamicZoneInput']>;
   offerings?: Maybe<Array<Maybe<Scalars['ID']>>>;
   is_service?: Maybe<Scalars['Boolean']>;
-  meta_description?: Maybe<Scalars['String']>;
+  seo?: Maybe<Strapi_ComponentGeneralSeoInput>;
   published_at?: Maybe<Scalars['STRAPI_DateTime']>;
   created_by?: Maybe<Scalars['ID']>;
   updated_by?: Maybe<Scalars['ID']>;
@@ -1731,7 +1725,7 @@ export type Strapi_EditServiceInput = {
   sales_page: Array<Scalars['STRAPI_ServiceSalesPageDynamicZoneInput']>;
   offerings?: Maybe<Array<Maybe<Scalars['ID']>>>;
   is_service?: Maybe<Scalars['Boolean']>;
-  meta_description?: Maybe<Scalars['String']>;
+  seo?: Maybe<Strapi_EditComponentGeneralSeoInput>;
   published_at?: Maybe<Scalars['STRAPI_DateTime']>;
   created_by?: Maybe<Scalars['ID']>;
   updated_by?: Maybe<Scalars['ID']>;
@@ -3008,7 +3002,7 @@ export type Strapi_EditComponentWidgetEmbeddedFormInput = {
   justify?: Maybe<Strapi_Enum_Componentwidgetembeddedform_Justify>;
 };
 
-export type Strapi_Morph = Strapi_UsersPermissionsMe | Strapi_UsersPermissionsMeRole | Strapi_UsersPermissionsLoginPayload | Strapi_UserPermissionsPasswordPayload | Strapi_BlogPost | Strapi_BlogPostConnection | Strapi_BlogPostAggregator | Strapi_BlogPostGroupBy | Strapi_BlogPostConnectionId | Strapi_BlogPostConnectionCreated_At | Strapi_BlogPostConnectionUpdated_At | Strapi_BlogPostConnectionTitle | Strapi_BlogPostConnectionSlug | Strapi_BlogPostConnectionPublished | Strapi_BlogPostConnectionCover_Image | Strapi_BlogPostConnectionBlog | Strapi_BlogPostConnectionCategory | Strapi_BlogPostConnectionIs_Blog_Post | Strapi_BlogPostConnectionPreview | Strapi_BlogPostConnectionSeo | Strapi_BlogPostConnectionPublished_At | Strapi_CreateBlogPostPayload | Strapi_UpdateBlogPostPayload | Strapi_DeleteBlogPostPayload | Strapi_Blog | Strapi_BlogConnection | Strapi_BlogAggregator | Strapi_BlogGroupBy | Strapi_BlogConnectionId | Strapi_BlogConnectionCreated_At | Strapi_BlogConnectionUpdated_At | Strapi_BlogConnectionName | Strapi_BlogConnectionSlug | Strapi_BlogConnectionPreview | Strapi_BlogConnectionIs_Blog | Strapi_BlogConnectionSeo | Strapi_CreateBlogPayload | Strapi_UpdateBlogPayload | Strapi_DeleteBlogPayload | Strapi_Category | Strapi_CategoryConnection | Strapi_CategoryAggregator | Strapi_CategoryGroupBy | Strapi_CategoryConnectionId | Strapi_CategoryConnectionCreated_At | Strapi_CategoryConnectionUpdated_At | Strapi_CategoryConnectionName | Strapi_CategoryConnectionSlug | Strapi_CategoryConnectionIs_Category | Strapi_CreateCategoryPayload | Strapi_UpdateCategoryPayload | Strapi_DeleteCategoryPayload | Strapi_MenuItem | Strapi_MenuItemConnection | Strapi_MenuItemAggregator | Strapi_MenuItemAggregatorSum | Strapi_MenuItemAggregatorAvg | Strapi_MenuItemAggregatorMin | Strapi_MenuItemAggregatorMax | Strapi_MenuItemGroupBy | Strapi_MenuItemConnectionId | Strapi_MenuItemConnectionCreated_At | Strapi_MenuItemConnectionUpdated_At | Strapi_MenuItemConnectionText | Strapi_MenuItemConnectionIs_External_Link | Strapi_MenuItemConnectionSlug | Strapi_MenuItemConnectionOrder | Strapi_MenuItemConnectionPage | Strapi_MenuItemConnectionPublished_At | Strapi_CreateMenuItemPayload | Strapi_UpdateMenuItemPayload | Strapi_DeleteMenuItemPayload | Strapi_Offering | Strapi_OfferingConnection | Strapi_OfferingAggregator | Strapi_OfferingGroupBy | Strapi_OfferingConnectionId | Strapi_OfferingConnectionCreated_At | Strapi_OfferingConnectionUpdated_At | Strapi_OfferingConnectionTitle | Strapi_OfferingConnectionSlug | Strapi_OfferingConnectionPreview | Strapi_OfferingConnectionIs_Offering | Strapi_OfferingConnectionMeta_Description | Strapi_OfferingConnectionPublished_At | Strapi_CreateOfferingPayload | Strapi_UpdateOfferingPayload | Strapi_DeleteOfferingPayload | Strapi_Page | Strapi_PageConnection | Strapi_PageAggregator | Strapi_PageGroupBy | Strapi_PageConnectionId | Strapi_PageConnectionCreated_At | Strapi_PageConnectionUpdated_At | Strapi_PageConnectionTitle | Strapi_PageConnectionSlug | Strapi_PageConnectionBanner_Background_Image | Strapi_PageConnectionSeo | Strapi_PageConnectionMenu_Item | Strapi_PageConnectionPublished_At | Strapi_CreatePagePayload | Strapi_UpdatePagePayload | Strapi_DeletePagePayload | Strapi_Service | Strapi_ServiceConnection | Strapi_ServiceAggregator | Strapi_ServiceGroupBy | Strapi_ServiceConnectionId | Strapi_ServiceConnectionCreated_At | Strapi_ServiceConnectionUpdated_At | Strapi_ServiceConnectionTitle | Strapi_ServiceConnectionPreview | Strapi_ServiceConnectionBanner_Background_Image | Strapi_ServiceConnectionSlug | Strapi_ServiceConnectionIs_Service | Strapi_ServiceConnectionMeta_Description | Strapi_ServiceConnectionPublished_At | Strapi_CreateServicePayload | Strapi_UpdateServicePayload | Strapi_DeleteServicePayload | Strapi_Tag | Strapi_TagConnection | Strapi_TagAggregator | Strapi_TagGroupBy | Strapi_TagConnectionId | Strapi_TagConnectionCreated_At | Strapi_TagConnectionUpdated_At | Strapi_TagConnectionName | Strapi_TagConnectionSlug | Strapi_TagConnectionIs_Tag | Strapi_CreateTagPayload | Strapi_UpdateTagPayload | Strapi_DeleteTagPayload | Strapi_CommentsComment | Strapi_CommentsReport | Strapi_UploadFile | Strapi_UploadFileConnection | Strapi_UploadFileAggregator | Strapi_UploadFileAggregatorSum | Strapi_UploadFileAggregatorAvg | Strapi_UploadFileAggregatorMin | Strapi_UploadFileAggregatorMax | Strapi_UploadFileGroupBy | Strapi_UploadFileConnectionId | Strapi_UploadFileConnectionCreated_At | Strapi_UploadFileConnectionUpdated_At | Strapi_UploadFileConnectionName | Strapi_UploadFileConnectionAlternativeText | Strapi_UploadFileConnectionCaption | Strapi_UploadFileConnectionWidth | Strapi_UploadFileConnectionHeight | Strapi_UploadFileConnectionFormats | Strapi_UploadFileConnectionHash | Strapi_UploadFileConnectionExt | Strapi_UploadFileConnectionMime | Strapi_UploadFileConnectionSize | Strapi_UploadFileConnectionUrl | Strapi_UploadFileConnectionPreviewUrl | Strapi_UploadFileConnectionProvider | Strapi_UploadFileConnectionProvider_Metadata | Strapi_DeleteFilePayload | Strapi_UsersPermissionsPermission | Strapi_UsersPermissionsRole | Strapi_UsersPermissionsRoleConnection | Strapi_UsersPermissionsRoleAggregator | Strapi_UsersPermissionsRoleGroupBy | Strapi_UsersPermissionsRoleConnectionId | Strapi_UsersPermissionsRoleConnectionName | Strapi_UsersPermissionsRoleConnectionDescription | Strapi_UsersPermissionsRoleConnectionType | Strapi_CreateRolePayload | Strapi_UpdateRolePayload | Strapi_DeleteRolePayload | Strapi_UsersPermissionsUser | Strapi_UsersPermissionsUserConnection | Strapi_UsersPermissionsUserAggregator | Strapi_UsersPermissionsUserGroupBy | Strapi_UsersPermissionsUserConnectionId | Strapi_UsersPermissionsUserConnectionCreated_At | Strapi_UsersPermissionsUserConnectionUpdated_At | Strapi_UsersPermissionsUserConnectionUsername | Strapi_UsersPermissionsUserConnectionEmail | Strapi_UsersPermissionsUserConnectionProvider | Strapi_UsersPermissionsUserConnectionConfirmed | Strapi_UsersPermissionsUserConnectionBlocked | Strapi_UsersPermissionsUserConnectionRole | Strapi_CreateUserPayload | Strapi_UpdateUserPayload | Strapi_DeleteUserPayload | Strapi_ComponentCollectionsBlogPosts | Strapi_ComponentCollectionsBlogs | Strapi_ComponentCollectionsOfferings | Strapi_ComponentCollectionsServices | Strapi_ComponentGeneralPreview | Strapi_ComponentGeneralSeo | Strapi_ComponentMediaFiles | Strapi_ComponentMediaImages | Strapi_ComponentMediaSingleFile | Strapi_ComponentMediaSingleImage | Strapi_ComponentMediaSingleVideo | Strapi_ComponentMediaVideos | Strapi_ComponentSectionHeadingLeftImageRight | Strapi_ComponentSectionHeadingRightImageLeft | Strapi_ComponentSectionImageCenterTextEitherSide | Strapi_ComponentSectionImageRightTextLeft | Strapi_ComponentSectionTextCenterImageEitherSide | Strapi_ComponentSectionTextRightImageLeft | Strapi_ComponentTextHeading | Strapi_ComponentTextParagraph | Strapi_ComponentTextQuote | Strapi_ComponentWidgetButton | Strapi_ComponentWidgetDivider | Strapi_ComponentWidgetEmbeddedForm;
+export type Strapi_Morph = Strapi_UsersPermissionsMe | Strapi_UsersPermissionsMeRole | Strapi_UsersPermissionsLoginPayload | Strapi_UserPermissionsPasswordPayload | Strapi_BlogPost | Strapi_BlogPostConnection | Strapi_BlogPostAggregator | Strapi_BlogPostGroupBy | Strapi_BlogPostConnectionId | Strapi_BlogPostConnectionCreated_At | Strapi_BlogPostConnectionUpdated_At | Strapi_BlogPostConnectionTitle | Strapi_BlogPostConnectionSlug | Strapi_BlogPostConnectionPublished | Strapi_BlogPostConnectionCover_Image | Strapi_BlogPostConnectionBlog | Strapi_BlogPostConnectionCategory | Strapi_BlogPostConnectionIs_Blog_Post | Strapi_BlogPostConnectionPreview | Strapi_BlogPostConnectionSeo | Strapi_BlogPostConnectionPublished_At | Strapi_CreateBlogPostPayload | Strapi_UpdateBlogPostPayload | Strapi_DeleteBlogPostPayload | Strapi_Blog | Strapi_BlogConnection | Strapi_BlogAggregator | Strapi_BlogGroupBy | Strapi_BlogConnectionId | Strapi_BlogConnectionCreated_At | Strapi_BlogConnectionUpdated_At | Strapi_BlogConnectionName | Strapi_BlogConnectionSlug | Strapi_BlogConnectionPreview | Strapi_BlogConnectionIs_Blog | Strapi_BlogConnectionSeo | Strapi_CreateBlogPayload | Strapi_UpdateBlogPayload | Strapi_DeleteBlogPayload | Strapi_Category | Strapi_CategoryConnection | Strapi_CategoryAggregator | Strapi_CategoryGroupBy | Strapi_CategoryConnectionId | Strapi_CategoryConnectionCreated_At | Strapi_CategoryConnectionUpdated_At | Strapi_CategoryConnectionName | Strapi_CategoryConnectionSlug | Strapi_CategoryConnectionIs_Category | Strapi_CreateCategoryPayload | Strapi_UpdateCategoryPayload | Strapi_DeleteCategoryPayload | Strapi_MenuItem | Strapi_MenuItemConnection | Strapi_MenuItemAggregator | Strapi_MenuItemAggregatorSum | Strapi_MenuItemAggregatorAvg | Strapi_MenuItemAggregatorMin | Strapi_MenuItemAggregatorMax | Strapi_MenuItemGroupBy | Strapi_MenuItemConnectionId | Strapi_MenuItemConnectionCreated_At | Strapi_MenuItemConnectionUpdated_At | Strapi_MenuItemConnectionText | Strapi_MenuItemConnectionIs_External_Link | Strapi_MenuItemConnectionSlug | Strapi_MenuItemConnectionOrder | Strapi_MenuItemConnectionPage | Strapi_MenuItemConnectionPublished_At | Strapi_CreateMenuItemPayload | Strapi_UpdateMenuItemPayload | Strapi_DeleteMenuItemPayload | Strapi_Offering | Strapi_OfferingConnection | Strapi_OfferingAggregator | Strapi_OfferingGroupBy | Strapi_OfferingConnectionId | Strapi_OfferingConnectionCreated_At | Strapi_OfferingConnectionUpdated_At | Strapi_OfferingConnectionTitle | Strapi_OfferingConnectionSlug | Strapi_OfferingConnectionPreview | Strapi_OfferingConnectionIs_Offering | Strapi_OfferingConnectionSeo | Strapi_OfferingConnectionPublished_At | Strapi_CreateOfferingPayload | Strapi_UpdateOfferingPayload | Strapi_DeleteOfferingPayload | Strapi_Page | Strapi_PageConnection | Strapi_PageAggregator | Strapi_PageGroupBy | Strapi_PageConnectionId | Strapi_PageConnectionCreated_At | Strapi_PageConnectionUpdated_At | Strapi_PageConnectionTitle | Strapi_PageConnectionSlug | Strapi_PageConnectionBanner_Background_Image | Strapi_PageConnectionSeo | Strapi_PageConnectionMenu_Item | Strapi_PageConnectionPublished_At | Strapi_CreatePagePayload | Strapi_UpdatePagePayload | Strapi_DeletePagePayload | Strapi_Service | Strapi_ServiceConnection | Strapi_ServiceAggregator | Strapi_ServiceGroupBy | Strapi_ServiceConnectionId | Strapi_ServiceConnectionCreated_At | Strapi_ServiceConnectionUpdated_At | Strapi_ServiceConnectionTitle | Strapi_ServiceConnectionPreview | Strapi_ServiceConnectionBanner_Background_Image | Strapi_ServiceConnectionSlug | Strapi_ServiceConnectionIs_Service | Strapi_ServiceConnectionSeo | Strapi_ServiceConnectionPublished_At | Strapi_CreateServicePayload | Strapi_UpdateServicePayload | Strapi_DeleteServicePayload | Strapi_Tag | Strapi_TagConnection | Strapi_TagAggregator | Strapi_TagGroupBy | Strapi_TagConnectionId | Strapi_TagConnectionCreated_At | Strapi_TagConnectionUpdated_At | Strapi_TagConnectionName | Strapi_TagConnectionSlug | Strapi_TagConnectionIs_Tag | Strapi_CreateTagPayload | Strapi_UpdateTagPayload | Strapi_DeleteTagPayload | Strapi_CommentsComment | Strapi_CommentsReport | Strapi_UploadFile | Strapi_UploadFileConnection | Strapi_UploadFileAggregator | Strapi_UploadFileAggregatorSum | Strapi_UploadFileAggregatorAvg | Strapi_UploadFileAggregatorMin | Strapi_UploadFileAggregatorMax | Strapi_UploadFileGroupBy | Strapi_UploadFileConnectionId | Strapi_UploadFileConnectionCreated_At | Strapi_UploadFileConnectionUpdated_At | Strapi_UploadFileConnectionName | Strapi_UploadFileConnectionAlternativeText | Strapi_UploadFileConnectionCaption | Strapi_UploadFileConnectionWidth | Strapi_UploadFileConnectionHeight | Strapi_UploadFileConnectionFormats | Strapi_UploadFileConnectionHash | Strapi_UploadFileConnectionExt | Strapi_UploadFileConnectionMime | Strapi_UploadFileConnectionSize | Strapi_UploadFileConnectionUrl | Strapi_UploadFileConnectionPreviewUrl | Strapi_UploadFileConnectionProvider | Strapi_UploadFileConnectionProvider_Metadata | Strapi_DeleteFilePayload | Strapi_UsersPermissionsPermission | Strapi_UsersPermissionsRole | Strapi_UsersPermissionsRoleConnection | Strapi_UsersPermissionsRoleAggregator | Strapi_UsersPermissionsRoleGroupBy | Strapi_UsersPermissionsRoleConnectionId | Strapi_UsersPermissionsRoleConnectionName | Strapi_UsersPermissionsRoleConnectionDescription | Strapi_UsersPermissionsRoleConnectionType | Strapi_CreateRolePayload | Strapi_UpdateRolePayload | Strapi_DeleteRolePayload | Strapi_UsersPermissionsUser | Strapi_UsersPermissionsUserConnection | Strapi_UsersPermissionsUserAggregator | Strapi_UsersPermissionsUserGroupBy | Strapi_UsersPermissionsUserConnectionId | Strapi_UsersPermissionsUserConnectionCreated_At | Strapi_UsersPermissionsUserConnectionUpdated_At | Strapi_UsersPermissionsUserConnectionUsername | Strapi_UsersPermissionsUserConnectionEmail | Strapi_UsersPermissionsUserConnectionProvider | Strapi_UsersPermissionsUserConnectionConfirmed | Strapi_UsersPermissionsUserConnectionBlocked | Strapi_UsersPermissionsUserConnectionRole | Strapi_CreateUserPayload | Strapi_UpdateUserPayload | Strapi_DeleteUserPayload | Strapi_ComponentCollectionsBlogPosts | Strapi_ComponentCollectionsBlogs | Strapi_ComponentCollectionsOfferings | Strapi_ComponentCollectionsServices | Strapi_ComponentGeneralPreview | Strapi_ComponentGeneralSeo | Strapi_ComponentMediaFiles | Strapi_ComponentMediaImages | Strapi_ComponentMediaSingleFile | Strapi_ComponentMediaSingleImage | Strapi_ComponentMediaSingleVideo | Strapi_ComponentMediaVideos | Strapi_ComponentSectionHeadingLeftImageRight | Strapi_ComponentSectionHeadingRightImageLeft | Strapi_ComponentSectionImageCenterTextEitherSide | Strapi_ComponentSectionImageRightTextLeft | Strapi_ComponentSectionTextCenterImageEitherSide | Strapi_ComponentSectionTextRightImageLeft | Strapi_ComponentTextHeading | Strapi_ComponentTextParagraph | Strapi_ComponentTextQuote | Strapi_ComponentWidgetButton | Strapi_ComponentWidgetDivider | Strapi_ComponentWidgetEmbeddedForm;
 
 export type Strapi_InputId = {
   id: Scalars['ID'];
@@ -3442,6 +3436,8 @@ export type QueryAllDirectoryArgs = {
 export type QuerySiteArgs = {
   buildTime?: Maybe<DateQueryOperatorInput>;
   siteMetadata?: Maybe<SiteSiteMetadataFilterInput>;
+  port?: Maybe<IntQueryOperatorInput>;
+  host?: Maybe<StringQueryOperatorInput>;
   polyfill?: Maybe<BooleanQueryOperatorInput>;
   pathPrefix?: Maybe<StringQueryOperatorInput>;
   id?: Maybe<StringQueryOperatorInput>;
@@ -4389,6 +4385,8 @@ export type SiteFieldsEnum =
   | 'siteMetadata___siteUrl'
   | 'siteMetadata___author___name'
   | 'siteMetadata___author___bio'
+  | 'port'
+  | 'host'
   | 'polyfill'
   | 'pathPrefix'
   | 'id'
@@ -4490,6 +4488,8 @@ export type SiteGroupConnection = {
 export type SiteFilterInput = {
   buildTime?: Maybe<DateQueryOperatorInput>;
   siteMetadata?: Maybe<SiteSiteMetadataFilterInput>;
+  port?: Maybe<IntQueryOperatorInput>;
+  host?: Maybe<StringQueryOperatorInput>;
   polyfill?: Maybe<BooleanQueryOperatorInput>;
   pathPrefix?: Maybe<StringQueryOperatorInput>;
   id?: Maybe<StringQueryOperatorInput>;
@@ -4696,11 +4696,10 @@ export type SitePluginPluginOptionsFilterInput = {
   createLinkInHead?: Maybe<BooleanQueryOperatorInput>;
   entryLimit?: Maybe<IntQueryOperatorInput>;
   query?: Maybe<StringQueryOperatorInput>;
-  failOnError?: Maybe<BooleanQueryOperatorInput>;
-  defaults?: Maybe<SitePluginPluginOptionsDefaultsFilterInput>;
   base64Width?: Maybe<IntQueryOperatorInput>;
   stripMetadata?: Maybe<BooleanQueryOperatorInput>;
   defaultQuality?: Maybe<IntQueryOperatorInput>;
+  failOnError?: Maybe<BooleanQueryOperatorInput>;
   displayName?: Maybe<BooleanQueryOperatorInput>;
   fileName?: Maybe<BooleanQueryOperatorInput>;
   namespace?: Maybe<StringQueryOperatorInput>;
@@ -4719,20 +4718,13 @@ export type SitePluginPluginOptionsFilterInput = {
   include_favicon?: Maybe<BooleanQueryOperatorInput>;
   cacheDigest?: Maybe<StringQueryOperatorInput>;
   path?: Maybe<StringQueryOperatorInput>;
+  typeName?: Maybe<StringQueryOperatorInput>;
+  fieldName?: Maybe<StringQueryOperatorInput>;
+  url?: Maybe<StringQueryOperatorInput>;
   pathCheck?: Maybe<BooleanQueryOperatorInput>;
   allExtensions?: Maybe<BooleanQueryOperatorInput>;
   isTSX?: Maybe<BooleanQueryOperatorInput>;
   jsxPragma?: Maybe<StringQueryOperatorInput>;
-  typeName?: Maybe<StringQueryOperatorInput>;
-  fieldName?: Maybe<StringQueryOperatorInput>;
-  url?: Maybe<StringQueryOperatorInput>;
-};
-
-export type SitePluginPluginOptionsDefaultsFilterInput = {
-  formats?: Maybe<StringQueryOperatorInput>;
-  quality?: Maybe<IntQueryOperatorInput>;
-  breakpoints?: Maybe<IntQueryOperatorInput>;
-  backgroundColor?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePluginPluginOptionsRuleFilterInput = {
@@ -4963,14 +4955,10 @@ export type SitePageFieldsEnum =
   | 'pluginCreator___pluginOptions___createLinkInHead'
   | 'pluginCreator___pluginOptions___entryLimit'
   | 'pluginCreator___pluginOptions___query'
-  | 'pluginCreator___pluginOptions___failOnError'
-  | 'pluginCreator___pluginOptions___defaults___formats'
-  | 'pluginCreator___pluginOptions___defaults___quality'
-  | 'pluginCreator___pluginOptions___defaults___breakpoints'
-  | 'pluginCreator___pluginOptions___defaults___backgroundColor'
   | 'pluginCreator___pluginOptions___base64Width'
   | 'pluginCreator___pluginOptions___stripMetadata'
   | 'pluginCreator___pluginOptions___defaultQuality'
+  | 'pluginCreator___pluginOptions___failOnError'
   | 'pluginCreator___pluginOptions___displayName'
   | 'pluginCreator___pluginOptions___fileName'
   | 'pluginCreator___pluginOptions___namespace'
@@ -4989,13 +4977,13 @@ export type SitePageFieldsEnum =
   | 'pluginCreator___pluginOptions___include_favicon'
   | 'pluginCreator___pluginOptions___cacheDigest'
   | 'pluginCreator___pluginOptions___path'
+  | 'pluginCreator___pluginOptions___typeName'
+  | 'pluginCreator___pluginOptions___fieldName'
+  | 'pluginCreator___pluginOptions___url'
   | 'pluginCreator___pluginOptions___pathCheck'
   | 'pluginCreator___pluginOptions___allExtensions'
   | 'pluginCreator___pluginOptions___isTSX'
   | 'pluginCreator___pluginOptions___jsxPragma'
-  | 'pluginCreator___pluginOptions___typeName'
-  | 'pluginCreator___pluginOptions___fieldName'
-  | 'pluginCreator___pluginOptions___url'
   | 'pluginCreator___nodeAPIs'
   | 'pluginCreator___browserAPIs'
   | 'pluginCreator___ssrAPIs'
@@ -5366,14 +5354,10 @@ export type SitePluginFieldsEnum =
   | 'pluginOptions___createLinkInHead'
   | 'pluginOptions___entryLimit'
   | 'pluginOptions___query'
-  | 'pluginOptions___failOnError'
-  | 'pluginOptions___defaults___formats'
-  | 'pluginOptions___defaults___quality'
-  | 'pluginOptions___defaults___breakpoints'
-  | 'pluginOptions___defaults___backgroundColor'
   | 'pluginOptions___base64Width'
   | 'pluginOptions___stripMetadata'
   | 'pluginOptions___defaultQuality'
+  | 'pluginOptions___failOnError'
   | 'pluginOptions___displayName'
   | 'pluginOptions___fileName'
   | 'pluginOptions___namespace'
@@ -5392,13 +5376,13 @@ export type SitePluginFieldsEnum =
   | 'pluginOptions___include_favicon'
   | 'pluginOptions___cacheDigest'
   | 'pluginOptions___path'
+  | 'pluginOptions___typeName'
+  | 'pluginOptions___fieldName'
+  | 'pluginOptions___url'
   | 'pluginOptions___pathCheck'
   | 'pluginOptions___allExtensions'
   | 'pluginOptions___isTSX'
   | 'pluginOptions___jsxPragma'
-  | 'pluginOptions___typeName'
-  | 'pluginOptions___fieldName'
-  | 'pluginOptions___url'
   | 'nodeAPIs'
   | 'browserAPIs'
   | 'ssrAPIs'
@@ -5824,8 +5808,8 @@ export type StrapiBlogPostFragment = (
 );
 
 export type StrapiOfferingFragment = (
-  Pick<Strapi_Offering, 'id' | 'title' | 'slug' | 'meta_description' | 'fullUrlPath' | 'is_offering'>
-  & { preview?: Maybe<StrapiComponentGeneralPreviewFragment>, services?: Maybe<Array<Maybe<StrapiServiceFragment>>> }
+  Pick<Strapi_Offering, 'id' | 'title' | 'slug' | 'fullUrlPath' | 'is_offering'>
+  & { seo?: Maybe<StrapiComponentGeneralSeoFragment>, preview?: Maybe<StrapiComponentGeneralPreviewFragment>, services?: Maybe<Array<Maybe<StrapiServiceFragment>>> }
 );
 
 export type StrapiServiceFragment = (
@@ -6143,8 +6127,7 @@ export type Get_Sales_PageQueryVariables = Exact<{
 
 
 export type Get_Sales_PageQuery = { strapi: { service?: Maybe<(
-      Pick<Strapi_Service, 'title' | 'meta_description'>
-      & { banner_background_image?: Maybe<StrapiUploadFileFragment>, banner?: Maybe<Array<Maybe<(
+      { seo?: Maybe<StrapiComponentGeneralSeoFragment>, banner_background_image?: Maybe<StrapiUploadFileFragment>, banner?: Maybe<Array<Maybe<(
         { __typename: 'STRAPI_ComponentMediaSingleVideo' }
         & StrapiComponentMediaSingleVideoFragment
       ) | (
@@ -6229,6 +6212,7 @@ export type Get_Sales_PageQuery = { strapi: { service?: Maybe<(
         { __typename: 'STRAPI_ComponentWidgetButton' }
         & StrapiComponentWidgetButtonFragment
       )>> }
+      & StrapiServiceFragment
     )> } };
 
 export type Get_Strapi_TagQueryVariables = Exact<{

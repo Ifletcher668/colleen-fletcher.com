@@ -40,7 +40,7 @@ const SEO = ({ title, description, image, lang, meta }: Props) => {
         lang: lang,
       }}
       title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
+      titleTemplate="%s"
       meta={[
         {
           name: 'lang',
@@ -70,16 +70,16 @@ const SEO = ({ title, description, image, lang, meta }: Props) => {
         {
           property: 'og:image:width',
           content:
-            imageData !== undefined && imageData.width < 768
+            imageData !== undefined && imageData.width < 1200
               ? imageData.width
-              : 768,
+              : 1200,
         },
         {
           property: 'og:image:height',
           content:
-            imageData !== undefined && imageData.width < 768
+            imageData !== undefined && imageData.width < 628
               ? imageData.height
-              : 768,
+              : 628,
         },
         {
           property: 'og:type',

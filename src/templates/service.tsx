@@ -16,7 +16,8 @@ export default (props: TemplateProps): JSX.Element => {
           banner,
           title,
           sales_page,
-          meta_description,
+          seo,
+          preview,
         },
       },
     },
@@ -24,7 +25,11 @@ export default (props: TemplateProps): JSX.Element => {
 
   return (
     <Layout location={props.location}>
-      <SEO title={title} description={meta_description} />
+      <SEO // Make SEO required eventually
+        title={seo?.title ?? title}
+        description={seo?.meta_description ?? preview?.text.body}
+        image={seo?.image ?? preview?.image.file}
+      />
 
       <Grid containerType="section">
         {banner_background_image && banner && (
@@ -46,8 +51,10 @@ export const query = graphql`
   query GET_SALES_PAGE($id: ID!) {
     strapi {
       service(id: $id) {
-        title
-        meta_description
+        ...StrapiService
+        seo {
+          ...StrapiComponentGeneralSeo
+        }
         banner_background_image {
           ...StrapiUploadFile
         }

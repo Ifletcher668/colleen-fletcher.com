@@ -32,33 +32,42 @@ export const above = typedKeys(breakpoints).reduce((accumulator, label) => {
   return accumulator;
 }, {} as StyleFnMap);
 
-export const color = (label: keyof DefaultTheme['color']) => (
-  props: ThemeProps<DefaultTheme>,
-): string => props.theme.color[label];
+export const color =
+  (label: keyof DefaultTheme['color']) =>
+  (props: ThemeProps<DefaultTheme>): string =>
+    props.theme.color[label];
 
-export const radius = (label: keyof DefaultTheme['radius']) => (
-  props: ThemeProps<DefaultTheme>,
-): string => props.theme.radius[label];
+export const radius =
+  (label: keyof DefaultTheme['radius']) =>
+  (props: ThemeProps<DefaultTheme>): string =>
+    props.theme.radius[label];
 
-export const time = (label: keyof DefaultTheme['time']) => (
-  props: ThemeProps<DefaultTheme>,
-): string => props.theme.time[label];
+export const time =
+  (label: keyof DefaultTheme['time']) =>
+  (props: ThemeProps<DefaultTheme>): string =>
+    props.theme.time[label];
 
-export const font = <
-  Variant extends keyof DefaultTheme['font'],
-  Label extends Extract<keyof DefaultTheme['font'][Variant], string | number>
->(
-  variant: Variant,
-  label: Label,
-) => (props: ThemeProps<DefaultTheme>) => props.theme.font[variant][label];
+export const font =
+  <
+    Variant extends keyof DefaultTheme['font'],
+    Label extends Extract<keyof DefaultTheme['font'][Variant], string | number>,
+  >(
+    variant: Variant,
+    label: Label,
+  ) =>
+  (props: ThemeProps<DefaultTheme>) =>
+    props.theme.font[variant][label];
 
-export const size = <
-  Variant extends keyof DefaultTheme['size'],
-  Label extends Extract<keyof DefaultTheme['size'][Variant], string | number>
->(
-  variant: Variant,
-  label: Label,
-) => (props: ThemeProps<DefaultTheme>) => props.theme.size[variant][label];
+export const size =
+  <
+    Variant extends keyof DefaultTheme['size'],
+    Label extends Extract<keyof DefaultTheme['size'][Variant], string | number>,
+  >(
+    variant: Variant,
+    label: Label,
+  ) =>
+  (props: ThemeProps<DefaultTheme>) =>
+    props.theme.size[variant][label];
 
 export const gridContainer = css`
   display: grid;

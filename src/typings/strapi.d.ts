@@ -262,7 +262,7 @@ declare namespace Strapi {
     id: string;
     title: string;
     slug: string;
-    meta_description: string;
+    seo?: SEO;
     preview: Preview;
     image: ComponentMediaSingleImage;
     fullUrlPath: string;
@@ -274,7 +274,7 @@ declare namespace Strapi {
     id: string;
     title: string;
     slug: string;
-    meta_description: string;
+    seo?: SEO;
     fullUrlPath: string;
     preview: Preview;
     banner_background_image: UploadFile;

@@ -114,7 +114,9 @@ export const StrapiOffering = graphql`
     id
     title
     slug
-    meta_description
+    seo {
+      ...StrapiComponentGeneralSeo
+    }
     preview {
       ...StrapiComponentGeneralPreview
     }
