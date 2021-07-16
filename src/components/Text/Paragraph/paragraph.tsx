@@ -103,7 +103,10 @@ const Paragraph: React.FC<Props> = ({ data, className }: Props) => {
             justifyParagraph={justifyParagraph}
           >
             <YangQuotes width={20} height={20} style={{ alignSelf: 'flex-start' }} />
-            {domToReact(children, options)}
+            {/* Arbitrary div to group any html that may split up 'children' */}
+            <div> 
+              {domToReact(children, options)}
+            </div>
             <YinQuotes width={20} height={20} style={{ alignSelf: 'flex-end' }} />
           </TextWrapper>
         );
