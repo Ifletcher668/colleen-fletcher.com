@@ -23,7 +23,6 @@ export const Anchor = styled.a<Props>`
 export const InternalLink = styled(GatsbyLink)`
   color: ${color('aterrima')};
   text-decoration: none;
-  font-weight: ${font('weight', 'heading')};
 
   &:hover {
     transition: ${props => props.theme.time.fast} ease-out;

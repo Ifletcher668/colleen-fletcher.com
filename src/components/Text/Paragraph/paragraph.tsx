@@ -21,7 +21,8 @@ const Paragraph: React.FC<Props> = ({ data, className }: Props) => {
       const { name, children, attribs } = domNode;
 
       if (name === 'a') {
-        <Link to={attribs.href}>{domToReact(children, options)}</Link>;
+        // add font-weight: ${font('weight', 'heading')};
+        return <Link to={attribs.href}>{domToReact(children, options)}</Link>;
       }
 
       if (name === 'h1') {
