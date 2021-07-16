@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { DefaultTheme } from 'styled-components';
 import { Link as GatsbyLink } from 'gatsby';
-import { color, time, font } from '../../../StyledComponents/_mixins';
+import { color, time } from '../../../StyledComponents/_mixins';
 
 type Props = {
   color?: keyof DefaultTheme['color'];
