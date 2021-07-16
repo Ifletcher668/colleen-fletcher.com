@@ -169,15 +169,28 @@ exports.createResolvers = async ({
     STRAPI_UploadFile: {
       imageFile: {
         type: `File`,
-        resolve(source) {
-          return createRemoteFileNode({
-            url: source.url,
-            store,
-            cache,
-            createNode,
-            createNodeId,
-            reporter,
-          });
+        resolve: async source => {
+          if (!source.url) {
+            return null;
+          }
+          let res;
+          try {
+            res = await createRemoteFileNode({
+              url: source.url,
+              store,
+              cache,
+              createNode,
+              createNodeId,
+              reporter,
+            });
+          } catch (err) {
+            console.error(
+              `[createResolvers] error in fetching remote image ${source.url} (${source.name}):`,
+              err,
+            );
+            throw err;
+          }
+          return res;
         },
       },
     },
