@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link, Span } from '../../Atoms';
+import YangQuotes from '../../../assets/images/svg/yang-quotation.svg';
+import YinQuotes from '../../../assets/images/svg/yin-quotation.svg';
 import { TextWrapper, H1, H2, H3 } from './styles';
 import { Grid } from '../../Containers';
 import parse, { domToReact, HTMLReactParserOptions } from 'html-react-parser';
@@ -22,7 +24,11 @@ const Paragraph: React.FC<Props> = ({ data, className }: Props) => {
 
       if (name === 'a') {
         // add font-weight: ${font('weight', 'heading')};
-        return <Link to={attribs.href}>{domToReact(children, options)}</Link>;
+        return (
+          <strong>
+            <Link to={attribs.href}>{domToReact(children, options)}</Link>
+          </strong>
+        );
       }
 
       if (name === 'h1') {
@@ -95,7 +101,9 @@ const Paragraph: React.FC<Props> = ({ data, className }: Props) => {
             alignParagraph={alignParagraph}
             justifyParagraph={justifyParagraph}
           >
+            <YangQuotes width={40} height={100} style={{ alignSelf: 'flex-start' }} />
             {domToReact(children, options)}
+            <YinQuotes width={40} height={100} style={{ alignSelf: 'flex-end' }} />
           </TextWrapper>
         );
 
