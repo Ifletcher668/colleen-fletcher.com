@@ -43,6 +43,7 @@
     "gatsby-source-strapi": "^1.0.2",
     "gatsby-transformer-sharp": "^3.9.0",
     "global": "^4.4.0",
+    "got": "^11.8.2",
     "html-react-parser": "^1.2.7",
     "js-search": "^2.0.0",
     "moment": "^2.29.1",

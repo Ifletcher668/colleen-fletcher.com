@@ -170,9 +170,8 @@ exports.createResolvers = async ({
       imageFile: {
         type: `File`,
         resolve: async source => {
-          if (!source.url) {
-            return null;
-          }
+          if (!source.url) return null;
+
           let res;
           try {
             res = await createRemoteFileNode({
