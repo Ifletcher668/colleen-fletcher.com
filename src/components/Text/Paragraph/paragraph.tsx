@@ -98,12 +98,13 @@ const Paragraph: React.FC<Props> = ({ data, className }: Props) => {
         return (
           <TextWrapper
             as="blockquote"
+            style={{display: 'flex', alignItems:"center", minHeight: '50px'}}
             alignParagraph={alignParagraph}
             justifyParagraph={justifyParagraph}
           >
-            <YangQuotes width={40} height={100} style={{ alignSelf: 'flex-start' }} />
+            <YangQuotes width={20} height={20} style={{ alignSelf: 'flex-start' }} />
             {domToReact(children, options)}
-            <YinQuotes width={40} height={100} style={{ alignSelf: 'flex-end' }} />
+            <YinQuotes width={20} height={20} style={{ alignSelf: 'flex-end' }} />
           </TextWrapper>
         );
 
