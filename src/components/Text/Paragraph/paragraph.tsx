@@ -1,5 +1,5 @@
 import React from 'react';
-import { Anchor, Link, Span } from '../../Atoms';
+import { Link, Span } from '../../Atoms';
 import { TextWrapper, H1, H2, H3 } from './styles';
 import { Grid } from '../../Containers';
 import parse, { domToReact, HTMLReactParserOptions } from 'html-react-parser';
@@ -21,20 +21,7 @@ const Paragraph: React.FC<Props> = ({ data, className }: Props) => {
       const { name, children, attribs } = domNode;
 
       if (name === 'a') {
-        // TODO: Every link in production starts with https... Fix
-        const isExternalLink = attribs.href.match('^(http|https)://');
-        return isExternalLink ? (
-          <Link to={attribs.href}>{domToReact(children, options)}</Link>
-        ) : (
-          <Anchor
-            color={'earth'}
-            href={attribs.href}
-            target={attribs.target}
-            rel={attribs.rel}
-          >
-            {domToReact(children, options)}
-          </Anchor>
-        );
+        <Link to={attribs.href}>{domToReact(children, options)}</Link>;
       }
 
       if (name === 'h1') {

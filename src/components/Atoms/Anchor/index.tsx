@@ -1,6 +1,6 @@
 import styled, { DefaultTheme } from 'styled-components';
 import { Link as GatsbyLink } from 'gatsby';
-import { color, time } from '../../../StyledComponents/_mixins';
+import { color, time, font } from '../../../StyledComponents/_mixins';
 
 type Props = {
   color?: keyof DefaultTheme['color'];
@@ -19,9 +19,10 @@ export const Anchor = styled.a<Props>`
 `;
 
 // Internal Link
-export const Link = styled(GatsbyLink)`
+export const InternalLink = styled(GatsbyLink)`
   color: ${color('aterrima')};
   text-decoration: none;
+  font-weight: ${font('weight', 'heading')};
 
   &:hover {
     transition: ${props => props.theme.time.fast} ease-out;
@@ -29,3 +30,33 @@ export const Link = styled(GatsbyLink)`
     color: ${color('dark-blue')};
   }
 `;
+
+export const Link = ({
+  children,
+  to,
+  activeClassName,
+  partiallyActive,
+  color,
+  ...other
+}: any): JSX.Element => {
+  const isInternalLink = /^\/(?!\/)/.test(to);
+
+  // Use Gatsby Link for internal links, and <a> for others
+  if (isInternalLink) {
+    return (
+      <InternalLink
+        to={to}
+        activeClassName={activeClassName}
+        partiallyActive={partiallyActive}
+        {...other}
+      >
+        {children}
+      </InternalLink>
+    );
+  }
+  return (
+    <Anchor href={to} color={color} {...other}>
+      {children}
+    </Anchor>
+  );
+};
