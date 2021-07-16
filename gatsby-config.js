@@ -22,24 +22,25 @@ module.exports = {
     `gatsby-plugin-sass`,
     `gatsby-plugin-postcss`,
     `gatsby-plugin-catch-links`,
-    {
-      resolve: `gatsby-plugin-sharp`,
-      options: {
-        failOnError: false,
-        defaults: {
-          formats: [`auto`, `webp`],
-          quality: 80,
-          breakpoints: [768, 1080, 1366, 1920],
-          backgroundColor: `transparent`,
-          tracedSVGOptions: {},
-          blurredOptions: {},
-          jpgOptions: {},
-          pngOptions: {},
-          webpOptions: {},
-          avifOptions: {},
-        },
-      },
-    },
+    `gatsby-plugin-sharp`,
+    // {
+    //   resolve: `gatsby-plugin-sharp`,
+    //   options: {
+    //     failOnError: false,
+    //     defaults: {
+    //       formats: [`auto`, `webp`],
+    //       quality: 80,
+    //       breakpoints: [768, 1080, 1366, 1920],
+    //       backgroundColor: `transparent`,
+    //       tracedSVGOptions: {},
+    //       blurredOptions: {},
+    //       jpgOptions: {},
+    //       pngOptions: {},
+    //       webpOptions: {},
+    //       avifOptions: {},
+    //     },
+    //   },
+    // },
 
     {
       resolve: `gatsby-plugin-styled-components`,
