@@ -81,7 +81,7 @@ const Footer: React.FC = () => {
             <span>
               <Anchor
                 color="earth"
-                href="https://colleen-fletcher.com/sitemap.xml"
+                href="https://colleen-fletcher.com/sitemap/sitemap-0.xml"
               >
                 Sitemap
               </Anchor>{' '}
