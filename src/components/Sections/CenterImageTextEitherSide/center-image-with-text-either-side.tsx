@@ -28,7 +28,7 @@ const ImageCenterTextEitherSideField = ({ data }: Props): JSX.Element => {
         <Paragraph data={text_right} />
       </GridAreaTextLeft>
 
-      <GridAreaImage>
+      <GridAreaImage {...image.configuration.alignImage}>
         <SingleImageField data={image} />
       </GridAreaImage>
 

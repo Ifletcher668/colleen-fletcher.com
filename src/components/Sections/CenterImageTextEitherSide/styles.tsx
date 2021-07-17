@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { above, gridContainer } from '../../../StyledComponents/_mixins';
-
+import { ComponentGeneralImageConfiguration } from '../../../typings/strapi';
 export const ImageCenterTextEitherSide = styled.section`
   ${gridContainer};
 
@@ -27,10 +27,44 @@ export const GridAreaTextLeft = styled.div`
     grid-area: content-start / text-left / content-end / text-left;
   `}
 `;
-
-export const GridAreaImage = styled.div`
+type ImageAreaProps = Pick<
+  ComponentGeneralImageConfiguration,
+  'alignImage' | 'justifyImage'
+>;
+export const GridAreaImage = styled.div<ImageAreaProps>`
   grid-area: content-start / auto / content-start / auto; // reorder image to top on mobile
 
+  align-self: ${props => {
+    switch (props.alignImage) {
+      case 'top':
+        return 'start';
+
+      case 'bottom':
+        return 'end';
+
+      case 'center':
+        return 'center';
+
+      default:
+        return 'unset';
+    }
+  }};
+
+  justify-self: ${props => {
+    switch (props.justifyImage) {
+      case 'right':
+        return 'end';
+
+      case 'center':
+        return 'center';
+
+      case 'left':
+        return 'start';
+
+      default:
+        return 'unset';
+    }
+  }};
   ${above.small`
     grid-area: content-start / image / content-end / image;
   `}

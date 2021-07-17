@@ -2543,6 +2543,45 @@ export type Strapi_EditComponentCollectionsServiceInput = {
   services?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
+export type Strapi_Enum_Componentgeneralimageconfiguration_Justify =
+  | 'left'
+  | 'center'
+  | 'right';
+
+export type Strapi_Enum_Componentgeneralimageconfiguration_Align =
+  | 'top'
+  | 'center'
+  | 'bottom';
+
+export type Strapi_ComponentGeneralImageConfiguration = {
+  id: Scalars['ID'];
+  width?: Maybe<Scalars['Int']>;
+  height?: Maybe<Scalars['Int']>;
+  is_circle?: Maybe<Scalars['Boolean']>;
+  has_border?: Maybe<Scalars['Boolean']>;
+  justify?: Maybe<Strapi_Enum_Componentgeneralimageconfiguration_Justify>;
+  align?: Maybe<Strapi_Enum_Componentgeneralimageconfiguration_Align>;
+};
+
+export type Strapi_ComponentGeneralImageConfigurationInput = {
+  width?: Maybe<Scalars['Int']>;
+  height?: Maybe<Scalars['Int']>;
+  is_circle?: Maybe<Scalars['Boolean']>;
+  has_border?: Maybe<Scalars['Boolean']>;
+  justify?: Maybe<Strapi_Enum_Componentgeneralimageconfiguration_Justify>;
+  align?: Maybe<Strapi_Enum_Componentgeneralimageconfiguration_Align>;
+};
+
+export type Strapi_EditComponentGeneralImageConfigurationInput = {
+  id?: Maybe<Scalars['ID']>;
+  width?: Maybe<Scalars['Int']>;
+  height?: Maybe<Scalars['Int']>;
+  is_circle?: Maybe<Scalars['Boolean']>;
+  has_border?: Maybe<Scalars['Boolean']>;
+  justify?: Maybe<Strapi_Enum_Componentgeneralimageconfiguration_Justify>;
+  align?: Maybe<Strapi_Enum_Componentgeneralimageconfiguration_Align>;
+};
+
 export type Strapi_ComponentGeneralPreview = {
   id: Scalars['ID'];
   heading?: Maybe<Strapi_ComponentTextHeading>;
@@ -2659,40 +2698,21 @@ export type Strapi_EditComponentMediaSingleFileInput = {
   file?: Maybe<Scalars['ID']>;
 };
 
-export type Strapi_Enum_Componentmediasingleimage_Justify =
-  | 'left'
-  | 'center'
-  | 'right';
-
-export type Strapi_Enum_Componentmediasingleimage_Align =
-  | 'top'
-  | 'center'
-  | 'bottom';
-
 export type Strapi_ComponentMediaSingleImage = {
   id: Scalars['ID'];
   file?: Maybe<Strapi_UploadFile>;
-  is_circle?: Maybe<Scalars['Boolean']>;
-  has_border?: Maybe<Scalars['Boolean']>;
-  justify?: Maybe<Strapi_Enum_Componentmediasingleimage_Justify>;
-  align?: Maybe<Strapi_Enum_Componentmediasingleimage_Align>;
+  configuration?: Maybe<Strapi_ComponentGeneralImageConfiguration>;
 };
 
 export type Strapi_ComponentMediaSingleImageInput = {
   file?: Maybe<Scalars['ID']>;
-  is_circle?: Maybe<Scalars['Boolean']>;
-  has_border?: Maybe<Scalars['Boolean']>;
-  justify?: Maybe<Strapi_Enum_Componentmediasingleimage_Justify>;
-  align?: Maybe<Strapi_Enum_Componentmediasingleimage_Align>;
+  configuration?: Maybe<Strapi_ComponentGeneralImageConfigurationInput>;
 };
 
 export type Strapi_EditComponentMediaSingleImageInput = {
   id?: Maybe<Scalars['ID']>;
   file?: Maybe<Scalars['ID']>;
-  is_circle?: Maybe<Scalars['Boolean']>;
-  has_border?: Maybe<Scalars['Boolean']>;
-  justify?: Maybe<Strapi_Enum_Componentmediasingleimage_Justify>;
-  align?: Maybe<Strapi_Enum_Componentmediasingleimage_Align>;
+  configuration?: Maybe<Strapi_EditComponentGeneralImageConfigurationInput>;
 };
 
 /** Upload a url and title to a YouTube video */
@@ -3002,7 +3022,7 @@ export type Strapi_EditComponentWidgetEmbeddedFormInput = {
   justify?: Maybe<Strapi_Enum_Componentwidgetembeddedform_Justify>;
 };
 
-export type Strapi_Morph = Strapi_UsersPermissionsMe | Strapi_UsersPermissionsMeRole | Strapi_UsersPermissionsLoginPayload | Strapi_UserPermissionsPasswordPayload | Strapi_BlogPost | Strapi_BlogPostConnection | Strapi_BlogPostAggregator | Strapi_BlogPostGroupBy | Strapi_BlogPostConnectionId | Strapi_BlogPostConnectionCreated_At | Strapi_BlogPostConnectionUpdated_At | Strapi_BlogPostConnectionTitle | Strapi_BlogPostConnectionSlug | Strapi_BlogPostConnectionPublished | Strapi_BlogPostConnectionCover_Image | Strapi_BlogPostConnectionBlog | Strapi_BlogPostConnectionCategory | Strapi_BlogPostConnectionIs_Blog_Post | Strapi_BlogPostConnectionPreview | Strapi_BlogPostConnectionSeo | Strapi_BlogPostConnectionPublished_At | Strapi_CreateBlogPostPayload | Strapi_UpdateBlogPostPayload | Strapi_DeleteBlogPostPayload | Strapi_Blog | Strapi_BlogConnection | Strapi_BlogAggregator | Strapi_BlogGroupBy | Strapi_BlogConnectionId | Strapi_BlogConnectionCreated_At | Strapi_BlogConnectionUpdated_At | Strapi_BlogConnectionName | Strapi_BlogConnectionSlug | Strapi_BlogConnectionPreview | Strapi_BlogConnectionIs_Blog | Strapi_BlogConnectionSeo | Strapi_CreateBlogPayload | Strapi_UpdateBlogPayload | Strapi_DeleteBlogPayload | Strapi_Category | Strapi_CategoryConnection | Strapi_CategoryAggregator | Strapi_CategoryGroupBy | Strapi_CategoryConnectionId | Strapi_CategoryConnectionCreated_At | Strapi_CategoryConnectionUpdated_At | Strapi_CategoryConnectionName | Strapi_CategoryConnectionSlug | Strapi_CategoryConnectionIs_Category | Strapi_CreateCategoryPayload | Strapi_UpdateCategoryPayload | Strapi_DeleteCategoryPayload | Strapi_MenuItem | Strapi_MenuItemConnection | Strapi_MenuItemAggregator | Strapi_MenuItemAggregatorSum | Strapi_MenuItemAggregatorAvg | Strapi_MenuItemAggregatorMin | Strapi_MenuItemAggregatorMax | Strapi_MenuItemGroupBy | Strapi_MenuItemConnectionId | Strapi_MenuItemConnectionCreated_At | Strapi_MenuItemConnectionUpdated_At | Strapi_MenuItemConnectionText | Strapi_MenuItemConnectionIs_External_Link | Strapi_MenuItemConnectionSlug | Strapi_MenuItemConnectionOrder | Strapi_MenuItemConnectionPage | Strapi_MenuItemConnectionPublished_At | Strapi_CreateMenuItemPayload | Strapi_UpdateMenuItemPayload | Strapi_DeleteMenuItemPayload | Strapi_Offering | Strapi_OfferingConnection | Strapi_OfferingAggregator | Strapi_OfferingGroupBy | Strapi_OfferingConnectionId | Strapi_OfferingConnectionCreated_At | Strapi_OfferingConnectionUpdated_At | Strapi_OfferingConnectionTitle | Strapi_OfferingConnectionSlug | Strapi_OfferingConnectionPreview | Strapi_OfferingConnectionIs_Offering | Strapi_OfferingConnectionSeo | Strapi_OfferingConnectionPublished_At | Strapi_CreateOfferingPayload | Strapi_UpdateOfferingPayload | Strapi_DeleteOfferingPayload | Strapi_Page | Strapi_PageConnection | Strapi_PageAggregator | Strapi_PageGroupBy | Strapi_PageConnectionId | Strapi_PageConnectionCreated_At | Strapi_PageConnectionUpdated_At | Strapi_PageConnectionTitle | Strapi_PageConnectionSlug | Strapi_PageConnectionBanner_Background_Image | Strapi_PageConnectionSeo | Strapi_PageConnectionMenu_Item | Strapi_PageConnectionPublished_At | Strapi_CreatePagePayload | Strapi_UpdatePagePayload | Strapi_DeletePagePayload | Strapi_Service | Strapi_ServiceConnection | Strapi_ServiceAggregator | Strapi_ServiceGroupBy | Strapi_ServiceConnectionId | Strapi_ServiceConnectionCreated_At | Strapi_ServiceConnectionUpdated_At | Strapi_ServiceConnectionTitle | Strapi_ServiceConnectionPreview | Strapi_ServiceConnectionBanner_Background_Image | Strapi_ServiceConnectionSlug | Strapi_ServiceConnectionIs_Service | Strapi_ServiceConnectionSeo | Strapi_ServiceConnectionPublished_At | Strapi_CreateServicePayload | Strapi_UpdateServicePayload | Strapi_DeleteServicePayload | Strapi_Tag | Strapi_TagConnection | Strapi_TagAggregator | Strapi_TagGroupBy | Strapi_TagConnectionId | Strapi_TagConnectionCreated_At | Strapi_TagConnectionUpdated_At | Strapi_TagConnectionName | Strapi_TagConnectionSlug | Strapi_TagConnectionIs_Tag | Strapi_CreateTagPayload | Strapi_UpdateTagPayload | Strapi_DeleteTagPayload | Strapi_CommentsComment | Strapi_CommentsReport | Strapi_UploadFile | Strapi_UploadFileConnection | Strapi_UploadFileAggregator | Strapi_UploadFileAggregatorSum | Strapi_UploadFileAggregatorAvg | Strapi_UploadFileAggregatorMin | Strapi_UploadFileAggregatorMax | Strapi_UploadFileGroupBy | Strapi_UploadFileConnectionId | Strapi_UploadFileConnectionCreated_At | Strapi_UploadFileConnectionUpdated_At | Strapi_UploadFileConnectionName | Strapi_UploadFileConnectionAlternativeText | Strapi_UploadFileConnectionCaption | Strapi_UploadFileConnectionWidth | Strapi_UploadFileConnectionHeight | Strapi_UploadFileConnectionFormats | Strapi_UploadFileConnectionHash | Strapi_UploadFileConnectionExt | Strapi_UploadFileConnectionMime | Strapi_UploadFileConnectionSize | Strapi_UploadFileConnectionUrl | Strapi_UploadFileConnectionPreviewUrl | Strapi_UploadFileConnectionProvider | Strapi_UploadFileConnectionProvider_Metadata | Strapi_DeleteFilePayload | Strapi_UsersPermissionsPermission | Strapi_UsersPermissionsRole | Strapi_UsersPermissionsRoleConnection | Strapi_UsersPermissionsRoleAggregator | Strapi_UsersPermissionsRoleGroupBy | Strapi_UsersPermissionsRoleConnectionId | Strapi_UsersPermissionsRoleConnectionName | Strapi_UsersPermissionsRoleConnectionDescription | Strapi_UsersPermissionsRoleConnectionType | Strapi_CreateRolePayload | Strapi_UpdateRolePayload | Strapi_DeleteRolePayload | Strapi_UsersPermissionsUser | Strapi_UsersPermissionsUserConnection | Strapi_UsersPermissionsUserAggregator | Strapi_UsersPermissionsUserGroupBy | Strapi_UsersPermissionsUserConnectionId | Strapi_UsersPermissionsUserConnectionCreated_At | Strapi_UsersPermissionsUserConnectionUpdated_At | Strapi_UsersPermissionsUserConnectionUsername | Strapi_UsersPermissionsUserConnectionEmail | Strapi_UsersPermissionsUserConnectionProvider | Strapi_UsersPermissionsUserConnectionConfirmed | Strapi_UsersPermissionsUserConnectionBlocked | Strapi_UsersPermissionsUserConnectionRole | Strapi_CreateUserPayload | Strapi_UpdateUserPayload | Strapi_DeleteUserPayload | Strapi_ComponentCollectionsBlogPosts | Strapi_ComponentCollectionsBlogs | Strapi_ComponentCollectionsOfferings | Strapi_ComponentCollectionsServices | Strapi_ComponentGeneralPreview | Strapi_ComponentGeneralSeo | Strapi_ComponentMediaFiles | Strapi_ComponentMediaImages | Strapi_ComponentMediaSingleFile | Strapi_ComponentMediaSingleImage | Strapi_ComponentMediaSingleVideo | Strapi_ComponentMediaVideos | Strapi_ComponentSectionHeadingLeftImageRight | Strapi_ComponentSectionHeadingRightImageLeft | Strapi_ComponentSectionImageCenterTextEitherSide | Strapi_ComponentSectionImageRightTextLeft | Strapi_ComponentSectionTextCenterImageEitherSide | Strapi_ComponentSectionTextRightImageLeft | Strapi_ComponentTextHeading | Strapi_ComponentTextParagraph | Strapi_ComponentTextQuote | Strapi_ComponentWidgetButton | Strapi_ComponentWidgetDivider | Strapi_ComponentWidgetEmbeddedForm;
+export type Strapi_Morph = Strapi_UsersPermissionsMe | Strapi_UsersPermissionsMeRole | Strapi_UsersPermissionsLoginPayload | Strapi_UserPermissionsPasswordPayload | Strapi_BlogPost | Strapi_BlogPostConnection | Strapi_BlogPostAggregator | Strapi_BlogPostGroupBy | Strapi_BlogPostConnectionId | Strapi_BlogPostConnectionCreated_At | Strapi_BlogPostConnectionUpdated_At | Strapi_BlogPostConnectionTitle | Strapi_BlogPostConnectionSlug | Strapi_BlogPostConnectionPublished | Strapi_BlogPostConnectionCover_Image | Strapi_BlogPostConnectionBlog | Strapi_BlogPostConnectionCategory | Strapi_BlogPostConnectionIs_Blog_Post | Strapi_BlogPostConnectionPreview | Strapi_BlogPostConnectionSeo | Strapi_BlogPostConnectionPublished_At | Strapi_CreateBlogPostPayload | Strapi_UpdateBlogPostPayload | Strapi_DeleteBlogPostPayload | Strapi_Blog | Strapi_BlogConnection | Strapi_BlogAggregator | Strapi_BlogGroupBy | Strapi_BlogConnectionId | Strapi_BlogConnectionCreated_At | Strapi_BlogConnectionUpdated_At | Strapi_BlogConnectionName | Strapi_BlogConnectionSlug | Strapi_BlogConnectionPreview | Strapi_BlogConnectionIs_Blog | Strapi_BlogConnectionSeo | Strapi_CreateBlogPayload | Strapi_UpdateBlogPayload | Strapi_DeleteBlogPayload | Strapi_Category | Strapi_CategoryConnection | Strapi_CategoryAggregator | Strapi_CategoryGroupBy | Strapi_CategoryConnectionId | Strapi_CategoryConnectionCreated_At | Strapi_CategoryConnectionUpdated_At | Strapi_CategoryConnectionName | Strapi_CategoryConnectionSlug | Strapi_CategoryConnectionIs_Category | Strapi_CreateCategoryPayload | Strapi_UpdateCategoryPayload | Strapi_DeleteCategoryPayload | Strapi_MenuItem | Strapi_MenuItemConnection | Strapi_MenuItemAggregator | Strapi_MenuItemAggregatorSum | Strapi_MenuItemAggregatorAvg | Strapi_MenuItemAggregatorMin | Strapi_MenuItemAggregatorMax | Strapi_MenuItemGroupBy | Strapi_MenuItemConnectionId | Strapi_MenuItemConnectionCreated_At | Strapi_MenuItemConnectionUpdated_At | Strapi_MenuItemConnectionText | Strapi_MenuItemConnectionIs_External_Link | Strapi_MenuItemConnectionSlug | Strapi_MenuItemConnectionOrder | Strapi_MenuItemConnectionPage | Strapi_MenuItemConnectionPublished_At | Strapi_CreateMenuItemPayload | Strapi_UpdateMenuItemPayload | Strapi_DeleteMenuItemPayload | Strapi_Offering | Strapi_OfferingConnection | Strapi_OfferingAggregator | Strapi_OfferingGroupBy | Strapi_OfferingConnectionId | Strapi_OfferingConnectionCreated_At | Strapi_OfferingConnectionUpdated_At | Strapi_OfferingConnectionTitle | Strapi_OfferingConnectionSlug | Strapi_OfferingConnectionPreview | Strapi_OfferingConnectionIs_Offering | Strapi_OfferingConnectionSeo | Strapi_OfferingConnectionPublished_At | Strapi_CreateOfferingPayload | Strapi_UpdateOfferingPayload | Strapi_DeleteOfferingPayload | Strapi_Page | Strapi_PageConnection | Strapi_PageAggregator | Strapi_PageGroupBy | Strapi_PageConnectionId | Strapi_PageConnectionCreated_At | Strapi_PageConnectionUpdated_At | Strapi_PageConnectionTitle | Strapi_PageConnectionSlug | Strapi_PageConnectionBanner_Background_Image | Strapi_PageConnectionSeo | Strapi_PageConnectionMenu_Item | Strapi_PageConnectionPublished_At | Strapi_CreatePagePayload | Strapi_UpdatePagePayload | Strapi_DeletePagePayload | Strapi_Service | Strapi_ServiceConnection | Strapi_ServiceAggregator | Strapi_ServiceGroupBy | Strapi_ServiceConnectionId | Strapi_ServiceConnectionCreated_At | Strapi_ServiceConnectionUpdated_At | Strapi_ServiceConnectionTitle | Strapi_ServiceConnectionPreview | Strapi_ServiceConnectionBanner_Background_Image | Strapi_ServiceConnectionSlug | Strapi_ServiceConnectionIs_Service | Strapi_ServiceConnectionSeo | Strapi_ServiceConnectionPublished_At | Strapi_CreateServicePayload | Strapi_UpdateServicePayload | Strapi_DeleteServicePayload | Strapi_Tag | Strapi_TagConnection | Strapi_TagAggregator | Strapi_TagGroupBy | Strapi_TagConnectionId | Strapi_TagConnectionCreated_At | Strapi_TagConnectionUpdated_At | Strapi_TagConnectionName | Strapi_TagConnectionSlug | Strapi_TagConnectionIs_Tag | Strapi_CreateTagPayload | Strapi_UpdateTagPayload | Strapi_DeleteTagPayload | Strapi_CommentsComment | Strapi_CommentsReport | Strapi_UploadFile | Strapi_UploadFileConnection | Strapi_UploadFileAggregator | Strapi_UploadFileAggregatorSum | Strapi_UploadFileAggregatorAvg | Strapi_UploadFileAggregatorMin | Strapi_UploadFileAggregatorMax | Strapi_UploadFileGroupBy | Strapi_UploadFileConnectionId | Strapi_UploadFileConnectionCreated_At | Strapi_UploadFileConnectionUpdated_At | Strapi_UploadFileConnectionName | Strapi_UploadFileConnectionAlternativeText | Strapi_UploadFileConnectionCaption | Strapi_UploadFileConnectionWidth | Strapi_UploadFileConnectionHeight | Strapi_UploadFileConnectionFormats | Strapi_UploadFileConnectionHash | Strapi_UploadFileConnectionExt | Strapi_UploadFileConnectionMime | Strapi_UploadFileConnectionSize | Strapi_UploadFileConnectionUrl | Strapi_UploadFileConnectionPreviewUrl | Strapi_UploadFileConnectionProvider | Strapi_UploadFileConnectionProvider_Metadata | Strapi_DeleteFilePayload | Strapi_UsersPermissionsPermission | Strapi_UsersPermissionsRole | Strapi_UsersPermissionsRoleConnection | Strapi_UsersPermissionsRoleAggregator | Strapi_UsersPermissionsRoleGroupBy | Strapi_UsersPermissionsRoleConnectionId | Strapi_UsersPermissionsRoleConnectionName | Strapi_UsersPermissionsRoleConnectionDescription | Strapi_UsersPermissionsRoleConnectionType | Strapi_CreateRolePayload | Strapi_UpdateRolePayload | Strapi_DeleteRolePayload | Strapi_UsersPermissionsUser | Strapi_UsersPermissionsUserConnection | Strapi_UsersPermissionsUserAggregator | Strapi_UsersPermissionsUserGroupBy | Strapi_UsersPermissionsUserConnectionId | Strapi_UsersPermissionsUserConnectionCreated_At | Strapi_UsersPermissionsUserConnectionUpdated_At | Strapi_UsersPermissionsUserConnectionUsername | Strapi_UsersPermissionsUserConnectionEmail | Strapi_UsersPermissionsUserConnectionProvider | Strapi_UsersPermissionsUserConnectionConfirmed | Strapi_UsersPermissionsUserConnectionBlocked | Strapi_UsersPermissionsUserConnectionRole | Strapi_CreateUserPayload | Strapi_UpdateUserPayload | Strapi_DeleteUserPayload | Strapi_ComponentCollectionsBlogPosts | Strapi_ComponentCollectionsBlogs | Strapi_ComponentCollectionsOfferings | Strapi_ComponentCollectionsServices | Strapi_ComponentGeneralImageConfiguration | Strapi_ComponentGeneralPreview | Strapi_ComponentGeneralSeo | Strapi_ComponentMediaFiles | Strapi_ComponentMediaImages | Strapi_ComponentMediaSingleFile | Strapi_ComponentMediaSingleImage | Strapi_ComponentMediaSingleVideo | Strapi_ComponentMediaVideos | Strapi_ComponentSectionHeadingLeftImageRight | Strapi_ComponentSectionHeadingRightImageLeft | Strapi_ComponentSectionImageCenterTextEitherSide | Strapi_ComponentSectionImageRightTextLeft | Strapi_ComponentSectionTextCenterImageEitherSide | Strapi_ComponentSectionTextRightImageLeft | Strapi_ComponentTextHeading | Strapi_ComponentTextParagraph | Strapi_ComponentTextQuote | Strapi_ComponentWidgetButton | Strapi_ComponentWidgetDivider | Strapi_ComponentWidgetEmbeddedForm;
 
 export type Strapi_InputId = {
   id: Scalars['ID'];
@@ -5836,8 +5856,7 @@ export type StrapiUploadFileFragment = (
 
 export type StrapiComponentMediaSingleImageFragment = (
   Pick<Strapi_ComponentMediaSingleImage, 'id'>
-  & { isCircle: Strapi_ComponentMediaSingleImage['is_circle'], hasBorder: Strapi_ComponentMediaSingleImage['has_border'] }
-  & { file?: Maybe<StrapiUploadFileFragment> }
+  & { file?: Maybe<StrapiUploadFileFragment>, configuration?: Maybe<StrapiComponentGeneralImageConfigurationFragment> }
 );
 
 export type StrapiComponentMediaImagesFragment = (
@@ -5925,6 +5944,8 @@ export type StrapiComponentGeneralSeoFragment = (
   Pick<Strapi_ComponentGeneralSeo, 'title' | 'meta_description'>
   & { image?: Maybe<StrapiUploadFileFragment> }
 );
+
+export type StrapiComponentGeneralImageConfigurationFragment = { imageWidth: Strapi_ComponentGeneralImageConfiguration['width'], imageHeight: Strapi_ComponentGeneralImageConfiguration['height'], isCircle: Strapi_ComponentGeneralImageConfiguration['is_circle'], hasBorder: Strapi_ComponentGeneralImageConfiguration['has_border'], justifyImage: Strapi_ComponentGeneralImageConfiguration['justify'], alignImage: Strapi_ComponentGeneralImageConfiguration['align'] };
 
 export type Unnamed_6_QueryVariables = Exact<{ [key: string]: never; }>;
 

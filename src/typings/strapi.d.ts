@@ -65,6 +65,7 @@ declare namespace Strapi {
     | 'STRAPI_ComponentCollectionsBlogPosts'
     | 'STRAPI_ComponentCollectionsServices';
 
+  // TODO: Refactor into discriminating union
   type DynamicZone = {
     readonly __typename: DynamicZoneTypeNames;
     id: string;
@@ -90,8 +91,7 @@ declare namespace Strapi {
     action: string;
     // ========================
     image: ComponentMediaSingleImage; // image inside section with text or header
-    isCircle: boolean;
-    hasBorder: boolean;
+    configuration: ComponentGeneralImageConfiguration;
     // =========================
     file: UploadFile; // single image , video or file
     files: Array<UploadFile>; // image files, videos, or files
@@ -184,17 +184,25 @@ declare namespace Strapi {
     text: ComponentTextParagraph;
   };
 
+  type ComponentGeneralImageConfiguration = {
+    imageWidth?: number;
+    imageHeight?: number;
+    isCircle?: boolean;
+    hasBorder?: boolean;
+    justifyImage?: JustifyValues;
+    alignImage?: AlignValues;
+  };
+
   //  Media Types
   type ComponentMediaSingleImage = {
     file: UploadFile;
-    isCircle: boolean;
-    hasBorder: boolean;
+    configuration: ComponentGeneralImageConfiguration;
   };
+
   type ComponentMediaImages = {
     files: Array<UploadFile>;
     style: Omit<ImageStyle, 'standard' | 'fancy'>;
-    isCircle: boolean;
-    hasBorder: boolean;
+    configuration: ComponentGeneralImageConfiguration;
   };
 
   //  Widget Types

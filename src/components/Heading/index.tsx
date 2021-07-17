@@ -33,6 +33,22 @@ const HeadingWrapper = styled(HeadingAtom)<WrapperProps>`
     }
   }};
 
+  text-align: ${props => {
+    switch (props.justifyHeading) {
+      case 'right':
+        return 'right';
+
+      case 'center':
+        return 'center';
+
+      case 'left':
+        return 'left';
+
+      default:
+        return 'unset';
+    }
+  }};
+
   align-self: ${props => {
     switch (props.alignHeading) {
       case 'top':
@@ -59,22 +75,6 @@ const HeadingWrapper = styled(HeadingAtom)<WrapperProps>`
 
       case 'left':
         return 'start';
-
-      default:
-        return 'unset';
-    }
-  }};
-
-  text-align: ${props => {
-    switch (props.justifyHeading) {
-      case 'right':
-        return 'right';
-
-      case 'center':
-        return 'center';
-
-      case 'left':
-        return 'left';
 
       default:
         return 'unset';

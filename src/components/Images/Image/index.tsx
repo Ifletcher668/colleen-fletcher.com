@@ -1,33 +1,47 @@
 import React from 'react';
 import { GatsbyImage } from 'gatsby-plugin-image';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { color } from '../../../StyledComponents/_mixins';
-import { ComponentMediaSingleImage } from '../../../typings/strapi';
+import {
+  ComponentGeneralImageConfiguration,
+  ComponentMediaSingleImage,
+} from '../../../typings/strapi';
+
 interface Props {
   data: ComponentMediaSingleImage;
 }
 
-interface WrapperProps {
-  hasBorder: boolean;
-  isCircle: boolean;
-}
-
-const ImageWrapper = styled(GatsbyImage)<WrapperProps>`
-  border: ${p => (p.hasBorder ? '1.5px solid' + color('aterrima') : 'none')};
+const ImageWrapper = styled(GatsbyImage)<ComponentGeneralImageConfiguration>`
   border-radius: ${p => (p.isCircle ? '1000px' : '2px')};
+
+  ${p =>
+    p.hasBorder &&
+    css`
+      border: 1.5px solid ${color('aterrima')};
+    `}
+  ${p =>
+    p.imageWidth &&
+    css`
+      max-width: ${p.imageWidth}px;
+    `}
+  ${p =>
+    p.imageHeight &&
+    css`
+      max-height: ${p.imageHeight}px;
+    `}
 `;
 
-const Image: React.FC<Props> = ({ data }: Props) => {
-  const { file, hasBorder, isCircle } = data;
+const Image = ({ data }: Props): JSX.Element => {
+  const { file, configuration } = data;
 
-  if (file === null || file === undefined) {
+  if (!file) {
     console.log('file passed to <Image /> component is null ');
     return <></>;
   }
 
   const { alternativeText, caption, imageFile } = file;
 
-  if (imageFile === null || imageFile === undefined) {
+  if (!imageFile) {
     console.log(
       'imageFile is null on <Image /> Component! Here is the file that was passed to the <Image /> component',
     );
@@ -41,8 +55,7 @@ const Image: React.FC<Props> = ({ data }: Props) => {
       alt={alternativeText || ''}
       title={caption || ''}
       image={imageFile.childImageSharp.gatsbyImageData}
-      hasBorder={hasBorder}
-      isCircle={isCircle}
+      {...configuration}
     />
   );
 };

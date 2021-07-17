@@ -9,7 +9,7 @@ interface Props {
 }
 
 const ImagesField: React.FC<Props> = ({ data }: Props) => {
-  const { files, isCircle, hasBorder } = data;
+  const { files, configuration } = data;
 
   const styles: CSSObject = {
     gap: '1rem',
@@ -27,8 +27,7 @@ const ImagesField: React.FC<Props> = ({ data }: Props) => {
       {files.map((image, idx) => {
         const imageData = {
           file: image,
-          isCircle,
-          hasBorder,
+          configuration,
         };
         return <ImageWithCaption key={idx} between data={imageData} />;
       })}

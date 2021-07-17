@@ -33,8 +33,7 @@ export const parseDynamicZoneContent = (
                 key={`${idx}${component.__typename}`}
                 data={{
                   file: component.file,
-                  isCircle: component.isCircle,
-                  hasBorder: component.hasBorder,
+                  configuration: component.configuration,
                 }}
               />
             );
@@ -46,8 +45,7 @@ export const parseDynamicZoneContent = (
                 data={{
                   style: component.style,
                   files: component.files,
-                  isCircle: component.isCircle,
-                  hasBorder: component.hasBorder,
+                  configuration: component.configuration,
                 }}
               />
             );

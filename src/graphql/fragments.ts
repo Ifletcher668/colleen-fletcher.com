@@ -198,8 +198,9 @@ export const StrapiComponentMediaSingleImage = graphql`
     file {
       ...StrapiUploadFile
     }
-    isCircle: is_circle
-    hasBorder: has_border
+    configuration {
+      ...StrapiComponentGeneralImageConfiguration
+    }
   }
 `;
 
@@ -440,5 +441,16 @@ export const StrapiComponentGeneralSeo = graphql`
       ...StrapiUploadFile
     }
     meta_description
+  }
+`;
+
+export const StrapiComponentGeneralImageConfiguration = graphql`
+  fragment StrapiComponentGeneralImageConfiguration on STRAPI_ComponentGeneralImageConfiguration {
+    imageWidth: width
+    imageHeight: height
+    isCircle: is_circle
+    hasBorder: has_border
+    justifyImage: justify
+    alignImage: align
   }
 `;
