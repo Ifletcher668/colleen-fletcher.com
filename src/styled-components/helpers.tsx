@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { below } from '../StyledComponents/_mixins';
+import { below } from './_mixins';
 interface Props {
   /**
    * @param column

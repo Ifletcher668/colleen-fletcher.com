@@ -10,7 +10,12 @@ interface Props extends DefaultProps {
 }
 
 interface WrapperProps
-  extends ThemedStyledFunction<'h1', DefaultTheme, {}, never> {
+  extends ThemedStyledFunction<
+    'h1',
+    DefaultTheme,
+    Record<string, unknown>,
+    never
+  > {
   tilt?: 'up' | 'even' | 'down';
   alignHeading?: AlignValues;
   justifyHeading?: JustifyValues;
@@ -82,7 +87,7 @@ const HeadingWrapper = styled(HeadingAtom)<WrapperProps>`
   }};
 `;
 
-const Heading: React.FC<Props> = ({
+const Heading = ({
   level = 1,
   children,
   tilt = 'even',
@@ -98,6 +103,7 @@ const Heading: React.FC<Props> = ({
 
   return (
     // TODO:
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     /* @ts-ignore */
     <HeadingWrapper
       tilt={tilt}
@@ -105,6 +111,8 @@ const Heading: React.FC<Props> = ({
       justifyHeading={justifyHeading}
       // Unsure of how to ensure styled-components
       // that this string will only be of the correct type
+
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       /* @ts-ignore */
       as={`h${level.toString()}`}
     >

@@ -16,7 +16,7 @@ const getFlexboxProps = ({
   around,
   vertical,
   gap,
-}: Props) => {
+}: Props): CSSObject => {
   let x = 'initial';
   let y = 'initial';
   let gridGap: string | number = 'none';
@@ -79,14 +79,14 @@ const getFlexboxProps = ({
     }
   }
 
-  return {
+  const properties: any = {
     'justify-content': x,
     'align-items': y,
-    '& > * + *': {
-      'margin-left': gap && !vertical && gridGap,
-      'margin-top': gap && vertical && gridGap,
-    } as any,
   };
+  if (gap && !vertical) properties['& > * + *']['margin-left'] = gridGap;
+  if (gap && vertical) properties['& > * + *']['margin-top'] = gridGap;
+
+  return properties;
 };
 
 const Wrapper = styled.div<Props>`
@@ -99,57 +99,59 @@ const Wrapper = styled.div<Props>`
   ${props => props.styling};
 `;
 
-const Flexbox: React.FC<Props> = forwardRef((props: Props, ref) => {
-  const {
-    className,
-    onClick,
-    inline,
-    vertical,
-    wrap,
-    flex,
-    styling,
-    top,
-    middle,
-    bottom,
-    left,
-    center,
-    right,
-    between,
-    around,
-    gap,
-    containerType = 'div',
-  } = props;
+const Flexbox = forwardRef(
+  (props: Props, ref: React.ForwardedRef<any>): JSX.Element => {
+    const {
+      className,
+      onClick,
+      inline,
+      vertical,
+      wrap,
+      flex,
+      styling,
+      top,
+      middle,
+      bottom,
+      left,
+      center,
+      right,
+      between,
+      around,
+      gap,
+      containerType = 'div',
+    } = props;
 
-  const cn = className
-    ? Array.isArray(className)
-      ? className.join(' ')
-      : className
-    : '';
+    const cn = className
+      ? Array.isArray(className)
+        ? className.join(' ')
+        : className
+      : '';
 
-  return (
-    <Wrapper
-      as={containerType}
-      ref={ref}
-      wrap={wrap}
-      flex={flex}
-      inline={inline}
-      onClick={onClick}
-      styling={styling}
-      className={cn}
-      top={top}
-      vertical={vertical}
-      middle={middle}
-      bottom={bottom}
-      left={left}
-      center={center}
-      right={right}
-      between={between}
-      around={around}
-      gap={gap}
-    >
-      {props.children}
-    </Wrapper>
-  );
-});
+    return (
+      <Wrapper
+        as={containerType}
+        ref={ref}
+        wrap={wrap}
+        flex={flex}
+        inline={inline}
+        onClick={onClick}
+        styling={styling}
+        className={cn}
+        top={top}
+        vertical={vertical}
+        middle={middle}
+        bottom={bottom}
+        left={left}
+        center={center}
+        right={right}
+        between={between}
+        around={around}
+        gap={gap}
+      >
+        {props.children}
+      </Wrapper>
+    );
+  },
+);
 
 export default Flexbox;

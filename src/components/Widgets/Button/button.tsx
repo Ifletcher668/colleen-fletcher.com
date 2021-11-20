@@ -7,9 +7,9 @@ export interface Props {
   data: ComponentWidgetButton;
 }
 
-const ButtonField: React.FC<Props> = ({
+const ButtonField = ({
   data: { buttonText, variant, action },
-}: Props) => {
+}: Props): JSX.Element => {
   return (
     <Button center variant={variant} type="button">
       <Link to={action}>{buttonText}</Link>

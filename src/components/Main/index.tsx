@@ -1,9 +1,6 @@
 import React from 'react';
 
-const Main: React.FC<DefaultProps> = ({
-  children,
-  className,
-}: DefaultProps) => {
+const Main = ({ children, className }: DefaultProps): JSX.Element => {
   return (
     <main
       role="main"

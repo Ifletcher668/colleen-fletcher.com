@@ -4,7 +4,7 @@ import { HeadingField, Paragraph } from '../../Text';
 import { ImageWithCaption } from '../../Images';
 import { ButtonField } from '../../Widgets';
 import { zigZagGridColumns } from '../../../utils/zigZagGridColumns';
-import { GridArea } from '../../../StyledComponents/helpers';
+import { GridArea } from '../../../styled-components/helpers';
 import Divider from '../../Divider';
 import { Offering } from '../../../typings/strapi';
 
@@ -13,7 +13,7 @@ export interface Props {
 }
 
 // Component only used in StrapiDynamicZone
-const OfferingsField: React.FC<Props> = ({ data }: Props) => {
+const OfferingsField = ({ data }: Props): JSX.Element => {
   return (
     <Grid containerType="section" gap="2em 0">
       {data.map((offering, idx) => {

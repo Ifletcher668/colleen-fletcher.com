@@ -3,7 +3,7 @@ import {
   above,
   gridContainer,
   mobileGridTemplateLayout,
-} from '../../../StyledComponents/_mixins';
+} from '../../../styled-components/_mixins';
 
 export const HeadingWithImageLeftSide = styled.section`
   ${gridContainer};

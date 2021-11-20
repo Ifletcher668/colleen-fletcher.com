@@ -243,7 +243,8 @@ export const parseDynamicZoneContent = (
             );
 
           default:
-            return <>{console.log('No component passed to dynamic zone')}</>;
+            // eslint-disable-next-line no-console
+            return <>{console.error('No component passed to dynamic zone')}</>;
         }
       })}
     </>

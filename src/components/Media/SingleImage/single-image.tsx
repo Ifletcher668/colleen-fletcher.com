@@ -6,7 +6,7 @@ export interface Props {
   data: ComponentMediaSingleImage;
 }
 
-const SingleImageField: React.FC<Props> = ({ data }: Props) => {
+const SingleImageField = ({ data }: Props): JSX.Element => {
   if (!data) {
     console.log('No single-image data found');
     return <></>;

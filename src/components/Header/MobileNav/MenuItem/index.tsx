@@ -20,13 +20,13 @@ type Offering = {
 };
 
 // data, className: Props
-const MenuItem: React.FC<Props> = ({
+const MenuItem = ({
   text,
   is_external_link,
   slug,
   content,
   className,
-}: Props) => {
+}: Props): JSX.Element => {
   const [showSubMenu, setShowSubMenu] = useState(false);
   const [clickedBlogName, setClickedBlogName] = useState('');
   const [clickedOffering, setClickedOffering] = useState<Offering>(
@@ -45,7 +45,8 @@ const MenuItem: React.FC<Props> = ({
       : ''
   }`;
 
-  const hasSubmenuContentToShow = () => (content.length > 0 ? true : false);
+  const hasSubmenuContentToShow = (): boolean =>
+    content.length > 0 ? true : false;
 
   const handleSubMenuBehavior = (content: Array<DynamicZone>): JSX.Element => {
     return (

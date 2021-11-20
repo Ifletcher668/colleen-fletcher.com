@@ -17,7 +17,7 @@ const data = graphql`
   }
 `;
 
-const Blogs: React.FC = (): JSX.Element => {
+const Blogs = (): JSX.Element => {
   const query: Strapi.Strapi = useStaticQuery(data);
   return (
     <>

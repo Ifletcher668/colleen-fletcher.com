@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { color, font } from '../../../StyledComponents/_mixins';
+import { color, font } from '../../../styled-components/_mixins';
 
 export default styled.h1`
   color: ${color('aterrima')};

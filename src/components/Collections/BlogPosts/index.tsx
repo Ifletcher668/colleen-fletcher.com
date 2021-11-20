@@ -1,11 +1,13 @@
 import React from 'react';
 import { BlogPost } from '../../../typings/strapi';
-// TODO:
+// TODO: Build out this file
 
 export interface Props {
   data: BlogPost[];
 }
-const BlogPostsField: React.FC<Props> = ({ data }: Props) => {
+const BlogPostsField = ({ data }: Props): JSX.Element => {
+  console.log(data);
+
   return (
     <>
       {/* <MarkdownField source={data} allowDangerousHtml className="paragraph" /> */}

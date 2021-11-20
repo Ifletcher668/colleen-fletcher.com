@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { color, size } from '../../StyledComponents/_mixins';
+import { color, size } from '../../styled-components/_mixins';
 import { DividerColorOptions } from '.';
 
 interface Props {

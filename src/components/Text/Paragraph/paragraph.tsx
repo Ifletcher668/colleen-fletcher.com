@@ -13,7 +13,7 @@ export interface Props {
   className?: Array<string> | string;
 }
 
-const Paragraph: React.FC<Props> = ({ data, className }: Props) => {
+const Paragraph = ({ data, className }: Props): JSX.Element => {
   const { body, alignParagraph, justifyParagraph } = data;
 
   // TODO: Add images to parser
@@ -98,16 +98,22 @@ const Paragraph: React.FC<Props> = ({ data, className }: Props) => {
         return (
           <TextWrapper
             as="blockquote"
-            style={{display: 'flex', alignItems:"center", minHeight: '50px'}}
+            style={{ display: 'flex', alignItems: 'center', minHeight: '50px' }}
             alignParagraph={alignParagraph}
             justifyParagraph={justifyParagraph}
           >
-            <YangQuotes width={20} height={20} style={{ alignSelf: 'flex-start' }} />
+            <YangQuotes
+              width={20}
+              height={20}
+              style={{ alignSelf: 'flex-start' }}
+            />
             {/* Arbitrary div to group any html that may split up 'children' */}
-            <div> 
-              {domToReact(children, options)}
-            </div>
-            <YinQuotes width={20} height={20} style={{ alignSelf: 'flex-end' }} />
+            <div>{domToReact(children, options)}</div>
+            <YinQuotes
+              width={20}
+              height={20}
+              style={{ alignSelf: 'flex-end' }}
+            />
           </TextWrapper>
         );
 
@@ -119,6 +125,8 @@ const Paragraph: React.FC<Props> = ({ data, className }: Props) => {
 
       if (attribs.class === 'ql-size-small')
         return <Span size="small">{domToReact(children, options)}</Span>;
+
+      return null;
     },
   };
 

@@ -18,7 +18,7 @@ interface Props extends FlexboxProps {
   circle?: boolean;
 }
 
-const ImageWithCaption: React.FC<Props> = (props: Props) => {
+const ImageWithCaption = (props: Props): JSX.Element => {
   const { data, containerType = 'article', styling } = props;
   if (!data)
     return (

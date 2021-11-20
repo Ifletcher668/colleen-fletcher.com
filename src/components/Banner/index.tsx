@@ -17,10 +17,7 @@ interface Props {
 //     `}
 // `;
 
-const BannerBackgroundImage: React.FC<Props> = ({
-  image,
-  banner,
-}: Props): JSX.Element => {
+const BannerBackgroundImage = ({ image, banner }: Props): JSX.Element => {
   if (image?.imageFile === null) return <> </>;
 
   return (

@@ -12,7 +12,7 @@ const data = graphql`
     }
   }
 `;
-const Offerings: React.FC = (): JSX.Element => {
+const Offerings = (): JSX.Element => {
   const query: Strapi.Strapi = useStaticQuery(data);
   return (
     <>

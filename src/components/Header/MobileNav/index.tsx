@@ -1,7 +1,7 @@
 import React, { forwardRef, useContext } from 'react';
 import { FaAlignJustify, FaTimes } from 'react-icons/fa';
 import styled from 'styled-components';
-import { font, size } from '../../../StyledComponents/_mixins';
+import { font, size } from '../../../styled-components/_mixins';
 import { Nav } from '../../Atoms';
 import { MobileMenuToggleButton } from '../../Button';
 import { Flexbox } from '../../Containers/';
@@ -61,38 +61,41 @@ const MobileNavLinks = styled.ul`
 //     }
 // `;
 
-const MobileMenu: React.FC<Props> = forwardRef(({ items }: Props, ref) => {
-  const { isMobileMenuOpen, toggleMobileMenu } = useContext(MobileMenuContext);
+const MobileMenu = forwardRef(
+  ({ items }: Props, ref: React.ForwardedRef<any>) => {
+    const { isMobileMenuOpen, toggleMobileMenu } =
+      useContext(MobileMenuContext);
 
-  return isMobileMenuOpen ? (
-    // TODO: How to pass props to styled-components without actually adding the prop
-    <MobileNav isMobileMenuOpen ref={ref}>
-      <MobileNavHeader>
-        <CloseButton type="button" onClick={() => toggleMobileMenu()}>
-          <FaTimes />
-        </CloseButton>
-      </MobileNavHeader>
+    return isMobileMenuOpen ? (
+      // TODO: How to pass props to styled-components without actually adding the prop
+      <MobileNav isMobileMenuOpen ref={ref}>
+        <MobileNavHeader>
+          <CloseButton type="button" onClick={() => toggleMobileMenu()}>
+            <FaTimes />
+          </CloseButton>
+        </MobileNavHeader>
 
-      <MobileNavLinks className="mobile-menu-links">
-        {items.map((item, idx) => {
-          return <MenuItem key={idx} {...item} />;
-        })}
-      </MobileNavLinks>
-    </MobileNav>
-  ) : (
-    <Flexbox containerType="nav" vertical>
-      <Heading level={1}>Colleen Fletcher</Heading>
+        <MobileNavLinks className="mobile-menu-links">
+          {items.map((item, idx) => {
+            return <MenuItem key={idx} {...item} />;
+          })}
+        </MobileNavLinks>
+      </MobileNav>
+    ) : (
+      <Flexbox containerType="nav" vertical>
+        <Heading level={1}>Colleen Fletcher</Heading>
 
-      <MobileMenuToggleButton
-        type="button"
-        variant="secondary"
-        className="toggle-menu"
-        onClick={() => toggleMobileMenu()}
-      >
-        <FaAlignJustify />
-      </MobileMenuToggleButton>
-    </Flexbox>
-  );
-});
+        <MobileMenuToggleButton
+          type="button"
+          variant="secondary"
+          className="toggle-menu"
+          onClick={() => toggleMobileMenu()}
+        >
+          <FaAlignJustify />
+        </MobileMenuToggleButton>
+      </Flexbox>
+    );
+  },
+);
 
 export default MobileMenu;

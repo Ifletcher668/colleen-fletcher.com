@@ -10,7 +10,7 @@ import { RiInformationLine } from 'react-icons/ri';
 import { Anchor } from '../Atoms';
 import Divider from '../Divider';
 
-const Footer: React.FC = () => {
+const Footer = (): JSX.Element => {
   return (
     <footer role="footer" className="site-footer">
       <div className="footer-content">

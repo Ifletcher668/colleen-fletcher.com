@@ -11,7 +11,7 @@ interface Props extends DefaultProps {
   content: Array<DynamicZone>;
 }
 
-const Panel: React.FC<Props> = ({ content, className }: Props) => {
+const Panel = ({ content, className }: Props): JSX.Element => {
   const [activeSubMenuItemName, setActiveSubMenuItemName] = useState('');
   const [blog, setBlog] = useState('');
   const [offering, setOffering] = useState<{
@@ -22,68 +22,73 @@ const Panel: React.FC<Props> = ({ content, className }: Props) => {
   const [showServices, setShowServices] = useState<boolean>(false);
   const { setIsActivePanel, setActivePanelName } = useContext(NavbarContext);
 
-  const handlePanelOpenOrCloseBehavior = (title: string, isActive: boolean) => {
+  const handlePanelOpenOrCloseBehavior = (
+    title: string,
+    isActive: boolean,
+  ): void => {
     setActivePanelName(title), setIsActivePanel(isActive);
   };
 
-  const handleSubMenuContent = () => {
-    return content.map((content, idx) => {
-      switch (content.__typename) {
-        case 'STRAPI_ComponentCollectionsBlogs':
-          return content.blogs.map(blog => {
-            let cn = '';
-            if (blog.name === activeSubMenuItemName) {
-              cn += 'active';
-            }
-            return (
-              <li key={`${idx}${blog.name}`} className={cn}>
-                <Link
-                  to={blog.fullUrlPath}
-                  onMouseOver={() => {
-                    if (content.show_blog_posts && showBlogPosts === false)
-                      setShowBlogPosts(true);
+  const handleSubMenuContent = (): JSX.Element => (
+    <>
+      {content.map((content, idx) => {
+        switch (content.__typename) {
+          case 'STRAPI_ComponentCollectionsBlogs':
+            return content.blogs.map(blog => {
+              let cn = '';
+              if (blog.name === activeSubMenuItemName) {
+                cn += 'active';
+              }
+              return (
+                <li key={`${idx}${blog.name}`} className={cn}>
+                  <Link
+                    to={blog.fullUrlPath}
+                    onMouseOver={() => {
+                      if (content.show_blog_posts && showBlogPosts === false)
+                        setShowBlogPosts(true);
 
-                    setActiveSubMenuItemName(blog.name);
-                    setBlog(blog.name);
-                  }}
-                >
-                  {blog.name}
-                </Link>
-              </li>
-            );
-          });
+                      setActiveSubMenuItemName(blog.name);
+                      setBlog(blog.name);
+                    }}
+                  >
+                    {blog.name}
+                  </Link>
+                </li>
+              );
+            });
 
-        case 'STRAPI_ComponentCollectionsOfferings':
-          return content.offerings.map(offering => {
-            let cn = '';
-            if (offering.title === activeSubMenuItemName) {
-              cn += 'active';
-            }
-            return (
-              <li key={`${idx}${offering.title}`} className={cn}>
-                <Link
-                  to={offering.fullUrlPath}
-                  onMouseOver={() => {
-                    if (content.show_services && showServices === false)
-                      setShowServices(true);
+          case 'STRAPI_ComponentCollectionsOfferings':
+            return content.offerings.map(offering => {
+              let cn = '';
+              if (offering.title === activeSubMenuItemName) {
+                cn += 'active';
+              }
+              return (
+                <li key={`${idx}${offering.title}`} className={cn}>
+                  <Link
+                    to={offering.fullUrlPath}
+                    onMouseOver={() => {
+                      if (content.show_services && showServices === false)
+                        setShowServices(true);
 
-                    setActiveSubMenuItemName(offering.title);
-                    setOffering({
-                      title: offering.title,
-                      url: offering.fullUrlPath,
-                    });
-                  }}
-                >
-                  {offering.title}
-                </Link>
-              </li>
-            );
-          });
-        default:
-          return <></>;
-      }
-    });
-  };
+                      setActiveSubMenuItemName(offering.title);
+                      setOffering({
+                        title: offering.title,
+                        url: offering.fullUrlPath,
+                      });
+                    }}
+                  >
+                    {offering.title}
+                  </Link>
+                </li>
+              );
+            });
+          default:
+            return <></>;
+        }
+      })}
+    </>
+  );
   return (
     <nav
       className={

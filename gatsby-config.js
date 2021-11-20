@@ -14,43 +14,29 @@ module.exports = {
   },
 
   plugins: [
-    `gatsby-plugin-image`,
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-sitemap`,
-    `gatsby-plugin-ts`,
-    `gatsby-plugin-sass`,
-    `gatsby-plugin-postcss`,
-    `gatsby-plugin-catch-links`,
-    `gatsby-plugin-sharp`,
-    // {
-    //   resolve: `gatsby-plugin-sharp`,
-    //   options: {
-    //     failOnError: false,
-    //     defaults: {
-    //       formats: [`auto`, `webp`],
-    //       quality: 80,
-    //       breakpoints: [768, 1080, 1366, 1920],
-    //       backgroundColor: `transparent`,
-    //       tracedSVGOptions: {},
-    //       blurredOptions: {},
-    //       jpgOptions: {},
-    //       pngOptions: {},
-    //       webpOptions: {},
-    //       avifOptions: {},
-    //     },
-    //   },
-    // },
-
+    'gatsby-plugin-image',
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-react-helmet',
+    'gatsby-plugin-sitemap',
+    'gatsby-plugin-sass',
+    'gatsby-plugin-postcss',
+    'gatsby-plugin-catch-links',
+    'gatsby-plugin-sharp',
     {
-      resolve: `gatsby-plugin-styled-components`,
+      resolve: 'gatsby-plugin-ts',
+      options: {
+        // disable codegen in favor of custom types
+        codegen: false,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-styled-components',
       options: {
         displayName: true,
         fileName: false, // only use DisplayName
         namespace: 'cf',
       },
     },
-
     {
       resolve: 'gatsby-plugin-react-svg',
       options: {
@@ -59,10 +45,9 @@ module.exports = {
         },
       },
     },
-
     {
       // browser tab thumbnail
-      resolve: `gatsby-plugin-manifest`,
+      resolve: 'gatsby-plugin-manifest',
       options: {
         name: 'colleen-fletcher.com',
         short_name: 'Colleen Fletcher',
@@ -70,14 +55,12 @@ module.exports = {
         icon: `${__dirname}/static/blue-flower-colleen-fletcher.png`,
       },
     },
-
     {
       resolve: 'gatsby-source-filesystem',
       options: {
         path: `${__dirname}/src/assets/images`,
       },
     },
-
     // TODO: Remove once gatsby-source-strapi is fixed
     // https://forum.strapi.io/t/gatsby-source-strapi-plugin-not-processing-images-in-dynamic-zones/5838/5
     {

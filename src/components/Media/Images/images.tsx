@@ -8,7 +8,7 @@ interface Props {
   data: ComponentMediaImages;
 }
 
-const ImagesField: React.FC<Props> = ({ data }: Props) => {
+const ImagesField = ({ data }: Props): JSX.Element => {
   const { files, configuration } = data;
 
   const styles: CSSObject = {

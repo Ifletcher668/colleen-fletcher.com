@@ -21,11 +21,11 @@ type Ctx = {
 
 export const MobileMenuContext = createContext<Ctx>({} as Ctx);
 
-const Header: React.FC<DefaultProps> = ({ className }: DefaultProps) => {
+const Header = ({ className }: DefaultProps): JSX.Element => {
   const [isFullMenu, toggleIsFullMenu] = useState<boolean>(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 
-  const toggleMobileMenu = () => {
+  const toggleMobileMenu = (): void => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
@@ -42,7 +42,7 @@ const Header: React.FC<DefaultProps> = ({ className }: DefaultProps) => {
   } = useBreakpoints();
 
   useEffect(() => {
-    const handleResize = () => setInnerWidth(window.innerWidth);
+    const handleResize = (): void => setInnerWidth(window.innerWidth);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -67,7 +67,7 @@ const Header: React.FC<DefaultProps> = ({ className }: DefaultProps) => {
   const navRef = useRef<HTMLUListElement>(null);
 
   const getClassNames = (): string => {
-    let cn: string = '';
+    let cn = '';
 
     if (!isFullMenu) cn += 'mobile ';
 

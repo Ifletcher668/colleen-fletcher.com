@@ -11,12 +11,14 @@ import {
   Preview as StrapiPreview,
 } from '../../../typings/strapi';
 
-interface Props {
+type Props = {
   preview: StrapiPreview;
   component: Blog | Offering;
-}
+};
 
-const Preview: React.FC<Props> = (props: Props) => {
+const Preview = (props: Props): JSX.Element => {
+  console.log(props);
+
   return (
     <>
       {/*  */}

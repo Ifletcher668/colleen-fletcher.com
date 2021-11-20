@@ -7,7 +7,7 @@ export interface Props {
   };
 }
 
-const EmbeddedForm: React.FC<Props> = ({ data }: Props) => {
+const EmbeddedForm = ({ data }: Props): JSX.Element => {
   return (
     <div
       className={`embedded-form ${data.justify}`}

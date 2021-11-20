@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { CSSObject } from 'styled-components';
-import { below } from '../../../StyledComponents/_mixins';
+import { below } from '../../../styled-components/_mixins';
 interface Props extends DefaultProps {
   columns?: BreakpointObject;
   rows?: BreakpointObject;
@@ -63,7 +63,7 @@ export const Wrapper = styled.div<Props>`
   ${({ styling }) => styling};
 `;
 
-const Grid: React.FC<Props> = (props: Props) => {
+const Grid = (props: Props): JSX.Element => {
   const {
     styling,
     className,

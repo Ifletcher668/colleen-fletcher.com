@@ -9,7 +9,7 @@ import Layout from '../components/Layout';
 import SEO from '../components/SEO';
 import { HeadingField, Paragraph } from '../components/Text';
 import { ButtonField } from '../components/Widgets';
-import { GridArea } from '../StyledComponents/helpers';
+import { GridArea } from '../styled-components/helpers';
 import { ComponentWidgetButton } from '../typings/strapi';
 import { zigZagGridColumns } from '../utils/zigZagGridColumns';
 import { TemplateProps } from './types';

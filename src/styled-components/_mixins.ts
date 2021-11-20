@@ -5,6 +5,7 @@ type CSSParams = Parameters<typeof css>;
 
 type StyleFnMap = Record<
   keyof DefaultTheme['breakpoints'],
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (...args: CSSParams) => any
 >;
 
@@ -55,6 +56,7 @@ export const font =
     variant: Variant,
     label: Label,
   ) =>
+  /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
   (props: ThemeProps<DefaultTheme>) =>
     props.theme.font[variant][label];
 
@@ -66,6 +68,7 @@ export const size =
     variant: Variant,
     label: Label,
   ) =>
+  /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
   (props: ThemeProps<DefaultTheme>) =>
     props.theme.size[variant][label];
 
