@@ -3,11 +3,11 @@ import Footer from '../Footer';
 import Header from '../Header';
 import Main from '../Main';
 import { ThemeProvider } from 'styled-components';
-import { theme } from '../../StyledComponents/defaultTheme';
+import { theme } from '../../styled-components/defaultTheme';
 
-const Layout: React.FC<PageProps> = ({ children, location }: PageProps) => {
+const Layout = ({ children, location }: PageProps): JSX.Element => {
   const [documentIsAtTop, setDocumentIsAtTop] = useState<boolean>(true);
-  const handleScrollY = () =>
+  const handleScrollY = (): void =>
     window.scrollY < 200 ? setDocumentIsAtTop(true) : setDocumentIsAtTop(false);
 
   useEffect(() => {
@@ -20,10 +20,10 @@ const Layout: React.FC<PageProps> = ({ children, location }: PageProps) => {
     headerClassNames.push('at-top');
   }
 
-  const handleHeaderBehavior = () =>
+  const handleHeaderBehavior = (): JSX.Element =>
     // hides header at top of homepage
     documentIsAtTop && location.pathname === '/' ? (
-      ''
+      <></>
     ) : (
       <Header className={headerClassNames} />
     );

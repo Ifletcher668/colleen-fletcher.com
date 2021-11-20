@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { below, size } from '../../../StyledComponents/_mixins';
+import { below, size } from '../../../styled-components/_mixins';
 
 // TODO: Update with theme variables
 const PageContainer = styled.section`
@@ -15,17 +15,17 @@ const PageContainer = styled.section`
   }
 
   ${below.small`
-            place-items:center;
-            grid-template-columns: 
-                [full-start] 4%
-                [content-start] 92%
-                [content-end] 4%
-                [full-end];
+    place-items:center;
+    grid-template-columns: 
+      [full-start] 4%
+      [content-start] 92%
+      [content-end] 4%
+      [full-end];
 
-                & > * {
-                    grid-column: content;
-                }
-        `};
+      & > * {
+          grid-column: content;
+      }
+  `};
 
   margin: ${size('margin', 'large')} 0;
 `;

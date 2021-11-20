@@ -4,10 +4,8 @@ export interface Props {
   data: any;
 }
 
-const TextWithImageField: React.FC<Props> = ({
-  data: { header, rich_text, image_right_side },
-}: Props) => {
+const FilesField = (): JSX.Element => {
   return <>{/* todo */}</>;
 };
 
-export default TextWithImageField;
+export default FilesField;

@@ -23,7 +23,7 @@ const data = graphql`
     }
   }
 `;
-const Services: React.FC<Props> = (props: Props) => {
+const Services = (props: Props): JSX.Element => {
   const query: Strapi.Strapi = useStaticQuery(data);
   return (
     <>
@@ -32,9 +32,11 @@ const Services: React.FC<Props> = (props: Props) => {
           const offering = service.offerings.find(
             offering => offering.title === props.offering.title,
           );
-          if (offering) {
-            return offering.title === props.offering.title ? service : '';
-          }
+          return offering
+            ? offering.title === props.offering.title
+              ? service
+              : ''
+            : false;
         })
         .map((service, idx) => {
           return (

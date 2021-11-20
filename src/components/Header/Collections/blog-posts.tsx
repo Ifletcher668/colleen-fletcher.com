@@ -21,7 +21,7 @@ const data = graphql`
   }
 `;
 
-const BlogPosts: React.FC<Props> = (props: Props) => {
+const BlogPosts = (props: Props): JSX.Element => {
   const query: Strapi = useStaticQuery(data);
 
   // TODO: A better way to handle limit?

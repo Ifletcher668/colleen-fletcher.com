@@ -6,9 +6,9 @@ interface Props {
   data: ComponentTextHeading;
 }
 
-const HeadingField: React.FC<Props> = ({
+const HeadingField = ({
   data: { headingText, level, tilt, alignHeading, justifyHeading },
-}: Props) => {
+}: Props): JSX.Element => {
   // string value enum type in database
   // looks better on client-end
   //

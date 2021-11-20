@@ -8,7 +8,7 @@ export interface Props {
   data: ComponentTextParagraph;
 }
 
-const QuoteField: React.FC<Props> = ({ data: body }: Props) => {
+const QuoteField = ({ data: body }: Props): JSX.Element => {
   // TODO add the quote
   return (
     <Flexbox containerType="section" vertical>

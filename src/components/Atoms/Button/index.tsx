@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Anchor, InternalLink } from '..';
-import { font, size } from '../../../StyledComponents/_mixins';
+import { font, size } from '../../../styled-components/_mixins';
 
 type Props = {
   variant?: 'primary' | 'secondary' | 'tertiary';

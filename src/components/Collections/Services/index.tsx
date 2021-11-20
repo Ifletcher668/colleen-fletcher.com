@@ -4,7 +4,7 @@ import { HeadingField, Paragraph } from '../../Text';
 import { ImageWithCaption } from '../../Images';
 import { ButtonField } from '../../Widgets';
 import { zigZagGridColumns } from '../../../utils/zigZagGridColumns';
-import { GridArea } from '../../../StyledComponents/helpers';
+import { GridArea } from '../../../styled-components/helpers';
 import Divider from '../../Divider';
 import { Service } from '../../../typings/strapi';
 
@@ -12,7 +12,7 @@ export interface Props {
   data: Service[];
 }
 
-const ServicesField: React.FC<Props> = ({ data }: Props): JSX.Element => {
+const ServicesField = ({ data }: Props): JSX.Element => {
   return (
     <Grid containerType="section" gap="2em 0">
       {data.map((service, idx) => {

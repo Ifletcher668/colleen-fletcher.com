@@ -7,10 +7,7 @@ interface Props extends Pick<DefaultProps, 'children'> {
 
 const ListItem = styled.li``;
 
-const SearchSection: React.FC<Props> = ({
-  hideElement,
-  children,
-}: Props): JSX.Element => {
+const SearchSection = ({ hideElement, children }: Props): JSX.Element => {
   return !hideElement ? <></> : <ListItem>{children}</ListItem>;
 };
 

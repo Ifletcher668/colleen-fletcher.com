@@ -1,7 +1,7 @@
 import React from 'react';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import styled, { css } from 'styled-components';
-import { color } from '../../../StyledComponents/_mixins';
+import { color } from '../../../styled-components/_mixins';
 import {
   ComponentGeneralImageConfiguration,
   ComponentMediaSingleImage,

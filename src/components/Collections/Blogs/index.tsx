@@ -10,7 +10,7 @@ export interface Props {
   data: Array<Pick<Blog, 'id' | 'slug' | 'fullUrlPath' | 'preview'>>;
 }
 
-const BlogsField: React.FC<Props> = ({ data }: Props) => {
+const BlogsField = ({ data }: Props): JSX.Element => {
   return (
     <>
       {data.map((blog, idx) => {

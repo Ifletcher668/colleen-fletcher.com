@@ -4,7 +4,7 @@ export interface Props {
   data: any;
 }
 
-const TextWithImageField: React.FC<Props> = ({}: Props) => {
+const TextWithImageField = ({}: Props): JSX.Element => {
   return <>{/* todo */}</>;
 };
 

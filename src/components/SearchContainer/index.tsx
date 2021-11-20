@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Axios from 'axios';
 import * as JsSearch from 'js-search';
 import { FaSearch } from 'react-icons/fa';
@@ -86,7 +86,7 @@ const SearchContainer = (): JSX.Element => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = async (): Promise<void> => {
       const blogs = await Axios(`${process.env.GATSBY_HEROKU_URL}blogs`);
       setBlogs(blogs.data);
 
@@ -150,15 +150,18 @@ const SearchContainer = (): JSX.Element => {
     if ((query === '' || searchResult.length < 1) && showServiceSearches) {
       setShowServiceSearches(false);
     }
-  }),
-    [query];
+  }, [
+    query,
+    searchResult.length,
+    showBlogSearches,
+    showBlogPostSearches,
+    showCategorySearches,
+    showTagSearches,
+    showOfferingSearches,
+    showServiceSearches,
+  ]);
 
-  useEffect(() => {
-    if (blogs || blogPosts || categories || tags || offerings || services)
-      rebuildIndex();
-  }, [isLoading]);
-
-  const rebuildIndex = () => {
+  const rebuildIndex = useCallback(() => {
     const {
       Search,
       PrefixIndexStrategy,
@@ -209,23 +212,43 @@ const SearchContainer = (): JSX.Element => {
     }
 
     setSearch(dataToSearch);
-  };
+  }, [blogs, blogPosts, categories, tags, offerings, services]);
 
-  const searchData = (e: React.ChangeEvent<HTMLInputElement>) => {
+  useEffect(() => {
+    if (blogs || blogPosts || categories || tags || offerings || services)
+      rebuildIndex();
+  }, [
+    isLoading,
+    blogs,
+    blogPosts,
+    categories,
+    tags,
+    offerings,
+    services,
+    rebuildIndex,
+  ]);
+
+  const searchData = (e: React.ChangeEvent<HTMLInputElement>): void => {
     if (search !== null) {
-      const queryResult: any = search.search(e.target.value); // set to any because Object[] is stupid
+      // set to any because Object[] is stupid
+      const queryResult: any = search.search(e.target.value);
       setSearchResult(queryResult);
     }
   };
 
-  const handleIsBlog = () => {
+  const handleCloseSearchContainerOnClickOutside = (): void => {
+    setQuery('');
+    setSearchResult([]);
+  };
+
+  const handleIsBlog = (): JSX.Element => {
     return (
       <SearchSection hideElement={showBlogSearches}>
         <Heading level={5}>Blogs</Heading>
         {isBlog(searchResult) && (
           <ul>
             {searchResult
-              .filter(data => (data.is_blog ? data : ''))
+              .filter(data => data.is_blog)
               .map((blog, idx) => {
                 if (!showBlogSearches) setShowBlogSearches(true);
                 return (
@@ -243,14 +266,14 @@ const SearchContainer = (): JSX.Element => {
     );
   };
 
-  const handleIsBlogPost = () => {
+  const handleIsBlogPost = (): JSX.Element => {
     return (
       <SearchSection hideElement={showBlogPostSearches}>
         <Heading level={5}>Blog Posts</Heading>
         {isBlogPost(searchResult) && (
           <ul>
             {searchResult
-              .filter(data => (data.is_blog_post ? data : ''))
+              .filter(data => data.is_blog_post)
               .map((post, idx) => {
                 if (!showBlogPostSearches) setShowBlogPostSearches(true);
                 return (
@@ -286,16 +309,14 @@ const SearchContainer = (): JSX.Element => {
     );
   };
 
-  const handleIsCategory = () => {
+  const handleIsCategory = (): JSX.Element => {
     return (
       <SearchSection hideElement={showCategorySearches}>
         <Heading level={5}>Categories</Heading>
         {isCategory(searchResult) && (
           <ul>
             {searchResult
-              .filter(data => {
-                if (data.is_category) return data;
-              })
+              .filter(data => data.is_category)
               .map((category, idx) => {
                 if (!showCategorySearches) setShowCategorySearches(true);
                 return (
@@ -315,16 +336,14 @@ const SearchContainer = (): JSX.Element => {
     );
   };
 
-  const handleIsTag = () => {
+  const handleIsTag = (): JSX.Element => {
     return (
       <SearchSection hideElement={showTagSearches}>
         <Heading level={5}>Tags</Heading>
         {isTag(searchResult) && (
           <ul>
             {searchResult
-              .filter(data => {
-                if (data.is_tag) return data;
-              })
+              .filter(data => data.is_tag)
               .map((tag, idx) => {
                 if (!showTagSearches) setShowTagSearches(true);
                 return (
@@ -342,16 +361,14 @@ const SearchContainer = (): JSX.Element => {
     );
   };
 
-  const handleIsOffering = () => {
+  const handleIsOffering = (): JSX.Element => {
     return (
       <SearchSection hideElement={showOfferingSearches}>
         <Heading level={5}>Offerings</Heading>
         {isOffering(searchResult) && (
           <ul>
             {searchResult
-              .filter(data => {
-                if (data.is_offering) return data;
-              })
+              .filter(data => data.is_offering)
               .map((offering, idx) => {
                 if (!showOfferingSearches) setShowOfferingSearches(true);
                 return (
@@ -371,16 +388,14 @@ const SearchContainer = (): JSX.Element => {
     );
   };
 
-  const handleIsService = () => {
+  const handleIsService = (): JSX.Element => {
     return (
       <SearchSection hideElement={showServiceSearches}>
         <Heading level={5}>Services</Heading>
         {isService(searchResult) && (
           <ul>
             {searchResult
-              .filter(data => {
-                if (data.is_service) return data;
-              })
+              .filter(data => data.is_service)
               .map((service, index) => {
                 if (!showServiceSearches) setShowServiceSearches(true);
                 return service.offerings.map((offering, idx) => {
@@ -405,12 +420,7 @@ const SearchContainer = (): JSX.Element => {
     );
   };
 
-  const handleCloseSearchContainerOnClickOutside = () => {
-    setQuery('');
-    setSearchResult([]);
-  };
-
-  const findRandomBlogPost = () => {
+  const findRandomBlogPost = (): JSX.Element => {
     if (!blogPosts) return <> </>;
 
     const randomPost = blogPosts[Math.floor(Math.random() * blogPosts.length)];
@@ -443,7 +453,7 @@ const SearchContainer = (): JSX.Element => {
   useEffect(() => {
     searchResult.length === 0 ? setHasFound(false) : setHasFound(true);
     query.length === 0 && setHasFound(true); // don't show if empty
-  }, [searchResult]);
+  }, [searchResult, query.length]);
 
   return (
     <Grid>

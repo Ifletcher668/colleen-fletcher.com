@@ -8,13 +8,13 @@ import { MenuItem as StrapiMenuItem } from '../../../../typings/strapi';
 interface Props extends DefaultProps, StrapiMenuItem {}
 
 // data, className: Props
-const MenuItem: React.FC<Props> = ({
+const MenuItem = ({
   text,
   is_external_link,
   slug,
   content,
   className,
-}: Props) => {
+}: Props): JSX.Element => {
   const {
     isActivePanel,
     setIsActivePanel,
@@ -30,7 +30,7 @@ const MenuItem: React.FC<Props> = ({
       : ''
   }`;
 
-  const handleOpenOrClosePanel = (title: string, isActive: boolean) => {
+  const handleOpenOrClosePanel = (title: string, isActive: boolean): void => {
     setActivePanelName(title);
     setIsActivePanel(isActive);
   };

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { above, gridContainer } from '../../../StyledComponents/_mixins';
+import { above, gridContainer } from '../../../styled-components/_mixins';
 
 export const TextCenterImageEitherSide = styled.section`
   ${gridContainer};

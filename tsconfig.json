@@ -13,18 +13,20 @@
     "strict": true,
     "noEmit": true,
     "alwaysStrict": true,
-    "isolatedModules": false, // change back
+    "isolatedModules": true,
     "noImplicitAny": true,
+    "noImplicitReturns": true,
     "noImplicitThis": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
     "strictBindCallApply": true,
     "strictPropertyInitialization": true,
     "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "preserveConstEnums": true
   },
-  "include": ["./src/**/*", "typings"]
+  "include": ["./src/**/*", "typings", "gatsby-node.js"]
 }

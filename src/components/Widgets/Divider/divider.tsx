@@ -7,7 +7,7 @@ export interface Props {
   };
 }
 
-const DividerField: React.FC<Props> = ({ data }: Props) => {
+const DividerField = ({ data }: Props): JSX.Element => {
   return <Divider type={data.style} />;
 };
 
