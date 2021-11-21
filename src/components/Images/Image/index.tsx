@@ -1,35 +1,11 @@
 import React from 'react';
 import { GatsbyImage } from 'gatsby-plugin-image';
-import styled, { css } from 'styled-components';
-import { color } from '../../../styled-components/_mixins';
-import {
-  ComponentGeneralImageConfiguration,
-  ComponentMediaSingleImage,
-} from '../../../typings/strapi';
+import { ComponentMediaSingleImage } from '../../../typings/strapi';
+import { theme } from '../../../styled-components/defaultTheme';
 
 interface Props {
   data: ComponentMediaSingleImage;
 }
-
-const ImageWrapper = styled(GatsbyImage)<ComponentGeneralImageConfiguration>`
-  border-radius: ${p => (p.isCircle ? '1000px' : '2px')};
-
-  ${p =>
-    p.hasBorder &&
-    css`
-      border: 1.5px solid ${color('aterrima')};
-    `}
-  ${p =>
-    p.imageWidth &&
-    css`
-      max-width: ${p.imageWidth}px;
-    `}
-  ${p =>
-    p.imageHeight &&
-    css`
-      max-height: ${p.imageHeight}px;
-    `}
-`;
 
 const Image = ({ data }: Props): JSX.Element => {
   const { file, configuration } = data;
@@ -50,8 +26,18 @@ const Image = ({ data }: Props): JSX.Element => {
     return <></>;
   }
 
+  const imgStyle = {
+    borderRadius: configuration.isCircle ? '1000px' : '2px',
+    border: configuration.hasBorder
+      ? `1.5px solid ${theme.color.aterrima}`
+      : 'unset',
+    maxWidth: configuration.imageWidth ? configuration.imageWidth : '100%',
+    maxHeight: configuration.imageHeight ? configuration.imageHeight : '100%',
+  };
+
   return (
-    <ImageWrapper
+    <GatsbyImage
+      imgStyle={imgStyle}
       alt={alternativeText || ''}
       title={caption || ''}
       image={imageFile.childImageSharp.gatsbyImageData}
