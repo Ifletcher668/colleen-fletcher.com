@@ -91,7 +91,7 @@ const Header = ({ className }: DefaultProps): JSX.Element => {
         }}
       >
         {isFullMenu ? (
-          <Navbar className="navbar" />
+          <Navbar className="navbar" items={strapiMenuItems} />
         ) : (
           <MobileNav ref={navRef} items={strapiMenuItems} />
         )}

@@ -5,7 +5,9 @@ import { Anchor, Link } from '../../../../Elements';
 import { MenuItem as StrapiMenuItem } from '../../../../../typings/strapi';
 
 // props matches type StrapiMenuItem
-interface Props extends DefaultProps, StrapiMenuItem {}
+interface Props extends DefaultProps, StrapiMenuItem {
+  isActive: boolean;
+}
 
 // data, className: Props
 const MenuItem = ({
@@ -13,14 +15,13 @@ const MenuItem = ({
   is_external_link,
   slug,
   content,
+  isActive,
   className,
 }: Props): JSX.Element => {
-  const {
-    isActivePanel,
-    setIsActivePanel,
-    activePanelName,
-    setActivePanelName,
-  } = useContext(NavbarContext);
+  const { showPanel, hidePanel } = useContext(NavbarContext);
+
+  const handleShowPanel = (): void => showPanel(text);
+  const handleHidePanel = (): void => hidePanel();
 
   const cn = `nav-list-item ${
     className
@@ -30,21 +31,11 @@ const MenuItem = ({
       : ''
   }`;
 
-  const handleOpenOrClosePanel = (title: string, isActive: boolean): void => {
-    setActivePanelName(title);
-    setIsActivePanel(isActive);
-  };
-
   return (
     <>
       {/* an external link makes page.id === null */}
       {is_external_link ? (
-        <li
-          className={cn}
-          onMouseOver={() => {
-            handleOpenOrClosePanel('', false);
-          }}
-        >
+        <li className={cn} onMouseOver={handleHidePanel}>
           <Anchor
             href={`${
               // Ensures an external link for Gatsby to not think it's local
@@ -57,13 +48,9 @@ const MenuItem = ({
       ) : (
         <li
           className={cn}
-          onMouseOver={() => {
-            handleOpenOrClosePanel(text, true);
-          }}
+          onMouseOver={handleShowPanel}
           // clear on navigation
-          onClick={() => {
-            handleOpenOrClosePanel('', false);
-          }}
+          onClick={handleHidePanel}
         >
           <Link
             to={`/${
@@ -74,7 +61,7 @@ const MenuItem = ({
             {text}
           </Link>
 
-          {content.length > 0 && isActivePanel && activePanelName === text && (
+          {content.length > 0 && isActive && (
             <Panel className="panel-navbar" content={content} />
           )}
         </li>

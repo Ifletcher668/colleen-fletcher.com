@@ -20,14 +20,10 @@ const Panel = ({ content, className }: Props): JSX.Element => {
   }>({ title: '', url: '' });
   const [showBlogPosts, setShowBlogPosts] = useState<boolean>(false);
   const [showServices, setShowServices] = useState<boolean>(false);
-  const { setIsActivePanel, setActivePanelName } = useContext(NavbarContext);
 
-  const handlePanelOpenOrCloseBehavior = (
-    title: string,
-    isActive: boolean,
-  ): void => {
-    setActivePanelName(title), setIsActivePanel(isActive);
-  };
+  const { hidePanel } = useContext(NavbarContext);
+
+  const handleHidePanel = (): void => hidePanel();
 
   const handleSubMenuContent = (): JSX.Element => (
     <>
@@ -98,9 +94,10 @@ const Panel = ({ content, className }: Props): JSX.Element => {
             : className
           : ''
       }
-      onMouseLeave={() => handlePanelOpenOrCloseBehavior('', false)}
+      onMouseLeave={handleHidePanel}
     >
       <ul className="submenu">{handleSubMenuContent()}</ul>
+
       <Grid className="content" containerType="section">
         {!showServices && !showBlogPosts && (
           <BlueInfinitySymbol width={200} height={200} />

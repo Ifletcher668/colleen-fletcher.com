@@ -6,11 +6,34 @@ import {
 } from '../../../../../typings/strapi';
 import ChevronDown from '../../../../../assets/images/svg/chevron-down.svg';
 import { Flexbox } from '../../../../Containers';
-// import ChevronUp from '../../../../assets/images/svg/chevron-up.svg';
 import { Link } from '../../../../Elements';
 import Heading from '../../../../Heading';
 import BlogPosts from '../../Collections/blog-posts';
 import Services from '../../Collections/services';
+import styled from 'styled-components';
+import { font } from '../../../../../styled-components/_mixins';
+
+type ChevronProps = {
+  isClicked: boolean;
+};
+
+const Chevron = styled(ChevronDown)<ChevronProps>`
+  width: ${font('size', 'medium')};
+  margin-left: 0.5rem;
+  /* transform: ${({ isClicked }) =>
+    isClicked ? 'rotate(180deg)' : 'unset'}; */
+`;
+
+const NavListItem = styled.li`
+  font-size: ${font('size', 'xlarge')};
+`;
+
+const SubmenuNav = styled.ul`
+  display: flex;
+  flex-flow: column nowrap;
+  margin-top: 1rem;
+  margin-left: 1rem;
+`;
 
 type Props = Pick<DefaultProps, 'className'> & Omit<StrapiMenuItem, 'page'>;
 
@@ -45,106 +68,108 @@ const MenuItem = ({
       : ''
   }`;
 
-  const hasSubmenuContentToShow = (): boolean =>
-    content.length > 0 ? true : false;
+  const hasSubmenuContentToShow = content.length > 0;
 
-  const handleSubMenuBehavior = (content: Array<DynamicZone>): JSX.Element => {
-    return (
-      <>
-        {content.map((item, idx) => {
-          switch (item.__typename) {
-            case 'STRAPI_ComponentCollectionsBlogs':
-              return (
-                <Fragment key={idx}>
-                  {item.blogs.map((blog, idx) => {
-                    return (
-                      <Flexbox key={idx} containerType="li" vertical>
-                        <Flexbox>
-                          <Link
-                            onClick={() => toggleMobileMenu()}
-                            onKeyPress={() => toggleMobileMenu()}
-                            to={blog.fullUrlPath}
-                          >
-                            {' '}
-                            <Heading level={6}>{blog.name}</Heading>
-                          </Link>
-                          <ChevronDown
-                            onClick={() => {
-                              setClickedBlogName(blog.name);
-                              setShowBlogPosts(!showBlogPosts);
-                            }}
-                            onKeyPress={() => {
-                              setClickedBlogName(blog.name);
-                              setShowBlogPosts(!showBlogPosts);
-                            }}
-                          />
-                        </Flexbox>
+  const mapBlogs = (blogs: Array<Strapi.Blog>): JSX.Element => (
+    <Fragment>
+      {blogs.map((blog, idx) => {
+        return (
+          <Flexbox key={idx} containerType="li" vertical>
+            <Flexbox middle center>
+              <Link
+                onClick={() => toggleMobileMenu()}
+                onKeyPress={() => toggleMobileMenu()}
+                to={blog.fullUrlPath}
+              >
+                {' '}
+                <Heading level={6}>{blog.name}</Heading>
+              </Link>
 
-                        {showBlogPosts && blog.name === clickedBlogName && (
-                          <Flexbox containerType="ul" vertical>
-                            <BlogPosts blog={clickedBlogName} />
-                          </Flexbox>
-                        )}
-                      </Flexbox>
-                    );
-                  })}
-                </Fragment>
-              );
-            case 'STRAPI_ComponentCollectionsOfferings':
-              return (
-                <Fragment key={idx}>
-                  {item.offerings.map((offering, idx) => {
-                    return (
-                      <Flexbox containerType="li" key={idx}>
-                        {' '}
-                        <Link
-                          onClick={() => toggleMobileMenu()}
-                          onKeyPress={() => toggleMobileMenu()}
-                          to={offering.fullUrlPath}
-                        >
-                          {' '}
-                          <Heading level={6}>{offering.title}</Heading>
-                        </Link>
-                        <ChevronDown
-                          onClick={() => {
-                            setShowServices(!showServices);
-                            setClickedOffering({
-                              title: offering.title,
-                              url: offering.fullUrlPath,
-                            });
-                          }}
-                          onKeyPress={() => {
-                            setShowServices(!showServices);
-                            setClickedOffering({
-                              title: offering.title,
-                              url: offering.fullUrlPath,
-                            });
-                          }}
-                        />
-                        {showServices &&
-                          offering.title === clickedOffering.title && (
-                            <Flexbox containerType="ul" vertical>
-                              <Services offering={clickedOffering} />
-                            </Flexbox>
-                          )}
-                      </Flexbox>
-                    );
-                  })}
-                </Fragment>
-              );
-            default:
-              return <></>;
-          }
-        })}
-      </>
-    );
-  };
+              <Chevron
+                isClicked={showSubMenu}
+                onClick={() => {
+                  setClickedBlogName(blog.name);
+                  setShowBlogPosts(!showBlogPosts);
+                }}
+                onKeyPress={() => {
+                  setClickedBlogName(blog.name);
+                  setShowBlogPosts(!showBlogPosts);
+                }}
+              />
+            </Flexbox>
+
+            {showBlogPosts && blog.name === clickedBlogName && (
+              <Flexbox containerType="ul" vertical center middle>
+                <BlogPosts blog={clickedBlogName} />
+              </Flexbox>
+            )}
+          </Flexbox>
+        );
+      })}
+    </Fragment>
+  );
+
+  const mapOfferings = (offerings: Array<Strapi.Offering>): JSX.Element => (
+    <Fragment>
+      {offerings.map((offering, idx) => {
+        return (
+          <Flexbox containerType="li" key={idx}>
+            {' '}
+            <Link
+              onClick={() => toggleMobileMenu()}
+              onKeyPress={() => toggleMobileMenu()}
+              to={offering.fullUrlPath}
+            >
+              {' '}
+              <Heading level={6}>{offering.title}</Heading>
+            </Link>
+            <Chevron
+              onClick={() => {
+                setShowServices(!showServices);
+                setClickedOffering({
+                  title: offering.title,
+                  url: offering.fullUrlPath,
+                });
+              }}
+              onKeyPress={() => {
+                setShowServices(!showServices);
+                setClickedOffering({
+                  title: offering.title,
+                  url: offering.fullUrlPath,
+                });
+              }}
+            />
+            {showServices && offering.title === clickedOffering.title && (
+              <Flexbox containerType="ul" vertical>
+                <Services offering={clickedOffering} />
+              </Flexbox>
+            )}
+          </Flexbox>
+        );
+      })}
+    </Fragment>
+  );
+
+  const renderSubmenuContent = (content: Array<DynamicZone>): JSX.Element => (
+    <>
+      {content.map(({ __typename, blogs, offerings }, idx) => {
+        switch (__typename) {
+          case 'STRAPI_ComponentCollectionsBlogs':
+            return <Fragment key={idx}>{mapBlogs(blogs)}</Fragment>;
+          case 'STRAPI_ComponentCollectionsOfferings':
+            return <Fragment key={idx}>{mapOfferings(offerings)}</Fragment>;
+          default:
+            return <></>;
+        }
+      })}
+    </>
+  );
 
   return (
     <>
       {/* an external link makes page.id === null */}
-      {is_external_link ? (
-        <li className={cn}>
+      <NavListItem className={cn}>
+        {is_external_link ? (
           <a
             href={`${
               slug.match('^(http|https)://') ? slug : `https://${slug}`
@@ -152,39 +177,31 @@ const MenuItem = ({
           >
             {text}
           </a>
-        </li>
-      ) : (
-        <Flexbox>
-          <Flexbox flex="1 1 20%">
-            <li className={cn}>
-              <Link
-                onClick={() => toggleMobileMenu()}
-                onKeyPress={() => toggleMobileMenu()}
-                to={`/${
-                  // TODO: hardcoding homepage
-                  slug.toLocaleLowerCase() === 'home' ? '' : slug
-                }`}
-              >
-                {text}
-              </Link>
-            </li>
+        ) : (
+          <Fragment>
+            <Link
+              onClick={() => toggleMobileMenu()}
+              onKeyPress={() => toggleMobileMenu()}
+              to={`/${
+                // TODO: hardcoding homepage
+                slug.toLocaleLowerCase() === 'home' ? '' : slug
+              }`}
+            >
+              {text}
+            </Link>
 
-            {hasSubmenuContentToShow() && (
-              <ChevronDown onClick={() => setShowSubMenu(!showSubMenu)} />
+            {hasSubmenuContentToShow && (
+              <Chevron onClick={() => setShowSubMenu(!showSubMenu)} />
             )}
-          </Flexbox>
 
-          {hasSubmenuContentToShow() && showSubMenu && (
-            <Flexbox flex="2 0 80%">
-              <Flexbox containerType="ul" vertical>
-                <Flexbox vertical className="test">
-                  {handleSubMenuBehavior(content)}
-                </Flexbox>
-              </Flexbox>
-            </Flexbox>
-          )}
-        </Flexbox>
-      )}
+            {hasSubmenuContentToShow && showSubMenu && (
+              <SubmenuNav>
+                <Flexbox vertical>{renderSubmenuContent(content)}</Flexbox>
+              </SubmenuNav>
+            )}
+          </Fragment>
+        )}
+      </NavListItem>
     </>
   );
 };

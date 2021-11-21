@@ -1,39 +1,43 @@
-import React, {
-  createContext,
-  Dispatch,
-  SetStateAction,
-  useState,
-} from 'react';
-import { useMenuItems } from '../../../../graphql/queries/useMenuItems';
+import React, { createContext } from 'react';
 import { Nav } from '../../../Elements';
+import navbarMachine from '../navbarMachine';
+import { useMachine } from '@xstate/react';
 // import SearchContainer from '../../SearchContainer';
 import MenuItem from './MenuItem';
+import { MenuItem as StrapiMenuItem } from '../../../../typings/strapi';
 
 type NavCtx = {
-  isActivePanel: boolean;
-  setIsActivePanel: Dispatch<SetStateAction<boolean>>;
-  activePanelName: string;
-  setActivePanelName: Dispatch<SetStateAction<string>>;
+  showPanel: (title: string) => void;
+  hidePanel: () => void;
 };
 
 export const NavbarContext = createContext<NavCtx>({} as NavCtx);
 
-const Navbar = (props: DefaultProps): JSX.Element => {
-  const { className } = props;
+type NavbarProps = DefaultProps & {
+  items: StrapiMenuItem[];
+};
 
-  const [isActivePanel, setIsActivePanel] = useState<boolean>(false);
-  const [activePanelName, setActivePanelName] = useState<string>('');
+const Navbar = ({ className, items }: NavbarProps): JSX.Element => {
+  const [current, send] = useMachine(navbarMachine);
 
-  const ctx = {
-    isActivePanel,
-    setIsActivePanel,
-    activePanelName,
-    setActivePanelName,
+  const showPanel = (panelName: string): void => {
+    send('SHOW', { panelName, isActive: true });
   };
 
-  const {
-    strapi: { menuItems },
-  } = useMenuItems();
+  const hidePanel = (): void => {
+    send('HIDE');
+  };
+
+  // TODO: add keyboard nav
+  // const handleEscapeKey  =(event:KeyboardEvent) => {
+  //   const isEscapeKeyPressed = event.keyCode === 27
+  //   if (isEscapeKeyPressed) send('HIDE')
+  // }
+
+  const ctx: NavCtx = {
+    showPanel,
+    hidePanel,
+  };
 
   return (
     <Nav
@@ -47,15 +51,16 @@ const Navbar = (props: DefaultProps): JSX.Element => {
     >
       <NavbarContext.Provider value={ctx}>
         <ul className="nav-list">
-          {menuItems.map((menuItem, idx) => {
-            return (
-              <MenuItem
-                key={idx}
-                className={menuItem.text === activePanelName ? 'active' : ''}
-                {...menuItem}
-              />
-            );
-          })}
+          {items.map((menuItem, idx) => (
+            <MenuItem
+              key={`${menuItem.text}-${idx}`}
+              isActive={current.context.isActive}
+              className={
+                menuItem.text === current.context.panelName ? 'active' : ''
+              }
+              {...menuItem}
+            />
+          ))}
         </ul>
       </NavbarContext.Provider>
       {/* <SearchContainer /> */}

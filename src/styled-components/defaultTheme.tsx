@@ -15,41 +15,36 @@ export const theme: DefaultTheme = {
     dark: '#1a1a1a',
     earth: '#664838',
   },
-
   size: {
     column: {
-      xlarge: '16em',
-      large: '12em',
-      medium: '8em',
-      small: '4em',
+      xlarge: '16rem',
+      large: '12rem',
+      medium: '8rem',
+      small: '4rem',
     },
-
     margin: {
-      xxlarge: '4em',
-      xlarge: '4.5em',
-      large: '3em',
-      medium: '2em',
-      small: '1em',
-      xsmall: '0.5em',
+      xxlarge: '4rem',
+      xlarge: '4.5rem',
+      large: '3rem',
+      medium: '2rem',
+      small: '1rem',
+      xsmall: '0.5rem',
     },
-
     padding: {
-      xxlarge: '4em',
-      xlarge: '4.5em',
-      large: '3em',
-      medium: '2em',
-      small: '1em',
-      xsmall: '0.5em',
+      xxlarge: '4rem',
+      xlarge: '4.5rem',
+      large: '3rem',
+      medium: '2rem',
+      small: '1rem',
+      xsmall: '0.5rem',
     },
   },
-
   font: {
     weight: {
       heading: 700,
       normal: 600,
       light: 500,
     },
-
     size: {
       xxlarge: '2.2rem',
       xlarge: '2rem',
@@ -61,26 +56,24 @@ export const theme: DefaultTheme = {
     },
 
     'letter-spacing': {
-      fancy: '0.2em',
-      important: '0.1em',
+      fancy: '0.2rem',
+      important: '0.1rem',
     },
 
     // TODO: Deprecate
-    h1: '1.6em',
-    h2: '1.4em',
-    h3: '1.2em',
-    h4: '1.1em',
-    h5: '0.9em',
-    h6: '0.8em',
+    h1: '1.6rem',
+    h2: '1.4rem',
+    h3: '1.2rem',
+    h4: '1.1rem',
+    h5: '0.9rem',
+    h6: '0.8rem',
     'line-height': '1.3',
   },
-
   radius: {
     edge: '2px',
     smooth: '10px',
     circle: '1000px',
   },
-
   breakpoints: {
     xlarge: '120rem', // 1920px
     large: '75rem', // 1200px
@@ -88,10 +81,9 @@ export const theme: DefaultTheme = {
     small: '48.0625rem', // 769px
     xsmall: '30rem', //480px
   },
-
   time: {
-    fast: '0.2s',
-    medium: ' 0.5s',
-    slow: ' 1s',
+    fast: '200ms',
+    medium: ' 500ms',
+    slow: ' 1000ms',
   },
 };
