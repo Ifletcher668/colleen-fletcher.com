@@ -60,6 +60,7 @@ export const OverlayMenu = styled(Nav)<ClickableProps>`
   display: grid;
   align-items: baseline;
   justify-content: left;
+  overflow: auto;
   grid-template-columns: [spacer] 10% [content] 88% [padding] 2%;
   grid-template-rows: [close-button] 10% [menu-items] 90%;
   gap: 1rem;
