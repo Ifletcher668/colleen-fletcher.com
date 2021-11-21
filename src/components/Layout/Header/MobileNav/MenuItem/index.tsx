@@ -101,9 +101,9 @@ const MenuItem = ({
             </Flexbox>
 
             {showBlogPosts && blog.name === clickedBlogName && (
-              <Flexbox containerType="ul" vertical center middle>
+              <SubmenuNav>
                 <BlogPosts blog={clickedBlogName} />
-              </Flexbox>
+              </SubmenuNav>
             )}
           </Flexbox>
         );
