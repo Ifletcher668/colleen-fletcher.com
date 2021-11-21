@@ -142,12 +142,13 @@ const MenuItem = ({
                   });
                 }}
               />
-              {showServices && offering.title === clickedOffering.title && (
-                <Flexbox containerType="ul" vertical center middle>
-                  <Services offering={clickedOffering} />
-                </Flexbox>
-              )}
             </Flexbox>
+
+            {showServices && offering.title === clickedOffering.title && (
+              <Flexbox containerType="ul" vertical center middle>
+                <Services offering={clickedOffering} />
+              </Flexbox>
+            )}
           </Flexbox>
         );
       })}
