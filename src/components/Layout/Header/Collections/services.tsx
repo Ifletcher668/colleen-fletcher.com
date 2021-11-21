@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Link } from '../../Atoms';
+import { Link } from '../../../Elements';
 
 interface Props extends DefaultProps {
   offering: {

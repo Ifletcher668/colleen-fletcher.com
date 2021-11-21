@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { font, size } from '../../styled-components/_mixins';
-import { Button as ButtonWrapper } from '../Atoms';
+import { Button as ButtonWrapper } from '../Elements';
 
 type V = 'primary' | 'secondary' | 'tertiary';
 type T = 'submit' | 'reset' | 'button';

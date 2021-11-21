@@ -4,8 +4,8 @@ import React, {
   SetStateAction,
   useState,
 } from 'react';
-import { useMenuItems } from '../../../graphql/queries/useMenuItems';
-import { Nav } from '../../Atoms';
+import { useMenuItems } from '../../../../graphql/queries/useMenuItems';
+import { Nav } from '../../../Elements';
 // import SearchContainer from '../../SearchContainer';
 import MenuItem from './MenuItem';
 

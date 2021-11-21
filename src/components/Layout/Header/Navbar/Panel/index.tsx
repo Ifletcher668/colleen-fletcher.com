@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react';
-import { Grid } from '../../../Containers/index';
+import { Grid } from '../../../../Containers/index';
 import { NavbarContext } from '../index';
 import Services from '../../Collections/services';
 import BlogPosts from '../../Collections/blog-posts';
-import { Link } from '../../../Atoms';
-import BlueInfinitySymbol from '../../../../assets/images/svg/colleens-blue-infinity.svg';
-import { DynamicZone } from '../../../../typings/strapi';
+import { Link } from '../../../../Elements';
+import BlueInfinitySymbol from '../../../../../assets/images/svg/colleens-blue-infinity.svg';
+import { DynamicZone } from '../../../../../typings/strapi';
 
 interface Props extends DefaultProps {
   content: Array<DynamicZone>;

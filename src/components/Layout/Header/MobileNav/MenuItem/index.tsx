@@ -1,16 +1,16 @@
 import React, { Fragment, useContext, useState } from 'react';
-import ChevronDown from '../../../../assets/images/svg/chevron-down.svg';
-// import ChevronUp from '../../../../assets/images/svg/chevron-up.svg';
-import { Link } from '../../../Atoms';
-import Heading from '../../../Heading';
-import Services from '../../Collections/services';
-import BlogPosts from '../../Collections/blog-posts';
 import { MobileMenuContext } from '../..';
-import { Flexbox } from '../../../Containers';
 import {
   DynamicZone,
   MenuItem as StrapiMenuItem,
-} from '../../../../typings/strapi';
+} from '../../../../../typings/strapi';
+import ChevronDown from '../../../../../assets/images/svg/chevron-down.svg';
+import { Flexbox } from '../../../../Containers';
+// import ChevronUp from '../../../../assets/images/svg/chevron-up.svg';
+import { Link } from '../../../../Elements';
+import Heading from '../../../../Heading';
+import BlogPosts from '../../Collections/blog-posts';
+import Services from '../../Collections/services';
 
 type Props = Pick<DefaultProps, 'className'> & Omit<StrapiMenuItem, 'page'>;
 

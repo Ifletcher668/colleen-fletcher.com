@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Heading, Paragraph } from '../../Atoms';
+import { Heading, Paragraph } from '../../Elements';
 
 interface WrapperProps {
   alignParagraph: AlignValues;

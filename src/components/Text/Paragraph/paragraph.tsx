@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Span } from '../../Atoms';
+import { Link, Span } from '../../Elements';
 import YangQuotes from '../../../assets/images/svg/yang-quotation.svg';
 import YinQuotes from '../../../assets/images/svg/yin-quotation.svg';
 import { TextWrapper, H1, H2, H3 } from './styles';

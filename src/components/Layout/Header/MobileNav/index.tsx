@@ -1,14 +1,14 @@
 import React, { forwardRef, useContext } from 'react';
 import { FaAlignJustify, FaTimes } from 'react-icons/fa';
 import styled from 'styled-components';
-import { font, size } from '../../../styled-components/_mixins';
-import { Nav } from '../../Atoms';
-import { MobileMenuToggleButton } from '../../Button';
-import { Flexbox } from '../../Containers/';
-import Heading from '../../Heading';
+import { font, size } from '../../../../styled-components/_mixins';
+import { Nav } from '../../../Elements';
+import { MobileMenuToggleButton } from '../../../Button';
+import { Flexbox } from '../../../Containers/';
+import Heading from '../../../Heading';
 import { MobileMenuContext } from '../index';
 import MenuItem from './MenuItem';
-import { MenuItem as StrapiMenuItem } from '../../../typings/strapi';
+import { MenuItem as StrapiMenuItem } from '../../../../typings/strapi';
 
 interface Props extends DefaultProps {
   items: StrapiMenuItem[];

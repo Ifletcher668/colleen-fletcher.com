@@ -2,7 +2,7 @@ import React from 'react';
 import { Image } from '../index';
 import { Flexbox } from '../../Containers';
 import { CSSObject } from 'styled-components';
-import { FigCaption } from '../../Atoms';
+import { FigCaption } from '../../Elements';
 import { ComponentMediaSingleImage } from '../../../typings/strapi';
 
 interface Props extends FlexboxProps {

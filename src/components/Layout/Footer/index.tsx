@@ -1,14 +1,14 @@
 import React from 'react';
-import config from '../../../config/website';
 import {
   FaDiscord,
-  FaPinterest,
   FaFacebook,
   FaInstagram,
+  FaPinterest,
 } from 'react-icons/fa';
 import { RiInformationLine } from 'react-icons/ri';
-import { Anchor } from '../Atoms';
-import Divider from '../Divider';
+import config from '../../../../config/website';
+import Divider from '../../Divider';
+import { Anchor } from '../../Elements';
 
 const Footer = (): JSX.Element => {
   return (
