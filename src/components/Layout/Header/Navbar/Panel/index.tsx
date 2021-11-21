@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react';
-import { Grid } from '../../../Containers/index';
+import { Grid } from '../../../../Containers/index';
 import { NavbarContext } from '../index';
 import Services from '../../Collections/services';
 import BlogPosts from '../../Collections/blog-posts';
-import { Link } from '../../../Atoms';
-import BlueInfinitySymbol from '../../../../assets/images/svg/colleens-blue-infinity.svg';
-import { DynamicZone } from '../../../../typings/strapi';
+import { Link } from '../../../../Elements';
+import BlueInfinitySymbol from '../../../../../assets/images/svg/colleens-blue-infinity.svg';
+import { DynamicZone } from '../../../../../typings/strapi';
 
 interface Props extends DefaultProps {
   content: Array<DynamicZone>;
@@ -20,14 +20,10 @@ const Panel = ({ content, className }: Props): JSX.Element => {
   }>({ title: '', url: '' });
   const [showBlogPosts, setShowBlogPosts] = useState<boolean>(false);
   const [showServices, setShowServices] = useState<boolean>(false);
-  const { setIsActivePanel, setActivePanelName } = useContext(NavbarContext);
 
-  const handlePanelOpenOrCloseBehavior = (
-    title: string,
-    isActive: boolean,
-  ): void => {
-    setActivePanelName(title), setIsActivePanel(isActive);
-  };
+  const { hidePanel } = useContext(NavbarContext);
+
+  const handleHidePanel = (): void => hidePanel();
 
   const handleSubMenuContent = (): JSX.Element => (
     <>
@@ -98,9 +94,10 @@ const Panel = ({ content, className }: Props): JSX.Element => {
             : className
           : ''
       }
-      onMouseLeave={() => handlePanelOpenOrCloseBehavior('', false)}
+      onMouseLeave={handleHidePanel}
     >
       <ul className="submenu">{handleSubMenuContent()}</ul>
+
       <Grid className="content" containerType="section">
         {!showServices && !showBlogPosts && (
           <BlueInfinitySymbol width={200} height={200} />

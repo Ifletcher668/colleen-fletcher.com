@@ -5,7 +5,7 @@ export const useMenuItems: () => Strapi = () =>
   useStaticQuery(graphql`
     query GET_STRAPI_MENU_ITEMS {
       strapi {
-        menuItems(sort: "order") {
+        menuItems(sort: "order:asc") {
           ...StrapiMenuItem
         }
       }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentWidgetButton } from '../../../typings/strapi';
-import { Link } from '../../Atoms';
+import { Link } from '../../Elements';
 import Button from '../../Button';
 
 export interface Props {

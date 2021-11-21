@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { DefaultTheme, ThemedStyledFunction } from 'styled-components';
-import { Heading as HeadingAtom } from '../Atoms';
+import { Heading as HeadingAtom } from '../Elements';
 
 interface Props extends DefaultProps {
   level: 1 | 2 | 3 | 4 | 5 | 6;

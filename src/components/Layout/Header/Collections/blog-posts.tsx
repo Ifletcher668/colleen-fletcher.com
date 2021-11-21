@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Link } from '../../Atoms';
-import { BlogPost, Strapi } from '../../../typings/strapi';
+import { Link } from '../../../Elements';
+import { BlogPost, Strapi } from '../../../../typings/strapi';
 
 interface Props extends DefaultProps {
   blog: string;

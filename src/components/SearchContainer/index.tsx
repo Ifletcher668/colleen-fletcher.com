@@ -9,7 +9,7 @@ import Flexbox from '../Containers/Flexbox';
 import OutsideClickContainer from '../OutsideClickContainer';
 import { formatDateOnSlug } from '../../utils/format-date';
 import styled from 'styled-components';
-import { Paragraph, Link } from '../Atoms';
+import { Paragraph, Link } from '../Elements';
 import {
   Blog,
   BlogPost,

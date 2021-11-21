@@ -8,10 +8,10 @@ import React, {
   useState,
 } from 'react';
 import Navbar from './Navbar';
-import BlueFrangipani from '../../assets/images/svg/wholistic-blue-frangipani.svg';
+import BlueFrangipani from '../../../assets/images/svg/wholistic-blue-frangipani.svg';
 import MobileNav from './MobileNav';
-import { useMenuItems } from '../../graphql/queries/useMenuItems';
-import { useBreakpoints } from '../../utils/CustomHooks/useBreakpoints';
+import { useMenuItems } from '../../../graphql/queries/useMenuItems';
+import { useBreakpoints } from '../../../utils/CustomHooks/useBreakpoints';
 
 type Ctx = {
   toggleIsFullMenu: React.Dispatch<React.SetStateAction<boolean>>;
@@ -91,7 +91,7 @@ const Header = ({ className }: DefaultProps): JSX.Element => {
         }}
       >
         {isFullMenu ? (
-          <Navbar className="navbar" />
+          <Navbar className="navbar" items={strapiMenuItems} />
         ) : (
           <MobileNav ref={navRef} items={strapiMenuItems} />
         )}
