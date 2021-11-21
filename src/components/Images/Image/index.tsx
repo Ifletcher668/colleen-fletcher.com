@@ -27,12 +27,12 @@ const Image = ({ data }: Props): JSX.Element => {
   }
 
   const imgStyle = {
-    borderRadius: configuration.isCircle ? '1000px' : '2px',
-    border: configuration.hasBorder
+    borderRadius: configuration?.isCircle ? '1000px' : '2px',
+    border: configuration?.hasBorder
       ? `1.5px solid ${theme.color.aterrima}`
       : 'unset',
-    maxWidth: configuration.imageWidth ? configuration.imageWidth : '100%',
-    maxHeight: configuration.imageHeight ? configuration.imageHeight : '100%',
+    maxWidth: configuration?.imageWidth ? configuration?.imageWidth : '100%',
+    maxHeight: configuration?.imageHeight ? configuration?.imageHeight : '100%',
   };
 
   return (

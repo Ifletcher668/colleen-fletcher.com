@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import { IGatsbyImageData } from 'gatsby-plugin-image';
 
 export = Strapi;
@@ -196,13 +197,13 @@ declare namespace Strapi {
   //  Media Types
   type ComponentMediaSingleImage = {
     file: UploadFile;
-    configuration: ComponentGeneralImageConfiguration;
+    configuration?: ComponentGeneralImageConfiguration;
   };
 
   type ComponentMediaImages = {
     files: Array<UploadFile>;
     style: Omit<ImageStyle, 'standard' | 'fancy'>;
-    configuration: ComponentGeneralImageConfiguration;
+    configuration?: ComponentGeneralImageConfiguration;
   };
 
   //  Widget Types
