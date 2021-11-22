@@ -2,7 +2,7 @@ import { graphql } from 'gatsby';
 import React from 'react';
 import { Grid, PageContainer } from '../components/Containers';
 import Divider from '../components/Divider';
-import Heading from '../components/Heading';
+import { Heading } from '../components/Text/Heading';
 import { ImageWithCaption } from '../components/Images';
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
@@ -31,7 +31,7 @@ export default (props: TemplateProps): JSX.Element => {
       />
 
       <PageContainer>
-        <Heading alignHeading="center" justifyHeading="center" level={1}>
+        <Heading alignHeading="center" justifyHeading="center" level="one">
           {name}
         </Heading>
 

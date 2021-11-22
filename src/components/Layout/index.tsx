@@ -31,7 +31,9 @@ const Layout = ({ children, location }: PageProps): JSX.Element => {
   return (
     <ThemeProvider theme={theme}>
       {handleHeaderBehavior()}
+
       <Main>{children}</Main>
+
       <Footer />
     </ThemeProvider>
   );

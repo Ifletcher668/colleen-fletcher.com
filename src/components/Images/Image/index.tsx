@@ -41,7 +41,6 @@ const Image = ({ data }: Props): JSX.Element => {
       alt={alternativeText || ''}
       title={caption || ''}
       image={imageFile.childImageSharp.gatsbyImageData}
-      {...configuration}
     />
   );
 };

@@ -7,7 +7,7 @@ import {
 import ChevronDown from '../../../../../assets/images/svg/chevron-down.svg';
 import { Flexbox } from '../../../../Containers';
 import { Link } from '../../../../Elements';
-import Heading from '../../../../Heading';
+import { Heading } from '../../../../Text/Heading';
 import BlogPosts from '../../Collections/blog-posts';
 import Services from '../../Collections/services';
 import styled from 'styled-components';
@@ -84,7 +84,7 @@ const MenuItem = ({
                 to={blog.fullUrlPath}
               >
                 {' '}
-                <Heading level={6}>{blog.name}</Heading>
+                <Heading level="six">{blog.name}</Heading>
               </Link>
 
               <Chevron
@@ -123,7 +123,7 @@ const MenuItem = ({
                 to={offering.fullUrlPath}
               >
                 {' '}
-                <Heading level={6}>{offering.title}</Heading>
+                <Heading level="six">{offering.title}</Heading>
               </Link>
 
               <Chevron

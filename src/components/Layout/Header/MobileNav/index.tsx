@@ -1,7 +1,7 @@
 import React, { forwardRef, useContext } from 'react';
 import styled from 'styled-components';
 import { color, font, size, time } from '../../../../styled-components/_mixins';
-import Heading from '../../../Heading';
+import { Heading } from '../../../Text/Heading';
 import { MobileMenuContext } from '../index';
 import MenuItem from './MenuItem';
 import { MenuItem as StrapiMenuItem } from '../../../../typings/strapi';
@@ -111,7 +111,7 @@ const MobileMenu = forwardRef(
     return (
       <>
         <Wrapper>
-          <Heading level={1}>Colleen Fletcher</Heading>
+          <Heading level="one">Colleen Fletcher</Heading>
 
           <MenuLabel onClick={() => toggleMobileMenu()}>
             <Icon isClicked={isMobileMenuOpen} />

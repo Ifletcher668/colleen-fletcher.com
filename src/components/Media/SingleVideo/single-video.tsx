@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentSingleVideo } from '../../../typings/strapi';
-import Heading from '../../Heading';
+import { Heading } from '../../Text/Heading';
 import { VideoWrapper } from './styles';
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 const VideoField = ({ data }: Props): JSX.Element => {
   return (
     <VideoWrapper>
-      <Heading level={3}>{data.title}</Heading>
+      <Heading level="three">{data.title}</Heading>
       <div dangerouslySetInnerHTML={{ __html: data.code_snippet }} />
     </VideoWrapper>
   );

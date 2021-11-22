@@ -3,7 +3,7 @@ import Axios from 'axios';
 import * as JsSearch from 'js-search';
 import { FaSearch } from 'react-icons/fa';
 import SearchSection from './SearchSection';
-import Heading from '../Heading';
+import { Heading } from '../Text/Heading';
 import Grid from '../Containers/Grid';
 import Flexbox from '../Containers/Flexbox';
 import OutsideClickContainer from '../OutsideClickContainer';
@@ -244,7 +244,7 @@ const SearchContainer = (): JSX.Element => {
   const handleIsBlog = (): JSX.Element => {
     return (
       <SearchSection hideElement={showBlogSearches}>
-        <Heading level={5}>Blogs</Heading>
+        <Heading level="five">Blogs</Heading>
         {isBlog(searchResult) && (
           <ul>
             {searchResult
@@ -269,7 +269,7 @@ const SearchContainer = (): JSX.Element => {
   const handleIsBlogPost = (): JSX.Element => {
     return (
       <SearchSection hideElement={showBlogPostSearches}>
-        <Heading level={5}>Blog Posts</Heading>
+        <Heading level="five">Blog Posts</Heading>
         {isBlogPost(searchResult) && (
           <ul>
             {searchResult
@@ -312,7 +312,7 @@ const SearchContainer = (): JSX.Element => {
   const handleIsCategory = (): JSX.Element => {
     return (
       <SearchSection hideElement={showCategorySearches}>
-        <Heading level={5}>Categories</Heading>
+        <Heading level="five">Categories</Heading>
         {isCategory(searchResult) && (
           <ul>
             {searchResult
@@ -339,7 +339,7 @@ const SearchContainer = (): JSX.Element => {
   const handleIsTag = (): JSX.Element => {
     return (
       <SearchSection hideElement={showTagSearches}>
-        <Heading level={5}>Tags</Heading>
+        <Heading level="five">Tags</Heading>
         {isTag(searchResult) && (
           <ul>
             {searchResult
@@ -364,7 +364,7 @@ const SearchContainer = (): JSX.Element => {
   const handleIsOffering = (): JSX.Element => {
     return (
       <SearchSection hideElement={showOfferingSearches}>
-        <Heading level={5}>Offerings</Heading>
+        <Heading level="five">Offerings</Heading>
         {isOffering(searchResult) && (
           <ul>
             {searchResult
@@ -391,7 +391,7 @@ const SearchContainer = (): JSX.Element => {
   const handleIsService = (): JSX.Element => {
     return (
       <SearchSection hideElement={showServiceSearches}>
-        <Heading level={5}>Services</Heading>
+        <Heading level="five">Services</Heading>
         {isService(searchResult) && (
           <ul>
             {searchResult
