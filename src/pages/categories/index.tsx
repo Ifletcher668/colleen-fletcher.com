@@ -2,9 +2,9 @@ import React from 'react';
 import { PageProps } from 'gatsby';
 import Layout from '../../components/Layout';
 
-export default (props: PageProps) => {
+export default ({ location }: PageProps): JSX.Element => {
   return (
-    <Layout location={props.location}>
+    <Layout location={location}>
       All Categories
       {/*  */}
     </Layout>

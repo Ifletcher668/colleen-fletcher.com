@@ -58,11 +58,6 @@ p {
   &::first-letter {
     @include font-family('MA Sexy');
   }
-  hyphens: auto;
-  hyphenate-limit-chars: 6 3 3;
-  hyphenate-limit-lines: 2;
-  hyphenate-limit-last: always;
-  hyphenate-limit-zone: 8%;
 }
 
 h1,
@@ -88,8 +83,6 @@ h1 {
   }
   font-size: size(h1);
   color: color(earth);
-  // corrects font going out of bounds
-  // margin: size(mg-xsmall) 0 size(mg-small) 0;
   margin: 0;
 }
 h2 {
@@ -111,15 +104,6 @@ h6 {
   font-size: size(h6);
 }
 
-// .paragraph {
-//     span {
-//         font-weight: size(weight-light);
-//     }
-// }
-// span {
-//     font-weight: size(weight-heading);
-// }
-
 .center {
   text-align: center;
   &:not(p) {
@@ -130,45 +114,3 @@ h6 {
 .circle {
   border-radius: 10000px;
 }
-// sub {
-//     font-size: 0.8em;
-//     position: relative;
-//     top: 0.5em;
-// }
-
-// sup {
-//     font-size: 0.8em;
-//     position: relative;
-//     top: -0.5em;
-// }
-
-// blockquote {
-//     border-left: solid 4px _palette(border);
-//     font-style: italic;
-//     margin: 0 0 _size(margin, lg) 0;
-//     padding: (_size(margin, lg) / 4) 0 (_size(margin, lg) / 4) _size(margin, lg);
-// }
-
-// code {
-//     background: _palette(border-bg);
-//     border-radius: _size(border-radius);
-//     border: solid 2px _palette(border);
-//     font-family: _font(family-fixed);
-//     font-size: 0.9em;
-//     margin: 0 0.25em;
-//     padding: 0.25em 0.65em;
-// }
-
-// pre {
-//     -webkit-overflow-scrolling: touch;
-//     font-family: _font(family-fixed);
-//     font-size: 0.9em;
-//     margin: 0 0 _size(margin, lg) 0;
-
-//     code {
-//         display: block;
-//         line-height: 1.75em;
-//         padding: 1em 1.5em;
-//         overflow-x: auto;
-//     }
-// }

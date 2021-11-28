@@ -166,17 +166,10 @@ export const parseDynamicZoneContent = (
             );
 
           case 'STRAPI_ComponentWidgetDivider':
-            // TODO: refactor from this simple Typescript workaround
-            return component.style === 'fancy' ||
-              component.style === 'standard' ? (
+            return (
               <DividerField
                 key={`${idx}${component.__typename}`}
-                data={{ style: component.style }}
-              />
-            ) : (
-              <DividerField
-                key={`${idx}${component.__typename}`}
-                data={{ style: 'standard' }}
+                data={{ style: component.style as DividerStyle }}
               />
             );
 

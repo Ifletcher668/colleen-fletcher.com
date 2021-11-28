@@ -29,3 +29,10 @@ export const StandardDivider = styled.hr<Props>`
     border-width: 0 0 1px 0;
   }
 `;
+
+export const FancyDivider = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+`;
