@@ -52,7 +52,10 @@
           left: 0;
           top: 80px;
           visibility: hidden;
-          box-shadow: 0 2px 4px 1px color(dark-blue);
+          box-shadow: 0px 1px 1.2px hsl(199deg 58% 40% / 0.28),
+            0px 3.5px 4.2px -0.7px hsl(199deg 58% 40% / 0.31),
+            -0.1px 8.3px 9.9px -1.4px hsl(199deg 58% 40% / 0.35),
+            -0.2px 19.6px 23.4px -2px hsl(199deg 58% 40% / 0.38);
           .submenu,
           .content {
             visibility: hidden;

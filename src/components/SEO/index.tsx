@@ -3,7 +3,6 @@ import { UploadFile } from '../../typings/strapi';
 import Helmet from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
 
-// TODO: Refactor to use eventual typescript type (strapi)
 export interface Props {
   title: string;
   description: string;
@@ -11,6 +10,23 @@ export interface Props {
   lang?: string;
   meta?: any[];
 }
+
+type SiteAuthor = {
+  name: string;
+  bio: string;
+};
+
+type SiteMetaData = {
+  title: string;
+  description: string;
+  author: SiteAuthor;
+};
+
+type SiteDataQuery = {
+  site: {
+    siteMetadata: SiteMetaData;
+  };
+};
 
 const siteDataQuery = graphql`
   query {
@@ -27,9 +43,8 @@ const siteDataQuery = graphql`
   }
 `;
 
-const SEO = ({ title, description, image, lang, meta }: Props) => {
-  // TODO: add SiteData to useStaticQuery for type safety
-  const { site } = useStaticQuery(siteDataQuery);
+const SEO = ({ title, description, image, lang, meta }: Props): JSX.Element => {
+  const { site } = useStaticQuery<SiteDataQuery>(siteDataQuery);
 
   const metaDescription = description || site.siteMetadata.description;
   const imageData = image?.imageFile.childImageSharp.gatsbyImageData;
@@ -70,16 +85,16 @@ const SEO = ({ title, description, image, lang, meta }: Props) => {
         {
           property: 'og:image:width',
           content:
-            imageData !== undefined && imageData.width < 1200
-              ? imageData.width
-              : 1200,
+            imageData && imageData.width < 1200
+              ? String(imageData.width)
+              : '1200',
         },
         {
           property: 'og:image:height',
           content:
-            imageData !== undefined && imageData.width < 628
-              ? imageData.height
-              : 628,
+            imageData && imageData.width < 628
+              ? String(imageData.height)
+              : '628',
         },
         {
           property: 'og:type',
