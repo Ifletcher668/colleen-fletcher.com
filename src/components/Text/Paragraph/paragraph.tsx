@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, Span } from '../../Elements';
 import YangQuotes from '../../../assets/images/svg/yang-quotation.svg';
 import YinQuotes from '../../../assets/images/svg/yin-quotation.svg';
-import { TextWrapper, H1, H2, H3 } from './styles';
+import { TextWrapper, H1, H2, H3, BlockQuote } from './styles';
 import { Grid } from '../../Containers';
 import parse, { domToReact, HTMLReactParserOptions } from 'html-react-parser';
 import { Element } from 'domhandler/lib/node';
@@ -96,9 +96,7 @@ const Paragraph = ({ data, className }: Props): JSX.Element => {
         );
       if (name === 'blockquote')
         return (
-          <TextWrapper
-            as="blockquote"
-            style={{ display: 'flex', alignItems: 'center', minHeight: '50px' }}
+          <BlockQuote
             alignParagraph={alignParagraph}
             justifyParagraph={justifyParagraph}
           >
@@ -114,7 +112,7 @@ const Paragraph = ({ data, className }: Props): JSX.Element => {
               height={20}
               style={{ alignSelf: 'flex-end' }}
             />
-          </TextWrapper>
+          </BlockQuote>
         );
 
       if (attribs.class === 'ql-size-huge')

@@ -30,6 +30,11 @@ const navbarMachine = createMachine<Context, Event, MachineStateSchema>(
             target: 'hidden',
             actions: ['hide'],
           },
+          SHOW: {
+            // If already an active tab, show another
+            target: 'shown',
+            actions: ['show'],
+          },
         },
       },
       hidden: {

@@ -100,7 +100,9 @@ const Panel = ({ content, className }: Props): JSX.Element => {
 
       <Grid className="content" containerType="section">
         {!showServices && !showBlogPosts && (
-          <BlueInfinitySymbol width={200} height={200} />
+          <>
+            <BlueInfinitySymbol width={200} height={200} />
+          </>
         )}
         {(showServices || showBlogPosts) && (
           <ul>

@@ -2,7 +2,6 @@ import React, { createContext } from 'react';
 import { Nav } from '../../../Elements';
 import navbarMachine from '../navbarMachine';
 import { useMachine } from '@xstate/react';
-// import SearchContainer from '../../SearchContainer';
 import MenuItem from './MenuItem';
 import { MenuItem as StrapiMenuItem } from '../../../../typings/strapi';
 

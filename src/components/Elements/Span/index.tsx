@@ -13,11 +13,11 @@ export default styled.span<Props>`
       case 'large':
         return props.theme.font.size.xlarge;
 
+      case 'normal':
+        return 'inherit';
+
       case 'small':
         return props.theme.font.size.small;
-
-      default:
-        return props.theme.font.size.large;
     }
   }};
 `;

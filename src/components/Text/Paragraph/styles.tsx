@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Heading, Paragraph } from '../../Elements';
 
 interface WrapperProps {
@@ -6,7 +6,7 @@ interface WrapperProps {
   justifyParagraph: JustifyValues;
 }
 
-export const TextWrapper = styled(Paragraph)<WrapperProps>`
+const addAlignAndJustifyValues = css<WrapperProps>`
   align-self: ${props => {
     switch (props.alignParagraph) {
       case 'top':
@@ -42,6 +42,17 @@ export const TextWrapper = styled(Paragraph)<WrapperProps>`
         return 'start';
     }
   }};
+`;
+
+export const TextWrapper = styled(Paragraph)<WrapperProps>`
+  ${addAlignAndJustifyValues}
+`;
+
+export const BlockQuote = styled.blockquote<WrapperProps>`
+  display: flex;
+  align-items: center;
+  min-height: 50px;
+  ${addAlignAndJustifyValues}
 `;
 
 export const H1 = styled(Heading).attrs({ as: 'h1' })``;
