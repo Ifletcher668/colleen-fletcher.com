@@ -132,7 +132,6 @@ const Paragraph = ({ data, className }: Props): JSX.Element => {
 
   return (
     <Grid
-      containerType="section"
       className={Array.isArray(className) ? className.join(' ') : className}
       styling={{ height: '100%', width: '100%' }}
     >

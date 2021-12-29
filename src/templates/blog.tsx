@@ -6,10 +6,15 @@ import Heading from '../components/Heading';
 import { ImageWithCaption } from '../components/Images';
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
-import { HeadingField, Paragraph } from '../components/Text';
+import { Paragraph } from '../components/Text';
 import { ButtonField } from '../components/Widgets';
 import { GridArea } from '../styled-components/helpers';
-import { ComponentWidgetButton } from '../typings/strapi';
+import {
+  BlogPost,
+  ComponentMediaSingleImage,
+  ComponentTextParagraph,
+  ComponentWidgetButton,
+} from '../typings/strapi';
 import { zigZagGridColumns } from '../utils/zigZagGridColumns';
 import { TemplateProps } from './types';
 
@@ -21,6 +26,84 @@ export default (props: TemplateProps): JSX.Element => {
       },
     },
   } = props;
+
+  const buildBlogPostPreviewSection = ({
+    fullUrlPath,
+    preview,
+    title,
+    cover_image,
+  }: BlogPost): JSX.Element => {
+    const previewHeading: ComponentTextParagraph = {
+      body: preview?.heading
+        ? preview.heading.headingText
+        : `<h3>${title}</h3>`, // paragraph component parses html
+      alignParagraph: preview?.heading
+        ? preview.heading.alignHeading
+        : 'center',
+      justifyParagraph: preview?.heading
+        ? preview.heading.justifyHeading
+        : 'center',
+    };
+
+    const buttonData: ComponentWidgetButton = {
+      action: `${fullUrlPath}`,
+      buttonText: preview?.button ? preview.button.buttonText : 'Click',
+      variant: preview?.button ? preview.button.variant : 'primary',
+    };
+
+    const defaultImageConfig: ComponentMediaSingleImage['configuration'] = {
+      isCircle: false,
+      hasBorder: true,
+      alignImage: 'center',
+      justifyImage: 'center',
+      imageHeight: 666,
+      imageWidth: 666,
+    };
+
+    const previewImage: ComponentMediaSingleImage = {
+      file: preview?.image ? preview.image.file : cover_image,
+      configuration: preview?.image
+        ? preview.image.configuration
+        : defaultImageConfig,
+    };
+
+    return (
+      <>
+        <GridArea
+          col-xl="image"
+          col-lg="image"
+          col-md="image"
+          row-xl="content-start"
+          row-lg="content-start"
+          row-md="content-start"
+          row-sm="content-start"
+          row-xs="content-start"
+        >
+          <ImageWithCaption data={previewImage} />
+        </GridArea>
+
+        <GridArea
+          col-xl="text"
+          col-lg="text"
+          col-md="text"
+          row-xl="content-start / content-end"
+          row-lg="content-start / content-end"
+          row-md="content-start / content-end"
+          row-sm="content-middle"
+          row-xs="content-middle"
+        >
+          <Grid>
+            <Paragraph data={previewHeading} />
+
+            {/* no fallback text if preview is missing */}
+            {preview?.text && <Paragraph data={preview.text} />}
+
+            <ButtonField data={buttonData} />
+          </Grid>
+        </GridArea>
+      </>
+    );
+  };
 
   return (
     <Layout location={props.location}>
@@ -45,20 +128,8 @@ export default (props: TemplateProps): JSX.Element => {
         />
 
         <Grid containerType="section" gap={'2em 0'}>
-          {blog_posts.map((post, idx) => {
+          {blog_posts.map((blog_post, idx) => {
             const zigZagColumnLayout = zigZagGridColumns(idx);
-
-            const buttonData: ComponentWidgetButton = {
-              action: `${post.fullUrlPath}`,
-              buttonText:
-                post.preview && post.preview.button
-                  ? post.preview.button.buttonText
-                  : 'Click',
-              variant:
-                post.preview && post.preview.button
-                  ? post.preview.button.variant
-                  : 'primary',
-            };
 
             return (
               <Grid
@@ -78,37 +149,7 @@ export default (props: TemplateProps): JSX.Element => {
                   gap: '1em 0',
                 }}
               >
-                <GridArea
-                  col-xl="image"
-                  col-lg="image"
-                  col-md="image"
-                  row-xl="content-start"
-                  row-lg="content-start"
-                  row-md="content-start"
-                  row-sm="content-start"
-                  row-xs="content-start"
-                >
-                  <ImageWithCaption data={post.preview.image} />
-                </GridArea>
-
-                <GridArea
-                  col-xl="text"
-                  col-lg="text"
-                  col-md="text"
-                  row-xl="content-start / content-end"
-                  row-lg="content-start / content-end"
-                  row-md="content-start / content-end"
-                  row-sm="content-middle"
-                  row-xs="content-middle"
-                >
-                  <Grid>
-                    <HeadingField data={post.preview.heading} />
-
-                    <Paragraph data={post.preview.text} />
-
-                    <ButtonField data={buttonData} />
-                  </Grid>
-                </GridArea>
+                {buildBlogPostPreviewSection(blog_post)}
 
                 <GridArea
                   col-xl="1 / span 3"

@@ -1,9 +1,10 @@
+/* eslint-disable */
+
 import { IGatsbyImageData } from 'gatsby-plugin-image';
 
 export = Strapi;
 export as namespace Strapi;
 
-/* eslint-disable no-unused-vars */
 declare namespace Strapi {
   /**
    *  essential, despite the namespace, because Graphql
@@ -48,13 +49,9 @@ declare namespace Strapi {
     // | 'STRAPI_ComponentMediaFiles' not yet supported
     | 'STRAPI_ComponentMediaSingleVideo'
     // | 'STRAPI_ComponentMediaVideos' not yet supported
-    | 'STRAPI_ComponentTextHeading'
     | 'STRAPI_ComponentTextParagraph'
-    | 'STRAPI_ComponentTextQuote'
     | 'STRAPI_ComponentSectionTextRightImageLeft'
     | 'STRAPI_ComponentSectionImageRightTextLeft'
-    | 'STRAPI_ComponentSectionHeadingLeftImageRight'
-    | 'STRAPI_ComponentSectionHeadingRightImageLeft'
     | 'STRAPI_ComponentSectionTextCenterImageEitherSide'
     | 'STRAPI_ComponentSectionImageCenterTextEitherSide'
     | 'STRAPI_ComponentWidgetDivider'
@@ -260,7 +257,7 @@ declare namespace Strapi {
     fullUrlPath: string;
     category?: Category;
     tags?: Array<Tag>;
-    cover_image?: UploadFile;
+    cover_image: UploadFile;
     published: string;
     body: Array<DynamicZone>;
     is_blog_post: boolean;

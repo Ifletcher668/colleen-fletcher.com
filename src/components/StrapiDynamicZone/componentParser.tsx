@@ -9,14 +9,12 @@ import {
 import Grid from '../Containers/Grid';
 import { ImagesField, SingleImageField, SingleVideoField } from '../Media';
 import {
-  HeadingWithImageLeftSideField,
-  HeadingWithImageRightSideField,
   ImageCenterTextEitherSideField,
   TextCenterImageEitherSideField,
   TextWithImageLeftSideField,
   TextWithImageRightSideField,
 } from '../Sections';
-import { HeadingField, Paragraph, QuoteField } from '../Text';
+import { Paragraph } from '../Text';
 import { ButtonField, DividerField } from '../Widgets';
 import EmbeddedForm from '../Widgets/EmbeddedForm';
 
@@ -63,20 +61,6 @@ export const parseDynamicZoneContent = (
               />
             );
 
-          case 'STRAPI_ComponentTextHeading':
-            return (
-              <HeadingField
-                key={`${idx}${component.__typename}`}
-                data={{
-                  headingText: component.headingText,
-                  level: component.level,
-                  tilt: component.tilt,
-                  justifyHeading: component.justifyHeading,
-                  alignHeading: component.alignHeading,
-                }}
-              />
-            );
-
           case 'STRAPI_ComponentTextParagraph':
             return (
               <Paragraph
@@ -86,14 +70,6 @@ export const parseDynamicZoneContent = (
                   justifyParagraph: component.justifyParagraph,
                   alignParagraph: component.alignParagraph,
                 }}
-              />
-            );
-
-          case 'STRAPI_ComponentTextQuote':
-            return (
-              <QuoteField
-                key={`${idx}${component.__typename}`}
-                data={component.text}
               />
             );
 
@@ -115,28 +91,6 @@ export const parseDynamicZoneContent = (
                 data={{
                   image: component.image,
                   text: component.text,
-                }}
-              />
-            );
-
-          case 'STRAPI_ComponentSectionHeadingLeftImageRight':
-            return (
-              <HeadingWithImageRightSideField
-                key={`${idx}${component.__typename}`}
-                data={{
-                  heading: component.heading,
-                  image: component.image,
-                }}
-              />
-            );
-
-          case 'STRAPI_ComponentSectionHeadingRightImageLeft':
-            return (
-              <HeadingWithImageLeftSideField
-                key={`${idx}${component.__typename}`}
-                data={{
-                  heading: component.heading,
-                  image: component.image,
                 }}
               />
             );

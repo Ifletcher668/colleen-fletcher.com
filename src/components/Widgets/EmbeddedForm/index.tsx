@@ -8,6 +8,7 @@ export interface Props {
 }
 
 const EmbeddedForm = ({ data }: Props): JSX.Element => {
+  console.log(data);
   return (
     <div
       className={`embedded-form ${data.justify}`}

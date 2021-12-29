@@ -12,23 +12,73 @@ interface Props {
 }
 
 const ImageWrapper = styled(GatsbyImage)<ComponentGeneralImageConfiguration>`
-  border-radius: ${p => (p.isCircle ? '1000px' : '2px')};
+  border-radius: ${({ isCircle }) => (isCircle ? '1000px' : '2px')};
 
-  ${p =>
-    p.hasBorder &&
+  ${({ hasBorder }) =>
+    hasBorder &&
     css`
       border: 1.5px solid ${color('aterrima')};
     `}
-  ${p =>
-    p.imageWidth &&
+
+  ${({ imageWidth }) =>
+    imageWidth &&
     css`
-      max-width: ${p.imageWidth}px;
+      max-width: ${imageWidth}px;
     `}
-  ${p =>
-    p.imageHeight &&
+
+  ${({ imageHeight }) =>
+    imageHeight &&
     css`
-      max-height: ${p.imageHeight}px;
+      max-height: ${imageHeight}px;
     `}
+
+  justify-self: ${({ justifyImage }) => {
+    switch (justifyImage) {
+      case 'right':
+        return 'end';
+
+      case 'center':
+        return 'center';
+
+      case 'left':
+        return 'start';
+
+      default:
+        return 'inherit';
+    }
+  }};
+
+  text-align: ${({ justifyImage }) => {
+    switch (justifyImage) {
+      case 'right':
+        return 'right';
+
+      case 'center':
+        return 'center';
+
+      case 'left':
+        return 'left';
+
+      default:
+        return 'inherit';
+    }
+  }};
+
+  align-self: ${({ alignImage }) => {
+    switch (alignImage) {
+      case 'top':
+        return 'start';
+
+      case 'bottom':
+        return 'end';
+
+      case 'center':
+        return 'center';
+
+      default:
+        return 'inherit';
+    }
+  }};
 `;
 
 const Image = ({ data }: Props): JSX.Element => {

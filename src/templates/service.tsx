@@ -72,24 +72,10 @@ export const query = graphql`
           ... on STRAPI_ComponentTextParagraph {
             ...StrapiComponentTextParagraph
           }
-          ... on STRAPI_ComponentTextQuote {
-            ...StrapiComponentTextQuote
-          }
-          ... on STRAPI_ComponentTextHeading {
-            ...StrapiComponentTextHeading
-          }
-          ... on STRAPI_ComponentWidgetDivider {
-            ...StrapiComponentWidgetDivider
-          }
           ... on STRAPI_ComponentWidgetButton {
             ...StrapiComponentWidgetButton
           }
-          ... on STRAPI_ComponentSectionHeadingRightImageLeft {
-            ...StrapiComponentSectionHeadingRightImageLeft
-          }
-          ... on STRAPI_ComponentSectionHeadingLeftImageRight {
-            ...StrapiComponentSectionHeadingLeftImageRight
-          }
+
           ... on STRAPI_ComponentSectionImageRightTextLeft {
             ...StrapiComponentSectionImageRightTextLeft
           }
@@ -114,26 +100,11 @@ export const query = graphql`
           ... on STRAPI_ComponentTextParagraph {
             ...StrapiComponentTextParagraph
           }
-          ... on STRAPI_ComponentTextQuote {
-            ...StrapiComponentTextQuote
-          }
-          ... on STRAPI_ComponentTextHeading {
-            ...StrapiComponentTextHeading
-          }
-          ... on STRAPI_ComponentWidgetDivider {
-            ...StrapiComponentWidgetDivider
-          }
           ... on STRAPI_ComponentWidgetEmbeddedForm {
             ...StrapiComponentWidgetEmbeddedForm
           }
           ... on STRAPI_ComponentWidgetButton {
             ...StrapiComponentWidgetButton
-          }
-          ... on STRAPI_ComponentSectionHeadingRightImageLeft {
-            ...StrapiComponentSectionHeadingRightImageLeft
-          }
-          ... on STRAPI_ComponentSectionHeadingLeftImageRight {
-            ...StrapiComponentSectionHeadingLeftImageRight
           }
           ... on STRAPI_ComponentSectionImageRightTextLeft {
             ...StrapiComponentSectionImageRightTextLeft

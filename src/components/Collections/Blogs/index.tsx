@@ -1,6 +1,5 @@
 import React from 'react';
 import Grid from '../../Containers/Grid';
-import { HeadingField } from '../../Text';
 import { ImageWithCaption } from '../../Images';
 import { ButtonField } from '../../Widgets';
 import { Paragraph } from '../../Text';
@@ -10,27 +9,34 @@ export interface Props {
   data: Array<Pick<Blog, 'id' | 'slug' | 'fullUrlPath' | 'preview'>>;
 }
 
-const BlogsField = ({ data }: Props): JSX.Element => {
-  return (
-    <>
-      {data.map((blog, idx) => {
-        const {
-          preview: { text, heading, image, button },
-        } = blog;
-
+const BlogsField = ({ data }: Props): JSX.Element => (
+  <>
+    {data.map(
+      (
+        {
+          id,
+          slug,
+          fullUrlPath,
+          preview: {
+            text: previewText,
+            image: previewImage,
+            button: previewButton,
+          },
+        },
+        idx,
+      ) => {
         // TODO: Refactor when handling routes better
         if (
-          button.action === '/' ||
-          button.action === '' ||
-          button.action === blog.slug
+          !previewButton.action ||
+          previewButton.action === '/' ||
+          previewButton.action === slug
         ) {
-          const buttonPath = blog.fullUrlPath;
-          button.action = buttonPath;
+          previewButton.action = fullUrlPath;
         }
 
         return (
           <Grid
-            key={idx}
+            key={idx + id}
             containerType="article"
             styling={{
               placeItems: 'center',
@@ -41,19 +47,20 @@ const BlogsField = ({ data }: Props): JSX.Element => {
               xlarge: '0.05fr auto auto minmax(50px, 70px)',
             }}
           >
-            <HeadingField data={heading} />
+            {/* TODO: Heading*/}
+            {/* <HeadingField data={heading} /> */}
             <ImageWithCaption
-              data={image}
+              data={previewImage}
               containerType="div"
               styling={{ width: '100%', height: '100%' }} // ensures image doesn't collapse
             />
-            <Paragraph data={text} />
-            <ButtonField data={button} />
+            <Paragraph data={previewText} />
+            <ButtonField data={previewButton} />
           </Grid>
         );
-      })}
-    </>
-  );
-};
+      },
+    )}
+  </>
+);
 
 export default BlogsField;

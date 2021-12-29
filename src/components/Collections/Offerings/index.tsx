@@ -1,6 +1,6 @@
 import React from 'react';
 import Grid from '../../Containers/Grid';
-import { HeadingField, Paragraph } from '../../Text';
+import { Paragraph } from '../../Text';
 import { ImageWithCaption } from '../../Images';
 import { ButtonField } from '../../Widgets';
 import { zigZagGridColumns } from '../../../utils/zigZagGridColumns';
@@ -20,8 +20,8 @@ const OfferingsField = ({ data }: Props): JSX.Element => {
         const { preview } = offering;
 
         if (
+          !preview.button.action ||
           preview.button.action === '/' ||
-          preview.button.action === '' ||
           preview.button.action === offering.slug // mutate data based on input in strapi
         ) {
           preview.button.action = offering.fullUrlPath;
@@ -73,7 +73,8 @@ const OfferingsField = ({ data }: Props): JSX.Element => {
               row-xs="content-middle"
             >
               <Grid>
-                <HeadingField data={offering.preview.heading} />
+                {/* TODO: Heading*/}
+                {/* <HeadingField data={offering.preview.heading} /> */}
 
                 <Paragraph data={offering.preview.text} />
 

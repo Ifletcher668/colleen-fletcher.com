@@ -7,7 +7,7 @@ import Heading from '../components/Heading';
 import { ImageWithCaption } from '../components/Images';
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
-import { HeadingField, Paragraph } from '../components/Text';
+import { Paragraph } from '../components/Text';
 import { ButtonField } from '../components/Widgets';
 import { GridArea } from '../styled-components/helpers';
 import { ComponentWidgetButton } from '../typings/strapi';
@@ -105,7 +105,8 @@ export default (props: TemplateProps): JSX.Element => {
                     row-xs="content-middle"
                   >
                     <Grid>
-                      <HeadingField data={service.preview.heading} />
+                      {/* TODO: Heading*/}
+                      {/* <HeadingField data={service.preview.heading} /> */}
 
                       <Paragraph data={service.preview.text} />
 
