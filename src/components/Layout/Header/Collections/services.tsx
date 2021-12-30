@@ -41,7 +41,7 @@ const Services = (props: Props): JSX.Element => {
         .map((service, idx) => {
           return (
             <li key={idx}>
-              <Link to={`${props.offering.url}${service.slug}`}>
+              <Link color="coffee" to={`${props.offering.url}${service.slug}`}>
                 {service.title}
               </Link>
             </li>

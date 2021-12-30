@@ -1,6 +1,5 @@
 import React from 'react';
-import styled, { DefaultTheme, ThemedStyledFunction } from 'styled-components';
-import { Heading as HeadingAtom } from '../Elements';
+import { H1, H2, H3, H4, H5, H6 } from '../Elements';
 
 interface Props extends DefaultProps {
   level: 1 | 2 | 3 | 4 | 5 | 6;
@@ -8,84 +7,6 @@ interface Props extends DefaultProps {
   alignHeading?: AlignValues;
   justifyHeading?: JustifyValues;
 }
-
-interface WrapperProps
-  extends ThemedStyledFunction<
-    'h1',
-    DefaultTheme,
-    Record<string, unknown>,
-    never
-  > {
-  tilt?: 'up' | 'even' | 'down';
-  alignHeading?: AlignValues;
-  justifyHeading?: JustifyValues;
-}
-
-const HeadingWrapper = styled(HeadingAtom)<WrapperProps>`
-  transform: ${props => {
-    switch (props.tilt) {
-      case 'up':
-        return 'rotate(1deg)';
-
-      case 'down':
-        return 'rotate(-1deg)';
-
-      case 'even':
-        return 'rotate(0deg)';
-
-      default:
-        return 'unset';
-    }
-  }};
-
-  text-align: ${props => {
-    switch (props.justifyHeading) {
-      case 'right':
-        return 'right';
-
-      case 'center':
-        return 'center';
-
-      case 'left':
-        return 'left';
-
-      default:
-        return 'unset';
-    }
-  }};
-
-  align-self: ${props => {
-    switch (props.alignHeading) {
-      case 'top':
-        return 'start';
-
-      case 'bottom':
-        return 'end';
-
-      case 'center':
-        return 'center';
-
-      default:
-        return 'unset';
-    }
-  }};
-
-  justify-self: ${props => {
-    switch (props.justifyHeading) {
-      case 'right':
-        return 'end';
-
-      case 'center':
-        return 'center';
-
-      case 'left':
-        return 'start';
-
-      default:
-        return 'unset';
-    }
-  }};
-`;
 
 const Heading = ({
   level = 1,
@@ -101,24 +22,26 @@ const Heading = ({
         )
       : children;
 
-  return (
-    // TODO:
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    /* @ts-ignore */
-    <HeadingWrapper
-      tilt={tilt}
-      alignHeading={alignHeading}
-      justifyHeading={justifyHeading}
-      // Unsure of how to ensure styled-components
-      // that this string will only be of the correct type
+  const sharedProps = {
+    tilt: tilt,
+    alignHeading: alignHeading,
+    justifyHeading: justifyHeading,
+  };
 
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      /* @ts-ignore */
-      as={`h${level.toString()}`}
-    >
-      {titleCaseStringChildren}
-    </HeadingWrapper>
-  );
+  switch (level) {
+    case 1:
+      return <H1 {...sharedProps}>{titleCaseStringChildren}</H1>;
+    case 2:
+      return <H2 {...sharedProps}>{titleCaseStringChildren}</H2>;
+    case 3:
+      return <H3 {...sharedProps}>{titleCaseStringChildren}</H3>;
+    case 4:
+      return <H4 {...sharedProps}>{titleCaseStringChildren}</H4>;
+    case 5:
+      return <H5 {...sharedProps}>{titleCaseStringChildren}</H5>;
+    case 6:
+      return <H6 {...sharedProps}>{titleCaseStringChildren}</H6>;
+  }
 };
 
 export default Heading;

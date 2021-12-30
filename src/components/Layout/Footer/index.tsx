@@ -8,7 +8,8 @@ import {
 import { RiInformationLine } from 'react-icons/ri';
 import config from '../../../../config/website';
 import Divider from '../../Divider';
-import { Anchor } from '../../Elements';
+import { Link, Span } from '../../Elements';
+import Heading from '../../Heading';
 
 const Footer = (): JSX.Element => {
   return (
@@ -17,83 +18,102 @@ const Footer = (): JSX.Element => {
         <nav className="footer-nav">
           <ul className="footer-navbar">
             <li>
-              <Anchor href={config.socials.discord} target="_blank">
+              <Link
+                href={config.socials.discord}
+                color="coffee"
+                target="_blank"
+              >
                 <FaDiscord />
-              </Anchor>
+              </Link>
             </li>
 
             <li>
-              <Anchor href={config.socials.facebook} target="_blank">
+              <Link
+                href={config.socials.facebook}
+                color="coffee"
+                target="_blank"
+              >
                 <FaFacebook />
-              </Anchor>
+              </Link>
             </li>
 
             <li>
-              <Anchor href={config.socials.instagram} target="_blank">
+              <Link
+                href={config.socials.instagram}
+                color="coffee"
+                target="_blank"
+              >
                 <FaInstagram />
-              </Anchor>
+              </Link>
             </li>
 
             <li>
-              <Anchor href={config.socials.pinterest} target="_blank">
+              <Link
+                href={config.socials.pinterest}
+                color="coffee"
+                target="_blank"
+              >
                 <FaPinterest />
-              </Anchor>
+              </Link>
             </li>
           </ul>
         </nav>
 
         <div className="footer-info">
-          <h4>Colleen Fletcher 1994 - {new Date().getFullYear()}</h4>
+          <Heading level={4}>
+            Colleen Fletcher 1994 - {new Date().getFullYear()}
+          </Heading>
 
-          <h5>
+          <Heading level={5}>
             Let's get in touch!{' '}
-            <Anchor color="earth" href="tel:208-841-9062">
+            <Link color="lightSlateGray" href="tel:208-841-9062">
               Phone
-            </Anchor>{' '}
+            </Link>{' '}
             or{' '}
-            <Anchor
-              color="earth"
+            <Link
+              color="lightSlateGray"
               href="mailto:colleenfletcher3@gmail.com"
               target="_blank"
             >
               email
-            </Anchor>
-          </h5>
+            </Link>
+          </Heading>
 
           <Divider lineColor="aterrima" type="standard" />
 
-          <h4>Designed by Colleen and her son, Isiah</h4>
+          <Heading level={4}>Designed by Colleen and her son, Isiah</Heading>
 
-          <h5>
+          <Heading level={5}>
             Developed by{' '}
-            <Anchor
-              color="earth"
+            <Link
+              color="lightSlateGray"
               href="https://Isiahfletcher.com"
               target="_blank"
             >
               {' '}
               Isiah Fletcher
-            </Anchor>
-          </h5>
+            </Link>
+          </Heading>
 
           {/* // TODO: Make disclaimer a modal */}
-          <h6>
-            <span>
-              <Anchor
-                color="earth"
+          <Heading level={6}>
+            <Span size="small">
+              <Link
+                color="lightSlateGray"
                 href="https://colleen-fletcher.com/sitemap.xml"
               >
                 Sitemap
-              </Anchor>{' '}
-            </span>
+              </Link>{' '}
+            </Span>
             |{' '}
-            <span
+            <Span
+              size="small"
               className="site-disclaimer"
               title="Disclaimer: By agreeing to use the services and guidance of Colleen Fletcher you agree that you understand and know all information is not a diagnosis, nor does it take the place of any medical, legal or financial advice. All information given is educational and is to be used to enhance your knowledge and ability to act in a positive manner in matters concerning your personal wholistic health care. You know your progress is dependent upon your commitment to your goals and that there are no guarantees as to the result or progress to be made. You understand that the success of the treatment is dependent upon your action to your goals. You must be 18 years of age or have a written release from a parent or legal guardian"
             >
-              Disclaimer <RiInformationLine />
-            </span>
-          </h6>
+              Disclaimer <RiInformationLine style={{ display: 'inline' }} />
+            </Span>
+          </Heading>
         </div>
       </div>
     </footer>

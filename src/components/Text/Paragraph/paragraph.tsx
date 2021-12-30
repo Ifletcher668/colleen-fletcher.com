@@ -1,12 +1,12 @@
+import { Element } from 'domhandler/lib/node';
+import parse, { domToReact, HTMLReactParserOptions } from 'html-react-parser';
 import React from 'react';
-import { Link, Span } from '../../Elements';
 import YangQuotes from '../../../assets/images/svg/yang-quotation.svg';
 import YinQuotes from '../../../assets/images/svg/yin-quotation.svg';
-import { TextWrapper, H1, H2, H3 } from './styles';
-import { Grid } from '../../Containers';
-import parse, { domToReact, HTMLReactParserOptions } from 'html-react-parser';
-import { Element } from 'domhandler/lib/node';
 import { ComponentTextParagraph } from '../../../typings/strapi';
+import { Grid } from '../../Containers';
+import { H1, H2, H3, H4, H5, H6, Link, Span, Strong } from '../../Elements';
+import { TextWrapper } from './styles';
 
 export interface Props {
   data: ComponentTextParagraph;
@@ -23,11 +23,10 @@ const Paragraph = ({ data, className }: Props): JSX.Element => {
       const { name, children, attribs } = domNode;
 
       if (name === 'a') {
-        // add font-weight: ${font('weight', 'heading')};
         return (
-          <strong>
+          <Strong>
             <Link to={attribs.href}>{domToReact(children, options)}</Link>
-          </strong>
+          </Strong>
         );
       }
 
@@ -65,6 +64,50 @@ const Paragraph = ({ data, className }: Props): JSX.Element => {
           </TextWrapper>
         );
 
+      if (name === 'h4')
+        return (
+          <TextWrapper
+            as={H4}
+            alignParagraph={alignParagraph}
+            justifyParagraph={justifyParagraph}
+          >
+            {domToReact(children, options)}
+          </TextWrapper>
+        );
+
+      if (name === 'h5')
+        return (
+          <TextWrapper
+            as={H5}
+            alignParagraph={alignParagraph}
+            justifyParagraph={justifyParagraph}
+          >
+            {domToReact(children, options)}
+          </TextWrapper>
+        );
+
+      if (name === 'h6')
+        return (
+          <TextWrapper
+            as={H6}
+            alignParagraph={alignParagraph}
+            justifyParagraph={justifyParagraph}
+          >
+            {domToReact(children, options)}
+          </TextWrapper>
+        );
+
+      if (name === 'strong')
+        return (
+          <TextWrapper
+            alignParagraph={alignParagraph}
+            justifyParagraph={justifyParagraph}
+            as={Strong}
+          >
+            {domToReact(children, options)}
+          </TextWrapper>
+        );
+
       if (name === 'p')
         return (
           <TextWrapper
@@ -74,6 +117,7 @@ const Paragraph = ({ data, className }: Props): JSX.Element => {
             {domToReact(children, options)}
           </TextWrapper>
         );
+
       if (name === 'ul')
         return (
           <TextWrapper
@@ -84,6 +128,7 @@ const Paragraph = ({ data, className }: Props): JSX.Element => {
             {domToReact(children, options)}
           </TextWrapper>
         );
+
       if (name === 'ol')
         return (
           <TextWrapper
@@ -94,6 +139,7 @@ const Paragraph = ({ data, className }: Props): JSX.Element => {
             {domToReact(children, options)}
           </TextWrapper>
         );
+
       if (name === 'blockquote')
         return (
           <TextWrapper
@@ -125,6 +171,12 @@ const Paragraph = ({ data, className }: Props): JSX.Element => {
 
       if (attribs.class === 'ql-size-small')
         return <Span size="small">{domToReact(children, options)}</Span>;
+
+      if (attribs.class === 'ql-tilt-up')
+        return <Span tilt="up">{domToReact(children, options)}</Span>;
+
+      if (attribs.class === 'ql-tilt-down')
+        return <Span tilt="down">{domToReact(children, options)}</Span>;
 
       return null;
     },

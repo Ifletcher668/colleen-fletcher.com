@@ -6,7 +6,7 @@ import { StandardDivider } from './styles';
 
 export type DividerColorOptions = keyof Pick<
   DefaultTheme['color'],
-  'aterrima' | 'earth' | 'primary-blue'
+  'aterrima' | 'coffee' | 'primary-blue'
 >;
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
   lineColor?: DividerColorOptions;
 }
 
-const Divider = ({ type, lineColor = 'earth' }: Props): JSX.Element =>
+const Divider = ({ type, lineColor = 'coffee' }: Props): JSX.Element =>
   type === 'standard' ? (
     <StandardDivider lineColor={lineColor} />
   ) : (

@@ -6,16 +6,16 @@ const PageContainer = styled.section`
   display: grid;
   gap: 4em 0;
   grid-template-columns:
-    [full-start] minmax(2em, 3em)
-    [content-start] minmax(0, 60em) [content-end]
-    minmax(2em, 3em) [full-end];
+    [full-start] minmax(4%, 22%)
+    [content-start] minmax(0, 56%) [content-end]
+    minmax(4%, 22%) [full-end];
 
   & > * {
     grid-column: content;
   }
 
   ${below.small`
-    place-items:center;
+    place-items: center;
     grid-template-columns: 
       [full-start] 4%
       [content-start] 92%

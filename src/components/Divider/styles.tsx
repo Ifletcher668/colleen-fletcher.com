@@ -10,12 +10,12 @@ export const StandardDivider = styled.hr<Props>`
   width: 100%;
   border: 0;
   border-bottom: solid 1px
-    ${props => (props.lineColor ? color(props.lineColor) : color('earth'))};
+    ${props => (props.lineColor ? color(props.lineColor) : color('coffee'))};
   margin: 0 0 ${size('margin', 'large')} 0;
   height: 30px;
   border-style: solid;
   border-color: ${props =>
-    props.lineColor ? color(props.lineColor) : color('earth')};
+    props.lineColor ? color(props.lineColor) : color('coffee')};
   border-width: 1px 0 0 0;
 
   &:before {
@@ -25,7 +25,7 @@ export const StandardDivider = styled.hr<Props>`
     margin-top: -30px;
     border-style: solid;
     border-color: ${props =>
-      props.lineColor ? color(props.lineColor) : color('earth')};
+      props.lineColor ? color(props.lineColor) : color('coffee')};
     border-width: 0 0 1px 0;
   }
 `;

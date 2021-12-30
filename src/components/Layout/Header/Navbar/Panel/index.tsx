@@ -38,6 +38,7 @@ const Panel = ({ content, className }: Props): JSX.Element => {
               return (
                 <li key={`${idx}${blog.name}`} className={cn}>
                   <Link
+                    color="coffee"
                     to={blog.fullUrlPath}
                     onMouseOver={() => {
                       if (content.show_blog_posts && showBlogPosts === false)
@@ -62,6 +63,7 @@ const Panel = ({ content, className }: Props): JSX.Element => {
               return (
                 <li key={`${idx}${offering.title}`} className={cn}>
                   <Link
+                    color="coffee"
                     to={offering.fullUrlPath}
                     onMouseOver={() => {
                       if (content.show_services && showServices === false)

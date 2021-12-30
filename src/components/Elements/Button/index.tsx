@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Anchor, InternalLink } from '..';
+import { Link } from '..';
 import { font, size } from '../../../styled-components/_mixins';
 
 type Props = {
@@ -17,7 +17,7 @@ export default styled.button<Props>`
   margin: ${size('margin', 'xsmall')} auto;
   padding: 0 ${size('padding', 'small')};
 
-  letter-spacing: ${font('letter-spacing', 'fancy')};
+  letter-spacing: ${font('letter-spacing', 'spaced')};
   border-radius: ${props => props.theme.radius.smooth};
   border: 1px solid
     ${props => {
@@ -26,10 +26,10 @@ export default styled.button<Props>`
           return props.theme.color['primary-blue'];
 
         case 'tertiary':
-          return props.theme.color.earth;
+          return props.theme.color.coffee;
 
         default:
-          return props.theme.color.lilac;
+          return props.theme.color.plumWeb;
       }
     }};
 
@@ -46,23 +46,23 @@ export default styled.button<Props>`
       case 'tertiary':
         return `radial-gradient(
                             68.84% 68.84% at 50% 50%,
-                            ${props.theme.color.earth} 0%,
+                            ${props.theme.color.coffee} 0%,
                             rgba(255, 255, 255, 0) 70.83%
                         ),
-                        ${props.theme.color.earth}`;
+                        ${props.theme.color.coffee}`;
 
       default:
         return `radial-gradient( 
                             68.84% 68.84% at 50% 50%,
-                            ${props.theme.color.lilac} 0%,
+                            ${props.theme.color.plumWeb} 0%,
                             rgba(255, 255, 255, 0) 70.83%
                         ),
-                        ${props.theme.color.lilac}`;
+                        ${props.theme.color.plumWeb}`;
     }
   }};
 
   &,
-  ${Anchor}, ${InternalLink} {
+  ${Link} {
     color: ${props =>
       ['tertiary', undefined].includes(props.variant)
         ? props.theme.color['primary-blue']
@@ -75,7 +75,7 @@ export default styled.button<Props>`
   }
 
   &:hover,
-  ${Anchor}:hover, ${InternalLink}:hover {
+  ${Link}:hover {
     &,
     > * {
       transition: ${props => props.theme.time.fast} ease-in-out;
@@ -85,13 +85,13 @@ export default styled.button<Props>`
           case 'secondary':
             return props.theme.color['primary-blue'];
           case 'tertiary':
-            return props.theme.color.earth;
+            return props.theme.color.coffee;
 
           default:
-            return props.theme.color.lilac;
+            return props.theme.color.plumWeb;
         }
       }};
-      font-weight: ${font('weight', 'heading')};
+      font-weight: ${font('weight', 'bold')};
     }
   }
 
@@ -108,16 +108,16 @@ export default styled.button<Props>`
             return props.theme.color['primary-blue'];
 
           case 'tertiary':
-            return props.theme.color.earth;
+            return props.theme.color.coffee;
 
           default:
-            return props.theme.color.lilac;
+            return props.theme.color.plumWeb;
         }
       }};
   }
 
   &:active,
-  ${Anchor}:active, ${InternalLink}:active {
+  ${Link}:active, {
     transition: 0.01s;
     color: ${props =>
       ['tertiary', undefined].includes(props.variant)
@@ -136,18 +136,18 @@ export default styled.button<Props>`
         case 'tertiary':
           return `radial-gradient(
                             68.84% 68.84% at 50% 50%,
-                            ${props.theme.color.earth} 0%,
+                            ${props.theme.color.coffee} 0%,
                             rgba(255, 255, 255, 0) 70.83%
                         ),
-                        ${props.theme.color.earth}`;
+                        ${props.theme.color.coffee}`;
 
         default:
           return `radial-gradient( 
                             68.84% 68.84% at 50% 50%,
-                            ${props.theme.color.lilac} 0%,
+                            ${props.theme.color.plumWeb} 0%,
                             rgba(255, 255, 255, 0) 70.83%
                         ),
-                        ${props.theme.color.lilac}`;
+                        ${props.theme.color.plumWeb}`;
       }
     }};
   }

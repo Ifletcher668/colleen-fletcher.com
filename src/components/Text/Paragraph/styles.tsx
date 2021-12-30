@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Heading, Paragraph } from '../../Elements';
+import { Paragraph } from '../../Elements';
 
 interface WrapperProps {
   alignParagraph: AlignValues;
@@ -43,9 +43,3 @@ export const TextWrapper = styled(Paragraph)<WrapperProps>`
     }
   }};
 `;
-
-export const H1 = styled(Heading).attrs({ as: 'h1' })``;
-
-export const H2 = styled(Heading).attrs({ as: 'h2' })``;
-
-export const H3 = styled(Heading).attrs({ as: 'h3' })``;

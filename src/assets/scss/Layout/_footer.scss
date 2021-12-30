@@ -3,9 +3,9 @@
 .site-footer {
   display: grid;
   grid-template-columns:
-    [full-start] minmax(size(mg-large), (size(mg-large) * 2))
-    [footer-start] minmax(0, 60em) [footer-end]
-    minmax(size(mg-large), (size(mg-large) * 2)) [full-end];
+  [full-start] minmax(4%, 22%)
+  [footer-start] minmax(0, 56%) [footer-end]
+  minmax(4%, 22%) [full-end];
 
   @include below(small) {
     grid-template-columns:
@@ -15,11 +15,10 @@
   }
 
   margin-bottom: 1rem;
-  place-items: center;
   text-align: center;
 
   .footer-content {
-    grid-column: footer-start / footer-end;
+    grid-column: footer-start / span footer-end;
 
     .footer-nav {
       margin: 0 0 size(mg-small) 0;

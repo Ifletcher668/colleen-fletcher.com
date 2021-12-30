@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { NavbarContext } from '../index';
 import Panel from '../Panel';
-import { Anchor, Link } from '../../../../Elements';
+import { Link } from '../../../../Elements';
 import { MenuItem as StrapiMenuItem } from '../../../../../typings/strapi';
 
 // props matches type StrapiMenuItem
@@ -21,7 +21,10 @@ const MenuItem = ({
   const { showPanel, hidePanel } = useContext(NavbarContext);
 
   const handleShowPanel = (): void => showPanel(text);
-  const handleHidePanel = (): void => hidePanel();
+  const handleHidePanel = (): void => {
+    if (content.length) return;
+    hidePanel();
+  };
 
   const cn = `nav-list-item ${
     className
@@ -35,24 +38,31 @@ const MenuItem = ({
     <>
       {/* an external link makes page.id === null */}
       {is_external_link ? (
-        <li className={cn} onMouseOver={handleHidePanel}>
-          <Anchor
+        <li
+          className={cn}
+          onMouseEnter={handleShowPanel}
+          onMouseLeave={handleHidePanel}
+        >
+          <Link
+            color="coffee"
             href={`${
               // Ensures an external link for Gatsby to not think it's local
               slug.match('^(http|https)://') ? slug : `https://${slug}`
             }`}
           >
             {text}
-          </Anchor>
+          </Link>
         </li>
       ) : (
         <li
           className={cn}
-          onMouseOver={handleShowPanel}
+          onMouseEnter={handleShowPanel}
+          onMouseLeave={handleHidePanel}
           // clear on navigation
           onClick={handleHidePanel}
         >
           <Link
+            color="coffee"
             to={`/${
               // TODO: hardcoding homepage
               slug.toLocaleLowerCase() === 'home' ? '' : slug

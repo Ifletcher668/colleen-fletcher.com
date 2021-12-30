@@ -3,17 +3,13 @@ import { DefaultTheme } from 'styled-components';
 export const theme: DefaultTheme = {
   color: {
     background: '#fff',
-    'background-accent': '#e6e6e6',
     'light-blue': '#e5f6fd',
-    'med-blue': '#caecfc',
     'primary-blue': '#7bd0f7',
-    'dark-blue': '#6fbbde',
-    lilac: '#eeb5eb',
-    'lilac-darkened': '#be91bc',
-    'lilac-lightened': '#f1c4ef',
+    plumWeb: '#eeb5eb',
     aterrima: '#000',
-    dark: '#1a1a1a',
-    earth: '#664838',
+    lightSlateGray: '#718C98',
+    coffee: '#664838',
+    darkLava: '#493B31',
   },
   size: {
     column: {
@@ -41,9 +37,11 @@ export const theme: DefaultTheme = {
   },
   font: {
     weight: {
-      heading: 700,
-      normal: 600,
-      light: 500,
+      boldest: 510,
+      bolder: 490,
+      bold: 470,
+      normal: 450,
+      light: 400,
     },
     size: {
       xxlarge: '2.2rem',
@@ -56,18 +54,10 @@ export const theme: DefaultTheme = {
     },
 
     'letter-spacing': {
-      fancy: '0.2rem',
-      important: '0.1rem',
+      spaced: '0.2rem',
+      standard: '0.1rem',
+      compact: '0.1rem',
     },
-
-    // TODO: Deprecate
-    h1: '1.6rem',
-    h2: '1.4rem',
-    h3: '1.2rem',
-    h4: '1.1rem',
-    h5: '0.9rem',
-    h6: '0.8rem',
-    'line-height': '1.3',
   },
   radius: {
     edge: '2px',

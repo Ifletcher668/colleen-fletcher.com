@@ -1746,6 +1746,11 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@fontsource/lora@^4.5.1":
+  version "4.5.1"
+  resolved "https://registry.yarnpkg.com/@fontsource/lora/-/lora-4.5.1.tgz#4605b3ec94d2c296d4fe6992df51619cb9338a60"
+  integrity sha512-LyF+0PORmbt0kHFn235L3G8gv7k/ihE5hd2AxNdnVCpIzuNkwPtE5i+iJPm6Z8NNNsQL9etb3qEDuQPIQhb8mQ==
+
 "@gatsbyjs/reach-router@^1.3.6":
   version "1.3.6"
   resolved "https://registry.yarnpkg.com/@gatsbyjs/reach-router/-/reach-router-1.3.6.tgz#4e8225836959be247890b66f21a3198a0589e34d"
