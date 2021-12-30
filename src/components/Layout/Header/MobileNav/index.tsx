@@ -1,11 +1,10 @@
 import React, { forwardRef, useContext } from 'react';
 import styled from 'styled-components';
 import { color, font, size, time } from '../../../../styled-components/_mixins';
-import Heading from '../../../Heading';
+import { MenuItem as StrapiMenuItem } from '../../../../typings/strapi';
+import { Nav, Span } from '../../../Elements';
 import { MobileMenuContext } from '../index';
 import MenuItem from './MenuItem';
-import { MenuItem as StrapiMenuItem } from '../../../../typings/strapi';
-import { Nav } from '../../../Elements';
 
 interface Props extends DefaultProps {
   items: StrapiMenuItem[];
@@ -63,6 +62,7 @@ export const OverlayMenu = styled(Nav)<ClickableProps>`
   grid-template-columns: [spacer] 10% [content] 88% [padding] 2%;
   grid-template-rows: [close-button] 10% [menu-items] 90%;
   gap: 1rem;
+  overflow-y: auto;
 
   background: ${color('primary-blue')};
   color: ${color('background')};
@@ -88,7 +88,7 @@ export const CloseButton = styled.button`
 const MobileNavLinks = styled.ul`
   display: flex;
   flex-flow: column nowrap;
-
+  padding: 0;
   gap: ${size('margin', 'small')};
   grid-column: content;
   grid-row: menu-items;
@@ -99,7 +99,8 @@ const Wrapper = styled.div`
   flex-flow: column nowrap;
   align-items: center;
   justify-content: space-around;
-  padding: ${size('padding', 'medium')} 0;
+  text-align: center;
+  padding: ${size('padding', 'small')} 0;
 `;
 
 const MobileMenu = forwardRef(
@@ -110,7 +111,7 @@ const MobileMenu = forwardRef(
     return (
       <>
         <Wrapper>
-          <Heading level={1}>Colleen Fletcher</Heading>
+          <Span size="normal">Colleen Fletcher</Span>
 
           <MenuLabel onClick={() => toggleMobileMenu()}>
             <Icon isClicked={isMobileMenuOpen} />

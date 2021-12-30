@@ -23,6 +23,7 @@ const data = graphql`
     }
   }
 `;
+
 const Services = (props: Props): JSX.Element => {
   const query: Strapi.Strapi = useStaticQuery(data);
   return (

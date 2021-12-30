@@ -38,8 +38,12 @@ const GlobalStylesheet = createGlobalStyle`
     /* url(${backgroundImage}) no-repeat; */
   }
 
-  img, picture, video, canvas, svg {
+  img, picture, video, canvas {
     display: block;
+    max-width: 100%;
+  }
+
+  svg {
     max-width: 100%;
   }
 

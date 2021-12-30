@@ -6,8 +6,7 @@ import {
 } from '../../../../../typings/strapi';
 import ChevronDown from '../../../../../assets/images/svg/chevron-down.svg';
 import { Flexbox } from '../../../../Containers';
-import { Link } from '../../../../Elements';
-import Heading from '../../../../Heading';
+import { Link, Span } from '../../../../Elements';
 import BlogPosts from '../../Collections/blog-posts';
 import Services from '../../Collections/services';
 import styled from 'styled-components';
@@ -25,14 +24,13 @@ const Chevron = styled(ChevronDown)<ChevronProps>`
 `;
 
 const NavListItem = styled.li`
-  font-size: ${font('size', 'xlarge')};
+  font-size: ${font('size', 'large')};
 `;
 
 const SubmenuNav = styled.ul`
   display: flex;
   flex-flow: column nowrap;
-  margin-top: 1rem;
-  margin-left: 1rem;
+  padding-left: 0.5rem;
 `;
 
 type Props = Pick<DefaultProps, 'className'> & Omit<StrapiMenuItem, 'page'>;
@@ -75,14 +73,15 @@ const MenuItem = ({
       {blogs.map((blog, idx) => {
         return (
           <Flexbox key={idx} containerType="li" vertical>
-            <Flexbox middle center>
+            <Flexbox between middle>
               <Link
                 onClick={() => toggleMobileMenu()}
                 onKeyPress={() => toggleMobileMenu()}
+                color="coffee"
                 to={blog.fullUrlPath}
               >
                 {' '}
-                <Heading level={6}>{blog.name}</Heading>
+                <Span size="small">{blog.name}</Span>
               </Link>
 
               <Chevron
@@ -99,7 +98,11 @@ const MenuItem = ({
             </Flexbox>
 
             {showBlogPosts && blog.name === clickedBlogName && (
-              <Flexbox containerType="ul" vertical center middle>
+              <Flexbox
+                containerType="ul"
+                vertical
+                styling={{ fontSize: '1rem' }}
+              >
                 <BlogPosts blog={clickedBlogName} />
               </Flexbox>
             )}
@@ -113,34 +116,40 @@ const MenuItem = ({
     <Fragment>
       {offerings.map((offering, idx) => {
         return (
-          <Flexbox containerType="li" key={idx}>
-            {' '}
-            <Link
-              onClick={() => toggleMobileMenu()}
-              onKeyPress={() => toggleMobileMenu()}
-              to={offering.fullUrlPath}
-            >
-              {' '}
-              <Heading level={6}>{offering.title}</Heading>
-            </Link>
-            <Chevron
-              onClick={() => {
-                setShowServices(!showServices);
-                setClickedOffering({
-                  title: offering.title,
-                  url: offering.fullUrlPath,
-                });
-              }}
-              onKeyPress={() => {
-                setShowServices(!showServices);
-                setClickedOffering({
-                  title: offering.title,
-                  url: offering.fullUrlPath,
-                });
-              }}
-            />
+          <Flexbox key={idx} containerType="li" vertical>
+            <Flexbox between middle>
+              <Link
+                onClick={() => toggleMobileMenu()}
+                onKeyPress={() => toggleMobileMenu()}
+                color="coffee"
+                to={offering.fullUrlPath}
+              >
+                <Span size="small">{offering.title}</Span>
+              </Link>
+              <Chevron
+                onClick={() => {
+                  setShowServices(!showServices);
+                  setClickedOffering({
+                    title: offering.title,
+                    url: offering.fullUrlPath,
+                  });
+                }}
+                onKeyPress={() => {
+                  setShowServices(!showServices);
+                  setClickedOffering({
+                    title: offering.title,
+                    url: offering.fullUrlPath,
+                  });
+                }}
+              />
+            </Flexbox>
+
             {showServices && offering.title === clickedOffering.title && (
-              <Flexbox containerType="ul" vertical>
+              <Flexbox
+                containerType="ul"
+                vertical
+                styling={{ fontSize: '1rem' }}
+              >
                 <Services offering={clickedOffering} />
               </Flexbox>
             )}
@@ -170,18 +179,20 @@ const MenuItem = ({
       {/* an external link makes page.id === null */}
       <NavListItem className={cn}>
         {is_external_link ? (
-          <a
+          <Link
+            color="coffee"
             href={`${
               slug.match('^(http|https)://') ? slug : `https://${slug}`
             }`}
           >
             {text}
-          </a>
+          </Link>
         ) : (
           <Fragment>
             <Link
               onClick={() => toggleMobileMenu()}
               onKeyPress={() => toggleMobileMenu()}
+              color="coffee"
               to={`/${
                 // TODO: hardcoding homepage
                 slug.toLocaleLowerCase() === 'home' ? '' : slug
@@ -195,9 +206,7 @@ const MenuItem = ({
             )}
 
             {hasSubmenuContentToShow && showSubMenu && (
-              <SubmenuNav>
-                <Flexbox vertical>{renderSubmenuContent(content)}</Flexbox>
-              </SubmenuNav>
+              <SubmenuNav>{renderSubmenuContent(content)}</SubmenuNav>
             )}
           </Fragment>
         )}
