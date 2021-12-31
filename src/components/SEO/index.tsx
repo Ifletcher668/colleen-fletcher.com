@@ -5,8 +5,8 @@ import { useStaticQuery, graphql } from 'gatsby';
 
 // TODO: Refactor to use eventual typescript type (strapi)
 export interface Props {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   image?: UploadFile;
   lang?: string;
   meta?: any[];
@@ -27,7 +27,7 @@ const siteDataQuery = graphql`
   }
 `;
 
-const SEO = ({ title, description, image, lang, meta }: Props) => {
+const SEO = ({ title, description, image, lang, meta }: Props): JSX.Element => {
   // TODO: add SiteData to useStaticQuery for type safety
   const { site } = useStaticQuery(siteDataQuery);
 

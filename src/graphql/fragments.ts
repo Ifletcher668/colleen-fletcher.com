@@ -368,6 +368,9 @@ export const StrapiComponentCollectionsServices = graphql`
 
 export const StrapiComponentGeneralPreview = graphql`
   fragment StrapiComponentGeneralPreview on STRAPI_ComponentGeneralPreview {
+    heading {
+      ...StrapiComponentTextParagraph
+    }
     text {
       ...StrapiComponentTextParagraph
     }

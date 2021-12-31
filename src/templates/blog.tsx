@@ -34,21 +34,9 @@ export default (props: TemplateProps): JSX.Element => {
     cover_image,
   }: BlogPost): JSX.Element => {
     const previewHeading: ComponentTextParagraph = {
-      body: preview?.heading
-        ? preview.heading.headingText
-        : `<h3>${title}</h3>`, // paragraph component parses html
-      alignParagraph: preview?.heading
-        ? preview.heading.alignHeading
-        : 'center',
-      justifyParagraph: preview?.heading
-        ? preview.heading.justifyHeading
-        : 'center',
-    };
-
-    const buttonData: ComponentWidgetButton = {
-      action: `${fullUrlPath}`,
-      buttonText: preview?.button ? preview.button.buttonText : 'Click',
-      variant: preview?.button ? preview.button.variant : 'primary',
+      body: preview?.heading?.headingText ?? `<h2>${title}</h2>`, // paragraph component parses html
+      alignParagraph: preview?.heading?.alignHeading ?? 'center',
+      justifyParagraph: preview?.heading?.justifyHeading ?? 'center',
     };
 
     const defaultImageConfig: ComponentMediaSingleImage['configuration'] = {
@@ -61,10 +49,14 @@ export default (props: TemplateProps): JSX.Element => {
     };
 
     const previewImage: ComponentMediaSingleImage = {
-      file: preview?.image ? preview.image.file : cover_image,
-      configuration: preview?.image
-        ? preview.image.configuration
-        : defaultImageConfig,
+      file: preview?.image?.file ?? cover_image,
+      configuration: preview?.image?.configuration ?? defaultImageConfig,
+    };
+
+    const buttonData: ComponentWidgetButton = {
+      action: preview?.button?.action ?? fullUrlPath,
+      buttonText: preview?.button?.buttonText ?? 'Click',
+      variant: preview?.button?.variant ?? 'primary',
     };
 
     return (
@@ -109,8 +101,8 @@ export default (props: TemplateProps): JSX.Element => {
     <Layout location={props.location}>
       <SEO // Make SEO required eventually
         title={seo?.title ?? name}
-        description={seo?.meta_description ?? preview.text.body}
-        image={seo?.image ?? preview.image.file}
+        description={seo?.meta_description ?? preview?.text?.body}
+        image={seo?.image ?? preview?.image?.file}
       />
 
       <PageContainer>

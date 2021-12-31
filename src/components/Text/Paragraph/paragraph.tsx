@@ -109,15 +109,52 @@ const Paragraph = ({ data, className }: Props): JSX.Element => {
           </TextWrapper>
         );
 
-      if (name === 'p')
-        return (
-          <TextWrapper
-            alignParagraph={alignParagraph}
-            justifyParagraph={justifyParagraph}
-          >
-            {domToReact(children, options)}
-          </TextWrapper>
-        );
+      if (name === 'p') {
+        switch (attribs.class) {
+          case 'ql-align-left':
+            return (
+              <TextWrapper
+                alignParagraph={alignParagraph}
+                justifyParagraph="left"
+              >
+                {domToReact(children, options)}
+              </TextWrapper>
+            );
+
+          case 'ql-align-center':
+            return (
+              <TextWrapper
+                alignParagraph={alignParagraph}
+                justifyParagraph="center"
+              >
+                {domToReact(children, options)}
+              </TextWrapper>
+            );
+
+          case 'ql-align-right':
+            return (
+              <TextWrapper
+                alignParagraph={alignParagraph}
+                justifyParagraph="right"
+              >
+                {domToReact(children, options)}
+              </TextWrapper>
+            );
+
+          case 'ql-align-justify': // is there actually a difference between this and left-aligned
+            return (
+              <TextWrapper
+                alignParagraph={alignParagraph}
+                justifyParagraph="left"
+              >
+                {domToReact(children, options)}
+              </TextWrapper>
+            );
+
+          default:
+            break;
+        }
+      }
 
       if (name === 'ul')
         return (

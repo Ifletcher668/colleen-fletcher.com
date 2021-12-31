@@ -34,6 +34,7 @@ declare namespace Strapi {
     tags: Array<Tag>;
   };
 
+  // TODO: make optional to reflect Strapi. Currently, only the Blog and post previews are accounted for
   type Preview = {
     heading: ComponentTextHeading;
     text: ComponentTextParagraph;
