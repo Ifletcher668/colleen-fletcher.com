@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Link } from '..';
-import { font, size } from '../../../styled-components/_mixins';
+import { font, radius, size, time } from '../../../styled-components/_mixins';
 
 type Props = {
   variant?: 'primary' | 'secondary' | 'tertiary';
@@ -9,17 +9,19 @@ type Props = {
 export default styled.button<Props>`
   display: inline-flex;
   align-items: center;
-  border: none;
   overflow: hidden;
   outline: none;
   box-shadow: none;
 
   margin: ${size('margin', 'xsmall')} auto;
-  padding: 0 ${size('padding', 'small')};
+  // Apply padding to Link to make a smoother animation
+  ${Link} {
+    padding: 0 ${size('padding', 'small')};
+  }
 
   letter-spacing: ${font('letter-spacing', 'spaced')};
-  border-radius: ${props => props.theme.radius.smooth};
-  border: 1px solid
+  border-radius: ${radius('smooth')};
+  border: 2px solid
     ${props => {
       switch (props.variant) {
         case 'secondary':
@@ -76,23 +78,21 @@ export default styled.button<Props>`
 
   &:hover,
   ${Link}:hover {
-    &,
-    > * {
-      transition: ${props => props.theme.time.fast} ease-in-out;
-      background: ${props => props.theme.color.background};
-      color: ${props => {
-        switch (props.variant) {
-          case 'secondary':
-            return props.theme.color['primary-blue'];
-          case 'tertiary':
-            return props.theme.color.coffee;
+    transition: ${time('medium')} ease-out;
+    transform: scale(0.98);
+    background: ${props => props.theme.color.background};
+    color: ${props => {
+      switch (props.variant) {
+        case 'secondary':
+          return props.theme.color['primary-blue'];
+        case 'tertiary':
+          return props.theme.color.coffee;
 
-          default:
-            return props.theme.color.plumWeb;
-        }
-      }};
-      font-weight: ${font('weight', 'bold')};
-    }
+        default:
+          return props.theme.color.plumWeb;
+      }
+    }};
+    font-weight: ${font('weight', 'bold')};
   }
 
   /**
@@ -101,7 +101,7 @@ export default styled.button<Props>`
     * where the bottom border doesn't show up
     */
   &:hover {
-    border: 1px solid
+    border: 2px solid
       ${props => {
         switch (props.variant) {
           case 'secondary':
