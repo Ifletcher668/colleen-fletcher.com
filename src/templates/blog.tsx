@@ -32,6 +32,7 @@ export default (props: TemplateProps): JSX.Element => {
     preview,
     title,
     cover_image,
+    slug,
   }: BlogPost): JSX.Element => {
     const previewHeading: ComponentTextParagraph = {
       body: preview?.heading?.headingText ?? `<h2>${title}</h2>`, // paragraph component parses html
@@ -54,7 +55,12 @@ export default (props: TemplateProps): JSX.Element => {
     };
 
     const buttonData: ComponentWidgetButton = {
-      action: preview?.button?.action ?? fullUrlPath,
+      action:
+        !preview?.button?.action ||
+        preview?.button?.action === '' ||
+        preview?.button?.action === slug
+          ? fullUrlPath
+          : preview.button.action,
       buttonText: preview?.button?.buttonText ?? 'Click',
       variant: preview?.button?.variant ?? 'primary',
     };
