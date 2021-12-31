@@ -34,9 +34,21 @@ export const above = typedKeys(breakpoints).reduce((accumulator, label) => {
 }, {} as StyleFnMap);
 
 export const color =
-  (label: keyof DefaultTheme['color']) =>
-  (props: ThemeProps<DefaultTheme>): string =>
-    props.theme.color[label];
+  (label: keyof DefaultTheme['color'], lighten?: Opacity) =>
+  (props: ThemeProps<DefaultTheme>): string => {
+    const color = props.theme.color[label];
+
+    if (lighten) {
+      const reformatedColorValue = color
+        .slice(3)
+        .replace('(', ' ')
+        .replace(')', ' ');
+
+      return `rgba(${reformatedColorValue},${lighten})`;
+    }
+
+    return color;
+  };
 
 export const radius =
   (label: keyof DefaultTheme['radius']) =>

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import { color, size } from '../../styled-components/_mixins';
+import { color, radius, size } from '../../styled-components/_mixins';
 import { DividerColorOptions } from '.';
+import { Flexbox } from '../Containers';
 
 interface Props {
   lineColor?: DividerColorOptions;
@@ -28,4 +29,15 @@ export const StandardDivider = styled.hr<Props>`
       props.lineColor ? color(props.lineColor) : color('coffee')};
     border-width: 0 0 1px 0;
   }
+`;
+
+export const FancyDivider = styled(Flexbox)`
+  gap: 2em;
+  background: linear-gradient(
+    90deg,
+    ${color('darkLava', 0.5)} 0%,
+    ${color('darkLava', 1)} 50%,
+    ${color('darkLava', 0.5)} 100%
+  );
+  border-radius: ${radius('smooth')};
 `;

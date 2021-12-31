@@ -5,6 +5,7 @@ import YangQuotes from '../../../assets/images/svg/yang-quotation.svg';
 import YinQuotes from '../../../assets/images/svg/yin-quotation.svg';
 import { ComponentTextParagraph } from '../../../typings/strapi';
 import { Grid } from '../../Containers';
+import Divider from '../../Divider';
 import { H1, H2, H3, H4, H5, H6, Link, Span, Strong } from '../../Elements';
 import { TextWrapper } from './styles';
 
@@ -162,6 +163,11 @@ const Paragraph = ({ data, className }: Props): JSX.Element => {
             />
           </TextWrapper>
         );
+
+      if (attribs.class === 'ql-divider-standard')
+        return <Divider type="standard" />;
+
+      if (attribs.class === 'ql-divider-fancy') return <Divider type="fancy" />;
 
       if (attribs.class === 'ql-size-huge')
         return <Span size="huge">{domToReact(children, options)}</Span>;

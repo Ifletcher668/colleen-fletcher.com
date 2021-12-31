@@ -2,14 +2,14 @@ import { DefaultTheme } from 'styled-components';
 
 export const theme: DefaultTheme = {
   color: {
-    background: '#fff',
-    'light-blue': '#e5f6fd',
-    'primary-blue': '#7bd0f7',
-    plumWeb: '#eeb5eb',
-    aterrima: '#000',
-    lightSlateGray: '#718C98',
-    coffee: '#664838',
-    darkLava: '#493B31',
+    background: 'rgb(255, 255, 255)',
+    'light-blue': 'rgb(229, 246, 253)',
+    'primary-blue': 'rgb(123, 208, 247)',
+    plumWeb: 'rgb(238, 181, 235)',
+    aterrima: 'rgb(0, 0, 0)',
+    lightSlateGray: 'rgb(113, 140, 152)',
+    coffee: 'rgb(102, 72, 56)',
+    darkLava: 'rgb(73, 59, 49)',
   },
   size: {
     column: {
