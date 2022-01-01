@@ -9,14 +9,22 @@ type Props = {
 export default styled.button<Props>`
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   overflow: hidden;
   outline: none;
   box-shadow: none;
+  min-height: 2rem;
 
-  margin: ${size('margin', 'xsmall')} auto;
-  // Apply padding to Link to make a smoother animation
+  margin: ${size('margin', 'xsmall')};
+
+  /* Reset link styles here */
   ${Link} {
+    width: 100%;
+    // Apply padding to Link to make a smoother animation
     padding: 0 ${size('padding', 'small')};
+    &:hover {
+      border-bottom: none;
+    }
   }
 
   letter-spacing: ${font('letter-spacing', 'spaced')};
@@ -69,11 +77,6 @@ export default styled.button<Props>`
       ['tertiary', undefined].includes(props.variant)
         ? props.theme.color['primary-blue']
         : props.theme.color.background};
-    &:hover {
-      color: ${props => props.theme.color.aterrima};
-
-      border-bottom: none;
-    }
   }
 
   &:hover,
@@ -95,11 +98,6 @@ export default styled.button<Props>`
     font-weight: ${font('weight', 'bold')};
   }
 
-  /**
-    * Only want to draw a border around the button itself 
-    * Border around 'hover' as well, due to an unknown bug
-    * where the bottom border doesn't show up
-    */
   &:hover {
     border: 2px solid
       ${props => {

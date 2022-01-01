@@ -53,82 +53,83 @@ export default (props: TemplateProps): JSX.Element => {
 
         {services?.length > 0 && (
           <Grid containerType="section">
-            {services.map((service, idx) => {
-              const zigZagColumnLayout = zigZagGridColumns(idx);
+            {services.map(
+              ({ slug: serviceSlug, preview: servicePreview }, idx) => {
+                const zigZagColumnLayout = zigZagGridColumns(idx);
 
-              // Mutating button data to append offering's url
-              const buttonData: ComponentWidgetButton = {
-                action: `${fullUrlPath}${service.slug}`,
-                buttonText: service.preview.button.buttonText,
-                variant: service.preview.button.variant,
-              };
+                // Mutating button data to append offering's url
+                const buttonData: ComponentWidgetButton = {
+                  action: `${fullUrlPath}${serviceSlug}`,
+                  buttonText: servicePreview.button.buttonText,
+                  variant: servicePreview.button.variant,
+                };
 
-              return (
-                <Grid
-                  key={idx}
-                  containerType="article"
-                  columns={zigZagColumnLayout} // col names === 'image' and 'content'
-                  rows={{
-                    xlarge:
-                      '[content-start] 1fr [content-middle] auto [content-end] 0.02fr',
-                    large:
-                      '[content-start] 1fr [content-middle] auto [content-end] 0.02fr',
-                    medium:
-                      '[content-start] auto [content-middle] auto [content-end] auto',
-                  }}
-                  styling={{
-                    margin: '2em 0em',
-                    gap: '1em 0',
-                  }}
-                >
-                  <GridArea
-                    col-xl="image"
-                    col-lg="image"
-                    col-md="image"
-                    row-xl="content-start"
-                    row-lg="content-start"
-                    row-md="content-start"
-                    row-sm="content-start"
-                    row-xs="content-start"
+                return (
+                  <Grid
+                    key={idx}
+                    containerType="article"
+                    columns={zigZagColumnLayout} // col names === 'image' and 'content'
+                    rows={{
+                      xlarge:
+                        '[content-start] 1fr [content-middle] auto [content-end] 0.02fr',
+                      large:
+                        '[content-start] 1fr [content-middle] auto [content-end] 0.02fr',
+                      medium:
+                        '[content-start] auto [content-middle] auto [content-end] auto',
+                    }}
+                    styling={{
+                      margin: '2em 0em',
+                      gap: '1em 0',
+                    }}
                   >
-                    <ImageWithCaption data={service.preview.image} />
-                  </GridArea>
+                    <GridArea
+                      col-xl="image"
+                      col-lg="image"
+                      col-md="image"
+                      row-xl="content-start"
+                      row-lg="content-start"
+                      row-md="content-start"
+                      row-sm="content-start"
+                      row-xs="content-start"
+                    >
+                      <ImageWithCaption data={servicePreview.image} />
+                    </GridArea>
 
-                  <GridArea
-                    col-xl="text"
-                    col-lg="text"
-                    col-md="text"
-                    row-xl="content-start / content-end"
-                    row-lg="content-start / content-end"
-                    row-md="content-start / content-end"
-                    row-sm="content-middle"
-                    row-xs="content-middle"
-                  >
-                    <Grid>
-                      {/* TODO: Heading*/}
-                      {/* <HeadingField data={service.preview.heading} /> */}
+                    <GridArea
+                      col-xl="text"
+                      col-lg="text"
+                      col-md="text"
+                      row-xl="content-start / content-end"
+                      row-lg="content-start / content-end"
+                      row-md="content-start / content-end"
+                      row-sm="content-middle"
+                      row-xs="content-middle"
+                    >
+                      <Grid>
+                        <Paragraph data={servicePreview.heading} />
 
-                      <Paragraph data={service.preview.text} />
+                        <Paragraph data={servicePreview.text} />
 
-                      <ButtonField data={buttonData} />
-                    </Grid>
-                  </GridArea>
+                        <ButtonField data={buttonData} />
+                      </Grid>
+                    </GridArea>
 
-                  <GridArea
-                    col-xl="1 / span 3"
-                    col-lg="1 / span 3"
-                    col-md="1 / span 3"
-                    row-xl="content-end"
-                    row-lg="content-end"
-                    row-md="content-end"
-                    row-sm="content-end"
-                    row-xs="content-end"
-                  >
-                    <Divider type="standard" />
-                  </GridArea>
-                </Grid>
-              );
-            })}
+                    <GridArea
+                      col-xl="1 / span 3"
+                      col-lg="1 / span 3"
+                      col-md="1 / span 3"
+                      row-xl="content-end"
+                      row-lg="content-end"
+                      row-md="content-end"
+                      row-sm="content-end"
+                      row-xs="content-end"
+                    >
+                      <Divider type="standard" />
+                    </GridArea>
+                  </Grid>
+                );
+              },
+            )}
           </Grid>
         )}
       </PageContainer>

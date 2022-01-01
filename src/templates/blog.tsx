@@ -35,9 +35,9 @@ export default (props: TemplateProps): JSX.Element => {
     slug,
   }: BlogPost): JSX.Element => {
     const previewHeading: ComponentTextParagraph = {
-      body: preview?.heading?.headingText ?? `<h2>${title}</h2>`, // paragraph component parses html
-      alignParagraph: preview?.heading?.alignHeading ?? 'center',
-      justifyParagraph: preview?.heading?.justifyHeading ?? 'center',
+      body: preview?.heading?.body ?? `<h2>${title}</h2>`, // paragraph component parses html
+      alignParagraph: preview?.heading?.alignParagraph ?? 'center',
+      justifyParagraph: preview?.heading?.justifyParagraph ?? 'center',
     };
 
     const defaultImageConfig: ComponentMediaSingleImage['configuration'] = {

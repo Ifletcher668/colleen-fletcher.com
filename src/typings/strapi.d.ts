@@ -36,7 +36,7 @@ declare namespace Strapi {
 
   // TODO: make optional to reflect Strapi. Currently, only the Blog and post previews are accounted for
   type Preview = {
-    heading: ComponentTextHeading;
+    heading: ComponentTextParagraph;
     text: ComponentTextParagraph;
     image: ComponentMediaSingleImage;
     button: ComponentWidgetButton;
@@ -55,7 +55,6 @@ declare namespace Strapi {
     | 'STRAPI_ComponentSectionImageRightTextLeft'
     | 'STRAPI_ComponentSectionTextCenterImageEitherSide'
     | 'STRAPI_ComponentSectionImageCenterTextEitherSide'
-    | 'STRAPI_ComponentWidgetDivider'
     | 'STRAPI_ComponentWidgetEmbeddedForm'
     | 'STRAPI_ComponentWidgetButton'
     | 'STRAPI_ComponentCollectionsOfferings'
@@ -74,15 +73,9 @@ declare namespace Strapi {
     alignParagraph: AlignValues;
     text_left: ComponentTextParagraph;
     text_right: ComponentTextParagraph;
-    // base 'heading' props
-    headingText: string; // alias for 'text' in db
-    level: 'one' | 'two' | 'three' | 'four' | 'five' | 'six';
-    tilt: 'down' | 'even' | 'up';
-    justifyHeading: JustifyValues;
-    alignHeading: AlignValues;
     // ========================
-    heading: ComponentTextHeading;
-    style: ImageStyle | DividerStyle;
+    heading: ComponentTextParagraph;
+    style: ImageStyle;
     // base 'button' props
     buttonText: string;
     variant: 'primary' | 'secondary' | 'tertiary';
@@ -143,16 +136,6 @@ declare namespace Strapi {
     text_right: ComponentMediaSingleImage;
   };
 
-  type ComponentSectionHeadingRightImageLeft = {
-    heading: ComponentTextHeading;
-    image: ComponentMediaSingleImage;
-  };
-
-  type ComponentSectionHeadingLeftImageRight = {
-    heading: ComponentTextHeading;
-    image: ComponentMediaSingleImage;
-  };
-
   type ComponentSectionImageRightTextLeft = {
     text: ComponentTextParagraph;
     image: ComponentMediaSingleImage;
@@ -168,14 +151,6 @@ declare namespace Strapi {
     body: string;
     justifyParagraph: JustifyValues; // Alias for 'justify' enum
     alignParagraph: AlignValues; // Alias for 'align' enum
-  };
-
-  type ComponentTextHeading = {
-    headingText: string; // alias for 'text' in db
-    level: 'one' | 'two' | 'three' | 'four' | 'five' | 'six';
-    tilt: 'down' | 'even' | 'up';
-    justifyHeading: JustifyValues; // Alias for 'justify' enum
-    alignHeading: AlignValues; // Alias for 'align' enum
   };
 
   type ComponentTextQuote = {
@@ -208,9 +183,6 @@ declare namespace Strapi {
     buttonText: string;
     variant: 'primary' | 'secondary' | 'tertiary';
     action: string;
-  };
-  type ComponentWidgetDivider = {
-    style: Pick<ImageStyle, 'standard' | 'fancy'>;
   };
 
   // ===========================================
@@ -270,7 +242,6 @@ declare namespace Strapi {
     slug: string;
     seo?: SEO;
     preview: Preview;
-    image: ComponentMediaSingleImage;
     fullUrlPath: string;
     services: Array<Service>;
     is_offering: boolean;

@@ -10,13 +10,14 @@ import { H1, H2, H3, H4, H5, H6, Link, Span, Strong } from '../../Elements';
 import { TextWrapper } from './styles';
 
 export interface Props {
-  data: ComponentTextParagraph;
+  data: ComponentTextParagraph | null;
   className?: Array<string> | string;
 }
 
-const Paragraph = ({ data, className }: Props): JSX.Element => {
-  const { body, alignParagraph, justifyParagraph } = data;
+const Paragraph = ({ data, className }: Props): JSX.Element | null => {
+  if (data === null) return null;
 
+  const { body, alignParagraph, justifyParagraph } = data;
   // TODO: Add images to parser
   const options: HTMLReactParserOptions = {
     replace: domNode => {

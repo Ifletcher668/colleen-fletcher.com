@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { DynamicZone } from '../../typings/strapi';
 import {
   BlogPostsField,
@@ -6,7 +6,6 @@ import {
   OfferingsField,
   ServicesField,
 } from '../Collections';
-import Grid from '../Containers/Grid';
 import { ImagesField, SingleImageField, SingleVideoField } from '../Media';
 import {
   ImageCenterTextEitherSideField,
@@ -15,7 +14,7 @@ import {
   TextWithImageRightSideField,
 } from '../Sections';
 import { Paragraph } from '../Text';
-import { ButtonField, DividerField } from '../Widgets';
+import { ButtonField } from '../Widgets';
 import EmbeddedForm from '../Widgets/EmbeddedForm';
 
 export const parseDynamicZoneContent = (
@@ -119,21 +118,6 @@ export const parseDynamicZoneContent = (
               />
             );
 
-          case 'STRAPI_ComponentWidgetDivider':
-            // TODO: refactor from this simple Typescript workaround
-            return component.style === 'fancy' ||
-              component.style === 'standard' ? (
-              <DividerField
-                key={`${idx}${component.__typename}`}
-                data={{ style: component.style }}
-              />
-            ) : (
-              <DividerField
-                key={`${idx}${component.__typename}`}
-                data={{ style: 'standard' }}
-              />
-            );
-
           case 'STRAPI_ComponentWidgetEmbeddedForm':
             return (
               <EmbeddedForm
@@ -167,17 +151,9 @@ export const parseDynamicZoneContent = (
 
           case 'STRAPI_ComponentCollectionsBlogs':
             return (
-              <Grid
-                key={`${idx}{idx}`}
-                containerType="section"
-                columns={{
-                  xlarge: '[left] 1fr [right] 1fr',
-                  small: '1fr',
-                }}
-                styling={{ gap: '5em' }}
-              >
+              <Fragment key={`${idx}{idx}`}>
                 <BlogsField data={component.blogs} />
-              </Grid>
+              </Fragment>
             );
 
           case 'STRAPI_ComponentCollectionsBlogPosts':

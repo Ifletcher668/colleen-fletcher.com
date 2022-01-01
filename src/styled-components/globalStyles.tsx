@@ -56,7 +56,7 @@ const GlobalStylesheet = createGlobalStyle`
   }
 
   ul, ol {
-  padding-left: 1.8rem;
+  padding-left: 2rem;
   }
 
   #root, #__gatsby {

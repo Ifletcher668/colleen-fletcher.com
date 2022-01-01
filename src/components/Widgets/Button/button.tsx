@@ -11,7 +11,7 @@ const ButtonField = ({
   data: { buttonText, variant, action },
 }: Props): JSX.Element => {
   return (
-    <Button center variant={variant} type="button">
+    <Button variant={variant} type="button">
       <Link to={action}>{buttonText}</Link>
     </Button>
   );

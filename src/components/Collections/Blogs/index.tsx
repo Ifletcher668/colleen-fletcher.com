@@ -4,27 +4,33 @@ import { ImageWithCaption } from '../../Images';
 import { ButtonField } from '../../Widgets';
 import { Paragraph } from '../../Text';
 import { Blog } from '../../../typings/strapi';
+import { Flexbox } from '../../Containers';
 
 export interface Props {
   data: Array<Pick<Blog, 'id' | 'slug' | 'fullUrlPath' | 'preview'>>;
 }
 
 const BlogsField = ({ data }: Props): JSX.Element => (
-  <>
+  <Grid
+    containerType="section"
+    columns={{
+      xlarge: '[left] 1fr [right] 1fr',
+      small: '1fr',
+    }}
+    styling={{ gap: '5em' }}
+  >
     {data.map(
-      (
-        {
-          id,
-          slug,
-          fullUrlPath,
-          preview: {
-            text: previewText,
-            image: previewImage,
-            button: previewButton,
-          },
+      ({
+        id,
+        slug,
+        fullUrlPath,
+        preview: {
+          heading: headingText,
+          text: previewText,
+          image: previewImage,
+          button: previewButton,
         },
-        idx,
-      ) => {
+      }) => {
         // TODO: Refactor when handling routes better
         if (
           !previewButton.action ||
@@ -35,20 +41,8 @@ const BlogsField = ({ data }: Props): JSX.Element => (
         }
 
         return (
-          <Grid
-            key={idx + id}
-            containerType="article"
-            styling={{
-              placeItems: 'center',
-              margin: '2em 0em',
-              gap: '1em 0',
-            }}
-            rows={{
-              xlarge: '0.05fr auto auto minmax(50px, 70px)',
-            }}
-          >
-            {/* TODO: Heading*/}
-            {/* <HeadingField data={heading} /> */}
+          <Flexbox key={`${id}-${slug}`} vertical gap>
+            <Paragraph data={headingText} />
             <ImageWithCaption
               data={previewImage}
               containerType="div"
@@ -56,11 +50,11 @@ const BlogsField = ({ data }: Props): JSX.Element => (
             />
             <Paragraph data={previewText} />
             <ButtonField data={previewButton} />
-          </Grid>
+          </Flexbox>
         );
       },
     )}
-  </>
+  </Grid>
 );
 
 export default BlogsField;

@@ -4,7 +4,7 @@ import { below, size } from '../../../styled-components/_mixins';
 // TODO: Update with theme variables
 const PageContainer = styled.section`
   display: grid;
-  gap: 4em 0;
+  gap: 2em 0;
   grid-template-columns:
     [full-start] minmax(4%, 22%)
     [content-start] minmax(0, 56%) [content-end]
