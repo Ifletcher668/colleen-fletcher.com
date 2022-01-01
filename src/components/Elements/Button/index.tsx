@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 import { Link } from '..';
-import { font, radius, size, time } from '../../../styled-components/_mixins';
+import {
+  color,
+  font,
+  radius,
+  size,
+  time,
+} from '../../../styled-components/_mixins';
 
 type Props = {
   variant?: 'primary' | 'secondary' | 'tertiary';
@@ -33,13 +39,13 @@ export default styled.button<Props>`
     ${props => {
       switch (props.variant) {
         case 'secondary':
-          return props.theme.color['primary-blue'];
+          return color('primary-blue');
 
         case 'tertiary':
-          return props.theme.color.coffee;
+          return color('coffee');
 
         default:
-          return props.theme.color.plumWeb;
+          return color('plumWeb');
       }
     }};
 
@@ -73,17 +79,25 @@ export default styled.button<Props>`
 
   &,
   ${Link} {
-    color: ${props =>
-      ['tertiary', undefined].includes(props.variant)
-        ? props.theme.color['primary-blue']
-        : props.theme.color.background};
+    color: ${props => {
+      switch (props.variant) {
+        case 'secondary':
+          return color('coffee');
+
+        case 'tertiary':
+          return color('primary-blue');
+
+        default:
+          return color('background');
+      }
+    }};
   }
 
   &:hover,
   ${Link}:hover {
     transition: ${time('medium')} ease-out;
     transform: scale(0.98);
-    background: ${props => props.theme.color.background};
+    background: ${color('background')};
     color: ${props => {
       switch (props.variant) {
         case 'secondary':
@@ -117,10 +131,17 @@ export default styled.button<Props>`
   &:active,
   ${Link}:active, {
     transition: 0.01s;
-    color: ${props =>
-      ['tertiary', undefined].includes(props.variant)
-        ? props.theme.color['primary-blue']
-        : props.theme.color.background};
+    color: ${props => {
+      switch (props.variant) {
+        case 'secondary':
+          return color('primary-blue');
+        case 'tertiary':
+          return color('coffee');
+        default:
+          // primary
+          return color('plumWeb');
+      }
+    }}
     background: ${props => {
       switch (props.variant) {
         case 'secondary':
@@ -140,6 +161,7 @@ export default styled.button<Props>`
                         ${props.theme.color.coffee}`;
 
         default:
+          // primary
           return `radial-gradient( 
                             68.84% 68.84% at 50% 50%,
                             ${props.theme.color.plumWeb} 0%,
