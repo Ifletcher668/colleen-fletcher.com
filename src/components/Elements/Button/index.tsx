@@ -19,6 +19,7 @@ export default styled.button<Props>`
   overflow: hidden;
   outline: none;
   box-shadow: none;
+  height: 100%;
   min-height: 2rem;
 
   margin: ${size('margin', 'xsmall')};

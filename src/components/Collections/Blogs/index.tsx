@@ -4,7 +4,6 @@ import { ImageWithCaption } from '../../Images';
 import { ButtonField } from '../../Widgets';
 import { Paragraph } from '../../Text';
 import { Blog } from '../../../typings/strapi';
-import { Flexbox } from '../../Containers';
 
 export interface Props {
   data: Array<Pick<Blog, 'id' | 'slug' | 'fullUrlPath' | 'preview'>>;
@@ -41,16 +40,24 @@ const BlogsField = ({ data }: Props): JSX.Element => (
         }
 
         return (
-          <Flexbox key={`${id}-${slug}`} vertical gap>
+          <Grid
+            key={`${id}-${slug}`}
+            rows={{
+              xlarge: 'minmax(6rem, 12rem) 0.5fr 1fr minmax(3rem, 4rem)',
+            }}
+          >
             <Paragraph data={headingText} />
+
             <ImageWithCaption
               data={previewImage}
               containerType="div"
               styling={{ width: '100%', height: '100%' }} // ensures image doesn't collapse
             />
+
             <Paragraph data={previewText} />
+
             <ButtonField data={previewButton} />
-          </Flexbox>
+          </Grid>
         );
       },
     )}

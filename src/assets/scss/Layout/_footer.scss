@@ -3,9 +3,9 @@
 .site-footer {
   display: grid;
   grid-template-columns:
-  [full-start] minmax(4%, 22%)
-  [footer-start] minmax(0, 56%) [footer-end]
-  minmax(4%, 22%) [full-end];
+    [full-start] minmax(4%, 22%)
+    [footer-start] minmax(0, 56%) [footer-end]
+    minmax(4%, 22%) [full-end];
 
   @include below(small) {
     grid-template-columns:

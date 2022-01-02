@@ -62,7 +62,12 @@ const Footer = (): JSX.Element => {
 
         <div className="footer-info">
           <Heading level={4}>
-            <FaCopyright /> Colleen Fletcher 1994 - {new Date().getFullYear()}
+            <FaCopyright
+              style={{
+                marginBottom: '10px',
+              }}
+            />{' '}
+            Colleen Fletcher 1994 - {new Date().getFullYear()}
           </Heading>
 
           <Heading level={5}>
@@ -112,7 +117,7 @@ const Footer = (): JSX.Element => {
               className="site-disclaimer"
               title="Disclaimer: By agreeing to use the services and guidance of Colleen Fletcher you agree that you understand and know all information is not a diagnosis, nor does it take the place of any medical, legal or financial advice. All information given is educational and is to be used to enhance your knowledge and ability to act in a positive manner in matters concerning your personal wholistic health care. You know your progress is dependent upon your commitment to your goals and that there are no guarantees as to the result or progress to be made. You understand that the success of the treatment is dependent upon your action to your goals. You must be 18 years of age or have a written release from a parent or legal guardian"
             >
-              Disclaimer <RiInformationLine style={{ display: 'inline' }} />
+              Disclaimer <RiInformationLine />
             </Span>
           </Heading>
         </div>
