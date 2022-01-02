@@ -3,7 +3,7 @@ import { graphql } from 'gatsby';
 import React from 'react';
 import { Grid, PageContainer } from '../components/Containers';
 import Divider from '../components/Divider';
-import { Heading } from '../components/Text/Heading';
+import Heading from '../components/Heading';
 import { ImageWithCaption } from '../components/Images';
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
@@ -13,6 +13,16 @@ import { GridArea } from '../styled-components/helpers';
 import { ComponentWidgetButton } from '../typings/strapi';
 import { zigZagGridColumns } from '../utils/zigZagGridColumns';
 import { TemplateProps } from './types';
+
+export const query = graphql`
+  query GET_OFFERING_PAGE($id: ID!) {
+    strapi {
+      offering(id: $id) {
+        ...StrapiOffering
+      }
+    }
+  }
+`;
 
 export default (props: TemplateProps): JSX.Element => {
   const {
@@ -31,7 +41,7 @@ export default (props: TemplateProps): JSX.Element => {
       />
 
       <PageContainer>
-        <Heading level="one" justifyHeading="center" alignHeading="center">
+        <Heading level={1} justifyHeading="center" alignHeading="center">
           {title}
         </Heading>
 
@@ -136,13 +146,3 @@ export default (props: TemplateProps): JSX.Element => {
     </Layout>
   );
 };
-
-export const query = graphql`
-  query GET_OFFERING_PAGE($id: ID!) {
-    strapi {
-      offering(id: $id) {
-        ...StrapiOffering
-      }
-    }
-  }
-`;
