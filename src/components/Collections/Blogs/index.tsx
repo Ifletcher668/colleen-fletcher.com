@@ -46,6 +46,10 @@ const BlogsField = ({ data }: Props): JSX.Element => (
             key={`${id}-${slug}`}
             rows={{
               xlarge: 'minmax(6rem, 12rem) 0.5fr 1fr minmax(3rem, 4.5rem)',
+              small: 'minmax(3rem, 8rem) 0.2fr 0.5fr minmax(1rem, 2rem)',
+            }}
+            styling={{
+              placeItems: 'center',
             }}
           >
             <Paragraph data={headingText} />

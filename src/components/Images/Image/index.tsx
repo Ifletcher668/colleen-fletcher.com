@@ -37,6 +37,10 @@ const Image = ({ data }: Props): JSX.Element => {
 
   return (
     <GatsbyImage
+      style={{
+        alignSelf: 'center',
+        textAlign: 'center',
+      }}
       imgStyle={imgStyle}
       alt={alternativeText || ''}
       title={caption || ''}

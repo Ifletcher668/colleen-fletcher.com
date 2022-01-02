@@ -100,6 +100,7 @@ const MenuItem = ({
               <Flexbox
                 containerType="ul"
                 vertical
+                gap
                 styling={{ fontSize: '1rem' }}
               >
                 <BlogPosts blog={clickedBlogName} />
@@ -147,6 +148,7 @@ const MenuItem = ({
               <Flexbox
                 containerType="ul"
                 vertical
+                gap
                 styling={{ fontSize: '1rem' }}
               >
                 <Services offering={clickedOffering} />

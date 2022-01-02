@@ -44,9 +44,6 @@
       justify-content: space-around;
       align-items: center;
       .nav-list-item {
-        &::first-letter {
-          @include font-family('MA Sexy');
-        }
         .panel-navbar {
           position: absolute;
           left: 0;
