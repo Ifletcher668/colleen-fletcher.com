@@ -4,4 +4,6 @@ declare module '*.jpeg';
 declare module '*.svg';
 declare module '*.gif';
 declare module '*.bmp';
+declare module '*.ttf';
+declare module '*.woff';
 declare module 'gatsby-plugin-transition-link/*';

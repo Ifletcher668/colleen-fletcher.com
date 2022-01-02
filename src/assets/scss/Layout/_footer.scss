@@ -1,0 +1,49 @@
+@use '../Config/' as *;
+
+.site-footer {
+  display: grid;
+  grid-template-columns:
+  [full-start] minmax(4%, 22%)
+  [footer-start] minmax(0, 56%) [footer-end]
+  minmax(4%, 22%) [full-end];
+
+  @include below(small) {
+    grid-template-columns:
+      [full-start] 5%
+      [footer-start] 90% [footer-end]
+      5% [full-end];
+  }
+
+  margin-bottom: 1rem;
+  text-align: center;
+
+  .footer-content {
+    grid-column: footer-start / span footer-end;
+
+    .footer-nav {
+      margin: 0 0 size(mg-small) 0;
+
+      .footer-navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+      }
+    }
+
+    .footer-info {
+      display: flex;
+      flex-flow: column nowrap;
+      > * {
+        margin: 0;
+      }
+      gap: 1rem 0;
+      .site-disclaimer {
+        svg {
+          //info icon
+          margin-bottom: 4px;
+          margin-left: -6px;
+        }
+      }
+    }
+  }
+}

@@ -53,7 +53,10 @@ const Navbar = ({ className, items }: NavbarProps): JSX.Element => {
           {items.map((menuItem, idx) => (
             <MenuItem
               key={`${menuItem.text}-${idx}`}
-              isActive={current.context.isActive}
+              isActive={
+                current.context.isActive &&
+                menuItem.text === current.context.panelName
+              }
               className={
                 menuItem.text === current.context.panelName ? 'active' : ''
               }

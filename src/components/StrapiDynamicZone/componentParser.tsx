@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { DynamicZone } from '../../typings/strapi';
 import {
   BlogPostsField,
@@ -6,18 +6,15 @@ import {
   OfferingsField,
   ServicesField,
 } from '../Collections';
-import Grid from '../Containers/Grid';
 import { ImagesField, SingleImageField, SingleVideoField } from '../Media';
 import {
-  HeadingWithImageLeftSideField,
-  HeadingWithImageRightSideField,
   ImageCenterTextEitherSideField,
   TextCenterImageEitherSideField,
   TextWithImageLeftSideField,
   TextWithImageRightSideField,
 } from '../Sections';
-import { HeadingField, Paragraph, QuoteField } from '../Text';
-import { ButtonField, DividerField } from '../Widgets';
+import { Paragraph } from '../Text';
+import { ButtonField } from '../Widgets';
 import EmbeddedForm from '../Widgets/EmbeddedForm';
 
 export const parseDynamicZoneContent = (
@@ -63,20 +60,6 @@ export const parseDynamicZoneContent = (
               />
             );
 
-          case 'STRAPI_ComponentTextHeading':
-            return (
-              <HeadingField
-                key={`${idx}${component.__typename}`}
-                data={{
-                  headingText: component.headingText,
-                  level: component.level,
-                  tilt: component.tilt,
-                  justifyHeading: component.justifyHeading,
-                  alignHeading: component.alignHeading,
-                }}
-              />
-            );
-
           case 'STRAPI_ComponentTextParagraph':
             return (
               <Paragraph
@@ -86,14 +69,6 @@ export const parseDynamicZoneContent = (
                   justifyParagraph: component.justifyParagraph,
                   alignParagraph: component.alignParagraph,
                 }}
-              />
-            );
-
-          case 'STRAPI_ComponentTextQuote':
-            return (
-              <QuoteField
-                key={`${idx}${component.__typename}`}
-                data={component.text}
               />
             );
 
@@ -119,28 +94,6 @@ export const parseDynamicZoneContent = (
               />
             );
 
-          case 'STRAPI_ComponentSectionHeadingLeftImageRight':
-            return (
-              <HeadingWithImageRightSideField
-                key={`${idx}${component.__typename}`}
-                data={{
-                  heading: component.heading,
-                  image: component.image,
-                }}
-              />
-            );
-
-          case 'STRAPI_ComponentSectionHeadingRightImageLeft':
-            return (
-              <HeadingWithImageLeftSideField
-                key={`${idx}${component.__typename}`}
-                data={{
-                  heading: component.heading,
-                  image: component.image,
-                }}
-              />
-            );
-
           case 'STRAPI_ComponentSectionTextCenterImageEitherSide':
             return (
               <TextCenterImageEitherSideField
@@ -162,14 +115,6 @@ export const parseDynamicZoneContent = (
                   image: component.image,
                   text_right: component.text_right,
                 }}
-              />
-            );
-
-          case 'STRAPI_ComponentWidgetDivider':
-            return (
-              <DividerField
-                key={`${idx}${component.__typename}`}
-                data={{ style: component.style as DividerStyle }}
               />
             );
 
@@ -206,17 +151,9 @@ export const parseDynamicZoneContent = (
 
           case 'STRAPI_ComponentCollectionsBlogs':
             return (
-              <Grid
-                key={`${idx}{idx}`}
-                containerType="section"
-                columns={{
-                  xlarge: '[left] 1fr [right] 1fr',
-                  small: '1fr',
-                }}
-                styling={{ gap: '5em' }}
-              >
+              <Fragment key={`${idx}{idx}`}>
                 <BlogsField data={component.blogs} />
-              </Grid>
+              </Fragment>
             );
 
           case 'STRAPI_ComponentCollectionsBlogPosts':

@@ -4,8 +4,8 @@ import Helmet from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
 
 export interface Props {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   image?: UploadFile;
   lang?: string;
   meta?: any[];

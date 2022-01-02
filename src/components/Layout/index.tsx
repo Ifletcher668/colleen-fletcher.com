@@ -4,6 +4,7 @@ import Header from './Header';
 import Main from './Main';
 import { ThemeProvider } from 'styled-components';
 import { theme } from '../../styled-components/defaultTheme';
+import GlobalStylesheet from '../../styled-components/globalStyles';
 
 const Layout = ({ children, location }: PageProps): JSX.Element => {
   const [documentIsAtTop, setDocumentIsAtTop] = useState<boolean>(true);
@@ -30,6 +31,7 @@ const Layout = ({ children, location }: PageProps): JSX.Element => {
 
   return (
     <ThemeProvider theme={theme}>
+      <GlobalStylesheet />
       {handleHeaderBehavior()}
 
       <Main>{children}</Main>

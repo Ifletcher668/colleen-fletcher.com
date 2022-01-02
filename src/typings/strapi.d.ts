@@ -1,10 +1,10 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
+/* eslint-disable */
+
 import { IGatsbyImageData } from 'gatsby-plugin-image';
 
 export = Strapi;
 export as namespace Strapi;
 
-/* eslint-disable no-unused-vars */
 declare namespace Strapi {
   /**
    *  essential, despite the namespace, because Graphql
@@ -34,8 +34,9 @@ declare namespace Strapi {
     tags: Array<Tag>;
   };
 
+  // TODO: make optional to reflect Strapi. Currently, only the Blog and post previews are accounted for
   type Preview = {
-    heading: ComponentTextHeading;
+    heading: ComponentTextParagraph;
     text: ComponentTextParagraph;
     image: ComponentMediaSingleImage;
     button: ComponentWidgetButton;
@@ -49,16 +50,11 @@ declare namespace Strapi {
     // | 'STRAPI_ComponentMediaFiles' not yet supported
     | 'STRAPI_ComponentMediaSingleVideo'
     // | 'STRAPI_ComponentMediaVideos' not yet supported
-    | 'STRAPI_ComponentTextHeading'
     | 'STRAPI_ComponentTextParagraph'
-    | 'STRAPI_ComponentTextQuote'
     | 'STRAPI_ComponentSectionTextRightImageLeft'
     | 'STRAPI_ComponentSectionImageRightTextLeft'
-    | 'STRAPI_ComponentSectionHeadingLeftImageRight'
-    | 'STRAPI_ComponentSectionHeadingRightImageLeft'
     | 'STRAPI_ComponentSectionTextCenterImageEitherSide'
     | 'STRAPI_ComponentSectionImageCenterTextEitherSide'
-    | 'STRAPI_ComponentWidgetDivider'
     | 'STRAPI_ComponentWidgetEmbeddedForm'
     | 'STRAPI_ComponentWidgetButton'
     | 'STRAPI_ComponentCollectionsOfferings'
@@ -77,15 +73,9 @@ declare namespace Strapi {
     alignParagraph: AlignValues;
     text_left: ComponentTextParagraph;
     text_right: ComponentTextParagraph;
-    // base 'heading' props
-    headingText: string; // alias for 'text' in db
-    level: 'one' | 'two' | 'three' | 'four' | 'five' | 'six';
-    tilt: 'down' | 'even' | 'up';
-    justifyHeading: JustifyValues;
-    alignHeading: AlignValues;
     // ========================
-    heading: ComponentTextHeading;
-    style: ImageStyle | DividerStyle;
+    heading: ComponentTextParagraph;
+    style: ImageStyle;
     // base 'button' props
     buttonText: string;
     variant: 'primary' | 'secondary' | 'tertiary';
@@ -146,16 +136,6 @@ declare namespace Strapi {
     text_right: ComponentMediaSingleImage;
   };
 
-  type ComponentSectionHeadingRightImageLeft = {
-    heading: ComponentTextHeading;
-    image: ComponentMediaSingleImage;
-  };
-
-  type ComponentSectionHeadingLeftImageRight = {
-    heading: ComponentTextHeading;
-    image: ComponentMediaSingleImage;
-  };
-
   type ComponentSectionImageRightTextLeft = {
     text: ComponentTextParagraph;
     image: ComponentMediaSingleImage;
@@ -171,14 +151,6 @@ declare namespace Strapi {
     body: string;
     justifyParagraph: JustifyValues; // Alias for 'justify' enum
     alignParagraph: AlignValues; // Alias for 'align' enum
-  };
-
-  type ComponentTextHeading = {
-    headingText: string; // alias for 'text' in db
-    level: 'one' | 'two' | 'three' | 'four' | 'five' | 'six';
-    tilt: 'down' | 'even' | 'up';
-    justifyHeading: JustifyValues; // Alias for 'justify' enum
-    alignHeading: AlignValues; // Alias for 'align' enum
   };
 
   type ComponentTextQuote = {
@@ -211,9 +183,6 @@ declare namespace Strapi {
     buttonText: string;
     variant: 'primary' | 'secondary' | 'tertiary';
     action: string;
-  };
-  type ComponentWidgetDivider = {
-    style: Pick<ImageStyle, 'standard' | 'fancy'>;
   };
 
   // ===========================================
@@ -261,7 +230,7 @@ declare namespace Strapi {
     fullUrlPath: string;
     category?: Category;
     tags?: Array<Tag>;
-    cover_image?: UploadFile;
+    cover_image: UploadFile;
     published: string;
     body: Array<DynamicZone>;
     is_blog_post: boolean;
@@ -273,7 +242,6 @@ declare namespace Strapi {
     slug: string;
     seo?: SEO;
     preview: Preview;
-    image: ComponentMediaSingleImage;
     fullUrlPath: string;
     services: Array<Service>;
     is_offering: boolean;

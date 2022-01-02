@@ -1,9 +1,11 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 type Props = {
-  size: 'huge' | 'large' | 'normal' | 'small';
+  size?: 'huge' | 'large' | 'normal' | 'small';
+  tilt?: 'up' | 'down';
 };
 
+// Mostly used to intercept custom Quill.js classNames and apply styles via styled-components
 export default styled.span<Props>`
   font-size: ${props => {
     switch (props.size) {
@@ -14,10 +16,31 @@ export default styled.span<Props>`
         return props.theme.font.size.xlarge;
 
       case 'normal':
-        return 'inherit';
+        return props.theme.font.size.medium;
 
       case 'small':
         return props.theme.font.size.small;
+
+      default:
+        return 'inherit';
     }
   }};
+
+  ${({ tilt }) =>
+    tilt &&
+    css`
+      display: inline-block;
+      transform: ${() => {
+        switch (tilt) {
+          case 'up':
+            return 'rotate(1deg)';
+
+          case 'down':
+            return 'rotate(-1deg)';
+
+          default:
+            return 'inherit';
+        }
+      }};
+    `}
 `;

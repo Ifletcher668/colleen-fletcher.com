@@ -38,7 +38,9 @@ const BlogPosts = (props: Props): JSX.Element => {
       {fivePosts.map((post, idx) => {
         return (
           <li key={idx}>
-            <Link to={`${post.fullUrlPath}`}>{post.title}</Link>
+            <Link color="coffee" to={`${post.fullUrlPath}`}>
+              {post.title}
+            </Link>
           </li>
         );
       })}

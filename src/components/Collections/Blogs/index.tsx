@@ -1,59 +1,60 @@
 import React from 'react';
 import Grid from '../../Containers/Grid';
-import { HeadingField } from '../../Text';
 import { ImageWithCaption } from '../../Images';
 import { ButtonField } from '../../Widgets';
 import { Paragraph } from '../../Text';
 import { Blog } from '../../../typings/strapi';
+import { Flexbox } from '../../Containers';
 
 export interface Props {
   data: Array<Pick<Blog, 'id' | 'slug' | 'fullUrlPath' | 'preview'>>;
 }
 
-const BlogsField = ({ data }: Props): JSX.Element => {
-  return (
-    <>
-      {data.map((blog, idx) => {
-        const {
-          preview: { text, heading, image, button },
-        } = blog;
-
+const BlogsField = ({ data }: Props): JSX.Element => (
+  <Grid
+    containerType="section"
+    columns={{
+      xlarge: '[left] 1fr [right] 1fr',
+      small: '1fr',
+    }}
+    styling={{ gap: '5em' }}
+  >
+    {data.map(
+      ({
+        id,
+        slug,
+        fullUrlPath,
+        preview: {
+          heading: headingText,
+          text: previewText,
+          image: previewImage,
+          button: previewButton,
+        },
+      }) => {
         // TODO: Refactor when handling routes better
         if (
-          button.action === '/' ||
-          button.action === '' ||
-          button.action === blog.slug
+          !previewButton.action ||
+          previewButton.action === '/' ||
+          previewButton.action === slug
         ) {
-          const buttonPath = blog.fullUrlPath;
-          button.action = buttonPath;
+          previewButton.action = fullUrlPath;
         }
 
         return (
-          <Grid
-            key={idx}
-            containerType="article"
-            styling={{
-              placeItems: 'center',
-              margin: '2em 0em',
-              gap: '1em 0',
-            }}
-            rows={{
-              xlarge: '0.05fr auto auto minmax(50px, 70px)',
-            }}
-          >
-            <HeadingField data={heading} />
+          <Flexbox key={`${id}-${slug}`} vertical gap>
+            <Paragraph data={headingText} />
             <ImageWithCaption
-              data={image}
+              data={previewImage}
               containerType="div"
               styling={{ width: '100%', height: '100%' }} // ensures image doesn't collapse
             />
-            <Paragraph data={text} />
-            <ButtonField data={button} />
-          </Grid>
+            <Paragraph data={previewText} />
+            <ButtonField data={previewButton} />
+          </Flexbox>
         );
-      })}
-    </>
-  );
-};
+      },
+    )}
+  </Grid>
+);
 
 export default BlogsField;

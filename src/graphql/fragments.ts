@@ -233,33 +233,6 @@ export const StrapiComponentTextParagraph = graphql`
   }
 `;
 
-export const StrapiComponentTextHeading = graphql`
-  fragment StrapiComponentTextHeading on STRAPI_ComponentTextHeading {
-    id
-    level
-    headingText: text
-    tilt
-    justifyHeading: justify
-    alignHeading: align
-  }
-`;
-
-export const StrapiComponentTextQuote = graphql`
-  fragment StrapiComponentTextQuote on STRAPI_ComponentTextQuote {
-    id
-    text {
-      ...StrapiComponentTextParagraph
-    }
-  }
-`;
-
-export const StrapiComponentWidgetDivider = graphql`
-  fragment StrapiComponentWidgetDivider on STRAPI_ComponentWidgetDivider {
-    id
-    style
-  }
-`;
-
 export const StrapiComponentWidgetEmbeddedForm = graphql`
   fragment StrapiComponentWidgetEmbeddedForm on STRAPI_ComponentWidgetEmbeddedForm {
     id
@@ -274,30 +247,6 @@ export const StrapiComponentWidgetButton = graphql`
     buttonText: text
     variant
     action
-  }
-`;
-
-export const StrapiComponentSectionHeadingRightImageLeft = graphql`
-  fragment StrapiComponentSectionHeadingRightImageLeft on STRAPI_ComponentSectionHeadingRightImageLeft {
-    id
-    heading {
-      ...StrapiComponentTextHeading
-    }
-    image {
-      ...StrapiComponentMediaSingleImage
-    }
-  }
-`;
-
-export const StrapiComponentSectionHeadingLeftImageRight = graphql`
-  fragment StrapiComponentSectionHeadingLeftImageRight on STRAPI_ComponentSectionHeadingLeftImageRight {
-    id
-    image {
-      ...StrapiComponentMediaSingleImage
-    }
-    heading {
-      ...StrapiComponentTextHeading
-    }
   }
 `;
 
@@ -420,7 +369,7 @@ export const StrapiComponentCollectionsServices = graphql`
 export const StrapiComponentGeneralPreview = graphql`
   fragment StrapiComponentGeneralPreview on STRAPI_ComponentGeneralPreview {
     heading {
-      ...StrapiComponentTextHeading
+      ...StrapiComponentTextParagraph
     }
     text {
       ...StrapiComponentTextParagraph

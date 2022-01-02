@@ -1,6 +1,6 @@
 import React from 'react';
 import Grid from '../../Containers/Grid';
-import { HeadingField, Paragraph } from '../../Text';
+import { Paragraph } from '../../Text';
 import { ImageWithCaption } from '../../Images';
 import { ButtonField } from '../../Widgets';
 import { zigZagGridColumns } from '../../../utils/zigZagGridColumns';
@@ -16,14 +16,19 @@ const ServicesField = ({ data }: Props): JSX.Element => {
   return (
     <Grid containerType="section" gap="2em 0">
       {data.map((service, idx) => {
-        const { text, heading, image, button } = service.preview;
+        const {
+          heading: serviceHeading,
+          text: serviceText,
+          image: serviceImage,
+          button: serviceButton,
+        } = service.preview;
 
         if (
-          button.action === '' ||
-          button.action === '/' ||
-          button.action === service.slug
+          !serviceButton.action ||
+          serviceButton.action === '/' ||
+          serviceButton.action === service.slug
         ) {
-          button.action = service.fullUrlPath;
+          serviceButton.action = service.fullUrlPath;
         }
 
         const zigZagColumLayout = zigZagGridColumns(idx);
@@ -56,7 +61,7 @@ const ServicesField = ({ data }: Props): JSX.Element => {
               row-sm="content-start"
               row-xs="content-start"
             >
-              <ImageWithCaption data={image} />
+              <ImageWithCaption data={serviceImage} />
             </GridArea>
 
             <GridArea
@@ -71,11 +76,11 @@ const ServicesField = ({ data }: Props): JSX.Element => {
               row-xs="content-middle"
             >
               <Grid>
-                <HeadingField data={heading} />
+                <Paragraph data={serviceHeading} />
 
-                <Paragraph data={text} />
+                <Paragraph data={serviceText} />
 
-                <ButtonField data={button} />
+                <ButtonField data={serviceButton} />
               </Grid>
             </GridArea>
 

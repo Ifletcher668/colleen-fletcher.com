@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { DefaultTheme } from 'styled-components';
+import styled, { css, DefaultTheme } from 'styled-components';
 import { Link as GatsbyLink } from 'gatsby';
 import { color, time } from '../../../styled-components/_mixins';
 
@@ -7,32 +7,31 @@ type Props = {
   color?: keyof DefaultTheme['color'];
 };
 
-// External Link
-export const Anchor = styled.a<Props>`
-  color: ${props => (props.color ? color(props.color) : color('aterrima'))};
+const sharedAnchorStyles = css<Props>`
   text-decoration: none;
+  transition: ${time('medium')} ease-out;
+  color: ${props =>
+    props.color ? color(props.color) : color('lightSlateGray')};
 
   &:hover {
-    transition: ${time('fast')} ease-out;
-    border-bottom: ${color('lilac')} solid 2px;
-    color: ${color('dark-blue')};
+    border-bottom: 1px solid
+      ${props => (props.color ? color(props.color) : color('lightSlateGray'))};
   }
+`;
+
+// External Link
+const Anchor = styled.a<Props>`
+  ${sharedAnchorStyles}
 `;
 
 // Internal Link
-export const InternalLink = styled(GatsbyLink)`
-  color: ${color('aterrima')};
-  text-decoration: none;
-
-  &:hover {
-    transition: ${props => props.theme.time.fast} ease-out;
-    border-bottom: ${color('lilac')} solid 2px;
-    color: ${color('dark-blue')};
-  }
+const InternalLink = styled(GatsbyLink)`
+  ${sharedAnchorStyles}
 `;
 
-export const Link = ({
+const Link = ({
   children,
+  className,
   to,
   activeClassName,
   partiallyActive,
@@ -46,6 +45,8 @@ export const Link = ({
     return (
       <InternalLink
         to={to}
+        color={color}
+        className={className}
         activeClassName={activeClassName}
         partiallyActive={partiallyActive}
         {...other}
@@ -55,8 +56,10 @@ export const Link = ({
     );
   }
   return (
-    <Anchor href={to} color={color} {...other}>
+    <Anchor className={className} href={to} color={color} {...other}>
       {children}
     </Anchor>
   );
 };
+
+export default styled(Link)``;

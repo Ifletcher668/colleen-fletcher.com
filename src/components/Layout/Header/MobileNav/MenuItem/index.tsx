@@ -6,8 +6,7 @@ import {
 } from '../../../../../typings/strapi';
 import ChevronDown from '../../../../../assets/images/svg/chevron-down.svg';
 import { Flexbox } from '../../../../Containers';
-import { Link } from '../../../../Elements';
-import { Heading } from '../../../../Text/Heading';
+import { Link, Span } from '../../../../Elements';
 import BlogPosts from '../../Collections/blog-posts';
 import Services from '../../Collections/services';
 import styled from 'styled-components';
@@ -21,20 +20,16 @@ const Chevron = styled(ChevronDown)<ChevronProps>`
   width: ${font('size', 'medium')};
   margin-left: 0.5rem;
   align-self: start;
-  /* transform: ${({ isClicked }) =>
-    isClicked ? 'rotate(180deg)' : 'unset'}; */
 `;
 
 const NavListItem = styled.li`
-  font-size: ${font('size', 'xlarge')};
+  font-size: ${font('size', 'large')};
 `;
 
 const SubmenuNav = styled.ul`
   display: flex;
   flex-flow: column nowrap;
-  gap: 1rem;
-  margin-top: 1rem;
-  margin-left: 1rem;
+  padding-left: 0.5rem;
 `;
 
 type Props = Pick<DefaultProps, 'className'> & Omit<StrapiMenuItem, 'page'>;
@@ -77,14 +72,15 @@ const MenuItem = ({
       {blogs.map((blog, idx) => {
         return (
           <Flexbox key={idx} containerType="li" vertical>
-            <Flexbox between>
+            <Flexbox between middle>
               <Link
                 onClick={() => toggleMobileMenu()}
                 onKeyPress={() => toggleMobileMenu()}
+                color="coffee"
                 to={blog.fullUrlPath}
               >
                 {' '}
-                <Heading level="six">{blog.name}</Heading>
+                <Span size="small">{blog.name}</Span>
               </Link>
 
               <Chevron
@@ -101,9 +97,13 @@ const MenuItem = ({
             </Flexbox>
 
             {showBlogPosts && blog.name === clickedBlogName && (
-              <SubmenuNav>
+              <Flexbox
+                containerType="ul"
+                vertical
+                styling={{ fontSize: '1rem' }}
+              >
                 <BlogPosts blog={clickedBlogName} />
-              </SubmenuNav>
+              </Flexbox>
             )}
           </Flexbox>
         );
@@ -115,17 +115,16 @@ const MenuItem = ({
     <Fragment>
       {offerings.map((offering, idx) => {
         return (
-          <Flexbox containerType="li" key={idx} vertical>
-            <Flexbox between>
+          <Flexbox key={idx} containerType="li" vertical>
+            <Flexbox between middle>
               <Link
                 onClick={() => toggleMobileMenu()}
                 onKeyPress={() => toggleMobileMenu()}
+                color="coffee"
                 to={offering.fullUrlPath}
               >
-                {' '}
-                <Heading level="six">{offering.title}</Heading>
+                <Span size="small">{offering.title}</Span>
               </Link>
-
               <Chevron
                 onClick={() => {
                   setShowServices(!showServices);
@@ -145,7 +144,11 @@ const MenuItem = ({
             </Flexbox>
 
             {showServices && offering.title === clickedOffering.title && (
-              <Flexbox containerType="ul" vertical center middle>
+              <Flexbox
+                containerType="ul"
+                vertical
+                styling={{ fontSize: '1rem' }}
+              >
                 <Services offering={clickedOffering} />
               </Flexbox>
             )}
@@ -175,18 +178,20 @@ const MenuItem = ({
       {/* an external link makes page.id === null */}
       <NavListItem className={cn}>
         {is_external_link ? (
-          <a
+          <Link
+            color="coffee"
             href={`${
               slug.match('^(http|https)://') ? slug : `https://${slug}`
             }`}
           >
             {text}
-          </a>
+          </Link>
         ) : (
           <Fragment>
             <Link
               onClick={() => toggleMobileMenu()}
               onKeyPress={() => toggleMobileMenu()}
+              color="coffee"
               to={`/${
                 // TODO: hardcoding homepage
                 slug.toLocaleLowerCase() === 'home' ? '' : slug

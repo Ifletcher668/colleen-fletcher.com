@@ -10,7 +10,7 @@ export default (props: TemplateProps): JSX.Element => {
   const {
     data: {
       strapi: {
-        blogPost: { body, seo, preview, title },
+        blogPost: { body, seo, title },
       },
     },
   } = props;
@@ -19,8 +19,8 @@ export default (props: TemplateProps): JSX.Element => {
     <Layout location={props.location}>
       <SEO // Make SEO Required
         title={seo?.title ?? title}
-        description={seo?.meta_description ?? preview.text.body}
-        image={seo?.image ?? preview.image.file}
+        description={seo?.meta_description ?? ''}
+        image={seo?.image}
       />
 
       <PageContainer>
@@ -63,26 +63,11 @@ export const query = graphql`
           ... on STRAPI_ComponentTextParagraph {
             ...StrapiComponentTextParagraph
           }
-          ... on STRAPI_ComponentTextQuote {
-            ...StrapiComponentTextQuote
-          }
-          ... on STRAPI_ComponentTextHeading {
-            ...StrapiComponentTextHeading
-          }
-          ... on STRAPI_ComponentWidgetDivider {
-            ...StrapiComponentWidgetDivider
-          }
           ... on STRAPI_ComponentWidgetEmbeddedForm {
             ...StrapiComponentWidgetEmbeddedForm
           }
           ... on STRAPI_ComponentWidgetButton {
             ...StrapiComponentWidgetButton
-          }
-          ... on STRAPI_ComponentSectionHeadingRightImageLeft {
-            ...StrapiComponentSectionHeadingRightImageLeft
-          }
-          ... on STRAPI_ComponentSectionHeadingLeftImageRight {
-            ...StrapiComponentSectionHeadingLeftImageRight
           }
           ... on STRAPI_ComponentSectionImageRightTextLeft {
             ...StrapiComponentSectionImageRightTextLeft

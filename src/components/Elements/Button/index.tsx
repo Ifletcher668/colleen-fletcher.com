@@ -1,6 +1,12 @@
 import styled from 'styled-components';
-import { Anchor, InternalLink } from '..';
-import { font, size } from '../../../styled-components/_mixins';
+import { Link } from '..';
+import {
+  color,
+  font,
+  radius,
+  size,
+  time,
+} from '../../../styled-components/_mixins';
 
 type Props = {
   variant?: 'primary' | 'secondary' | 'tertiary';
@@ -9,27 +15,37 @@ type Props = {
 export default styled.button<Props>`
   display: inline-flex;
   align-items: center;
-  border: none;
+  justify-content: center;
   overflow: hidden;
   outline: none;
   box-shadow: none;
+  min-height: 2rem;
 
-  margin: ${size('margin', 'xsmall')} auto;
-  padding: 0 ${size('padding', 'small')};
+  margin: ${size('margin', 'xsmall')};
 
-  letter-spacing: ${font('letter-spacing', 'fancy')};
-  border-radius: ${props => props.theme.radius.smooth};
-  border: 1px solid
+  /* Reset link styles here */
+  ${Link} {
+    width: 100%;
+    // Apply padding to Link to make a smoother animation
+    padding: 0 ${size('padding', 'small')};
+    &:hover {
+      border-bottom: none;
+    }
+  }
+
+  letter-spacing: ${font('letter-spacing', 'spaced')};
+  border-radius: ${radius('smooth')};
+  border: 2px solid
     ${props => {
       switch (props.variant) {
         case 'secondary':
-          return props.theme.color['primary-blue'];
+          return color('primary-blue');
 
         case 'tertiary':
-          return props.theme.color.earth;
+          return color('coffee');
 
         default:
-          return props.theme.color.lilac;
+          return color('plumWeb');
       }
     }};
 
@@ -46,83 +62,86 @@ export default styled.button<Props>`
       case 'tertiary':
         return `radial-gradient(
                             68.84% 68.84% at 50% 50%,
-                            ${props.theme.color.earth} 0%,
+                            ${props.theme.color.coffee} 0%,
                             rgba(255, 255, 255, 0) 70.83%
                         ),
-                        ${props.theme.color.earth}`;
+                        ${props.theme.color.coffee}`;
 
       default:
         return `radial-gradient( 
                             68.84% 68.84% at 50% 50%,
-                            ${props.theme.color.lilac} 0%,
+                            ${props.theme.color.plumWeb} 0%,
                             rgba(255, 255, 255, 0) 70.83%
                         ),
-                        ${props.theme.color.lilac}`;
+                        ${props.theme.color.plumWeb}`;
     }
   }};
 
   &,
-  ${Anchor}, ${InternalLink} {
-    color: ${props =>
-      ['tertiary', undefined].includes(props.variant)
-        ? props.theme.color['primary-blue']
-        : props.theme.color.background};
-    &:hover {
-      color: ${props => props.theme.color.aterrima};
+  ${Link} {
+    color: ${props => {
+      switch (props.variant) {
+        case 'secondary':
+          return color('coffee');
 
-      border-bottom: none;
-    }
+        case 'tertiary':
+          return color('primary-blue');
+
+        default:
+          return color('background');
+      }
+    }};
   }
 
   &:hover,
-  ${Anchor}:hover, ${InternalLink}:hover {
-    &,
-    > * {
-      transition: ${props => props.theme.time.fast} ease-in-out;
-      background: ${props => props.theme.color.background};
-      color: ${props => {
-        switch (props.variant) {
-          case 'secondary':
-            return props.theme.color['primary-blue'];
-          case 'tertiary':
-            return props.theme.color.earth;
+  ${Link}:hover {
+    transition: ${time('medium')} ease-out;
+    transform: scale(0.98);
+    background: ${color('background')};
+    color: ${props => {
+      switch (props.variant) {
+        case 'secondary':
+          return props.theme.color['primary-blue'];
+        case 'tertiary':
+          return props.theme.color.coffee;
 
-          default:
-            return props.theme.color.lilac;
-        }
-      }};
-      font-weight: ${font('weight', 'heading')};
-    }
+        default:
+          return props.theme.color.plumWeb;
+      }
+    }};
+    font-weight: ${font('weight', 'bold')};
   }
 
-  /**
-    * Only want to draw a border around the button itself 
-    * Border around 'hover' as well, due to an unknown bug
-    * where the bottom border doesn't show up
-    */
   &:hover {
-    border: 1px solid
+    border: 2px solid
       ${props => {
         switch (props.variant) {
           case 'secondary':
             return props.theme.color['primary-blue'];
 
           case 'tertiary':
-            return props.theme.color.earth;
+            return props.theme.color.coffee;
 
           default:
-            return props.theme.color.lilac;
+            return props.theme.color.plumWeb;
         }
       }};
   }
 
   &:active,
-  ${Anchor}:active, ${InternalLink}:active {
+  ${Link}:active, {
     transition: 0.01s;
-    color: ${props =>
-      ['tertiary', undefined].includes(props.variant)
-        ? props.theme.color['primary-blue']
-        : props.theme.color.background};
+    color: ${props => {
+      switch (props.variant) {
+        case 'secondary':
+          return color('primary-blue');
+        case 'tertiary':
+          return color('coffee');
+        default:
+          // primary
+          return color('plumWeb');
+      }
+    }}
     background: ${props => {
       switch (props.variant) {
         case 'secondary':
@@ -136,18 +155,19 @@ export default styled.button<Props>`
         case 'tertiary':
           return `radial-gradient(
                             68.84% 68.84% at 50% 50%,
-                            ${props.theme.color.earth} 0%,
+                            ${props.theme.color.coffee} 0%,
                             rgba(255, 255, 255, 0) 70.83%
                         ),
-                        ${props.theme.color.earth}`;
+                        ${props.theme.color.coffee}`;
 
         default:
+          // primary
           return `radial-gradient( 
                             68.84% 68.84% at 50% 50%,
-                            ${props.theme.color.lilac} 0%,
+                            ${props.theme.color.plumWeb} 0%,
                             rgba(255, 255, 255, 0) 70.83%
                         ),
-                        ${props.theme.color.lilac}`;
+                        ${props.theme.color.plumWeb}`;
       }
     }};
   }

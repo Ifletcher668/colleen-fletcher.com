@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
 import styled, { CSSObject } from 'styled-components';
+import { theme } from '../../../styled-components/defaultTheme';
 
 type Props = FlexboxProps & {
   styling?: CSSObject;
@@ -72,19 +73,15 @@ const getFlexboxProps = ({
   }
 
   if (gap) {
-    if (gap) {
-      gridGap = 2;
-    } else {
-      gridGap = gap;
-    }
+    if (typeof gap === 'boolean') gridGap = theme.size.margin.small;
+    else gridGap = gap;
   }
 
   const properties: any = {
     'justify-content': x,
     'align-items': y,
   };
-  if (gap && !vertical) properties['& > * + *']['margin-left'] = gridGap;
-  if (gap && vertical) properties['& > * + *']['margin-top'] = gridGap;
+  if (gap) properties['gap'] = gridGap;
 
   return properties;
 };

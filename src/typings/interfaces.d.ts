@@ -25,7 +25,7 @@ interface FlexboxProps extends DefaultProps {
   right?: boolean;
   between?: boolean;
   around?: boolean;
-  gap?: boolean | number; // add margin between children similar to grid-gap on grid
+  gap?: string | boolean | number;
   containerType?: 'div' | 'nav' | 'section' | 'aside' | 'article' | 'ul' | 'li';
 }
 
