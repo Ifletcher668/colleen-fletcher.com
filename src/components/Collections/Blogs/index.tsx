@@ -45,7 +45,7 @@ const BlogsField = ({ data }: Props): JSX.Element => (
           <Grid
             key={`${id}-${slug}`}
             rows={{
-              xlarge: 'minmax(6rem, 12rem) 0.5fr 1fr minmax(3rem, 4rem)',
+              xlarge: 'minmax(6rem, 12rem) 0.5fr 1fr minmax(3rem, 4.5rem)',
             }}
           >
             <Paragraph data={headingText} />
