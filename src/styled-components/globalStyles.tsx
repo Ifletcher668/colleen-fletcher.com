@@ -1,6 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
 import MASexy from '../assets/fonts/MASexy/MASexy.ttf';
-import backgroundImage from '../assets/images/background-milky-way.png';
 import { above, color, font } from './_mixins';
 
 const GlobalStylesheet = createGlobalStyle`
@@ -35,7 +34,6 @@ const GlobalStylesheet = createGlobalStyle`
       rgba(0, 0, 0, 0.3),
       rgba(0, 0, 0, 0.4)
     );
-    /* url(${backgroundImage}) no-repeat; */
   }
 
   img, picture, video, canvas {
@@ -64,24 +62,24 @@ const GlobalStylesheet = createGlobalStyle`
   }
 
   .gatsby-image-wrapper {
-  border-radius: 2px;
-}
-
-.embedded-form {
-  display: flex;
-
-  &.left {
-    justify-content: flex-start;
+    border-radius: 2px;
   }
 
-  &.center {
-    justify-content: center;
+  .embedded-form {
+    display: flex;
+    
+    &.left {
+      justify-content: flex-start;
+    }
+  
+    &.center {
+      justify-content: center;
+    }
+  
+    &.right {
+      justify-content: flex-end;
+    }
   }
-
-  &.right {
-    justify-content: flex-end;
-  }
-}
 
   body,
   input,
@@ -92,6 +90,10 @@ const GlobalStylesheet = createGlobalStyle`
     font-weight: 420;
     letter-spacing: ${font('letter-spacing', 'standard')};
     line-height: 1.6;
+
+    em {
+      font-weight: 460;
+    }
 
     ${above.small`
       font-size: ${font('size', 'small')}
