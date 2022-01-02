@@ -137,7 +137,7 @@ export const useBreakpoints = (): MutableRefObject<Breakpoints> => {
   }, [width]);
 
   useEffect(() => {
-    const handleResize = () => {
+    const handleResize = (): void => {
       setWidth(_getScreenWidth());
     };
 
@@ -172,7 +172,7 @@ export const useScreenWidth = (): number => {
   }, [width]);
 
   useEffect(() => {
-    const handleWidthResize = () => {
+    const handleWidthResize = (): void => {
       setWidth(_getScreenWidth());
     };
 

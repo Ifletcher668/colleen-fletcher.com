@@ -7,9 +7,8 @@ import { useEffect, useState } from 'react';
  * @param delayTime The duration the component should wait before unmounting
  */
 const useDelayedUnmount = (isMounted: boolean, delayTime: number): boolean => {
-  const [shouldRenderComponent, setShouldRenderComponent] = useState<boolean>(
-    false,
-  );
+  const [shouldRenderComponent, setShouldRenderComponent] =
+    useState<boolean>(false);
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;

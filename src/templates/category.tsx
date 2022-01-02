@@ -3,7 +3,7 @@ import React from 'react';
 import Layout from '../components/Layout';
 import { TemplateProps } from './types';
 
-export default (props: TemplateProps) => {
+export default (props: TemplateProps): JSX.Element => {
   // TODO: Paginate Blog Posts
   const {
     data: {

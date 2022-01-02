@@ -7,7 +7,7 @@ interface Props {
   data: Strapi.Strapi;
   location: Location;
 }
-export default (props: Props) => {
+export default (props: Props): JSX.Element => {
   // TODO: Paginate blog posts!
   const {
     data: {
