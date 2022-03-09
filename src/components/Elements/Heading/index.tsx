@@ -1,5 +1,9 @@
 import styled, { css } from 'styled-components';
-import { color, font } from '../../../styled-components/_mixins';
+import {
+  color,
+  getFancyFirstLetterStyles,
+  font,
+} from '../../../styled-components/_mixins';
 
 type HeadingAlignmentProps = {
   tilt?: 'up' | 'even' | 'down';
@@ -71,9 +75,7 @@ export const H1 = styled.h1<HeadingAlignmentProps>`
 
   font-weight: ${font('weight', 'boldest')};
   font-size: 1.9em;
-  &::first-letter {
-    font-family: 'MA Sexy';
-  }
+  ${getFancyFirstLetterStyles('1.9em')};
 `;
 
 export const H2 = styled.h2<HeadingAlignmentProps>`
@@ -81,6 +83,7 @@ export const H2 = styled.h2<HeadingAlignmentProps>`
   ${determineHeadingAlignment}
   font-weight: ${font('weight', 'bolder')};
   font-size: 1.7em;
+  ${getFancyFirstLetterStyles('1.7em')};
 `;
 
 export const H3 = styled.h3<HeadingAlignmentProps>`
@@ -88,6 +91,7 @@ export const H3 = styled.h3<HeadingAlignmentProps>`
   ${determineHeadingAlignment}
   font-weight: ${font('weight', 'bolder')};
   font-size: 1.5em;
+  ${getFancyFirstLetterStyles('1.5em')};
 `;
 
 export const H4 = styled.h4<HeadingAlignmentProps>`
@@ -96,6 +100,7 @@ export const H4 = styled.h4<HeadingAlignmentProps>`
   font-weight: ${font('weight', 'bold')};
   letter-spacing: ${font('letter-spacing', 'standard')};
   font-size: 1.4em;
+  ${getFancyFirstLetterStyles('1.4em')};
 `;
 
 export const H5 = styled.h5<HeadingAlignmentProps>`
@@ -103,6 +108,7 @@ export const H5 = styled.h5<HeadingAlignmentProps>`
   ${determineHeadingAlignment}
   letter-spacing: ${font('letter-spacing', 'compact')};
   font-size: 1.2em;
+  ${getFancyFirstLetterStyles('1.2em')};
 `;
 
 export const H6 = styled.h6<HeadingAlignmentProps>`
@@ -110,4 +116,5 @@ export const H6 = styled.h6<HeadingAlignmentProps>`
   ${determineHeadingAlignment}
   letter-spacing: ${font('letter-spacing', 'compact')};
   font-size: 1.1em;
+  ${getFancyFirstLetterStyles('1.1em')};
 `;

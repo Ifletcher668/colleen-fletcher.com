@@ -1,4 +1,9 @@
-import { css, DefaultTheme, ThemeProps } from 'styled-components';
+import {
+  css,
+  DefaultTheme,
+  FlattenInterpolation,
+  ThemeProps,
+} from 'styled-components';
 import { theme } from './defaultTheme';
 
 type CSSParams = Parameters<typeof css>;
@@ -93,4 +98,15 @@ export const mobileGridTemplateLayout = css`
   grid-template-rows:
     [content-start] auto
     [content-end] auto;
+`;
+
+export const getFancyFirstLetterStyles = (
+  fontSize: string = '1em',
+): FlattenInterpolation<ThemeProps<DefaultTheme>> => css`
+  &::first-letter {
+    font-family: 'CaveatVariable';
+    margin-right: 0.5rem;
+    font-style: italic;
+    font-size: calc(${fontSize} + 5px);
+  }
 `;

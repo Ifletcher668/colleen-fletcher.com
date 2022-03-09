@@ -1,12 +1,11 @@
 import styled from 'styled-components';
-import { Paragraph } from '../../Elements';
 
 interface WrapperProps {
   alignParagraph: AlignValues;
   justifyParagraph: JustifyValues;
 }
 
-export const TextWrapper = styled(Paragraph)<WrapperProps>`
+export const TextWrapper = styled.p<WrapperProps>`
   align-self: ${props => {
     switch (props.alignParagraph) {
       case 'top':

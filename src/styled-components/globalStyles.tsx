@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import MASexy from '../assets/fonts/MASexy/MASexy.ttf';
-import { above, color, font } from './_mixins';
+import { above, color, font, getFancyFirstLetterStyles } from './_mixins';
 
 const GlobalStylesheet = createGlobalStyle`
   @font-face {
@@ -25,7 +25,6 @@ const GlobalStylesheet = createGlobalStyle`
   }
 
   body {
-    line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     background: linear-gradient(
       rgba(0, 0, 0, 0.1),
@@ -52,14 +51,6 @@ const GlobalStylesheet = createGlobalStyle`
   p, h1, h2, h3, h4, h5, h6 {
     overflow-wrap: break-word;
   }
-  
-  p, h1, h2, h3, h4, h5, h6, li {
-    &::first-letter {
-      font-weight: ${font('weight', 'bold')};
-      font-style: italic;
-    }
-  }
-  
 
   ul, ol {
   padding-left: 2rem;
@@ -98,6 +89,10 @@ const GlobalStylesheet = createGlobalStyle`
     font-weight: 420;
     letter-spacing: ${font('letter-spacing', 'standard')};
     line-height: 1.6;
+    
+    p {
+      ${getFancyFirstLetterStyles()};
+    }
 
     em {
       font-weight: 460;
@@ -105,10 +100,12 @@ const GlobalStylesheet = createGlobalStyle`
 
     ${above.small`
       font-size: ${font('size', 'small')}
+      
     `}
     
     ${above.medium`
       font-size: ${font('size', 'medium')}
+      
     `}
 
     ${above.large`

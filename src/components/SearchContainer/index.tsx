@@ -9,7 +9,7 @@ import Flexbox from '../Containers/Flexbox';
 import OutsideClickContainer from '../OutsideClickContainer';
 import { formatDateOnSlug } from '../../utils/format-date';
 import styled from 'styled-components';
-import { Paragraph, Link } from '../Elements';
+import { Link } from '../Elements';
 import {
   Blog,
   BlogPost,
@@ -427,10 +427,10 @@ const SearchContainer = (): JSX.Element => {
 
     return (
       <>
-        <Paragraph>
+        <p>
           Oh no! 😮 We couldn't find anything under "{query}". <br /> How about
           we pull a random blog post for you to read, instead?
-        </Paragraph>
+        </p>
 
         <Link
           to={
