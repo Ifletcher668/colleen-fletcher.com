@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import MASexy from '../assets/fonts/MASexy/MASexy.ttf';
-import { above, color, font, getFancyFirstLetterStyles } from './_mixins';
+import { above, color, font, getFancyFirstLetterStyles, size } from './_mixins';
 
 const GlobalStylesheet = createGlobalStyle`
   @font-face {
@@ -92,6 +92,8 @@ const GlobalStylesheet = createGlobalStyle`
     
     p {
       ${getFancyFirstLetterStyles()};
+      width: 100%; // fix unknown bug causing some wrap
+      margin-bottom: ${size('margin', 'small')}
     }
 
     em {
