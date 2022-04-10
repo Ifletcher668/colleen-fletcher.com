@@ -12,7 +12,7 @@ type QuillEditorProps = {
 };
 
 const _isRenderingInBrowser =
-  typeof window !== 'undefined' || typeof document !== 'undefined';
+  typeof window !== undefined || typeof document !== undefined;
 
 const QuillEditor = ({
   onChange,
