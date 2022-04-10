@@ -1,7 +1,7 @@
 import React from 'react';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
 import styled from 'styled-components';
+import 'react-quill/dist/quill.snow.css';
+let ReactQuill: any;
 
 type QuillEditorProps = {
   onChange: any;
@@ -11,9 +11,9 @@ type QuillEditorProps = {
   className?: string;
 };
 
-const _isRenderingInBrowser =
-  typeof window !== undefined || typeof document !== undefined;
-
+if (document) {
+  ReactQuill = require('react-quill');
+}
 const QuillEditor = ({
   onChange,
   name,
@@ -46,7 +46,6 @@ const QuillEditor = ({
     clipboard,
     history,
   };
-
   const formats = [
     'header',
     'font',
@@ -65,7 +64,7 @@ const QuillEditor = ({
     'align',
   ];
 
-  return _isRenderingInBrowser ? (
+  return (
     <ReactQuill
       id={id}
       className={className}
@@ -73,12 +72,10 @@ const QuillEditor = ({
       value={value}
       modules={modules}
       formats={formats}
-      onChange={content => {
+      onChange={(content: any) => {
         onChange({ target: { name, value: content } });
       }}
     />
-  ) : (
-    <></>
   );
 };
 
