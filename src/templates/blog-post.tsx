@@ -1,5 +1,6 @@
 import { graphql } from 'gatsby';
 import React from 'react';
+import { Comments } from '../components/Comments';
 import { PageContainer } from '../components/Containers';
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
@@ -10,7 +11,7 @@ export default (props: TemplateProps): JSX.Element => {
   const {
     data: {
       strapi: {
-        blogPost: { body, seo, title },
+        blogPost: { id: blogPostId, body, seo, title },
       },
     },
   } = props;
@@ -25,6 +26,8 @@ export default (props: TemplateProps): JSX.Element => {
 
       <PageContainer>
         <StrapiDynamicZone components={body} />
+
+        <Comments blogPostId={blogPostId} />
       </PageContainer>
     </Layout>
   );
@@ -34,6 +37,7 @@ export const query = graphql`
   query GET_BLOG_POST($id: ID!) {
     strapi {
       blogPost(id: $id) {
+        id
         title
         tags {
           name

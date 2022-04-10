@@ -9,6 +9,14 @@ interface Props {
 
 const Image = ({ data }: Props): JSX.Element => {
   const { file, configuration } = data;
+  const {
+    alignImage,
+    hasBorder,
+    imageHeight,
+    imageWidth,
+    isCircle,
+    justifyImage,
+  } = configuration ?? {};
 
   if (!file) {
     console.log('file passed to <Image /> component is null ');
@@ -27,19 +35,19 @@ const Image = ({ data }: Props): JSX.Element => {
   }
 
   const imgStyle = {
-    borderRadius: configuration?.isCircle ? '1000px' : '2px',
-    border: configuration?.hasBorder
-      ? `1.5px solid ${theme.color.aterrima}`
-      : 'unset',
-    maxWidth: configuration?.imageWidth ? configuration?.imageWidth : '100%',
-    maxHeight: configuration?.imageHeight ? configuration?.imageHeight : '100%',
+    borderRadius: isCircle ? '1000px' : '2px',
+    border: hasBorder ? `1.5px solid ${theme.color.aterrima}` : 'unset',
+    maxWidth: imageWidth ? imageWidth : '100%',
+    maxHeight: imageHeight ? imageHeight : '100%',
   };
 
   return (
     <GatsbyImage
       style={{
-        alignSelf: 'center',
-        textAlign: 'center',
+        alignSelf: alignImage ? alignImage : 'center',
+        justifySelf: justifyImage ? justifyImage : 'center',
+        maxWidth: imageWidth ? imageWidth : '100%',
+        maxHeight: imageHeight ? imageHeight : '100%',
       }}
       imgStyle={imgStyle}
       alt={alternativeText || ''}

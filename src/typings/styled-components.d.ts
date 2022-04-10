@@ -10,6 +10,7 @@ declare module 'styled-components' {
       lightSlateGray: string;
       coffee: string;
       darkLava: string;
+      validationErrorRed: string;
     };
     size: {
       column: {

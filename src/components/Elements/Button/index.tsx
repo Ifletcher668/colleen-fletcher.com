@@ -21,6 +21,7 @@ export default styled.button<Props>`
   box-shadow: none;
   height: 100%;
   min-height: 2rem;
+  padding: 0 1rem;
 
   margin: ${size('margin', 'xsmall')};
 

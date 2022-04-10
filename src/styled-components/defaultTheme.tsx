@@ -10,6 +10,7 @@ export const theme: DefaultTheme = {
     lightSlateGray: 'rgb(113, 140, 152)',
     coffee: 'rgb(102, 72, 56)',
     darkLava: 'rgb(73, 59, 49)',
+    validationErrorRed: 'rgb(255, 72, 20)',
   },
   size: {
     column: {

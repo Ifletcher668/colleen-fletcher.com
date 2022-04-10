@@ -46,6 +46,10 @@ const GlobalStylesheet = createGlobalStyle`
 
   input, button, textarea, select {
     font: inherit;
+    &:focus {
+      box-shadow: 0 0 0 2px ${color('background')},
+        0 0 0 4px ${color('primary-blue')};
+    }
   }
 
   p, h1, h2, h3, h4, h5, h6 {

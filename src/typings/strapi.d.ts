@@ -296,4 +296,28 @@ declare namespace Strapi {
       };
     };
   };
+
+  type Comment = {
+    id: number;
+    content: string;
+    blocked: boolean;
+    blockedThread: null;
+    blockReason: null;
+    points: null; //TODO: Figure out
+    authorUser: null;
+    authorType: null;
+    authorId: string;
+    authorName: string;
+    authorEmail: string;
+    approvalStatus: null;
+    authorAvatar: null;
+    relatedSlug: string;
+    removed: null;
+    children: Comment[];
+    reports: any[]; //TODO: Figure out
+    updated_at: string;
+    created_at: string;
+    created_by: null;
+    updated_by: null;
+  };
 }

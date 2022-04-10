@@ -7,3 +7,7 @@ module.exports.formatDateOnSlug = date => {
 module.exports.formatDatePublished = date => {
   return moment(date).format('DD MMM, YYYY');
 };
+
+module.exports.formatDateTime = date => {
+  return moment(date).format('DD MMM, YYYY, LT');
+};
