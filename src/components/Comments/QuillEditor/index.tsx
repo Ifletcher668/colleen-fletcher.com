@@ -65,7 +65,7 @@ const QuillEditor = ({
     'align',
   ];
 
-  return (
+  return typeof document !== undefined ? (
     <ReactQuill
       id={id}
       className={className}
@@ -77,6 +77,8 @@ const QuillEditor = ({
         onChange({ target: { name, value: content } });
       }}
     />
+  ) : (
+    <></>
   );
 };
 
