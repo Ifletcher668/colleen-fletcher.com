@@ -3,6 +3,7 @@ import { Form, ValidationErrorMessage, SubmitButton } from './styles';
 import { v4 } from 'uuid';
 import axios from 'axios';
 import { SubmitFormProps, ValidationErrors } from './types';
+import QuillEditor from './QuillEditor';
 
 const THREE_SECOND_DELAY = 3000;
 
@@ -19,11 +20,6 @@ const SubmitForm = ({
   const [validationErrors, setValidationErrors] = useState<ValidationErrors>(
     {},
   );
-
-  let QuillEditor: any;
-  if (typeof document !== undefined) {
-    QuillEditor = require('./QuillEditor');
-  }
 
   useEffect(() => {
     const resetIsSubmitted = setTimeout(
@@ -120,16 +116,14 @@ const SubmitForm = ({
         {isReply ? 'Enter your reply' : 'Enter your comment here'}
       </label>
 
-      {typeof document !== undefined && (
-        <QuillEditor
-          id="commentBody"
-          name="commentBody"
-          value={commentBody}
-          onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
-            setCommentBody(e.target.value)
-          }
-        />
-      )}
+      <QuillEditor
+        id="commentBody"
+        name="commentBody"
+        value={commentBody}
+        onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
+          setCommentBody(e.target.value)
+        }
+      />
 
       {validationErrors.commentBodyError && (
         <ValidationErrorMessage>

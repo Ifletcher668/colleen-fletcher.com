@@ -2,7 +2,6 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { v4 } from 'uuid';
 import { Comment as CommentData } from '../../typings/strapi';
-
 import Heading from '../Heading';
 import Comment from './Comment';
 import { CommentsList } from './styles';
@@ -12,17 +11,6 @@ type CommentsProps = {
   blogPostId: string;
 };
 
-/** TODO:
- *
- * 1. add validation
- * 2. add opt-in for email
- * 3. style comments
- * 4. add support for replies
- * 5. refactor to useReducer
- * 6. add avatars?
- *
- * */
-
 const Comments = ({ blogPostId }: CommentsProps): JSX.Element => {
   const commentsEndpoint = `${process.env.GATSBY_COMMENTS_ENDPOINT}${blogPostId}`;
   const [allComments, setAllComments] = useState<CommentData[]>([]);
@@ -30,7 +18,7 @@ const Comments = ({ blogPostId }: CommentsProps): JSX.Element => {
   const [shouldRefetchComments, setShouldRefetchComments] = useState(false);
   const [numberOfTimesCommentsHaveLoaded, setNumberOfTimesCommentsHaveLoaded] =
     useState(1); // start at one to account for first render
-
+  const [errors, setErrors] = useState(null);
   // GET comments
   useEffect(() => {
     async function fetchComments(): Promise<void> {
@@ -43,9 +31,12 @@ const Comments = ({ blogPostId }: CommentsProps): JSX.Element => {
             const today = new Date().getTime();
             return commentDate - today;
           });
+        })
+        .catch(err => {
+          setErrors(err);
         });
 
-      setAllComments(result);
+      if (result) setAllComments(result);
 
       if (shouldRefetchComments) setShouldRefetchComments(false);
     }
@@ -58,6 +49,13 @@ const Comments = ({ blogPostId }: CommentsProps): JSX.Element => {
       allComments.slice(0, numberOfTimesCommentsHaveLoaded * 10),
     );
   }, [allComments, numberOfTimesCommentsHaveLoaded]);
+
+  if (errors)
+    return (
+      <p>
+        Sorry, something went wrong! We can't show any comments at this time
+      </p>
+    );
 
   return (
     <section>
