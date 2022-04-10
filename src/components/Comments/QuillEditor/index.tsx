@@ -11,9 +11,10 @@ type QuillEditorProps = {
   className?: string;
 };
 
-if (document) {
+if (typeof document !== undefined) {
   ReactQuill = require('react-quill');
 }
+
 const QuillEditor = ({
   onChange,
   name,
