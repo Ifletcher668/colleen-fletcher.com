@@ -11,6 +11,9 @@ type QuillEditorProps = {
   className?: string;
 };
 
+const _isRenderingInBrowser =
+  typeof window !== 'undefined' || typeof document !== 'undefined';
+
 const QuillEditor = ({
   onChange,
   name,
@@ -62,7 +65,7 @@ const QuillEditor = ({
     'align',
   ];
 
-  return (
+  return _isRenderingInBrowser ? (
     <ReactQuill
       id={id}
       className={className}
@@ -74,6 +77,8 @@ const QuillEditor = ({
         onChange({ target: { name, value: content } });
       }}
     />
+  ) : (
+    <></>
   );
 };
 
