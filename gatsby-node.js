@@ -246,26 +246,3 @@ exports.createResolvers = async ({
   };
   createResolvers(resolvers);
 };
-
-exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
-  actions.setWebpackConfig({
-    resolve: {
-      fallback: {
-        fs: false,
-      },
-    },
-  });
-
-  if (stage === 'build-html') {
-    actions.setWebpackConfig({
-      module: {
-        rules: [
-          {
-            test: /react-quill/,
-            use: loaders.null(),
-          },
-        ],
-      },
-    });
-  }
-};
