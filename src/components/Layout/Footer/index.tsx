@@ -14,7 +14,7 @@ import Heading from '../../Heading';
 
 const Footer = (): JSX.Element => {
   return (
-    <footer role="footer" className="site-footer">
+    <footer className="site-footer">
       <div className="footer-content">
         <nav className="footer-nav">
           <ul className="footer-navbar">

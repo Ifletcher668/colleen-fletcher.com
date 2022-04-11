@@ -53,7 +53,7 @@ const SEO = ({ title, description, image, lang, meta }: Props): JSX.Element => {
   return (
     <Helmet
       htmlAttributes={{
-        lang: lang,
+        lang: lang ?? 'EN-US',
       }}
       title={title}
       titleTemplate="%s"
