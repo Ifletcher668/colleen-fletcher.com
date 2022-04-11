@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactQuillProps from 'react-quill/types';
 let ReactQuill: typeof ReactQuillProps;
-if (typeof document === undefined) require('react-quill');
+if (typeof document !== undefined) require('react-quill');
 import 'react-quill/dist/quill.snow.css';
 import styled from 'styled-components';
 
