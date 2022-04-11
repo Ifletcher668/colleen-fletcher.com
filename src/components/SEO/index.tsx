@@ -48,6 +48,7 @@ const SEO = ({ title, description, image, lang, meta }: Props): JSX.Element => {
 
   const metaDescription = description || site.siteMetadata.description;
   const imageData = image?.imageFile.childImageSharp.gatsbyImageData;
+  const GOOGLE_ANALYTICS_ID = 'G-JX61TCM0BQ';
 
   return (
     <Helmet
@@ -113,7 +114,26 @@ const SEO = ({ title, description, image, lang, meta }: Props): JSX.Element => {
           content: metaDescription,
         },
       ].concat(meta || [])}
-    />
+    >
+      {/* Global site tag (gtag.js) - Google Analytics */}
+      <script
+        async
+        src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID}`}
+      />
+      <script>
+        {`
+        window.dataLayer = window.dataLayer || [];
+        
+        function gtag(){
+          window.dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', "${GOOGLE_ANALYTICS_ID}");
+  `}
+      </script>
+    </Helmet>
   );
 };
 
