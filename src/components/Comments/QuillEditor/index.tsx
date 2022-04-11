@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactQuillProps from 'react-quill/types';
 let ReactQuill: typeof ReactQuillProps;
-if (typeof document !== undefined) require('react-quill');
+if (typeof document === 'object') require('react-quill');
 import 'react-quill/dist/quill.snow.css';
 import styled from 'styled-components';
 
@@ -20,8 +20,6 @@ const QuillEditor = ({
   id,
   className,
 }: QuillEditorProps): JSX.Element => {
-  if (typeof document === undefined) return <></>;
-
   const toolbar = [
     // toolbar container
     [{ header: [2, 3, 4, 5, 6, false] }, { font: [] }, { size: [] }],
@@ -66,6 +64,7 @@ const QuillEditor = ({
     'align',
   ];
 
+  if (!ReactQuill) return <></>;
   return (
     <ReactQuill
       id={id}
