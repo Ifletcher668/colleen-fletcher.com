@@ -249,8 +249,10 @@ exports.createResolvers = async ({
 
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
   actions.setWebpackConfig({
-    node: {
-      fs: 'empty',
+    resolve: {
+      fallback: {
+        fs: false,
+      },
     },
   });
 
