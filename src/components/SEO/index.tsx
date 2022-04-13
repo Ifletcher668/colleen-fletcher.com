@@ -48,7 +48,7 @@ const SEO = ({ title, description, image, lang, meta }: Props): JSX.Element => {
 
   const metaDescription = description || site.siteMetadata.description;
   const imageData = image?.imageFile.childImageSharp.gatsbyImageData;
-  const GOOGLE_ANALYTICS_ID = 'G-JX61TCM0BQ';
+  const GOOGLE_ANALYTICS_ID = 'UA-62542419-2';
 
   return (
     <Helmet
