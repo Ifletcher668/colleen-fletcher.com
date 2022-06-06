@@ -113,6 +113,11 @@ const SEO = ({ title, description, image, lang, meta }: Props): JSX.Element => {
           name: 'twitter:description',
           content: metaDescription,
         },
+        // Pinterest
+        {
+          name: 'p:domain_verify',
+          content: '020ab54be8116b72fb0c44495108d961',
+        },
       ].concat(meta || [])}
     >
       {/* Global site tag (gtag.js) - Google Analytics */}
